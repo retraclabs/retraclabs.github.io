@@ -12,25 +12,35 @@ export const Footer = () => {
           </span>
           <span className="text-sm font-mono text-zinc-500 mt-2 font-bold">© {new Date().getFullYear()} / ALL RIGHTS RESERVED</span>
         </div>
-        
-        <div className="flex gap-4">
-          {[
-            { icon: Twitter, href: "#", color: "hover:bg-cyan-400 hover:text-black", border: "hover:border-cyan-400" },
-            { icon: Github, href: "#", color: "hover:bg-white hover:text-black", border: "hover:border-white" },
-            { icon: Mail, href: "mailto:hello@retraclabs.com", color: "hover:bg-yellow-400 hover:text-black", border: "hover:border-yellow-400" }
-          ].map((social, i) => (
-            <motion.a
-              key={i}
-              href={social.href}
-              style={{ boxShadow: "0px 0px 0px 0px rgba(255,255,255,0)" }}
-              whileHover={{ y: -4, boxShadow: "4px 4px 0px 0px rgba(255,255,255,0.2)" }}
-              whileTap={{ y: 0, boxShadow: "0px 0px 0px 0px rgba(255,255,255,0.2)" }}
-              className={`p-4 rounded-xl bg-zinc-900 border-2 border-zinc-800 text-zinc-400 transition-colors cursor-none ${social.color} ${social.border}`}
-            >
-              <social.icon className="w-6 h-6" />
-            </motion.a>
-          ))}
-        </div>
+
+          <div className="flex flex-col items-center md:items-end gap-4">
+              <div className="flex gap-4">
+                  {[
+                      { icon: Twitter, href: "#", color: "hover:bg-cyan-400 hover:text-black", border: "hover:border-cyan-400" },
+                      { icon: Github, href: "#", color: "hover:bg-white hover:text-black", border: "hover:border-white" },
+                      { icon: Mail, href: "mailto:hello@retraclabs.com", color: "hover:bg-yellow-400 hover:text-black", border: "hover:border-yellow-400" }
+                  ].map((social, i) => (
+                      <motion.a
+                          key={i}
+                          href={social.href}
+                          style={{ boxShadow: "0px 0px 0px 0px rgba(255,255,255,0)" }}
+                          whileHover={{ y: -4, boxShadow: "4px 4px 0px 0px rgba(255,255,255,0.2)" }}
+                          whileTap={{ y: 0, boxShadow: "0px 0px 0px 0px rgba(255,255,255,0.2)" }}
+                          className={`p-4 rounded-xl bg-zinc-900 border-2 border-zinc-800 text-zinc-400 transition-colors md:cursor-none ${social.color} ${social.border}`}
+                      >
+                          <social.icon className="w-6 h-6" />
+                      </motion.a>
+                  ))}
+              </div>
+
+              <a
+                  href="#/privacy"
+                  className="text-sm font-mono font-bold text-zinc-500 hover:text-white transition-colors md:cursor-none"
+              >
+                  Privacy Policy
+              </a>
+          </div>
+
       </div>
     </footer>
   );
