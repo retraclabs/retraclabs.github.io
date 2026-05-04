@@ -99,7 +99,7 @@ export const PrivacyPolicy = () => {
                                     href="mailto:hello@retraclabs.com"
                                     className="text-cyan-400 hover:text-cyan-300"
                                 >
-                                    hello@retraclabs.com
+                                    retrac.labs@gmail.com
                                 </a>.
                             </p>
                         </section>
