@@ -16,32 +16,34 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    slug: 'nova',
-    name: 'Project Nova',
-    platform: 'macOS',
-    status: 'Concept Build',
+    slug: 'amparo',
+    name: 'Amparo',
+    platform: 'iOS',
+    status: 'Beta Testing',
     accent: 'pink',
     accentText: 'text-pink-400',
-    icon: Monitor,
-    summary: 'A spatial workspace manager for people who live inside complex desktop flows.',
+    icon: Smartphone,
+    summary: 'A more personal way to track your menstrual cycle',
     description:
-      'Nova is an experimental macOS utility for arranging windows, workspaces, and task contexts with a more visual sense of place. The goal is to make a desktop feel less like a stack of rectangles and more like a system you can navigate.',
+      'Amparo is an iOS cycle-tracking app designed around privacy, clarity, and emotional ease. Instead of turning your' +
+        'body into a dashboard of warnings and streaks, Amparo helps you notice patterns, track symptoms, and prepare' +
+        'for what is coming with a calmer, more human interface.',
     highlights: [
-      'Spatial window grouping for repeatable work contexts',
-      'Fast keyboard-first controls with visual recall',
-      'Designed for creative, research, and development workflows',
+        'Private cycle, symptom, and mood tracking built for everyday use',
+        'Pattern insights that help users understand their own rhythms over time',
+        'A gentle visual language that avoids shame, pressure, or alarmist design',
     ],
     nextSteps: [
-      'Build the first clickable prototype',
-      'Test workspace presets against real daily workflows',
-      'Decide which interactions belong in Swift versus supporting services',
+        'Expand beta testing with a small group of trusted users',
+        'Refine predictions, reminders, and symptom logging flows',
+        'Review privacy language and App Store health-data requirements before launch',
     ],
   },
   {
     slug: 'aura',
     name: 'Aura',
     platform: 'iOS',
-    status: 'Exploration',
+    status: 'Concept Build',
     accent: 'cyan',
     accentText: 'text-cyan-400',
     icon: Smartphone,
