@@ -96,7 +96,7 @@ export const PrivacyPolicy = () => {
                             <p>
                                 If you have questions about this privacy policy, contact us at{' '}
                                 <a
-                                    href="mailto:retrac.labs@gmail.com"
+                                    href="mailto:hello@retraclabs.com"
                                     className="text-cyan-400 hover:text-cyan-300"
                                 >
                                     hello@retraclabs.com

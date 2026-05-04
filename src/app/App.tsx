@@ -5,8 +5,10 @@ import { Hero } from './components/Hero';
 import { LabSection } from './components/LabSection';
 import { Footer } from './components/Footer';
 import { ProjectDetail } from './components/ProjectDetail';
+import { PrivacyPolicy } from './components/PrivacyPolicy';
 import { getProjectBySlug } from './data/projects';
 import { motion } from 'motion/react';
+
 
 const getProjectFromHash = () => {
   const match = window.location.hash.match(/^#\/projects\/([a-z0-9-]+)$/);
@@ -14,12 +16,14 @@ const getProjectFromHash = () => {
 };
 
 export default function App() {
+  const [currentHash, setCurrentHash] = useState(window.location.hash);
   const [activeProject, setActiveProject] = useState(getProjectFromHash);
 
   useEffect(() => {
     window.history.scrollRestoration = 'manual';
 
     const handleHashChange = () => {
+      setCurrentHash(window.location.hash);
       setActiveProject(getProjectFromHash());
     };
 
@@ -28,14 +32,14 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    if (activeProject) {
+    if (activeProject || currentHash === '#/privacy') {
       const scrollId = window.setTimeout(() => {
         window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
       }, 0);
 
       return () => window.clearTimeout(scrollId);
     }
-  }, [activeProject]);
+  }, [activeProject, currentHash]);
 
   return (
     <div className="relative min-h-screen bg-[#09090b] text-zinc-50 selection:bg-fuchsia-500/30 selection:text-white md:cursor-none font-sans overflow-x-hidden">
@@ -60,7 +64,9 @@ export default function App() {
         </div>
       </motion.header>
 
-      {activeProject ? (
+      {currentHash === '#/privacy' ? (
+        <PrivacyPolicy />
+      ) : activeProject ? (
         <ProjectDetail project={activeProject} />
       ) : (
         <main>
