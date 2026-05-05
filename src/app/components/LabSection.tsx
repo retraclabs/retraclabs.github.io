@@ -6,6 +6,10 @@ import { projects } from '../data/projects';
 const [amparo, snippystack, nexus] = projects;
 
 export const LabSection = () => {
+  const openProject = (slug: string) => {
+    window.location.hash = `#/projects/${slug}`;
+  };
+
   const AmparoIcon = amparo.icon;
   const SnippystackIcon = snippystack.icon;
   const NexusIcon = nexus.icon;
@@ -70,15 +74,16 @@ export const LabSection = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-5 sm:gap-6 auto-rows-[300px] sm:auto-rows-[280px]">
-          <motion.a
-            href="#/projects/amparo"
+          <motion.button
+            type="button"
+            onClick={() => openProject('amparo')}
             initial={{ opacity: 0, y: 40 }}
             style={{ boxShadow: '0px 0px 0px 0px rgba(244,114,182,0)' }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             whileHover={{ y: -8, boxShadow: '12px 12px 0px 0px rgba(244,114,182,1)' }}
             transition={{ type: 'spring', bounce: 0.4 }}
-            className="col-span-1 md:col-span-2 lg:col-span-4 bg-zinc-900 border-4 border-zinc-800 rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-8 relative overflow-hidden group hover:border-pink-400 transition-colors md:cursor-none"
+            className="col-span-1 md:col-span-2 lg:col-span-4 bg-zinc-900 border-4 border-zinc-800 rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-8 relative overflow-hidden group hover:border-pink-400 transition-colors text-left md:cursor-none"
           >
             <div className="absolute -right-20 -top-20 w-64 h-64 bg-pink-500 rounded-full blur-[80px] opacity-20 group-hover:opacity-40 transition-opacity" />
 
@@ -100,17 +105,18 @@ export const LabSection = () => {
                 </p>
               </div>
             </div>
-          </motion.a>
+          </motion.button>
 
-          <motion.a
-            href="#/projects/snippystack"
+          <motion.button
+            type="button"
+            onClick={() => openProject('snippystack')}
             initial={{ opacity: 0, y: 40 }}
             style={{ boxShadow: '0px 0px 0px 0px rgba(34,211,238,0)' }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             whileHover={{ y: -8, boxShadow: '12px 12px 0px 0px rgba(34,211,238,1)' }}
             transition={{ type: 'spring', bounce: 0.4, delay: 0.1 }}
-            className="col-span-1 md:col-span-2 lg:col-span-2 bg-cyan-400 border-4 border-cyan-400 rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-8 relative overflow-hidden group hover:border-white transition-colors md:cursor-none"
+            className="col-span-1 md:col-span-2 lg:col-span-2 bg-cyan-400 border-4 border-cyan-400 rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-8 relative overflow-hidden group hover:border-white transition-colors text-left md:cursor-none"
           >
             <div className="absolute -bottom-10 -right-10 opacity-20 transform group-hover:scale-110 transition-transform">
               <SnippystackIcon className="w-48 h-48 text-black" />
@@ -134,7 +140,7 @@ export const LabSection = () => {
                 </p>
               </div>
             </div>
-          </motion.a>
+          </motion.button>
 
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -154,15 +160,16 @@ export const LabSection = () => {
             </div>
           </motion.div>
 
-          <motion.a
-            href="#/projects/nexus"
+          <motion.button
+            type="button"
+            onClick={() => openProject('nexus')}
             initial={{ opacity: 0, y: 40 }}
             style={{ boxShadow: '0px 0px 0px 0px rgba(168,85,247,0)' }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             whileHover={{ y: -8, boxShadow: '12px 12px 0px 0px rgba(168,85,247,1)' }}
             transition={{ type: 'spring', bounce: 0.4, delay: 0.3 }}
-            className="col-span-1 md:col-span-2 lg:col-span-4 bg-zinc-900 border-4 border-zinc-800 rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-8 relative overflow-hidden group hover:border-purple-500 transition-colors md:cursor-none"
+            className="col-span-1 md:col-span-2 lg:col-span-4 bg-zinc-900 border-4 border-zinc-800 rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-8 relative overflow-hidden group hover:border-purple-500 transition-colors text-left md:cursor-none"
           >
             <div className="absolute left-0 top-0 w-full h-full bg-[radial-gradient(circle_at_80%_20%,rgba(168,85,247,0.15),transparent_50%)]" />
 
@@ -200,7 +207,7 @@ export const LabSection = () => {
                 </div>
               </div>
             </div>
-          </motion.a>
+          </motion.button>
         </div>
       </div>
     </section>
