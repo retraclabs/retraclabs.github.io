@@ -40,16 +40,34 @@ export const projects: Project[] = [
     ],
   },
   {
-    slug: 'aura',
-    name: 'Aura',
-    platform: 'iOS',
-    status: 'Concept Build',
+    slug: 'snippystack',
+    name: 'Snippystack',
+    platform: 'macOS',
+    status: 'In Review',
     accent: 'cyan',
     accentText: 'text-cyan-400',
     icon: Smartphone,
-    summary: 'A habit and rhythm companion that turns routines into calm, glanceable visuals.',
+    summary: 'The clipboard manager that actually thinks. Smart type detection, full history, search, and pins — all' +
+        'from your menu bar.',
     description:
-      'Aura is a mobile experiment around lightweight personal systems. It focuses on tiny daily signals, visual continuity, and interfaces that feel motivating without becoming noisy.',
+      'macOS copies. SnippyStack remembers.\n' +
+        '\n' +
+        'Every time you press ⌘C, the system overwrites your last copy, and whatever was there is gone. SnippyStack fixes that. It quietly lives in your menu bar, capturing everything you copy and keeping it ready whenever you need it.\n' +
+        '\n' +
+        'Click the Snippystack icon to browse your full clipboard history. Click any item to instantly paste it. Search across hundreds of saved clips. Pin your most-used snippets so they\'re always at the top.\n' +
+        '\n' +
+        'SnippyStack goes further than other clipboard managers:\n' +
+        '\n' +
+        '· Smart detection: clips are automatically labeled as URLs, emails, code, or plain text\n' +
+        '· Full history window: sort by newest, oldest, longest, or most copied, and filter by type\n' +
+        '· Permanent Snippets: save text you reuse often, separate from your clipboard history\n' +
+        '· Word and character counts: see exactly how long each clip is at a glance\n' +
+        '· Copy tracking: Snippystack remembers how many times you\'ve used each item\n' +
+        '· Pin to top: keep your most-used clips always within reach\n' +
+        '· Global shortcut: open SnippyStack from anywhere with ⌥⌘V\n' +
+        '· Privacy-first: your history never leaves your Mac. No cloud. No servers. No accounts.\n' +
+        '\n' +
+        'One-time purchase. No subscription. No nonsense.',
     highlights: [
       'Animated habit widgets built for quick daily check-ins',
       'Soft progress language instead of guilt-driven streak mechanics',

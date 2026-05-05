@@ -3,11 +3,11 @@ import { motion } from 'motion/react';
 import { Layers, Sparkles, ArrowRight } from 'lucide-react';
 import { projects } from '../data/projects';
 
-const [nova, aura, nexus] = projects;
+const [amparo, snippystack, nexus] = projects;
 
 export const LabSection = () => {
-  const NovaIcon = nova.icon;
-  const AuraIcon = aura.icon;
+  const AmparoIcon = amparo.icon;
+  const SnippystackIcon = snippystack.icon;
   const NexusIcon = nexus.icon;
 
   return (
@@ -71,7 +71,7 @@ export const LabSection = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-5 sm:gap-6 auto-rows-[300px] sm:auto-rows-[280px]">
           <motion.a
-            href="#/projects/nova"
+            href="#/projects/amparo"
             initial={{ opacity: 0, y: 40 }}
             style={{ boxShadow: '0px 0px 0px 0px rgba(244,114,182,0)' }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -85,25 +85,25 @@ export const LabSection = () => {
             <div className="relative z-10 h-full flex flex-col justify-between">
               <div className="flex justify-between items-start gap-4">
                 <div className="p-4 rounded-2xl bg-white text-black">
-                  <NovaIcon className="w-8 h-8" />
+                  <AmparoIcon className="w-8 h-8" />
                 </div>
                 <span className="px-4 py-2 rounded-full bg-pink-400/10 text-pink-400 font-mono font-bold text-sm border-2 border-pink-400/20">
-                  {nova.platform}
+                  {amparo.platform}
                 </span>
               </div>
 
               <div>
-                <div className="text-pink-400 font-mono font-bold text-xs uppercase mb-2">{nova.status}</div>
-                <h3 className="text-3xl font-black text-white mb-3 tracking-tight">{nova.name}</h3>
+                <div className="text-pink-400 font-mono font-bold text-xs uppercase mb-2">{amparo.status}</div>
+                <h3 className="text-3xl font-black text-white mb-3 tracking-tight">{amparo.name}</h3>
                 <p className="text-zinc-400 font-medium text-base sm:text-lg max-w-md">
-                  {nova.summary}
+                  {amparo.summary}
                 </p>
               </div>
             </div>
           </motion.a>
 
           <motion.a
-            href="#/projects/aura"
+            href="#/projects/snippystack"
             initial={{ opacity: 0, y: 40 }}
             style={{ boxShadow: '0px 0px 0px 0px rgba(34,211,238,0)' }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -113,7 +113,7 @@ export const LabSection = () => {
             className="col-span-1 md:col-span-2 lg:col-span-2 bg-cyan-400 border-4 border-cyan-400 rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-8 relative overflow-hidden group hover:border-white transition-colors md:cursor-none"
           >
             <div className="absolute -bottom-10 -right-10 opacity-20 transform group-hover:scale-110 transition-transform">
-              <AuraIcon className="w-48 h-48 text-black" />
+              <SnippystackIcon className="w-48 h-48 text-black" />
             </div>
 
             <div className="relative z-10 h-full flex flex-col justify-between">
@@ -122,15 +122,15 @@ export const LabSection = () => {
                   <Sparkles className="w-6 h-6" />
                 </div>
                 <span className="px-4 py-2 rounded-full bg-black/10 text-black font-mono font-black text-sm">
-                  {aura.platform}
+                  {snippystack.platform}
                 </span>
               </div>
 
               <div>
-                <div className="text-black/60 font-mono font-black text-xs uppercase mb-2">{aura.status}</div>
-                <h3 className="text-3xl font-black text-black mb-2 tracking-tight">{aura.name}</h3>
+                <div className="text-black/60 font-mono font-black text-xs uppercase mb-2">{snippystack.status}</div>
+                <h3 className="text-3xl font-black text-black mb-2 tracking-tight">{snippystack.name}</h3>
                 <p className="text-black/70 font-bold text-sm leading-snug">
-                  {aura.summary}
+                  {snippystack.summary}
                 </p>
               </div>
             </div>

@@ -10,15 +10,11 @@ export const Hero = () => {
     offset: ['start start', 'end end'],
   });
 
-  // Animate the SVG camera instead of scaling the entire element. This keeps the title vector-crisp
-  // during the dive between the two words.
-  const viewBox = useTransform(
-    scrollYProgress,
-    [0, 0.32, 0.72],
-    ['0 0 1000 500', '120 70 760 380', '360 180 280 140'],
-  );
+  // CSS scale zoom centered on the wrapper div's midpoint, which aligns exactly
+  // with y=250 in SVG space — the gap between RETRAC (y=150) and LABS (y=350).
+  const scale = useTransform(scrollYProgress, [0, 0.72], [1, 2.0]);
 
-  const textOpacity = useTransform(scrollYProgress, [0.58, 0.76], [1, 0]);
+  const textOpacity = useTransform(scrollYProgress, [0.62, 0.78], [1, 0]);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
   const contentY = useTransform(scrollYProgress, [0, 0.15], [0, 50]);
 
@@ -41,11 +37,11 @@ export const Hero = () => {
         </motion.div>
 
         <motion.div
-          style={{ opacity: textOpacity }}
+          style={{ opacity: textOpacity, scale }}
           className="flex flex-col items-center justify-center relative z-20 pointer-events-none w-full max-w-7xl mx-auto"
         >
           <motion.svg
-            viewBox={viewBox}
+            viewBox="0 0 1000 500"
             preserveAspectRatio="xMidYMid meet"
             textRendering="geometricPrecision"
             className="w-full h-auto overflow-visible"
@@ -61,28 +57,28 @@ export const Hero = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.1, type: 'spring', bounce: 0.4 }}
-              x="50%"
+              x={500}
               y="150"
               textAnchor="middle"
               dominantBaseline="middle"
-              className="font-black text-[220px] uppercase fill-white"
+              className="font-black text-[220px] fill-white"
               style={{ letterSpacing: 0 }}
             >
-              Retrac
+              RETRAC
             </motion.text>
             <motion.text
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.3, type: 'spring', bounce: 0.4 }}
-              x="50%"
+              x={500}
               y="350"
               textAnchor="middle"
               dominantBaseline="middle"
-              className="font-black text-[220px] uppercase"
+              className="font-black text-[220px]"
               style={{ letterSpacing: 0 }}
               fill="url(#textGrad)"
             >
-              Labs
+              LABS
             </motion.text>
           </motion.svg>
         </motion.div>
