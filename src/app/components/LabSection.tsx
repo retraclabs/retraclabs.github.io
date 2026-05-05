@@ -48,7 +48,7 @@ export const LabSection = () => {
             </motion.a>
 
             <motion.a
-              href="mailto:hello@retraclabs.com"
+              href="mailto:retrac.labs@gmail.com"
               style={{ boxShadow: '0px 0px 0px 0px rgba(34,211,238,0)' }}
               whileHover={{ y: -4, x: -4, boxShadow: '8px 8px 0px 0px rgba(34,211,238,1)' }}
               whileTap={{ y: 0, x: 0, boxShadow: '0px 0px 0px 0px rgba(34,211,238,1)' }}

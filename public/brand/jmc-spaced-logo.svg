@@ -1,0 +1,25 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 2048 2048"
+  width="2048"
+  height="2048"
+>
+  <rect width="2048" height="2048" rx="416" fill="#18181b"/>
+  <rect x="56" y="56" width="1936" height="1936" rx="360" fill="none" stroke="#3f3f46" stroke-width="72"/>
+  <g
+    fill="#d4d4d8"
+    font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+    font-size="620"
+    font-weight="900"
+  >
+    <text x="628" y="1218" text-anchor="middle">J</text>
+    <text x="1024" y="1218" text-anchor="middle">M</text>
+    <text x="1420" y="1218" text-anchor="middle">C</text>
+  </g>
+  <path
+    d="M520 1420H1528"
+    stroke="#d4d4d8"
+    stroke-width="128"
+    stroke-linecap="round"
+  />
+</svg>

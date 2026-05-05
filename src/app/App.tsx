@@ -59,7 +59,7 @@ export default function App() {
           <nav className="flex gap-3 sm:gap-6 text-[10px] sm:text-sm font-bold font-mono text-zinc-400">
             <a href="#apps" className="hover:text-cyan-400 transition-colors md:cursor-none">LAB</a>
             <a href="#about" className="hover:text-fuchsia-400 transition-colors md:cursor-none">ABOUT</a>
-            <a href="mailto:hello@retraclabs.com" className="hover:text-yellow-400 transition-colors md:cursor-none">CONTACT</a>
+            <a href="mailto:retrac.labs@gmail.com" className="hover:text-yellow-400 transition-colors md:cursor-none">CONTACT</a>
           </nav>
         </div>
       </motion.header>

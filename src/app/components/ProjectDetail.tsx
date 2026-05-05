@@ -73,7 +73,7 @@ export const ProjectDetail = ({ project }: ProjectDetailProps) => {
               {project.description}
             </p>
             <a
-              href="mailto:hello@retraclabs.com"
+              href="mailto:retrac.labs@gmail.com"
               className="inline-flex items-center justify-center gap-2 w-full px-5 py-4 rounded-2xl bg-white text-black font-black border-2 border-white hover:bg-yellow-400 hover:border-yellow-400 transition-colors md:cursor-none"
             >
               Ask About This

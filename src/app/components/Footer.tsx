@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Twitter, Github, Mail } from 'lucide-react';
+import { Github, Mail } from 'lucide-react';
+import JMCLogo from './JMCLogo';
 
 export const Footer = () => {
   return (
@@ -16,21 +17,27 @@ export const Footer = () => {
           <div className="flex flex-col items-center md:items-end gap-4">
               <div className="flex gap-4">
                   {[
-                      { icon: Twitter, href: "#", color: "hover:bg-cyan-400 hover:text-black", border: "hover:border-cyan-400" },
-                      { icon: Github, href: "#", color: "hover:bg-white hover:text-black", border: "hover:border-white" },
-                      { icon: Mail, href: "mailto:hello@retraclabs.com", color: "hover:bg-yellow-400 hover:text-black", border: "hover:border-yellow-400" }
-                  ].map((social, i) => (
-                      <motion.a
-                          key={i}
-                          href={social.href}
-                          style={{ boxShadow: "0px 0px 0px 0px rgba(255,255,255,0)" }}
-                          whileHover={{ y: -4, boxShadow: "4px 4px 0px 0px rgba(255,255,255,0.2)" }}
-                          whileTap={{ y: 0, boxShadow: "0px 0px 0px 0px rgba(255,255,255,0.2)" }}
-                          className={`p-4 rounded-xl bg-zinc-900 border-2 border-zinc-800 text-zinc-400 transition-colors md:cursor-none ${social.color} ${social.border}`}
-                      >
-                          <social.icon className="w-6 h-6" />
-                      </motion.a>
-                  ))}
+                      { icon: JMCLogo, href: "https://jarredmcarter.com", color: "hover:bg-cyan-400 hover:text-black", border: "hover:border-cyan-400", label: "Jarred M. Carter" },
+                      { icon: Github, href: "https://github.com/retraclabs", color: "hover:bg-white hover:text-black", border: "hover:border-white", label: "GitHub" },
+                      { icon: Mail, href: "mailto:retrac.labs@gmail.com", color: "hover:bg-yellow-400 hover:text-black", border: "hover:border-yellow-400", label: "Email" }
+                  ].map((social, i) => {
+                      const Icon = social.icon;
+
+                      return (
+                          <motion.a
+                              key={i}
+                              href={social.href}
+                              aria-label={social.label}
+                              title={social.label}
+                              style={{ boxShadow: "0px 0px 0px 0px rgba(255,255,255,0)" }}
+                              whileHover={{ y: -4, boxShadow: "4px 4px 0px 0px rgba(255,255,255,0.2)" }}
+                              whileTap={{ y: 0, boxShadow: "0px 0px 0px 0px rgba(255,255,255,0.2)" }}
+                              className={`p-4 rounded-xl bg-zinc-900 border-2 border-zinc-800 text-zinc-400 transition-colors md:cursor-none ${social.color} ${social.border}`}
+                          >
+                              <Icon className="w-6 h-6" />
+                          </motion.a>
+                      );
+                  })}
               </div>
 
               <a
