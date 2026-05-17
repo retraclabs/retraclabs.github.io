@@ -12,6 +12,7 @@ export type Project = {
   description: string;
   highlights: string[];
   nextSteps: string[];
+  appStoreUrl?: string;
 };
 
 export const projects: Project[] = [
@@ -43,12 +44,12 @@ export const projects: Project[] = [
     slug: 'snippystack',
     name: 'Snippystack',
     platform: 'macOS',
-    status: 'In Review',
+    status: 'Available',
     accent: 'cyan',
     accentText: 'text-cyan-400',
-    icon: Smartphone,
+    icon: Monitor,
     summary: 'The clipboard manager that actually thinks. Smart type detection, full history, search, and pins — all' +
-        'from your menu bar.',
+        ' from your menu bar.',
     description:
       'macOS copies. SnippyStack remembers.\n' +
         '\n' +
@@ -69,15 +70,16 @@ export const projects: Project[] = [
         '\n' +
         'One-time purchase. No subscription. No nonsense.',
     highlights: [
-      'Animated habit widgets built for quick daily check-ins',
-      'Soft progress language instead of guilt-driven streak mechanics',
-      'A visual system that can expand from phone to desktop later',
+      'Smart type detection: clips are automatically labeled as URLs, emails, code, or plain text',
+      'Full history with sort, search, and filter — plus Permanent Snippets for text you reuse',
+      'Privacy-first: your clipboard never leaves your Mac. No cloud, no accounts, no nonsense.',
     ],
     nextSteps: [
-      'Define the smallest useful tracking loop',
-      'Prototype the primary widget states',
-      'Test whether the visual language stays clear on small screens',
+      'Keyboard-driven quick-paste mini window for faster access without opening the full history',
+      'Scheduled expiry for sensitive clips — set a clip to auto-delete after a chosen time',
+      'Expanded smart detection for additional content types based on user feedback',
     ],
+    appStoreUrl: 'https://apps.apple.com/us/app/snippystack/id6765705718?mt=12',
   },
   {
     slug: 'nexus',

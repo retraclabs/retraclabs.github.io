@@ -37,7 +37,7 @@ export const LabSection = () => {
             className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center items-stretch sm:items-center w-full sm:w-auto"
           >
             <motion.a
-              href="#apps"
+              href="#lab-grid"
               style={{ boxShadow: '0px 0px 0px 0px rgba(244,114,182,0)' }}
               whileHover={{ y: -4, x: -4, boxShadow: '8px 8px 0px 0px rgba(244,114,182,1)' }}
               whileTap={{ y: 0, x: 0, boxShadow: '0px 0px 0px 0px rgba(244,114,182,1)' }}
@@ -73,7 +73,7 @@ export const LabSection = () => {
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-5 sm:gap-6 auto-rows-[300px] sm:auto-rows-[280px]">
+        <div id="lab-grid" className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-5 sm:gap-6 auto-rows-[300px] sm:auto-rows-[280px] scroll-mt-8">
           <motion.button
             type="button"
             onClick={() => openProject('amparo')}

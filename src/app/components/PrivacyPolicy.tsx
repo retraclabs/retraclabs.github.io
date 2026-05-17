@@ -26,7 +26,7 @@ export const PrivacyPolicy = () => {
                     </h1>
 
                     <p className="text-zinc-500 font-mono font-bold mb-10">
-                        Last updated: May 4, 2026
+                        Last updated: May 16, 2026
                     </p>
 
                     <div className="space-y-10 text-zinc-300 font-medium leading-relaxed">
@@ -47,9 +47,10 @@ export const PrivacyPolicy = () => {
                             </h2>
                             <p>
                                 Some Retrac Labs apps may allow you to enter information directly,
-                                such as app settings, preferences, cycle tracking details, notes,
-                                symptoms, or other personal records. We only use this information
-                                to provide the features of the app.
+                                such as app settings, preferences, notes, or other personal records.
+                                We only use this information to provide the features of the app.
+                                Information entered into Retrac Labs apps stays on your device unless
+                                you explicitly choose to share it.
                             </p>
                         </section>
 
@@ -58,10 +59,25 @@ export const PrivacyPolicy = () => {
                                 Health-Related Information
                             </h2>
                             <p>
-                                Apps such as Amparo may involve sensitive health-related information.
+                                Some Retrac Labs apps may involve sensitive health-related information.
                                 We design these experiences to minimize unnecessary collection,
                                 protect user privacy, and avoid selling or sharing personal health
-                                information for advertising purposes.
+                                information for advertising purposes. App-specific privacy details
+                                will be provided as those apps become available.
+                            </p>
+                        </section>
+
+                        <section>
+                            <h2 className="text-2xl font-black text-white mb-3">
+                                SnippyStack
+                            </h2>
+                            <p>
+                                SnippyStack is a macOS clipboard manager available on the Mac App Store.
+                                All clipboard history, pinned snippets, and usage data are stored
+                                exclusively on your Mac. SnippyStack does not transmit clipboard
+                                contents, history, or any personally identifiable information to
+                                Retrac Labs or any third party. No account is required. No cloud
+                                sync occurs.
                             </p>
                         </section>
 
@@ -83,9 +99,11 @@ export const PrivacyPolicy = () => {
                                 Beta Software
                             </h2>
                             <p>
-                                Some Retrac Labs projects may be offered as beta software. Beta
-                                versions may change frequently and may collect limited diagnostic
-                                or feedback information when you choose to participate in testing.
+                                Some Retrac Labs projects are offered as beta software ahead of
+                                public release. Beta versions may change frequently. We may collect
+                                limited diagnostic or feedback information when you choose to
+                                participate in testing. Participation in any beta is voluntary,
+                                and you may opt out at any time by contacting us.
                             </p>
                         </section>
 
@@ -96,7 +114,7 @@ export const PrivacyPolicy = () => {
                             <p>
                                 If you have questions about this privacy policy, contact us at{' '}
                                 <a
-                                    href="mailto:rerac.labs@gmail.com"
+                                    href="mailto:retrac.labs@gmail.com"
                                     className="text-cyan-400 hover:text-cyan-300"
                                 >
                                     retrac.labs@gmail.com

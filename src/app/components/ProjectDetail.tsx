@@ -72,13 +72,25 @@ export const ProjectDetail = ({ project }: ProjectDetailProps) => {
             <p className="text-zinc-300 font-medium leading-relaxed mb-8">
               {project.description}
             </p>
-            <a
-              href="mailto:retrac.labs@gmail.com"
-              className="inline-flex items-center justify-center gap-2 w-full px-5 py-4 rounded-2xl bg-white text-black font-black border-2 border-white hover:bg-yellow-400 hover:border-yellow-400 transition-colors md:cursor-none"
-            >
-              Ask About This
-              <ArrowUpRight className="w-5 h-5" />
-            </a>
+            {project.appStoreUrl ? (
+              <a
+                href={project.appStoreUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 w-full px-5 py-4 rounded-2xl bg-cyan-400 text-black font-black border-2 border-cyan-400 hover:bg-yellow-400 hover:border-yellow-400 transition-colors md:cursor-none"
+              >
+                Download on the Mac App Store
+                <ArrowUpRight className="w-5 h-5" />
+              </a>
+            ) : (
+              <a
+                href="mailto:retrac.labs@gmail.com"
+                className="inline-flex items-center justify-center gap-2 w-full px-5 py-4 rounded-2xl bg-white text-black font-black border-2 border-white hover:bg-yellow-400 hover:border-yellow-400 transition-colors md:cursor-none"
+              >
+                Ask About This
+                <ArrowUpRight className="w-5 h-5" />
+              </a>
+            )}
           </motion.aside>
         </section>
 
