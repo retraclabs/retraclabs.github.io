@@ -20,25 +20,28 @@ export const projects: Project[] = [
     slug: 'amparo',
     name: 'Amparo',
     platform: 'iOS',
-    status: 'Beta Testing',
+    status: 'Available',
     accent: 'pink',
     accentText: 'text-pink-400',
     icon: Smartphone,
-    summary: 'A more personal way to track your menstrual cycle',
+    summary: 'Privacy-first cycle tracking for iPhone. Your body, your data — no subscriptions, no cloud, no noise.',
     description:
-      'Amparo is an iOS cycle-tracking app designed around privacy, clarity, and emotional ease. Instead of turning your' +
-        'body into a dashboard of warnings and streaks, Amparo helps you notice patterns, track symptoms, and prepare' +
-        'for what is coming with a calmer, more human interface.',
+      'Amparo is a cycle-tracking app for iPhone built around privacy, clarity, and emotional ease. ' +
+      'Instead of turning your body into a dashboard of warnings and streaks, Amparo helps you log symptoms, ' +
+      'track moods, and notice patterns — with a calmer, more human interface that never judges or alarms.\n\n' +
+      'Everything stays on your device. No account required. No cloud sync. No subscription. ' +
+      'One-time purchase at $4.99.',
     highlights: [
-        'Private cycle, symptom, and mood tracking built for everyday use',
-        'Pattern insights that help users understand their own rhythms over time',
-        'A gentle visual language that avoids shame, pressure, or alarmist design',
+        'Local-only storage: your cycle data never leaves your iPhone — no accounts, no servers',
+        'Log symptoms, moods, and cycle phases with a calm, shame-free interface',
+        'Pattern insights that help you understand your own rhythms over time',
     ],
     nextSteps: [
-        'Expand beta testing with a small group of trusted users',
-        'Refine predictions, reminders, and symptom logging flows',
-        'Review privacy language and App Store health-data requirements before launch',
+        'Expand symptom and mood logging categories based on early user feedback',
+        'Introduce optional reminders for upcoming cycle phases and symptom windows',
+        'Home screen widget for quick symptom logging without opening the full app',
     ],
+    appStoreUrl: 'https://apps.apple.com/us/app/amparo/id6765911709',
   },
   {
     slug: 'snippystack',
@@ -82,25 +85,27 @@ export const projects: Project[] = [
     appStoreUrl: 'https://apps.apple.com/us/app/snippystack/id6765705718?mt=12',
   },
   {
-    slug: 'nexus',
-    name: 'Project Nexus',
-    platform: 'macOS + iOS',
-    status: 'Prototyping',
+    slug: 'ambient-desk',
+    name: 'Ambient Desk',
+    platform: 'macOS',
+    status: 'Beta',
     accent: 'purple',
     accentText: 'text-purple-400',
     icon: Zap,
     summary: 'A fast bridge for clipboard, files, and context across Apple devices.',
     description:
-      'Nexus is a cross-device utility concept for moving useful fragments between machines without breaking focus. It is early, but it has a clear north star: make handoff feel instant, visible, and trustworthy.',
+      'Ambient Desk is a macOS utility for moving useful fragments between machines without breaking focus. ' +
+      'It keeps a visible, local queue of clipboard items and files ready to hand off across your Apple devices — ' +
+      'fast, private, and trustworthy. Now entering beta and looking for early testers.',
     highlights: [
-      'Clipboard and file relay concepts for Apple-platform workflows',
-      'A visible queue so transfers feel understandable',
-      'Early thinking around local-first privacy boundaries',
+      'Clipboard and file relay built for Apple-platform workflows',
+      'A visible queue so every transfer feels understandable and intentional',
+      'Local-first: nothing moves without your say-so, no accounts required',
     ],
     nextSteps: [
-      'Map the transport and permissions model',
-      'Prototype the queue UI',
-      'Validate what should be automatic and what should require confirmation',
+      'Gather feedback from early beta testers on core handoff flows',
+      'Refine the queue UI and permission model based on real usage',
+      'Expand device pairing and add scheduled or triggered transfers',
     ],
   },
 ];

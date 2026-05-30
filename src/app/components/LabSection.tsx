@@ -198,7 +198,7 @@ export const LabSection = () => {
                   <div className="w-full md:w-48 h-3 bg-zinc-800 rounded-full overflow-hidden border border-zinc-700">
                     <motion.div
                       initial={{ width: 0 }}
-                      whileInView={{ width: '15%' }}
+                      whileInView={{ width: '35%' }}
                       viewport={{ once: true }}
                       transition={{ delay: 0.8, duration: 1 }}
                       className="h-full bg-purple-500"

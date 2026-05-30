@@ -26,7 +26,7 @@ export const PrivacyPolicy = () => {
                     </h1>
 
                     <p className="text-zinc-500 font-mono font-bold mb-10">
-                        Last updated: May 16, 2026
+                        Last updated: May 18, 2026
                     </p>
 
                     <div className="space-y-10 text-zinc-300 font-medium leading-relaxed">
@@ -56,14 +56,15 @@ export const PrivacyPolicy = () => {
 
                         <section>
                             <h2 className="text-2xl font-black text-white mb-3">
-                                Health-Related Information
+                                Amparo
                             </h2>
                             <p>
-                                Some Retrac Labs apps may involve sensitive health-related information.
-                                We design these experiences to minimize unnecessary collection,
-                                protect user privacy, and avoid selling or sharing personal health
-                                information for advertising purposes. App-specific privacy details
-                                will be provided as those apps become available.
+                                Amparo is an iOS cycle-tracking app available on the App Store.
+                                All cycle data, symptoms, moods, and personal health records you
+                                enter are stored exclusively on your iPhone. Amparo does not
+                                transmit health information to Retrac Labs or any third party.
+                                No account is required. No cloud sync occurs. Your data stays
+                                yours — private, local, and fully under your control.
                             </p>
                         </section>
 
