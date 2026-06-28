@@ -51,16 +51,16 @@ export const projects: Project[] = [
     accent: 'cyan',
     accentText: 'text-cyan-400',
     icon: Monitor,
-    summary: 'The clipboard manager that actually thinks. Smart type detection, full history, search, and pins — all' +
+    summary: 'The context-aware clipboard manager that actually thinks. Smart type detection, full history, search, and pins, all' +
         ' from your menu bar.',
     description:
-      'macOS copies. SnippyStack remembers.\n' +
+      'macOS copies. SnippyStack remembers.' +
         '\n' +
         'Every time you press ⌘C, the system overwrites your last copy, and whatever was there is gone. SnippyStack fixes that. It quietly lives in your menu bar, capturing everything you copy and keeping it ready whenever you need it.\n' +
         '\n' +
         'Click the Snippystack icon to browse your full clipboard history. Click any item to instantly paste it. Search across hundreds of saved clips. Pin your most-used snippets so they\'re always at the top.\n' +
         '\n' +
-        'SnippyStack goes further than other clipboard managers:\n' +
+        'SnippyStack goes further than other clipboard managers:' +
         '\n' +
         '· Smart detection: clips are automatically labeled as URLs, emails, code, or plain text\n' +
         '· Full history window: sort by newest, oldest, longest, or most copied, and filter by type\n' +

@@ -69,7 +69,7 @@ export const ProjectDetail = ({ project }: ProjectDetailProps) => {
             <div className="text-xs font-mono font-black text-zinc-500 uppercase tracking-widest mb-4">
               Current Focus
             </div>
-            <p className="text-zinc-300 font-medium leading-relaxed mb-8">
+            <p className="text-zinc-300 font-medium leading-relaxed mb-8 whitespace-pre-line">
               {project.description}
             </p>
             {project.appStoreUrl ? (
