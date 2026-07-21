@@ -15,7 +15,9 @@ export const ProjectDetail = ({ project }: ProjectDetailProps) => {
       ? 'bg-pink-500'
       : project.accent === 'cyan'
         ? 'bg-cyan-500'
-        : 'bg-purple-500';
+        : project.accent === 'emerald'
+          ? 'bg-emerald-500'
+          : 'bg-purple-500';
 
   return (
     <main className="relative z-10 px-4 sm:px-6 pt-32 sm:pt-36 pb-20 min-h-screen">

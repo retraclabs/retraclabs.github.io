@@ -26,7 +26,7 @@ export const PrivacyPolicy = () => {
                     </h1>
 
                     <p className="text-zinc-500 font-mono font-bold mb-10">
-                        Last updated: May 18, 2026
+                        Last updated: May 19, 2026
                     </p>
 
                     <div className="space-y-10 text-zinc-300 font-medium leading-relaxed">
@@ -51,6 +51,24 @@ export const PrivacyPolicy = () => {
                                 We only use this information to provide the features of the app.
                                 Information entered into Retrac Labs apps stays on your device unless
                                 you explicitly choose to share it.
+                            </p>
+                        </section>
+
+                        <section>
+                            <h2 className="text-2xl font-black text-white mb-3">
+                                Fiel
+                            </h2>
+                            <p>
+                                Fiel is an on-device clinical scribe for macOS, currently in
+                                development. It records a session (with clinician consent),
+                                transcribes it using on-device AI, and drafts a progress note
+                                in the clinician's own template — entirely on their Mac.
+                                Fiel ships without any network entitlement, which means it
+                                cannot transmit data to Retrac Labs or any third party — not
+                                audio, not transcripts, not notes, not anything. There is no
+                                server, no account, and no analytics. Clinicians can verify
+                                this independently on the shipped binary
+                                (<code>codesign -d --entitlements</code>).
                             </p>
                         </section>
 

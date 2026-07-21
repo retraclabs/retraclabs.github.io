@@ -1,4 +1,4 @@
-import { Monitor, Smartphone, Zap, type LucideIcon } from 'lucide-react';
+import { Mic, Monitor, Smartphone, Zap, type LucideIcon } from 'lucide-react';
 
 export type Project = {
   slug: string;
@@ -83,6 +83,37 @@ export const projects: Project[] = [
       'Expanded smart detection for additional content types based on user feedback',
     ],
     appStoreUrl: 'https://apps.apple.com/us/app/snippystack/id6765705718?mt=12',
+  },
+  {
+    slug: 'fiel',
+    name: 'Fiel',
+    platform: 'macOS',
+    status: 'In Development',
+    accent: 'emerald',
+    accentText: 'text-emerald-400',
+    icon: Mic,
+    summary: 'Private, on-device session notes for therapists — nothing ever leaves your Mac.',
+    description:
+      'Fiel records a therapy session (with consent), transcribes it, and drafts a progress note ' +
+      'in the clinician\'s own template — using on-device AI, entirely on their Mac. ' +
+      'There is no server, no account, and no analytics.\n\n' +
+      'The privacy claim is not a policy promise. It is an architectural fact: Fiel ships without ' +
+      'any network entitlement, which means it cannot transmit data. You can verify this yourself ' +
+      'on the shipped binary (`codesign -d --entitlements`). There is no server to breach because ' +
+      'there is no server.\n\n' +
+      'Every note is a visible draft you review, edit, and sign. Every drafted sentence is linked ' +
+      'to the transcript span that supports it — so you always know where it came from. ' +
+      'Fiel structures what was said; you author the note.',
+    highlights: [
+      'On-device transcription and note drafting — no server, no account, no network permission',
+      'Grounded notes: every sentence cites the transcript; you review and sign every word',
+      'Built for EMDR and therapy documentation workflows',
+    ],
+    nextSteps: [
+      'TestFlight beta with a small group of EMDR clinicians',
+      'Refine note templates and transcript-to-note citation linking',
+      'Validate the full session-to-signed-note workflow in real clinical use',
+    ],
   },
   {
     slug: 'ambient-desk',
