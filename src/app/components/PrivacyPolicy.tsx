@@ -102,6 +102,33 @@ export const PrivacyPolicy = () => {
 
                         <section>
                             <h2 className="text-2xl font-black text-white mb-3">
+                                Apunte
+                            </h2>
+                            <p>
+                                Apunte is a macOS transcription app that converts audio and video
+                                into timestamped transcripts entirely on your Mac. It ships without
+                                any outgoing-network entitlement, so it cannot transmit your audio or
+                                transcripts anywhere — no analytics, no account, no cloud. Stored
+                                audio is encrypted at rest; the transcript database is kept locally.
+                                For full details, see the{' '}
+                                <a
+                                    href="#/apunte/privacy"
+                                    className="text-cyan-400 hover:text-cyan-300"
+                                >
+                                    Apunte privacy policy
+                                </a>{' '}
+                                and{' '}
+                                <a
+                                    href="#/apunte/terms"
+                                    className="text-cyan-400 hover:text-cyan-300"
+                                >
+                                    Terms of Use
+                                </a>.
+                            </p>
+                        </section>
+
+                        <section>
+                            <h2 className="text-2xl font-black text-white mb-3">
                                 Data Sharing
                             </h2>
                             <p>
@@ -110,6 +137,21 @@ export const PrivacyPolicy = () => {
                                 advertising. If a specific app uses third-party services, we will
                                 describe those services clearly in this policy or in app-specific
                                 privacy information.
+                            </p>
+                        </section>
+
+                        <section>
+                            <h2 className="text-2xl font-black text-white mb-3">
+                                Website Analytics
+                            </h2>
+                            <p>
+                                This website (retraclabs.co) uses Google Analytics to understand
+                                aggregate traffic — page views, general location, and referral
+                                sources — so we can improve the site. This applies to the website
+                                only and is entirely separate from our apps, which contain no
+                                analytics. You can opt out with Google's browser add-on or by
+                                blocking analytics scripts. This does not apply to any Retrac Labs
+                                app you download.
                             </p>
                         </section>
 

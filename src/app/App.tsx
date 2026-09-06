@@ -6,8 +6,12 @@ import { LabSection } from './components/LabSection';
 import { Footer } from './components/Footer';
 import { ProjectDetail } from './components/ProjectDetail';
 import { PrivacyPolicy } from './components/PrivacyPolicy';
+import { ApuntePrivacy } from './components/ApuntePrivacy';
+import { ApunteTerms } from './components/ApunteTerms';
 import { getProjectBySlug } from './data/projects';
 import { motion } from 'motion/react';
+
+const STATIC_PAGE_HASHES = ['#/privacy', '#/apunte/privacy', '#/apunte/terms'];
 
 
 const getProjectFromHash = () => {
@@ -32,7 +36,7 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    if (activeProject || currentHash === '#/privacy') {
+    if (activeProject || STATIC_PAGE_HASHES.includes(currentHash)) {
       const scrollId = window.setTimeout(() => {
         window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
       }, 0);
@@ -66,6 +70,10 @@ export default function App() {
 
       {currentHash === '#/privacy' ? (
         <PrivacyPolicy />
+      ) : currentHash === '#/apunte/privacy' ? (
+        <ApuntePrivacy />
+      ) : currentHash === '#/apunte/terms' ? (
+        <ApunteTerms />
       ) : activeProject ? (
         <ProjectDetail project={activeProject} />
       ) : (
