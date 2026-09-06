@@ -1,4 +1,4 @@
-import { Mic, Monitor, Smartphone, Zap, type LucideIcon } from 'lucide-react';
+import { FileText, Mic, Monitor, Smartphone, Zap, type LucideIcon } from 'lucide-react';
 
 export type Project = {
   slug: string;
@@ -137,6 +137,33 @@ export const projects: Project[] = [
       'Gather feedback from early beta testers on core handoff flows',
       'Refine the queue UI and permission model based on real usage',
       'Expand device pairing and add scheduled or triggered transfers',
+    ],
+  },
+  {
+    slug: 'apunte',
+    name: 'Apunte',
+    platform: 'macOS',
+    status: 'Coming Soon',
+    accent: 'sky',
+    accentText: 'text-sky-400',
+    icon: FileText,
+    summary:
+      'Transcription that never leaves your Mac. Your recordings, your words — no uploads, no account, no network.',
+    description:
+      'Apunte turns audio and video into accurate, timestamped transcripts entirely on your Mac. ' +
+      'Drop in a voice memo, an interview, a lecture, a video — if macOS can play it, Apunte can read it.\n\n' +
+      'It ships without the outgoing-network entitlement, so the app\'s own code cannot open a network ' +
+      'connection. You don\'t have to take that on faith. Inspect the signed app yourself with codesign. ' +
+      'Transcription is free, permanently; Premium adds speaker names and formatted export.',
+    highlights: [
+      'No network access, verifiable: the app ships without the network entitlement, so it cannot upload your audio. Check it yourself in Terminal.',
+      'Accurate on real recordings: on a 64-minute, two-person session it captured the same content as MacWhisper, keeping hesitations and false starts rather than smoothing them away.',
+      'A free tier that\'s actually complete: transcription, editing, playback, and plain-text, timestamped, and JSON export are free forever. JSON carries everything, so your work is never locked in.',
+    ],
+    nextSteps: [
+      'Automatic speaker labels, so conversations are attributed without assigning every line by hand',
+      'Encryption for the transcript database — stored audio is already sealed with a key held in the Mac\'s Secure Enclave',
+      'A clinical edition built on the same on-device core, for practitioners who cannot send session audio to a server',
     ],
   },
 ];

@@ -3,7 +3,7 @@ import { motion } from 'motion/react';
 import { Sparkles, ArrowRight } from 'lucide-react';
 import { projects } from '../data/projects';
 
-const [amparo, snippystack, fiel, nexus] = projects;
+const [amparo, snippystack, fiel, nexus, apunte] = projects;
 
 export const LabSection = () => {
   const openProject = (slug: string) => {
@@ -14,6 +14,7 @@ export const LabSection = () => {
   const SnippystackIcon = snippystack.icon;
   const FielIcon = fiel.icon;
   const NexusIcon = nexus.icon;
+  const ApunteIcon = apunte.icon;
 
   return (
     <section id="apps" className="py-16 sm:py-24 px-4 sm:px-6 relative z-10">
@@ -180,6 +181,48 @@ export const LabSection = () => {
                 <h3 className="text-3xl font-black text-black mb-2 tracking-tight">{snippystack.name}</h3>
                 <p className="text-black/70 font-bold text-sm leading-snug">
                   {snippystack.summary}
+                </p>
+              </div>
+            </div>
+          </motion.button>
+
+          <motion.button
+            type="button"
+            onClick={() => openProject('apunte')}
+            initial={{ opacity: 0, y: 40 }}
+            style={{ boxShadow: '0px 0px 0px 0px rgba(56,189,248,0)' }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            whileHover={{ y: -8, boxShadow: '12px 12px 0px 0px rgba(56,189,248,1)' }}
+            transition={{ type: 'spring', bounce: 0.4, delay: 0.25 }}
+            className="col-span-1 md:col-span-4 lg:col-span-6 bg-zinc-900 border-4 border-zinc-800 rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-8 relative overflow-hidden group hover:border-sky-500 transition-colors text-left md:cursor-none"
+          >
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_85%_40%,rgba(56,189,248,0.08),transparent_55%)]" />
+
+            <div className="relative z-10 h-full flex flex-col sm:flex-row justify-between gap-6">
+              <div className="flex flex-col justify-between gap-4">
+                <div className="flex flex-wrap items-center gap-3">
+                  <div className="p-4 rounded-2xl bg-zinc-800 text-sky-400">
+                    <ApunteIcon className="w-8 h-8" />
+                  </div>
+                  <span className="px-4 py-2 rounded-full bg-zinc-800 text-white font-mono font-bold text-sm">
+                    {apunte.platform}
+                  </span>
+                  <span className="px-3 py-1.5 rounded-full bg-sky-500/10 text-sky-400 font-mono font-bold text-xs border border-sky-500/20">
+                    {apunte.status}
+                  </span>
+                </div>
+                <div>
+                  <h3 className="text-3xl font-black text-white mb-3 tracking-tight">{apunte.name}</h3>
+                  <p className="text-zinc-400 font-medium max-w-lg">{apunte.summary}</p>
+                </div>
+              </div>
+              <div className="flex flex-col justify-end sm:items-end shrink-0 gap-1.5">
+                <p className="text-zinc-500 font-mono text-xs sm:text-right leading-relaxed max-w-xs">
+                  Transcribes on-device. No uploads, no account, no network entitlement.
+                </p>
+                <p className="text-sky-600 font-mono text-xs sm:text-right">
+                  Verify it yourself with codesign.
                 </p>
               </div>
             </div>
