@@ -26,7 +26,7 @@ export const ApuntePrivacy = () => {
                     </h1>
 
                     <p className="text-zinc-500 font-mono font-bold mb-10">
-                        Last updated: May 19, 2026
+                        Last updated: September 10, 2026
                     </p>
 
                     <div className="space-y-10 text-zinc-300 font-medium leading-relaxed">
@@ -140,7 +140,7 @@ export const ApuntePrivacy = () => {
                             </h2>
                             <p>
                                 Apunte uses no third-party SDKs, ad networks, data brokers, or
-                                analytics providers. The only third party involved is Apple, in two
+                                analytics providers. The only third party involved is Apple, in three
                                 operating-system roles:
                             </p>
                             <ul className="list-disc pl-5 space-y-3 mt-4 marker:text-sky-400">
@@ -157,6 +157,14 @@ export const ApuntePrivacy = () => {
                                     macOS itself downloads the speech-recognition model. That
                                     download is an Apple operating-system function, governed by
                                     Apple's privacy policy — not something Apunte performs.
+                                </li>
+                                <li>
+                                    <strong className="text-white font-bold">Summaries.</strong>{' '}
+                                    Premium summaries are generated on your Mac by Apple
+                                    Intelligence, an Apple operating-system function governed by
+                                    Apple's privacy policy — not something Apunte performs. Apunte
+                                    passes the transcript to the on-device system; the app itself,
+                                    having no network entitlement, sends nothing off your Mac.
                                 </li>
                             </ul>
                             <p className="mt-4">

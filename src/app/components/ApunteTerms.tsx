@@ -26,7 +26,7 @@ export const ApunteTerms = () => {
                     </h1>
 
                     <p className="text-zinc-500 font-mono font-bold mb-10">
-                        Last updated: May 19, 2026
+                        Last updated: September 10, 2026
                     </p>
 
                     <div className="space-y-10 text-zinc-300 font-medium leading-relaxed">
@@ -65,10 +65,12 @@ export const ApunteTerms = () => {
                                 timestamped text, and JSON, are free — and remain free.
                             </p>
                             <p className="mt-4">
-                                Premium features — speaker names on transcript lines, and export to
-                                SubRip (SRT), WebVTT, CSV, Markdown, HTML, PDF, and Word — are
-                                unlocked through an in-app purchase, offered as a monthly
-                                subscription, a yearly subscription, or a one-time lifetime purchase.
+                                Premium features — speaker names on transcript lines, on-device
+                                summaries of each part of a recording, search across your whole
+                                transcript library, and export to SubRip (SRT), WebVTT, CSV,
+                                Markdown, HTML, PDF, and Word — are unlocked through an in-app
+                                purchase, offered as a monthly subscription, a yearly subscription,
+                                or a one-time lifetime purchase.
                             </p>
                             <ul className="list-disc pl-5 space-y-3 mt-4 marker:text-sky-400">
                                 <li>
@@ -103,10 +105,11 @@ export const ApunteTerms = () => {
                             <p className="mt-4">
                                 <strong className="text-white font-bold">If Premium lapses.</strong>{' '}
                                 Any speaker names you have already assigned remain visible and
-                                continue to export; only assigning <em>new</em> speaker names stops
-                                until you renew. Free exports — plain text, timestamped text, and
-                                JSON — remain available forever. We consider this a commitment, not a
-                                courtesy.
+                                continue to export, and summaries you have already generated remain
+                                in place; only creating <em>new</em> ones stops until you renew.
+                                Searching within a single transcript remains free. Free exports —
+                                plain text, timestamped text, and JSON — remain available forever. We
+                                consider this a commitment, not a courtesy.
                             </p>
                         </section>
 
@@ -122,6 +125,12 @@ export const ApunteTerms = () => {
                                 and correcting any transcript before relying on it for any purpose.
                                 Apunte is provided “as is,” without warranty of any kind as to
                                 accuracy, completeness, or fitness for a particular purpose.
+                            </p>
+                            <p className="mt-4">
+                                Summaries are generated on your Mac by Apple Intelligence and can be
+                                inaccurate or incomplete, including stating things that were not said.
+                                Always check a summary against the transcript and the recording before
+                                relying on it.
                             </p>
                         </section>
 
