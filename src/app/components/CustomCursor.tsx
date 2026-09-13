@@ -1,5 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion, useMotionValue, useSpring } from 'motion/react';
+
+// How long the mouse has to sit still before the floppy takes over.
+const IDLE_MS = 2200;
 
 // ── Floppy Disk SVG ───────────────────────────────────────────────────────────
 // 32 × 34 px canvas, center (16, 17).
@@ -77,62 +80,103 @@ const FloppySVG = () => (
 );
 
 // ── Component ─────────────────────────────────────────────────────────────────
+// Two cursors, one at a time:
+//   • moving the mouse → the pixel arrow/hand from cursors.css (same as
+//     jarredmcarter.com), floppy hidden.
+//   • mouse held still for IDLE_MS → .cursor-idle goes on <html>, which sets
+//     cursor:none, and the floppy fades in at the last known position and spins.
+// Scrolling is intentionally NOT treated as activity: a reader who is only
+// scrolling stays in the floppy state.
 export const CustomCursor = () => {
-  const [isVisible,  setIsVisible]  = useState(false);
-  const [isHovering, setIsHovering] = useState(false);
+  const [isIdle, setIsIdle] = useState(false);
+  const [hasPosition, setHasPosition] = useState(false);
+  const [reduceMotion, setReduceMotion] = useState(false);
+  const idleTimer = useRef<number | undefined>(undefined);
 
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
 
+  // A soft spring so the floppy drifts into place rather than snapping.
   const springConfig = { damping: 20, stiffness: 400, mass: 0.5 };
   const x = useSpring(cursorX, springConfig);
   const y = useSpring(cursorY, springConfig);
 
   useEffect(() => {
+    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const onMotionChange = () => setReduceMotion(motionQuery.matches);
+    onMotionChange();
+    motionQuery.addEventListener('change', onMotionChange);
+
+    // A coarse pointer has no cursor to replace, so leave the whole thing off.
+    const coarse = window.matchMedia('(hover: none), (pointer: coarse)');
+    if (coarse.matches) {
+      motionQuery.removeEventListener('change', onMotionChange);
+      return;
+    }
+
+    const goIdle = () => {
+      setIsIdle(true);
+      document.documentElement.classList.add('cursor-idle');
+    };
+
+    const wake = () => {
+      setIsIdle(false);
+      document.documentElement.classList.remove('cursor-idle');
+      window.clearTimeout(idleTimer.current);
+      idleTimer.current = window.setTimeout(goIdle, IDLE_MS);
+    };
+
     const onMove = (e: MouseEvent) => {
       cursorX.set(e.clientX - 16); // center the 32 px width on the pointer
       cursorY.set(e.clientY - 17); // center the 34 px height
-      if (!isVisible) setIsVisible(true);
+      setHasPosition(true);
+      wake();
     };
 
-    const onOver = (e: MouseEvent) => {
-      const t = e.target as HTMLElement;
-      // Walk up the tree — the direct target is often a child element
-      // inside a button/link, which won't match a tag check on its own.
-      setIsHovering(
-        t.closest('a, button') !== null ||
-        window.getComputedStyle(t).cursor === 'pointer',
-      );
+    // Leaving the window hides the floppy; the pixel cursor is the OS's problem.
+    const onLeave = () => {
+      setHasPosition(false);
+      window.clearTimeout(idleTimer.current);
+      setIsIdle(false);
+      document.documentElement.classList.remove('cursor-idle');
     };
-
-    const onLeave = () => setIsVisible(false);
-    const onEnter = () => setIsVisible(true);
 
     window.addEventListener('mousemove', onMove);
-    document.addEventListener('mouseover',  onOver);
+    window.addEventListener('mousedown', wake);
+    window.addEventListener('wheel', wake, { passive: true });
     document.addEventListener('mouseleave', onLeave);
-    document.addEventListener('mouseenter', onEnter);
+
+    // Start the clock so an untouched page settles into the floppy on its own.
+    idleTimer.current = window.setTimeout(goIdle, IDLE_MS);
 
     return () => {
+      window.clearTimeout(idleTimer.current);
+      document.documentElement.classList.remove('cursor-idle');
+      motionQuery.removeEventListener('change', onMotionChange);
       window.removeEventListener('mousemove', onMove);
-      document.removeEventListener('mouseover',  onOver);
+      window.removeEventListener('mousedown', wake);
+      window.removeEventListener('wheel', wake);
       document.removeEventListener('mouseleave', onLeave);
-      document.removeEventListener('mouseenter', onEnter);
     };
-  }, [cursorX, cursorY, isVisible]);
+  }, [cursorX, cursorY]);
 
   return (
     <motion.div
+      aria-hidden="true"
       className="fixed top-0 left-0 pointer-events-none z-[9999] hidden md:block"
-      style={{ x, y, opacity: isVisible ? 1 : 0 }}
-      // Idle: one lazy spin every 5 s. Hover: one spin every 0.5 s.
-      animate={{ rotate: 360 }}
+      style={{ x, y }}
+      animate={{
+        opacity: isIdle && hasPosition ? 1 : 0,
+        scale: isIdle && hasPosition ? 1 : 0.7,
+        rotate: reduceMotion ? 0 : 360,
+      }}
       transition={{
-        rotate: {
-          repeat: Infinity,
-          ease: 'linear',
-          duration: isHovering ? 0.5 : 5,
-        },
+        opacity: { duration: 0.35, ease: 'easeOut' },
+        scale: { duration: 0.35, ease: 'easeOut' },
+        // One lazy spin every 5 s, the same idle tempo it always had.
+        rotate: reduceMotion
+          ? { duration: 0 }
+          : { repeat: Infinity, ease: 'linear', duration: 5 },
       }}
     >
       <FloppySVG />

@@ -10,7 +10,7 @@ export const ApuntePrivacy = () => {
                     href="#"
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="inline-flex items-center gap-2 text-sm font-mono font-bold text-zinc-400 hover:text-white transition-colors mb-10 md:cursor-none"
+                    className="inline-flex items-center gap-2 text-sm font-mono font-bold text-zinc-400 hover:text-white transition-colors mb-10"
                 >
                     <ArrowLeft className="w-4 h-4" />
                     Back to Retrac Labs
