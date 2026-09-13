@@ -32,7 +32,7 @@ export const Footer = () => {
                               style={{ boxShadow: "0px 0px 0px 0px rgba(255,255,255,0)" }}
                               whileHover={{ y: -4, boxShadow: "4px 4px 0px 0px rgba(255,255,255,0.2)" }}
                               whileTap={{ y: 0, boxShadow: "0px 0px 0px 0px rgba(255,255,255,0.2)" }}
-                              className={`p-4 rounded-xl bg-zinc-900 border-2 border-zinc-800 text-zinc-400 transition-colors md:cursor-none ${social.color} ${social.border}`}
+                              className={`p-4 rounded-xl bg-zinc-900 border-2 border-zinc-800 text-zinc-400 transition-colors ${social.color} ${social.border}`}
                           >
                               <Icon className="w-6 h-6" />
                           </motion.a>
@@ -40,12 +40,28 @@ export const Footer = () => {
                   })}
               </div>
 
-              <a
-                  href="#/privacy"
-                  className="text-sm font-mono font-bold text-zinc-500 hover:text-white transition-colors md:cursor-none"
-              >
-                  Privacy Policy
-              </a>
+              <div className="flex items-center gap-4">
+                  <a
+                      href="#/about"
+                      className="text-sm font-mono font-bold text-zinc-500 hover:text-white transition-colors"
+                  >
+                      About
+                  </a>
+                  <span className="text-zinc-700" aria-hidden="true">/</span>
+                  <a
+                      href="#/early-access"
+                      className="text-sm font-mono font-bold text-zinc-500 hover:text-white transition-colors"
+                  >
+                      Become a Lab Rat
+                  </a>
+                  <span className="text-zinc-700" aria-hidden="true">/</span>
+                  <a
+                      href="#/privacy"
+                      className="text-sm font-mono font-bold text-zinc-500 hover:text-white transition-colors"
+                  >
+                      Privacy Policy
+                  </a>
+              </div>
           </div>
 
       </div>

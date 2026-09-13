@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
-import { Sparkles } from 'lucide-react';
+import { HERO_SECTION_VH, HERO_FADE_END, c01, smooth } from '../heroChoreography';
 
 export const Hero = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -10,35 +10,34 @@ export const Hero = () => {
     offset: ['start start', 'end end'],
   });
 
-  // CSS scale zoom centered on the wrapper div's midpoint, which aligns exactly
-  // with y=250 in SVG space — the gap between RETRAC (y=150) and LABS (y=350).
-  const scale = useTransform(scrollYProgress, [0, 0.72], [1, 2.0]);
+  // `h` is the wordmark's own 0..1 progress: it finishes well before the
+  // section does, which leaves a beat of empty scroll before the Lab arrives.
+  const h = useTransform(scrollYProgress, (p) => c01(p / HERO_FADE_END));
 
-  const textOpacity = useTransform(scrollYProgress, [0.62, 0.78], [1, 0]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
-  const contentY = useTransform(scrollYProgress, [0, 0.15], [0, 50]);
+  // The three moves that make it "dissipate" rather than just scroll away:
+  // it rushes toward the reader, goes soft, and burns off. Same curve as
+  // jarredmcarter.com: scale 1 to 3.1, blur ramping quadratically to 4.2px.
+  const scale = useTransform(h, (v) => 1 + smooth(v) * 2.1);
+  const textOpacity = useTransform(h, (v) => 1 - c01((v - 0.18) / 0.82));
+  const filter = useTransform(h, (v) =>
+    v > 0.02 ? `blur(${(v * v * 4.2).toFixed(2)}px)` : 'none',
+  );
+  // Once it is gone, take it out of the compositor entirely.
+  const visibility = useTransform(h, (v) => (v >= 1 ? 'hidden' : 'visible'));
+
+  // The scroll cue leaves almost immediately; it has done its job by then.
+  const cueOpacity = useTransform(scrollYProgress, (p) => c01(1 - p * 9));
 
   return (
-    <section ref={containerRef} className="relative h-[145svh] md:h-[150vh] selection:bg-cyan-400 selection:text-black">
+    <section
+      ref={containerRef}
+      style={{ height: `${HERO_SECTION_VH}svh` }}
+      className="relative selection:bg-cyan-400 selection:text-black"
+    >
       <div className="sticky top-0 h-[100svh] flex flex-col items-center justify-center px-4 sm:px-6 overflow-hidden">
         <motion.div
-          style={{ opacity: contentOpacity, y: contentY }}
-          className="absolute top-28 sm:top-32 flex justify-center w-full z-10 pointer-events-none"
-        >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.8, type: 'spring', bounce: 0.5 }}
-            className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 rounded-full border-2 border-zinc-800 bg-zinc-900/50 backdrop-blur-md text-xs sm:text-sm font-bold font-mono text-cyan-400 shadow-[4px_4px_0px_0px_rgba(39,39,42,1)]"
-          >
-            <Sparkles className="w-4 h-4" />
-            APPS IN DEVELOPMENT
-          </motion.div>
-        </motion.div>
-
-        <motion.div
-          style={{ opacity: textOpacity, scale }}
-          className="flex flex-col items-center justify-center relative z-20 pointer-events-none w-full max-w-7xl mx-auto"
+          style={{ opacity: textOpacity, scale, filter, visibility }}
+          className="flex flex-col items-center justify-center relative z-20 pointer-events-none w-full max-w-7xl mx-auto will-change-[transform,opacity,filter]"
         >
           <motion.svg
             viewBox="0 0 1000 500"
@@ -84,23 +83,44 @@ export const Hero = () => {
         </motion.div>
 
         <motion.div
-          style={{ opacity: contentOpacity }}
-          className="absolute bottom-10 sm:bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none"
+          style={{ opacity: cueOpacity }}
+          className="absolute bottom-10 sm:bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 pointer-events-none"
         >
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 2.5, duration: 1 }}
-            className="flex flex-col items-center gap-2"
+            transition={{ delay: 0.9, duration: 1 }}
+            className="flex flex-col items-center gap-3"
           >
             <span className="text-[10px] sm:text-xs font-mono font-bold text-zinc-500 uppercase tracking-widest text-center">
-              Scroll to Dive In
+              Specimens Below
             </span>
-            <motion.div
+            {/* A drawn arrow rather than a tapered bar. The old gradient faded
+                out exactly where the head should have been, so there was no head. */}
+            <motion.svg
+              width="18"
+              height="30"
+              viewBox="0 0 18 30"
+              fill="none"
+              aria-hidden="true"
               animate={{ y: [0, 8, 0] }}
               transition={{ repeat: Infinity, duration: 1.5, ease: 'easeInOut' }}
-              className="w-1 h-8 rounded-full bg-gradient-to-b from-zinc-500 to-transparent"
-            />
+              className="overflow-visible"
+            >
+              <path
+                d="M9 1 V23"
+                stroke="#71717a"
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
+              <path
+                d="M2.5 17.5 L9 24.5 L15.5 17.5"
+                stroke="#a1a1aa"
+                strokeWidth="2.4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </motion.svg>
           </motion.div>
         </motion.div>
       </div>

@@ -8,10 +8,14 @@ import { ProjectDetail } from './components/ProjectDetail';
 import { PrivacyPolicy } from './components/PrivacyPolicy';
 import { ApuntePrivacy } from './components/ApuntePrivacy';
 import { ApunteTerms } from './components/ApunteTerms';
+import { EarlyAccess } from './components/EarlyAccess';
+import { About } from './components/About';
+import { Thanks } from './components/Thanks';
 import { getProjectBySlug } from './data/projects';
+import { heroDissipatedAt } from './heroChoreography';
 import { motion } from 'motion/react';
 
-const STATIC_PAGE_HASHES = ['#/privacy', '#/apunte/privacy', '#/apunte/terms'];
+const STATIC_PAGE_HASHES = ['#/privacy', '#/apunte/privacy', '#/apunte/terms', '#/early-access', '#/about', '#/thanks'];
 
 
 const getProjectFromHash = () => {
@@ -22,6 +26,7 @@ const getProjectFromHash = () => {
 export default function App() {
   const [currentHash, setCurrentHash] = useState(window.location.hash);
   const [activeProject, setActiveProject] = useState(getProjectFromHash);
+  const [headerVisible, setHeaderVisible] = useState(false);
 
   useEffect(() => {
     window.history.scrollRestoration = 'manual';
@@ -45,25 +50,67 @@ export default function App() {
     }
   }, [activeProject, currentHash]);
 
+  // The menu bar stays out of the way until RETRAC LABS has finished
+  // dissipating, the same hand-off jarredmcarter.com makes. Interior pages have
+  // no hero to wait for, so it is there from the start.
+  const onHomePage = !activeProject && !STATIC_PAGE_HASHES.includes(currentHash);
+
+  useEffect(() => {
+    if (!onHomePage) {
+      setHeaderVisible(true);
+      return;
+    }
+
+    let frame = false;
+    const draw = () => {
+      frame = false;
+      setHeaderVisible(window.scrollY >= heroDissipatedAt());
+    };
+
+    const onScroll = () => {
+      if (!frame) {
+        frame = true;
+        requestAnimationFrame(draw);
+      }
+    };
+
+    draw();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', draw);
+
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', draw);
+    };
+  }, [onHomePage]);
+
   return (
-    <div className="relative min-h-screen bg-[#09090b] text-zinc-50 selection:bg-fuchsia-500/30 selection:text-white md:cursor-none font-sans overflow-x-hidden">
+    <div className="relative min-h-screen bg-[#09090b] text-zinc-50 selection:bg-fuchsia-500/30 selection:text-white font-sans overflow-x-hidden">
       <CustomCursor />
       <AnimatedBackground />
 
       <motion.header
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.4, duration: 0.8, type: 'spring', bounce: 0.5 }}
-        className="fixed top-4 sm:top-6 left-0 right-0 z-50 flex justify-center px-3 sm:px-6 pointer-events-none"
+        initial={false}
+        animate={{
+          opacity: headerVisible ? 1 : 0,
+          y: headerVisible ? 0 : -24,
+        }}
+        transition={{ duration: 0.45, ease: 'easeOut' }}
+        aria-hidden={!headerVisible}
+        className={
+          'fixed top-4 sm:top-6 left-0 right-0 z-50 flex justify-center px-3 sm:px-6 pointer-events-none ' +
+          (headerVisible ? '' : 'invisible')
+        }
       >
-        <div className="flex items-center gap-4 sm:gap-8 px-4 sm:px-6 py-3 bg-zinc-900/80 backdrop-blur-xl border-2 border-zinc-800 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.4)] pointer-events-auto max-w-[calc(100vw-1.5rem)]">
-          <a href="#" className="text-lg sm:text-xl font-black text-white uppercase md:cursor-none whitespace-nowrap">
+        <div className="flex items-center gap-4 sm:gap-8 px-4 sm:px-6 py-3 bg-zinc-900/95 backdrop-blur-xl border-2 border-zinc-800 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.4)] pointer-events-auto max-w-[calc(100vw-1.5rem)]">
+          <a href="#" className="text-lg sm:text-xl font-black text-white uppercase whitespace-nowrap">
             Retrac<span className="text-zinc-500">Labs</span>
           </a>
           <nav className="flex gap-3 sm:gap-6 text-[10px] sm:text-sm font-bold font-mono text-zinc-400">
-            <a href="#apps" className="hover:text-cyan-400 transition-colors md:cursor-none">LAB</a>
-            <a href="#about" className="hover:text-fuchsia-400 transition-colors md:cursor-none">ABOUT</a>
-            <a href="mailto:retrac.labs@gmail.com" className="hover:text-yellow-400 transition-colors md:cursor-none">CONTACT</a>
+            <a href="#apps" className="hover:text-cyan-400 transition-colors">LAB</a>
+            <a href="#/about" className="hover:text-fuchsia-400 transition-colors">ABOUT</a>
+            <a href="#/early-access" className="hover:text-emerald-400 transition-colors">BETA</a>
+            <a href="mailto:retrac.labs@gmail.com" className="hover:text-yellow-400 transition-colors">CONTACT</a>
           </nav>
         </div>
       </motion.header>
@@ -74,6 +121,12 @@ export default function App() {
         <ApuntePrivacy />
       ) : currentHash === '#/apunte/terms' ? (
         <ApunteTerms />
+      ) : currentHash === '#/early-access' ? (
+        <EarlyAccess />
+      ) : currentHash === '#/about' ? (
+        <About />
+      ) : currentHash === '#/thanks' ? (
+        <Thanks />
       ) : activeProject ? (
         <ProjectDetail project={activeProject} />
       ) : (
