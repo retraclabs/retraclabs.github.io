@@ -12,23 +12,52 @@ import { ArrowLeft, ArrowUpRight, Mail } from 'lucide-react';
    ───────────────────────────────────────────────────────────────────────────── */
 
 const FOUNDER_PHOTO: string | null = null; // e.g. '/brand/jarred-carter.jpg'
-const FOUNDER_PHOTO_ALT = 'Jarred M. Carter';
+const FOUNDER_PHOTO_ALT = 'Jarred Carter';
 
 const FOUNDER_NAME = 'Jarred M. Carter';
 const FOUNDER_ROLE = 'Founder';
 
 /** The short version, sitting right under your name. One or two sentences. */
 const FOUNDER_TAGLINE =
-  'Security engineer in New York. Retrac Labs is where the software half of that goes.';
+  'Security engineer in New York City. Retrac Labs is where the software half of that goes.';
 
 /** The long version. Each string is its own paragraph. Write these however you
  *  like; nothing here is load-bearing for the layout. */
 const FOUNDER_BIO: string[] = [
-  'REPLACE ME. A few paragraphs in your own voice: where you came from, what you ' +
-    'did before this, and what made you start building apps of your own.',
-  'REPLACE ME. What you care about in software, and why the apps in the lab look ' +
-    'the way they do. This is the paragraph people actually remember.',
-  'REPLACE ME. The human bit. What you do when you are not at a keyboard.',
+  // Note the trailing space inside each fragment. JavaScript joins these end to
+  // end with nothing in between, so a fragment ending in "a phone" followed by
+  // one starting "interview" renders as "phoneinterview".
+  'I got my start at nine when a voluntary school assignment on motivational speaker Zig Ziglar turned into a phone ' +
+    'interview with him and a permanent job offer from the state\'s largest newspaper. I stayed in journalism until ' +
+    'I got my first Macintosh at eleven, which I still have and use, and decided to write software instead.',
+
+  'I finished two bachelor\'s degrees at Marshall on full scholarship, Computer Science and Cybersecurity, since the ' +
+    'coursework overlapped enough to make both possible, and added a minor in Spanish. One data structures course was ' +
+    'all it took to steer me off the software engineering track and onto the closely-related security one, and I came ' +
+    'to New York as a CyberCorps Scholar for an M.S. at NYU. There, I trained for pentesting and reverse engineering, ' +
+    'then graduated into a job market that wasn\'t hiring. I had spent years learning how software can betray the ' +
+    'people using it, so rather than wait for the market to move, I built the opposite. That\'s Retrac Labs.',
+
+  'Local-first is not a feature that I haphazardly put on a list; rather, I looked at the current state of ' +
+    'surveillance and made it the entire design. Retrac Labs was borne out of the desire to make sure that your data ' +
+    'is yours versus entrusting it with someone else to protect it. It\'s all built for macOS power users who run their ' +
+    'work and life out of the Apple ecosystem, and who would like for both things to remain theirs.',
+
+  'Away from the keyboard, I teach Lagree, which is fifty minutes of asking people to stay in challenging moves for ' +
+    'a bit longer than they\'d like. Once a week, I take classical Pilates as a student, and I model on the side, ' +
+    'which usually surprises people a lot less than the cybersecurity part. Otherwise, my time is filled with ' +
+    'frequenting coffee shops and jazz clubs in the West Village, concerts, the beach in Fire Island in the summer, ' +
+    'and making sure I don\'t miss a single Taylor Swift album release party.',
+];
+
+/* Optional. Scannable proof behind the trust claims the apps make, which prose
+   alone does not deliver: nobody reads four paragraphs to find out whether you
+   know what you are talking about. Empty the array to drop the strip. */
+const CREDENTIALS: { label: string; detail: string }[] = [
+  { label: 'M.S., Cybersecurity', detail: 'NYU Tandon' },
+  { label: 'CyberCorps Scholar', detail: 'NSF Scholarship for Service' },
+  { label: 'B.S., Computer Science and Cybersecurity', detail: 'Marshall, two degrees on full scholarship' },
+  { label: 'Pentesting, reverse engineering', detail: 'Trained, then went the other way' },
 ];
 
 /** Optional. Delete the array entries you do not want, or empty the array to
@@ -114,7 +143,7 @@ export const About = () => (
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-zinc-800 text-white font-bold text-sm border-2 border-zinc-700 hover:border-cyan-400 transition-colors"
               >
-                jarredmcarter.com
+                Personal Site
                 <ArrowUpRight className="w-4 h-4" />
               </a>
               <a
@@ -122,7 +151,7 @@ export const About = () => (
                 className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-zinc-800 text-white font-bold text-sm border-2 border-zinc-700 hover:border-yellow-400 transition-colors"
               >
                 <Mail className="w-4 h-4" />
-                Get in touch
+                Get in Touch
               </a>
             </div>
           </div>
@@ -136,13 +165,38 @@ export const About = () => (
         transition={{ duration: 0.55, delay: 0.1 }}
         className="border-4 border-zinc-800 bg-[#0f0f12] rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-10 mb-6"
       >
-        <h2 className="text-2xl font-black text-white mb-6">The longer version</h2>
+        <h2 className="text-2xl font-black text-white mb-6">The Longer Version</h2>
         <div className="space-y-5 text-zinc-300 font-medium leading-relaxed text-lg">
           {FOUNDER_BIO.map((paragraph, index) => (
-            <p key={index}>{paragraph}</p>
+            /* hyphens-auto matters here: justified text without it opens rivers
+               of white space, and the column is narrow on a phone. It works
+               because index.html sets <html lang="en">. */
+            <p key={index} className="text-justify hyphens-auto">
+              {paragraph}
+            </p>
           ))}
         </div>
       </motion.section>
+
+      {/* ── credentials, scannable ── */}
+      {CREDENTIALS.length ? (
+        <motion.section
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55, delay: 0.14 }}
+          className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6"
+        >
+          {CREDENTIALS.map((item) => (
+            <div
+              key={item.label}
+              className="border-2 border-zinc-800 bg-zinc-900 rounded-2xl px-5 py-4"
+            >
+              <div className="font-black text-white">{item.label}</div>
+              <div className="text-sm text-zinc-500 font-mono font-bold mt-1">{item.detail}</div>
+            </div>
+          ))}
+        </motion.section>
+      ) : null}
 
       {/* ── the name ── */}
       <motion.section
@@ -153,8 +207,9 @@ export const About = () => (
       >
         <h2 className="text-2xl font-black text-white mb-4">Why "Retrac"</h2>
         <p className="text-zinc-300 font-medium leading-relaxed text-lg">
-          Carter, backwards. It started as a placeholder and stuck, which is roughly how
-          most good names happen.
+          Retrac is my last name, Carter, backwards. In college, my best friend and I would refer to each other like
+            this — with reversed first and last names — when we would go out on the weekends, and after being reminded
+            of this earlier this year, the name stuck.
         </p>
       </motion.section>
 
@@ -166,7 +221,7 @@ export const About = () => (
           transition={{ duration: 0.55, delay: 0.22 }}
           className="border-4 border-zinc-800 bg-zinc-900 rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-10 mb-6"
         >
-          <h2 className="text-2xl font-black text-white mb-8">How the apps get built</h2>
+          <h2 className="text-2xl font-black text-white mb-8">How the Apps Get Built</h2>
           <div className="space-y-8">
             {PRINCIPLES.map((principle, index) => (
               <div key={principle.title} className="flex gap-5">
@@ -195,8 +250,8 @@ export const About = () => (
           className="flex items-center justify-between gap-4 border-2 border-zinc-800 bg-zinc-900 rounded-2xl p-6 hover:border-white transition-colors"
         >
           <div>
-            <div className="font-black text-white text-lg">See what's in the lab</div>
-            <div className="text-sm text-zinc-500 font-mono font-bold">Shipping and in progress</div>
+            <div className="font-black text-white text-lg">See What's in the Lab</div>
+            <div className="text-sm text-zinc-500 font-mono font-bold">Shipping and in Progress</div>
           </div>
           <ArrowUpRight className="w-5 h-5 text-zinc-500 shrink-0" />
         </a>
@@ -205,8 +260,8 @@ export const About = () => (
           className="flex items-center justify-between gap-4 border-2 border-zinc-800 bg-zinc-900 rounded-2xl p-6 hover:border-cyan-400 transition-colors"
         >
           <div>
-            <div className="font-black text-white text-lg">Test a build</div>
-            <div className="text-sm text-zinc-500 font-mono font-bold">Join the beta program</div>
+            <div className="font-black text-white text-lg">Test a Build</div>
+            <div className="text-sm text-zinc-500 font-mono font-bold">Join the Beta Program</div>
           </div>
           <ArrowUpRight className="w-5 h-5 text-zinc-500 shrink-0" />
         </a>
