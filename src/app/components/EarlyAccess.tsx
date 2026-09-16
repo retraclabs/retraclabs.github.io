@@ -125,18 +125,19 @@ const Field = ({
   required?: boolean;
 }) => (
   <div className="mb-8">
-    <label className="block text-sm font-black text-white mb-1">
+    <label className="block text-sm font-black text-white light:text-zinc-900 mb-1">
       {label}
-      {required ? <span className="text-cyan-400"> *</span> : null}
+      {required ? <span className="text-cyan-400 light:text-cyan-700"> *</span> : null}
     </label>
-    {hint ? <p className="text-xs font-mono text-zinc-500 mb-3">{hint}</p> : <div className="mb-3" />}
+    {hint ? <p className="text-xs font-mono text-zinc-500 light:text-zinc-600 mb-3">{hint}</p> : <div className="mb-3" />}
     {children}
   </div>
 );
 
 const inputClass =
-  'w-full px-4 py-3 rounded-xl bg-zinc-900 border-2 border-zinc-800 text-white ' +
-  'placeholder:text-zinc-600 focus:border-cyan-400 focus:outline-none transition-colors';
+  'w-full px-4 py-3 rounded-xl bg-zinc-900 light:bg-zinc-50 border-2 border-zinc-800 light:border-zinc-300 ' +
+  'text-white light:text-zinc-900 placeholder:text-zinc-600 light:placeholder:text-zinc-400 ' +
+  'focus:border-cyan-400 light:focus:border-cyan-600 focus:outline-none transition-colors';
 
 type CheckOption = string | { value: string; hint?: string };
 
@@ -163,8 +164,8 @@ const CheckGrid = ({
           className={
             'flex items-start gap-3 px-4 py-3 rounded-xl border-2 transition-colors ' +
             (checked
-              ? 'border-cyan-400 bg-cyan-400/10 text-white'
-              : 'border-zinc-800 bg-zinc-900 text-zinc-400 hover:border-zinc-700')
+              ? 'border-cyan-400 bg-cyan-400/10 text-white light:text-zinc-900'
+              : 'border-zinc-800 light:border-zinc-300 bg-zinc-900 light:bg-zinc-50 text-zinc-400 light:text-zinc-600 hover:border-zinc-700 light:hover:border-zinc-400')
           }
         >
           <input
@@ -178,7 +179,7 @@ const CheckGrid = ({
           <span className="min-w-0">
             <span className="block text-sm font-medium">{value}</span>
             {hint ? (
-              <span className="block text-xs font-mono text-zinc-500 mt-1 leading-relaxed">
+              <span className="block text-xs font-mono text-zinc-500 light:text-zinc-600 mt-1 leading-relaxed">
                 {hint}
               </span>
             ) : null}
@@ -260,7 +261,7 @@ export const EarlyAccess = () => {
           href="#"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="inline-flex items-center gap-2 text-sm font-mono font-bold text-zinc-400 hover:text-white transition-colors mb-10"
+          className="inline-flex items-center gap-2 text-sm font-mono font-bold text-zinc-400 light:text-zinc-600 hover:text-white light:hover:text-zinc-900 transition-colors mb-10"
         >
           <ArrowLeft className="w-4 h-4" />
           Back to Lab
@@ -271,25 +272,25 @@ export const EarlyAccess = () => {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55 }}
-          className="border-4 border-zinc-800 bg-zinc-900 rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-10 relative overflow-hidden mb-6"
+          className="border-4 border-zinc-800 light:border-zinc-200 bg-zinc-900 light:bg-white rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-10 relative overflow-hidden mb-6"
         >
           <div className="absolute -right-24 -top-24 w-72 h-72 rounded-full blur-[90px] opacity-20 bg-cyan-500" />
           <div className="relative z-10">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border-2 border-zinc-800 bg-zinc-900/50 text-xs font-bold font-mono text-cyan-400 mb-8">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border-2 border-zinc-800 light:border-zinc-200 bg-zinc-900/50 light:bg-white/60 text-xs font-bold font-mono text-cyan-400 light:text-cyan-700 mb-8">
               <FlaskConical className="w-4 h-4" />
               LAB RATS WANTED
             </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white uppercase mb-6 leading-[0.95]">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white light:text-zinc-900 uppercase mb-6 leading-[0.95]">
               There is no lab
               <br />
               without you
             </h1>
-            <p className="text-lg sm:text-xl text-zinc-300 font-medium leading-relaxed mb-4">
+            <p className="text-lg sm:text-xl text-zinc-300 light:text-zinc-700 font-medium leading-relaxed mb-4">
               Retrac Labs is a small operation. There is no QA department, no focus group, and no
               analytics quietly watching how you use anything, and that last one is the whole point of
               how these apps are built.
             </p>
-            <p className="text-lg sm:text-xl text-zinc-400 font-medium leading-relaxed">
+            <p className="text-lg sm:text-xl text-zinc-400 light:text-zinc-600 font-medium leading-relaxed">
               Which means the only way a build gets better is that a real person runs it on a real
               Mac or iPhone and tells us what went wrong. Every app in the lab exists because
               someone did that. The application house doesn't stand without its testers.
@@ -302,9 +303,9 @@ export const EarlyAccess = () => {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, delay: 0.1 }}
-          className="border-4 border-zinc-800 bg-[#0f0f12] rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-8 mb-6"
+          className="border-4 border-zinc-800 light:border-zinc-200 bg-[#0f0f12] light:bg-zinc-50 rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-8 mb-6"
         >
-          <h2 className="text-2xl font-black text-white mb-6">What testing actually involves</h2>
+          <h2 className="text-2xl font-black text-white light:text-zinc-900 mb-6">What testing actually involves</h2>
           <ol className="space-y-5">
             {[
               [
@@ -329,12 +330,12 @@ export const EarlyAccess = () => {
               ],
             ].map(([title, detail], index) => (
               <li key={title} className="flex gap-4">
-                <span className="font-mono font-black text-cyan-400 shrink-0">
+                <span className="font-mono font-black text-cyan-400 light:text-cyan-700 shrink-0">
                   {String(index + 1).padStart(2, '0')}
                 </span>
                 <span>
-                  <strong className="block text-white font-bold mb-1">{title}</strong>
-                  <span className="text-zinc-400 font-medium leading-relaxed">{detail}</span>
+                  <strong className="block text-white light:text-zinc-900 font-bold mb-1">{title}</strong>
+                  <span className="text-zinc-400 light:text-zinc-600 font-medium leading-relaxed">{detail}</span>
                 </span>
               </li>
             ))}
@@ -346,10 +347,10 @@ export const EarlyAccess = () => {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, delay: 0.18 }}
-          className="border-4 border-zinc-800 bg-zinc-900 rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-10"
+          className="border-4 border-zinc-800 light:border-zinc-200 bg-zinc-900 light:bg-white rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-10"
         >
-          <h2 className="text-3xl font-black text-white uppercase mb-2">Sign up to test</h2>
-          <p className="text-zinc-400 font-medium mb-10">
+          <h2 className="text-3xl font-black text-white light:text-zinc-900 uppercase mb-2">Sign up to test</h2>
+          <p className="text-zinc-400 light:text-zinc-600 font-medium mb-10">
             Everything except your email is optional. The more you fill in, the better we can match
             you to a build that will actually run.
           </p>
@@ -517,8 +518,8 @@ export const EarlyAccess = () => {
               />
             </Field>
 
-            <div className="border-t-2 border-zinc-800 pt-8">
-              <p className="text-xs font-mono text-zinc-500 leading-relaxed mb-6">
+            <div className="border-t-2 border-zinc-800 light:border-zinc-200 pt-8">
+              <p className="text-xs font-mono text-zinc-500 light:text-zinc-600 leading-relaxed mb-6">
                 What happens to this: it lands in retrac.labs@gmail.com and stays there. It is not
                 sold, not shared, and not fed to any analytics service. Ask us to delete it at any
                 time and it's gone.
@@ -526,10 +527,10 @@ export const EarlyAccess = () => {
 
               {!isConfigured ? (
                 <div className="rounded-xl border-2 border-amber-500/40 bg-amber-500/10 p-5 text-sm">
-                  <strong className="block font-black text-amber-300 mb-1">
+                  <strong className="block font-black text-amber-300 light:text-amber-700 mb-1">
                     This form isn't connected yet.
                   </strong>
-                  <span className="text-amber-200/80 font-medium">
+                  <span className="text-amber-200/80 light:text-amber-800 font-medium">
                     Nothing would be delivered, so the submit button is switched off. In the
                     meantime, email{' '}
                     <a href="mailto:retrac.labs@gmail.com" className="underline font-bold">
@@ -541,7 +542,7 @@ export const EarlyAccess = () => {
               ) : (
                 <>
                   {status === 'error' ? (
-                    <div className="rounded-xl border-2 border-red-500/40 bg-red-500/10 p-5 text-sm text-red-200 font-medium mb-6">
+                    <div className="rounded-xl border-2 border-red-500/40 bg-red-500/10 p-5 text-sm text-red-200 light:text-red-700 font-medium mb-6">
                       {errorMessage}
                     </div>
                   ) : null}

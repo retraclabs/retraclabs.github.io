@@ -53,7 +53,10 @@ src/app/components/EarlyAccess.tsx
 src/app/components/About.tsx
 src/app/components/Thanks.tsx
 src/app/components/LabRat.tsx
+src/app/components/AccentGlow.tsx
 src/app/components/CustomCursor.tsx
+src/app/components/ThemeToggle.tsx
+src/app/theme.ts
 src/app/components/Footer.tsx
 src/app/components/PrivacyPolicy.tsx
 src/app/data/projects.ts
@@ -467,6 +470,56 @@ Example section:
 ```
 
 If you want each project to have different custom sections, add more fields to the project data first, then render them in `ProjectDetail.tsx`.
+
+### The glow on a project title card
+
+```text
+src/app/components/AccentGlow.tsx
+```
+
+The wash of color on a project page's title card. It enters from the top-right
+corner, drifts slowly across the card, and keeps gaining intensity for the first
+40 seconds somebody is on the page. It is meant to be almost subliminal: nobody
+should catch it moving, they should just feel the card was flatter a minute ago.
+
+Two blurred blobs do the work. The first is the project's own `accent`, the
+second is the RETRAC LABS gradient at lower opacity so the wash is not one flat
+hue. To retune it:
+
+- `RAMP_SECONDS` at the top of the file: how long intensity takes to top out.
+- The `opacity` arrays: where it starts and where it settles. The accent blob
+  climbs to 0.6, the gradient blob to 0.38.
+- The `x` and `y` arrays: where it drifts.
+
+Three things are deliberate and worth not undoing:
+
+- **The two blobs have different periods, 37s and 53s.** Give them the same
+  duration and the pair visibly loops.
+- **Intensity does not repeat.** It settles at full. A pulse would read as a
+  loading spinner.
+- **Only `transform` and `opacity` animate.** Animating `left` or `top` on a
+  100px-blurred element repaints the whole card every frame. As written it stays
+  on the compositor: measured at 8.3ms median frame time with nothing dropped.
+
+**It pauses when the card scrolls out of view.** An IntersectionObserver, via
+Motion's `useInView`, calls `pause()` on both animations when the card leaves
+the viewport and `play()` when it returns. Pausing rather than stopping is the
+point: elapsed time is held, so scrolling away and back resumes the intensity
+ramp where it was instead of blooming from nothing a second time.
+
+That is also why the animations are driven imperatively with `animate()` rather
+than with `animate` props on a `motion.div`. The declarative form has no pause.
+
+One trap, if you ever refactor this: **`useInView` cannot observe the scope
+object returned by `useAnimate`.** Hand it one and it silently reports `false`
+forever, the animations pause on mount, and the glow never appears. It needs a
+plain `useRef`.
+
+`prefers-reduced-motion` gets a static wash at the old fixed opacity. The card
+still has its color, it just does not crawl.
+
+The whole effect is damped to 60% on light backgrounds, where a saturated blur
+at full strength turns the card muddy.
 
 ## Privacy Policy
 
@@ -933,6 +986,101 @@ FileLock  Lock  ShieldCheck  KeyRound  Fingerprint  Binary  Droplet
 **If an icon does not appear and the page goes blank**, the name is almost
 certainly wrong or missing from the import list at the top of `projects.ts`.
 That is the single most common way to white-screen this site.
+
+## Light Mode
+
+The site is **dark by default for everyone**, and light is something a reader
+opts into with the sun icon in the menu bar. It does not follow the operating
+system's appearance setting, on purpose: the dark version is the brand.
+
+```text
+src/app/theme.ts                    reading, applying, and storing the choice
+src/app/components/ThemeToggle.tsx  the button in the menu bar
+src/styles/tailwind.css             where the `light:` variant is defined
+index.html                          sets the class before React mounts
+```
+
+### How it works
+
+Dark is the **unprefixed** palette, and light is an override:
+
+```tsx
+className="bg-zinc-900 light:bg-white"
+```
+
+That reads as "dark normally, white when asked", which matches the intent and
+meant the whole site did not have to be rewritten light-first. The variant is
+one line in `tailwind.css`:
+
+```css
+@custom-variant light (&:where(.light, .light *));
+```
+
+The class goes on `<html>`. An inline script at the top of `index.html` puts it
+there **before React loads**, so somebody who chose light never sees a flash of
+dark first. That script reads the same localStorage key as `theme.ts`; if you
+change the key, change both.
+
+### Adding new markup
+
+Every color class you write needs a light counterpart. The mapping in use:
+
+```text
+bg-[#09090b]     light:bg-[#f4f4f5]     the page ground
+bg-zinc-900      light:bg-white         a card
+bg-[#0f0f12]     light:bg-zinc-50       an inset card
+bg-zinc-800      light:bg-zinc-100      a pill
+border-zinc-800  light:border-zinc-200
+border-zinc-700  light:border-zinc-300
+text-white       light:text-zinc-900
+text-zinc-300    light:text-zinc-700
+text-zinc-400    light:text-zinc-600
+text-zinc-500    light:text-zinc-600    zinc-500 is 4.39:1 on light, just under AA
+```
+
+**Accents get darker on light, not lighter.** A 400-weight accent on white is
+unreadable, so `text-cyan-400` pairs with `light:text-cyan-700`, and so on
+through the palette in `src/app/data/accents.ts`.
+
+### Two traps
+
+**A button whose background does not change must keep its text color.** The
+submit button is `bg-cyan-400` in both themes, so its black text has to stay
+black. Adding `light:text-white` there drops it to 1.8:1. The same applies to
+anything with a `hover:bg-yellow-400`: the hover fill stays yellow in both
+themes, so the hover text has to be dark in both.
+
+**Form fields need to be recessed on light, not white.** A white input on a
+white card is separated only by a hairline. They use `light:bg-zinc-50` with a
+`light:border-zinc-300` so the field still reads as a field.
+
+### Checking your work
+
+Paste this into the browser console on any page to audit contrast. It converts
+through canvas because Tailwind 4 emits `oklch()`, which cannot be parsed as RGB:
+
+```js
+const cv=document.createElement('canvas');cv.width=cv.height=1;
+const cx=cv.getContext('2d',{willReadFrequently:true});
+const toRGB=s=>{cx.fillStyle='#000';cx.fillStyle=s;cx.fillRect(0,0,1,1);
+  const d=cx.getImageData(0,0,1,1).data;return [d[0],d[1],d[2]];};
+const lum=(r,g,b)=>{const f=c=>{c/=255;return c<=.03928?c/12.92:((c+.055)/1.055)**2.4};
+  return .2126*f(r)+.7152*f(g)+.0722*f(b)};
+[...document.querySelectorAll('p,h1,h2,h3,span,a,li,button')].forEach(el=>{
+  const cs=getComputedStyle(el); if(!el.offsetParent) return;
+  const t=[...el.childNodes].filter(n=>n.nodeType===3).map(n=>n.textContent.trim()).join('');
+  if(t.length<3) return;
+  let n=el,bg=[255,255,255];
+  while(n){const c=getComputedStyle(n).backgroundColor;
+    if(!c.includes('rgba(0, 0, 0, 0)')){bg=toRGB(c);break} n=n.parentElement}
+  const L1=lum(...toRGB(cs.color)),L2=lum(...bg);
+  const r=(Math.max(L1,L2)+.05)/(Math.min(L1,L2)+.05);
+  if(r<4.5) console.warn(r.toFixed(2), t.slice(0,40), el);
+});
+```
+
+Anything under 4.5 for body text, or under 3 for large text, fails WCAG AA.
+Both themes should be checked; a fix for one can break the other.
 
 ## Cursors
 

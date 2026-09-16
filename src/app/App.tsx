@@ -11,6 +11,7 @@ import { ApunteTerms } from './components/ApunteTerms';
 import { EarlyAccess } from './components/EarlyAccess';
 import { About } from './components/About';
 import { Thanks } from './components/Thanks';
+import { ThemeToggle } from './components/ThemeToggle';
 import { getProjectBySlug } from './data/projects';
 import { heroDissipatedAt } from './heroChoreography';
 import { motion } from 'motion/react';
@@ -85,7 +86,7 @@ export default function App() {
   }, [onHomePage]);
 
   return (
-    <div className="relative min-h-screen bg-[#09090b] text-zinc-50 selection:bg-fuchsia-500/30 selection:text-white font-sans overflow-x-hidden">
+    <div className="relative min-h-screen bg-[#09090b] light:bg-[#f4f4f5] text-zinc-50 light:text-zinc-900 selection:bg-fuchsia-500/30 selection:text-white font-sans overflow-x-hidden">
       <CustomCursor />
       <AnimatedBackground />
 
@@ -102,16 +103,19 @@ export default function App() {
           (headerVisible ? '' : 'invisible')
         }
       >
-        <div className="flex items-center gap-4 sm:gap-8 px-4 sm:px-6 py-3 bg-zinc-900/95 backdrop-blur-xl border-2 border-zinc-800 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.4)] pointer-events-auto max-w-[calc(100vw-1.5rem)]">
-          <a href="#" className="text-lg sm:text-xl font-black text-white uppercase whitespace-nowrap">
-            Retrac<span className="text-zinc-500">Labs</span>
+        <div className="flex items-center gap-4 sm:gap-8 px-4 sm:px-6 py-3 bg-zinc-900/95 light:bg-white/95 backdrop-blur-xl border-2 border-zinc-800 light:border-zinc-200 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.4)] pointer-events-auto max-w-[calc(100vw-1.5rem)]">
+          <a href="#" className="text-lg sm:text-xl font-black text-white light:text-zinc-900 uppercase whitespace-nowrap">
+            Retrac<span className="text-zinc-500 light:text-zinc-600">Labs</span>
           </a>
-          <nav className="flex gap-3 sm:gap-6 text-[10px] sm:text-sm font-bold font-mono text-zinc-400">
-            <a href="#apps" className="hover:text-cyan-400 transition-colors">LAB</a>
-            <a href="#/about" className="hover:text-fuchsia-400 transition-colors">ABOUT</a>
-            <a href="#/early-access" className="hover:text-emerald-400 transition-colors">BETA</a>
-            <a href="mailto:retrac.labs@gmail.com" className="hover:text-yellow-400 transition-colors">CONTACT</a>
+          <nav className="flex gap-3 sm:gap-6 text-[10px] sm:text-sm font-bold font-mono text-zinc-400 light:text-zinc-600">
+            <a href="#apps" className="hover:text-cyan-400 light:hover:text-cyan-700 transition-colors">LAB</a>
+            <a href="#/about" className="hover:text-fuchsia-400 light:hover:text-fuchsia-700 transition-colors">ABOUT</a>
+            <a href="#/early-access" className="hover:text-emerald-400 light:hover:text-emerald-700 transition-colors">BETA</a>
+            <a href="mailto:retrac.labs@gmail.com" className="hover:text-yellow-400 light:hover:text-yellow-600 transition-colors">CONTACT</a>
           </nav>
+
+          <div className="w-px h-5 bg-zinc-800 light:bg-zinc-200 shrink-0" aria-hidden="true" />
+          <ThemeToggle />
         </div>
       </motion.header>
 

@@ -224,17 +224,33 @@ export const projects: Project[] = [
       'Instead of turning your body into a dashboard of warnings and streaks, Amparo helps you log symptoms, ' +
       'track moods, and notice patterns — with a calmer, more human interface that never judges or alarms.\n\n' +
       'Everything stays on your device. No account required. No cloud sync. No subscription. ' +
-      'One-time purchase at $4.99.',
+      'One-time purchase at $4.99.\n\n' +
+      'Amparo describes what you log. It does not diagnose, and it is not a method of contraception.',
     highlights: [
         'Local-only storage: your cycle data never leaves your iPhone — no accounts, no servers',
         'Log symptoms, moods, and cycle phases with a calm, shame-free interface',
-        'Pattern insights that help you understand your own rhythms over time',
+        'Pattern insights that describe your own rhythms: never a diagnosis, never a contraceptive',
     ],
-    nextSteps: [
-        'Expand symptom and mood logging categories based on early user feedback',
-        'Introduce optional reminders for upcoming cycle phases and symptom windows',
-        'Home screen widget for quick symptom logging without opening the full app',
-    ],
+    version: {
+      current: '1.0',
+      currentFeatures: [
+        'Period, symptom, and mood logging in a calm, shame-free interface',
+        'Cycle and fertile-window predictions, calculated entirely on your iPhone',
+        'Calendar, charts, and insights that build up as you log',
+        'Home Screen and Lock Screen widgets, Live Activities, and Siri support',
+        'Face ID app lock, local reminders, and CSV export',
+      ],
+      next: '1.1',
+      nextFeatures: [
+        'Rebuilt prediction engine: one unusual cycle no longer skews every estimate that follows',
+        'Predictions carry a confidence level and a range, instead of implying a certainty the data does not have',
+        'A late period is shown as late, rather than folded into the next cycle',
+        'Cycle pattern observations: irregularity, long gaps, and persistent changes in cycle length',
+        'Ovulation estimated from your own cycle length rather than a fixed day 14',
+        'Widget fix: widgets now install on every iOS version the app supports, not only iOS 18.6 and later',
+        'Reduce Motion honoured throughout, for anyone sensitive to movement',
+      ],
+    },
     appStoreUrl: 'https://apps.apple.com/us/app/amparo/id6765911709',
   },
 ];
