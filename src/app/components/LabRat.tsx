@@ -10,12 +10,19 @@ import { motion } from 'motion/react';
    keep in mind are: the rim sits at y=112, the liquid surface at y=150, and the
    rat's head is centred on (130, 62). */
 
-const FUR = '#d4d4d8';
-const FUR_SHADE = '#a1a1aa';
-const INK = '#09090b';
+/* The rat is drawn on a card that is near-black in dark mode and white in light
+   mode, so pale grey fur with a near-black outline would all but disappear on
+   the light side. These flip with the theme.
+
+   They are CSS variables rather than constants because an SVG fill cannot read
+   a Tailwind class on an ancestor, but it can read a custom property. The
+   values are set on the <svg> itself, just below. */
+const FUR = 'var(--rat-fur)';
+const FUR_SHADE = 'var(--rat-fur-shade)';
+const INK = 'var(--rat-ink)';
+const GLASS = 'var(--rat-glass)';
 const PINK = '#f472b6';
 const CYAN = '#22d3ee';
-const GLASS = '#a1a1aa';
 
 type Bubble = { cx: number; r: number; delay: number; duration: number };
 
@@ -30,7 +37,12 @@ const BUBBLES: Bubble[] = [
 export const LabRat = ({ className = '' }: { className?: string }) => (
   <svg
     viewBox="0 0 260 260"
-    className={className}
+    className={
+      '[--rat-fur:#d4d4d8] [--rat-fur-shade:#a1a1aa] [--rat-ink:#09090b] [--rat-glass:#a1a1aa] ' +
+      'light:[--rat-fur:#52525b] light:[--rat-fur-shade:#71717a] light:[--rat-ink:#18181b] ' +
+      'light:[--rat-glass:#71717a] ' +
+      className
+    }
     role="img"
     aria-label="A lab rat wearing safety goggles, peeking over the rim of a bubbling beaker"
   >
@@ -41,10 +53,11 @@ export const LabRat = ({ className = '' }: { className?: string }) => (
         <stop offset="50%" stopColor="#ec4899" />
         <stop offset="100%" stopColor="#fb923c" />
       </linearGradient>
+      {/* currentColor so the sheen on the glass inverts with the theme */}
       <linearGradient id="rat-glass" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" stopColor="#ffffff" stopOpacity="0.14" />
-        <stop offset="45%" stopColor="#ffffff" stopOpacity="0.03" />
-        <stop offset="100%" stopColor="#ffffff" stopOpacity="0.10" />
+        <stop offset="0%" stopColor="currentColor" stopOpacity="0.14" />
+        <stop offset="45%" stopColor="currentColor" stopOpacity="0.03" />
+        <stop offset="100%" stopColor="currentColor" stopOpacity="0.10" />
       </linearGradient>
       {/* keeps the liquid and its bubbles inside the beaker walls */}
       <clipPath id="rat-beaker-clip">
@@ -210,7 +223,7 @@ export const LabRat = ({ className = '' }: { className?: string }) => (
       textAnchor="middle"
       className="font-black"
       fontSize="20"
-      fill="#ffffff"
+      fill="currentColor"
       opacity="0.45"
       letterSpacing="1"
     >

@@ -10,28 +10,28 @@ export const ApunteTerms = () => {
                     href="#"
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="inline-flex items-center gap-2 text-sm font-mono font-bold text-zinc-400 hover:text-white transition-colors mb-10"
+                    className="inline-flex items-center gap-2 text-sm font-mono font-bold text-zinc-400 light:text-zinc-600 hover:text-white light:hover:text-zinc-900 transition-colors mb-10"
                 >
                     <ArrowLeft className="w-4 h-4" />
                     Back to Retrac Labs
                 </motion.a>
 
-                <section className="border-4 border-zinc-800 bg-zinc-900 rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-10">
-                    <div className="text-xs font-mono font-black text-sky-400 uppercase tracking-widest mb-4">
+                <section className="border-4 border-zinc-800 light:border-zinc-200 bg-zinc-900 light:bg-white rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-10">
+                    <div className="text-xs font-mono font-black text-sky-400 light:text-sky-700 uppercase tracking-widest mb-4">
                         Apunte
                     </div>
 
-                    <h1 className="text-4xl sm:text-6xl font-black text-white uppercase mb-4">
+                    <h1 className="text-4xl sm:text-6xl font-black text-white light:text-zinc-900 uppercase mb-4">
                         Terms of Use
                     </h1>
 
-                    <p className="text-zinc-500 font-mono font-bold mb-10">
+                    <p className="text-zinc-500 light:text-zinc-600 font-mono font-bold mb-10">
                         Last updated: September 10, 2026
                     </p>
 
-                    <div className="space-y-10 text-zinc-300 font-medium leading-relaxed">
+                    <div className="space-y-10 text-zinc-300 light:text-zinc-700 font-medium leading-relaxed">
                         <section>
-                            <h2 className="text-2xl font-black text-white mb-3">
+                            <h2 className="text-2xl font-black text-white light:text-zinc-900 mb-3">
                                 Agreement
                             </h2>
                             <p>
@@ -43,7 +43,7 @@ export const ApunteTerms = () => {
                         </section>
 
                         <section>
-                            <h2 className="text-2xl font-black text-white mb-3">
+                            <h2 className="text-2xl font-black text-white light:text-zinc-900 mb-3">
                                 1. Licence
                             </h2>
                             <p>
@@ -57,7 +57,7 @@ export const ApunteTerms = () => {
                         </section>
 
                         <section>
-                            <h2 className="text-2xl font-black text-white mb-3">
+                            <h2 className="text-2xl font-black text-white light:text-zinc-900 mb-3">
                                 2. Purchases and Subscriptions
                             </h2>
                             <p>
@@ -69,41 +69,35 @@ export const ApunteTerms = () => {
                                 summaries of each part of a recording, search across your whole
                                 transcript library, and export to SubRip (SRT), WebVTT, CSV,
                                 Markdown, HTML, PDF, and Word — are unlocked through an in-app
-                                purchase, offered as a monthly subscription, a yearly subscription,
-                                or a one-time lifetime purchase.
+                                purchase, offered as a monthly or yearly subscription.
                             </p>
                             <ul className="list-disc pl-5 space-y-3 mt-4 marker:text-sky-400">
                                 <li>
-                                    <strong className="text-white font-bold">Auto-renewal.</strong>{' '}
+                                    <strong className="text-white light:text-zinc-900 font-bold">Auto-renewal.</strong>{' '}
                                     Subscriptions renew automatically unless cancelled at least 24
                                     hours before the end of the current period. Your Apple Account is
                                     charged for renewal within 24 hours before the current period
                                     ends.
                                 </li>
                                 <li>
-                                    <strong className="text-white font-bold">Payment.</strong>{' '}
+                                    <strong className="text-white light:text-zinc-900 font-bold">Payment.</strong>{' '}
                                     Charged to your Apple Account at confirmation of purchase.
                                 </li>
                                 <li>
-                                    <strong className="text-white font-bold">Managing or
+                                    <strong className="text-white light:text-zinc-900 font-bold">Managing or
                                     cancelling.</strong> Manage or cancel anytime in{' '}
-                                    <span className="text-white">System Settings › Apple Account ›
+                                    <span className="text-white light:text-zinc-900">System Settings › Apple Account ›
                                     Subscriptions</span>. Cancellation is handled by Apple, not
                                     Retrac Labs; we cannot cancel a subscription on your behalf.
                                 </li>
                                 <li>
-                                    <strong className="text-white font-bold">Lifetime option.</strong>{' '}
-                                    The lifetime purchase is a one-time purchase, not a subscription.
-                                    It does not renew.
-                                </li>
-                                <li>
-                                    <strong className="text-white font-bold">Refunds.</strong>{' '}
+                                    <strong className="text-white light:text-zinc-900 font-bold">Refunds.</strong>{' '}
                                     Purchases and refunds are handled by Apple under the App Store's
                                     terms. Retrac Labs cannot issue refunds directly.
                                 </li>
                             </ul>
                             <p className="mt-4">
-                                <strong className="text-white font-bold">If Premium lapses.</strong>{' '}
+                                <strong className="text-white light:text-zinc-900 font-bold">If Premium lapses.</strong>{' '}
                                 Any speaker names you have already assigned remain visible and
                                 continue to export, and summaries you have already generated remain
                                 in place; only creating <em>new</em> ones stops until you renew.
@@ -114,12 +108,12 @@ export const ApunteTerms = () => {
                         </section>
 
                         <section>
-                            <h2 className="text-2xl font-black text-white mb-3">
+                            <h2 className="text-2xl font-black text-white light:text-zinc-900 mb-3">
                                 3. Accuracy — Please Read
                             </h2>
                             <p>
                                 Apunte produces transcripts using automatic speech recognition, which
-                                is imperfect and <strong className="text-white font-bold">will
+                                is imperfect and <strong className="text-white light:text-zinc-900 font-bold">will
                                 contain errors</strong> — including misheard words, incorrect speaker
                                 attribution, and missing content. You are responsible for reviewing
                                 and correcting any transcript before relying on it for any purpose.
@@ -135,12 +129,12 @@ export const ApunteTerms = () => {
                         </section>
 
                         <section>
-                            <h2 className="text-2xl font-black text-white mb-3">
+                            <h2 className="text-2xl font-black text-white light:text-zinc-900 mb-3">
                                 4. Not a Medical or Legal Record
                             </h2>
                             <p>
                                 Apunte is a general-purpose transcription tool. It is{' '}
-                                <strong className="text-white font-bold">not a medical device</strong>,
+                                <strong className="text-white light:text-zinc-900 font-bold">not a medical device</strong>,
                                 and is not certified or intended for clinical documentation, legal
                                 transcription, or any regulated record-keeping. If you work in a
                                 regulated field, you are solely responsible for your own compliance
@@ -150,7 +144,7 @@ export const ApunteTerms = () => {
                         </section>
 
                         <section>
-                            <h2 className="text-2xl font-black text-white mb-3">
+                            <h2 className="text-2xl font-black text-white light:text-zinc-900 mb-3">
                                 5. Your Content
                             </h2>
                             <p>
@@ -162,7 +156,7 @@ export const ApunteTerms = () => {
                         </section>
 
                         <section>
-                            <h2 className="text-2xl font-black text-white mb-3">
+                            <h2 className="text-2xl font-black text-white light:text-zinc-900 mb-3">
                                 6. Limitation of Liability
                             </h2>
                             <p>
@@ -175,7 +169,7 @@ export const ApunteTerms = () => {
                         </section>
 
                         <section>
-                            <h2 className="text-2xl font-black text-white mb-3">
+                            <h2 className="text-2xl font-black text-white light:text-zinc-900 mb-3">
                                 7. Governing Law
                             </h2>
                             <p>
@@ -185,7 +179,7 @@ export const ApunteTerms = () => {
                         </section>
 
                         <section>
-                            <h2 className="text-2xl font-black text-white mb-3">
+                            <h2 className="text-2xl font-black text-white light:text-zinc-900 mb-3">
                                 8. Changes to These Terms
                             </h2>
                             <p>
@@ -196,23 +190,23 @@ export const ApunteTerms = () => {
                         </section>
 
                         <section>
-                            <h2 className="text-2xl font-black text-white mb-3">
+                            <h2 className="text-2xl font-black text-white light:text-zinc-900 mb-3">
                                 9. Contact
                             </h2>
                             <p>
                                 Questions about these Terms? Contact us at{' '}
                                 <a
                                     href="mailto:retrac.labs@gmail.com"
-                                    className="text-cyan-400 hover:text-cyan-300"
+                                    className="text-cyan-400 light:text-cyan-700 hover:text-cyan-300 light:hover:text-cyan-800"
                                 >
                                     retrac.labs@gmail.com
                                 </a>.
                             </p>
-                            <p className="mt-6 text-sm text-zinc-500">
+                            <p className="mt-6 text-sm text-zinc-500 light:text-zinc-600">
                                 See also:{' '}
                                 <a
                                     href="#/apunte/privacy"
-                                    className="text-sky-400 hover:text-sky-300 font-bold"
+                                    className="text-sky-400 light:text-sky-700 hover:text-sky-300 light:hover:text-sky-800 font-bold"
                                 >
                                     Apunte Privacy Policy
                                 </a>.

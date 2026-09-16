@@ -9,20 +9,20 @@ const LAST_UPDATED = 'September 13, 2026';
 
 const Section = ({ title, children }: { title: string; children: React.ReactNode }) => (
     <section>
-        <h2 className="text-2xl font-black text-white mb-3">{title}</h2>
+        <h2 className="text-2xl font-black text-white light:text-zinc-900 mb-3">{title}</h2>
         <div className="space-y-4">{children}</div>
     </section>
 );
 
 const Sub = ({ title, children }: { title: string; children: React.ReactNode }) => (
     <div>
-        <h3 className="text-lg font-black text-white mb-2">{title}</h3>
+        <h3 className="text-lg font-black text-white light:text-zinc-900 mb-2">{title}</h3>
         <div className="space-y-3">{children}</div>
     </div>
 );
 
 const Link = ({ href, children }: { href: string; children: React.ReactNode }) => (
-    <a href={href} target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300">
+    <a href={href} target="_blank" rel="noopener noreferrer" className="text-cyan-400 light:text-cyan-700 hover:text-cyan-300 light:hover:text-cyan-800">
         {children}
     </a>
 );
@@ -35,26 +35,26 @@ export const PrivacyPolicy = () => {
                     href="#"
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="inline-flex items-center gap-2 text-sm font-mono font-bold text-zinc-400 hover:text-white transition-colors mb-10"
+                    className="inline-flex items-center gap-2 text-sm font-mono font-bold text-zinc-400 light:text-zinc-600 hover:text-white light:hover:text-zinc-900 transition-colors mb-10"
                 >
                     <ArrowLeft className="w-4 h-4" />
                     Back to Retrac Labs
                 </motion.a>
 
-                <section className="border-4 border-zinc-800 bg-zinc-900 rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-10">
-                    <div className="text-xs font-mono font-black text-pink-400 uppercase tracking-widest mb-4">
+                <section className="border-4 border-zinc-800 light:border-zinc-200 bg-zinc-900 light:bg-white rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-10">
+                    <div className="text-xs font-mono font-black text-pink-400 light:text-pink-600 uppercase tracking-widest mb-4">
                         Retrac Labs
                     </div>
 
-                    <h1 className="text-4xl sm:text-6xl font-black text-white uppercase mb-4">
+                    <h1 className="text-4xl sm:text-6xl font-black text-white light:text-zinc-900 uppercase mb-4">
                         Privacy Policy
                     </h1>
 
-                    <p className="text-zinc-500 font-mono font-bold mb-10">
+                    <p className="text-zinc-500 light:text-zinc-600 font-mono font-bold mb-10">
                         Last updated: {LAST_UPDATED}
                     </p>
 
-                    <div className="space-y-10 text-zinc-300 font-medium leading-relaxed">
+                    <div className="space-y-10 text-zinc-300 light:text-zinc-700 font-medium leading-relaxed">
                         <Section title="Overview">
                             <p>
                                 Retrac Labs builds apps with privacy, clarity, and user control in mind.
@@ -102,13 +102,13 @@ export const PrivacyPolicy = () => {
                             <Sub title="What the signup form collects">
                                 <p>
                                     When you submit the form at{' '}
-                                    <a href="#/early-access" className="text-cyan-400 hover:text-cyan-300">
+                                    <a href="#/early-access" className="text-cyan-400 light:text-cyan-700 hover:text-cyan-300 light:hover:text-cyan-800">
                                         retraclabs.co beta signup
                                     </a>
                                     , we receive whatever you chose to fill in. Only your email address is
                                     required. The form asks for:
                                 </p>
-                                <ul className="list-disc pl-6 space-y-1.5 text-zinc-400">
+                                <ul className="list-disc pl-6 space-y-1.5 text-zinc-400 light:text-zinc-600">
                                     <li>Email address (required, so we can send you a TestFlight invitation)</li>
                                     <li>A name or handle to address you by (optional)</li>
                                     <li>Age range</li>
@@ -156,7 +156,7 @@ export const PrivacyPolicy = () => {
                                     no arrangement with either of them beyond ordinary use of their service.
                                 </p>
                                 <p>
-                                    <strong className="text-white">Formspree</strong> receives the form
+                                    <strong className="text-white light:text-zinc-900">Formspree</strong> receives the form
                                     submission and forwards it to our email. They process it on our behalf
                                     as a service provider, and their handling is governed by their own{' '}
                                     <Link href="https://formspree.io/legal/privacy-policy/">privacy policy</Link>.
@@ -165,7 +165,7 @@ export const PrivacyPolicy = () => {
                                     have to secure.
                                 </p>
                                 <p>
-                                    <strong className="text-white">Apple</strong> operates TestFlight, which
+                                    <strong className="text-white light:text-zinc-900">Apple</strong> operates TestFlight, which
                                     is how beta builds are distributed. When you accept an invitation, Apple
                                     processes your participation under{' '}
                                     <Link href="https://www.apple.com/legal/privacy/">Apple's privacy policy</Link>
@@ -244,7 +244,7 @@ export const PrivacyPolicy = () => {
                             <Sub title="Leaving the program">
                                 <p>
                                     Email{' '}
-                                    <a href="mailto:retrac.labs@gmail.com" className="text-cyan-400 hover:text-cyan-300">
+                                    <a href="mailto:retrac.labs@gmail.com" className="text-cyan-400 light:text-cyan-700 hover:text-cyan-300 light:hover:text-cyan-800">
                                         retrac.labs@gmail.com
                                     </a>{' '}
                                     and ask to be removed. We will delete your signup information and stop
@@ -305,11 +305,11 @@ export const PrivacyPolicy = () => {
                                 transcripts anywhere: no analytics, no account, no cloud. Stored audio is
                                 encrypted at rest; the transcript database is kept locally. For full
                                 details, see the{' '}
-                                <a href="#/apunte/privacy" className="text-cyan-400 hover:text-cyan-300">
+                                <a href="#/apunte/privacy" className="text-cyan-400 light:text-cyan-700 hover:text-cyan-300 light:hover:text-cyan-800">
                                     Apunte privacy policy
                                 </a>{' '}
                                 and{' '}
-                                <a href="#/apunte/terms" className="text-cyan-400 hover:text-cyan-300">
+                                <a href="#/apunte/terms" className="text-cyan-400 light:text-cyan-700 hover:text-cyan-300 light:hover:text-cyan-800">
                                     Terms of Use
                                 </a>
                                 .
@@ -393,7 +393,7 @@ export const PrivacyPolicy = () => {
                                 Wherever you live, you can ask us to show you what information we hold
                                 about you, correct it if it is wrong, delete it, or send you a copy of it.
                                 Email{' '}
-                                <a href="mailto:retrac.labs@gmail.com" className="text-cyan-400 hover:text-cyan-300">
+                                <a href="mailto:retrac.labs@gmail.com" className="text-cyan-400 light:text-cyan-700 hover:text-cyan-300 light:hover:text-cyan-800">
                                     retrac.labs@gmail.com
                                 </a>
                                 . We aim to respond within 30 days. There is no charge, and we will not
@@ -446,7 +446,7 @@ export const PrivacyPolicy = () => {
                             <p>
                                 If you have questions about this privacy policy, or want to exercise any of
                                 the rights described above, contact us at{' '}
-                                <a href="mailto:retrac.labs@gmail.com" className="text-cyan-400 hover:text-cyan-300">
+                                <a href="mailto:retrac.labs@gmail.com" className="text-cyan-400 light:text-cyan-700 hover:text-cyan-300 light:hover:text-cyan-800">
                                     retrac.labs@gmail.com
                                 </a>
                                 .

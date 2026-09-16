@@ -3,6 +3,7 @@ import { motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 import { projects, isAnnounced, type Project } from '../data/projects';
 import { ACCENTS, SPANS } from '../data/accents';
+import { MISSION, MISSION_SHORT, CRAFT_LINE } from '../data/mission';
 
 const openProject = (slug: string) => {
   window.location.hash = `#/projects/${slug}`;
@@ -17,7 +18,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
   const announced = isAnnounced(project);
 
   const shared =
-    `${SPANS[project.span]} col-span-1 bg-zinc-900 border-4 border-zinc-800 ` +
+    `${SPANS[project.span]} col-span-1 bg-zinc-900 light:bg-white border-4 border-zinc-800 light:border-zinc-200 ` +
     'rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-8 relative overflow-hidden group ' +
     'transition-colors text-left';
 
@@ -31,7 +32,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
             <Icon className="w-8 h-8" />
           </div>
           <div className="flex flex-wrap justify-end gap-2">
-            <span className="px-4 py-2 rounded-full bg-zinc-800 text-white font-mono font-bold text-sm">
+            <span className="px-4 py-2 rounded-full bg-zinc-800 light:bg-zinc-100 text-white light:text-zinc-900 font-mono font-bold text-sm">
               {project.platform}
             </span>
             <span
@@ -45,11 +46,11 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
         </div>
 
         <div>
-          <h3 className="text-3xl font-black text-white mb-3 tracking-tight">{project.name}</h3>
+          <h3 className="text-3xl font-black text-white light:text-zinc-900 mb-3 tracking-tight">{project.name}</h3>
           {/* Announced projects show the full summary. Unannounced ones fall back
               to the one-line teaser, which says what the thing does without
               naming it or announcing it. */}
-          <p className="text-zinc-400 font-medium max-w-lg">
+          <p className="text-zinc-400 light:text-zinc-600 font-medium max-w-lg">
             {announced ? project.summary : project.teaser}
           </p>
         </div>
@@ -92,16 +93,32 @@ export const LabSection = () => (
   <section id="apps" className="py-16 sm:py-24 px-4 sm:px-6 relative z-10">
     <div className="max-w-6xl mx-auto">
       <div id="about" className="flex flex-col items-center mb-24 sm:mb-40 pt-10 sm:pt-12 scroll-mt-32">
-        <motion.p
+        {/* Three tiers, descending in weight: the claim, the proof, then the
+            craft note. A first-time reader should learn what these apps refuse
+            to do before learning how they feel. */}
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-lg sm:text-xl md:text-3xl text-zinc-400 max-w-4xl mx-auto text-center font-medium leading-relaxed mb-10 sm:mb-12"
+          className="max-w-4xl mx-auto text-center mb-10 sm:mb-12"
         >
-          Retrac Labs designs and builds <strong className="text-white font-bold">playful, powerful, and precise</strong> experiences for the Apple ecosystem.
-          <br className="hidden md:block" /> Currently experimenting in the laboratory.
-        </motion.p>
+          <div className="text-xs sm:text-sm font-mono font-black text-cyan-400 light:text-cyan-700 uppercase tracking-widest mb-6">
+            {MISSION_SHORT}
+          </div>
+
+          <p className="text-2xl sm:text-3xl md:text-4xl font-black text-white light:text-zinc-900 leading-[1.15] tracking-tight mb-6">
+            {MISSION[0]} {MISSION[1]}
+          </p>
+
+          <p className="text-lg sm:text-xl md:text-2xl text-zinc-400 light:text-zinc-600 font-medium leading-relaxed mb-8">
+            {MISSION[2]}
+          </p>
+
+          <p className="text-sm sm:text-base text-zinc-500 light:text-zinc-600 font-medium leading-relaxed max-w-2xl mx-auto">
+            {CRAFT_LINE}
+          </p>
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -115,7 +132,7 @@ export const LabSection = () => (
             style={{ boxShadow: '0px 0px 0px 0px rgba(244,114,182,0)' }}
             whileHover={{ y: -4, x: -4, boxShadow: '8px 8px 0px 0px rgba(244,114,182,1)' }}
             whileTap={{ y: 0, x: 0, boxShadow: '0px 0px 0px 0px rgba(244,114,182,1)' }}
-            className="group flex items-center justify-center gap-3 px-7 sm:px-8 py-4 rounded-2xl bg-white text-black font-black tracking-wide border-2 border-white transition-all"
+            className="group flex items-center justify-center gap-3 px-7 sm:px-8 py-4 rounded-2xl bg-white light:bg-zinc-900 text-black light:text-white font-black tracking-wide border-2 border-white light:border-zinc-900 transition-all"
           >
             Visit the Lab
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -126,7 +143,7 @@ export const LabSection = () => (
             style={{ boxShadow: '0px 0px 0px 0px rgba(34,211,238,0)' }}
             whileHover={{ y: -4, x: -4, boxShadow: '8px 8px 0px 0px rgba(34,211,238,1)' }}
             whileTap={{ y: 0, x: 0, boxShadow: '0px 0px 0px 0px rgba(34,211,238,1)' }}
-            className="flex items-center justify-center px-7 sm:px-8 py-4 rounded-2xl bg-zinc-900 text-white font-bold tracking-wide border-2 border-zinc-700 hover:border-cyan-400 transition-all"
+            className="flex items-center justify-center px-7 sm:px-8 py-4 rounded-2xl bg-zinc-900 light:bg-white text-white light:text-zinc-900 font-bold tracking-wide border-2 border-zinc-700 light:border-zinc-300 hover:border-cyan-400 transition-all"
           >
             Get Early Access
           </motion.a>
@@ -139,11 +156,11 @@ export const LabSection = () => (
         viewport={{ once: true }}
         className="flex flex-col items-center mb-12 sm:mb-16 space-y-4"
       >
-        <div className="px-4 py-1.5 rounded-full border-2 border-zinc-800 bg-zinc-900 text-xs font-black font-mono text-zinc-400 uppercase tracking-widest">
+        <div className="px-4 py-1.5 rounded-full border-2 border-zinc-800 light:border-zinc-200 bg-zinc-900 light:bg-white text-xs font-black font-mono text-zinc-400 light:text-zinc-600 uppercase tracking-widest">
           Current Projects
         </div>
-        <h2 className="text-4xl md:text-6xl font-black text-white uppercase">
-          In the <span className="text-yellow-400">Lab</span>
+        <h2 className="text-4xl md:text-6xl font-black text-white light:text-zinc-900 uppercase">
+          In the <span className="text-yellow-400 light:text-yellow-700">Lab</span>
         </h2>
       </motion.div>
 

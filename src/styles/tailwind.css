@@ -2,3 +2,8 @@
 @source '../**/*.{js,ts,jsx,tsx}';
 
 @import 'tw-animate-css';
+
+/* Light mode is an opt-in overlay on a dark-first site: the unprefixed classes
+   are the dark palette, and `light:` overrides them. The class sits on <html>,
+   so :where covers both the root itself and everything under it. */
+@custom-variant light (&:where(.light, .light *));

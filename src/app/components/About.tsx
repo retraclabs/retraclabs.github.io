@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { ArrowLeft, ArrowUpRight, Mail } from 'lucide-react';
+import { MISSION, MISSION_SHORT } from '../data/mission';
 
 /* ─────────────────────────────────────────────────────────────────────────────
    YOUR BIT. Everything you need to change on this page is in this one block.
@@ -11,8 +12,9 @@ import { ArrowLeft, ArrowUpRight, Mail } from 'lucide-react';
    instead of a broken image.
    ───────────────────────────────────────────────────────────────────────────── */
 
-const FOUNDER_PHOTO: string | null = null; // e.g. '/brand/jarred-carter.jpg'
-const FOUNDER_PHOTO_ALT = 'Jarred Carter';
+const FOUNDER_PHOTO: string | null = '/brand/jarred-carter.jpg';
+const FOUNDER_PHOTO_ALT =
+  'Jarred Carter, smiling, in a black tank top against a plain light background.';
 
 const FOUNDER_NAME = 'Jarred M. Carter';
 const FOUNDER_ROLE = 'Founder';
@@ -50,6 +52,46 @@ const FOUNDER_BIO: string[] = [
     'and making sure I don\'t miss a single Taylor Swift album release party.',
 ];
 
+/* Sits beside the FIRST bio paragraph, the one about getting a Macintosh at
+   eleven. Note what it is and is not: the machine is not in the frame, so this
+   cannot carry the "bought once, still running" argument. What it can carry is
+   the moment, because it is that Mac's own output. The caption does that work.
+
+   Left deliberately at its native 640x480. It renders around 250px wide here,
+   so it is downscaling; blown up to full width a webcam frame just looks mushy,
+   which is also why it does not go in the MAC_PHOTO figure below. */
+const MAC_2011_PHOTO: string | null = '/brand/first-macintosh-2011.jpg';
+const MAC_2011_ALT =
+  'A young Jarred Carter at home with a small white dog, caught on a webcam.';
+const MAC_2011_CAPTION = 'Taken on that Macintosh, with its own camera. February 19, 2011.';
+
+/* Sits beside the last bio paragraph, the one about Lagree, Pilates, and the
+   West Village. Sunglasses would be a problem on a photo carrying the trust
+   argument; here they cost nothing, because this one is only doing the human
+   half of the job. Set to null and the paragraph simply runs full width. */
+const LIFE_PHOTO: string | null = '/brand/jarred-carter-offline.jpg';
+const LIFE_PHOTO_ALT = 'Jarred Carter outdoors in Manhattan, holding a large cream-colored doodle.';
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   THE MACINTOSH. Drop the photo in public/brand/ and put its path below.
+
+   This is the best evidence on the site and it is worth shooting properly: the
+   actual machine, powered on if it will, somewhere with daylight. Landscape,
+   16:9-ish, at least 1600px wide. It does not need to be styled. A slightly
+   scuffed thirty-year-old computer that still boots is the argument.
+
+   Leave MAC_PHOTO as null and the section hides itself entirely, so nothing
+   breaks and no placeholder ships by accident.
+   ───────────────────────────────────────────────────────────────────────────── */
+const MAC_PHOTO: string | null = null; // e.g. '/brand/first-macintosh.jpg'
+const MAC_PHOTO_ALT =
+  'The Macintosh I got at eleven, still on my desk and still working.';
+/** Edit the year. This caption is doing argumentative work, so keep it factual
+ *  and let the machine speak. */
+const MAC_PHOTO_CAPTION =
+  'My first Macintosh, bought in 19XX. It still runs. No subscription kept it alive, ' +
+  'no server had to stay up, and nobody revoked it.';
+
 /* Optional. Scannable proof behind the trust claims the apps make, which prose
    alone does not deliver: nobody reads four paragraphs to find out whether you
    know what you are talking about. Empty the array to drop the strip. */
@@ -78,11 +120,11 @@ const PRINCIPLES: { title: string; body: string }[] = [
 ];
 
 const Placeholder = () => (
-  <div className="aspect-[4/5] w-full rounded-[1.25rem] border-4 border-dashed border-zinc-800 bg-[#0f0f12] flex flex-col items-center justify-center gap-3 p-6 text-center">
+  <div className="aspect-[4/5] w-full rounded-[1.25rem] border-4 border-dashed border-zinc-800 light:border-zinc-200 bg-[#0f0f12] light:bg-zinc-50 flex flex-col items-center justify-center gap-3 p-6 text-center">
     <div className="text-5xl" aria-hidden="true">
       🧪
     </div>
-    <p className="text-sm font-mono font-bold text-zinc-500 leading-relaxed">
+    <p className="text-sm font-mono font-bold text-zinc-500 light:text-zinc-600 leading-relaxed">
       Photo goes here.
       <br />
       Set FOUNDER_PHOTO in About.tsx.
@@ -97,7 +139,7 @@ export const About = () => (
         href="#"
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="inline-flex items-center gap-2 text-sm font-mono font-bold text-zinc-400 hover:text-white transition-colors mb-10"
+        className="inline-flex items-center gap-2 text-sm font-mono font-bold text-zinc-400 light:text-zinc-600 hover:text-white light:hover:text-zinc-900 transition-colors mb-10"
       >
         <ArrowLeft className="w-4 h-4" />
         Back to Lab
@@ -108,7 +150,7 @@ export const About = () => (
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.55 }}
-        className="border-4 border-zinc-800 bg-zinc-900 rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-10 relative overflow-hidden mb-6"
+        className="border-4 border-zinc-800 light:border-zinc-200 bg-zinc-900 light:bg-white rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-10 relative overflow-hidden mb-6"
       >
         <div className="absolute -right-24 -top-24 w-72 h-72 rounded-full blur-[90px] opacity-20 bg-fuchsia-500" />
 
@@ -118,7 +160,7 @@ export const About = () => (
               <img
                 src={FOUNDER_PHOTO}
                 alt={FOUNDER_PHOTO_ALT}
-                className="aspect-[4/5] w-full object-cover rounded-[1.25rem] border-4 border-zinc-800"
+                className="aspect-[4/5] w-full object-cover rounded-[1.25rem] border-4 border-zinc-800 light:border-zinc-200"
               />
             ) : (
               <Placeholder />
@@ -126,13 +168,13 @@ export const About = () => (
           </div>
 
           <div>
-            <div className="text-xs font-mono font-black text-fuchsia-400 uppercase tracking-widest mb-4">
+            <div className="text-xs font-mono font-black text-fuchsia-400 light:text-fuchsia-700 uppercase tracking-widest mb-4">
               {FOUNDER_ROLE}
             </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white uppercase mb-5 leading-[0.95]">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white light:text-zinc-900 uppercase mb-5 leading-[0.95]">
               {FOUNDER_NAME}
             </h1>
-            <p className="text-lg sm:text-xl text-zinc-300 font-medium leading-relaxed mb-8">
+            <p className="text-lg sm:text-xl text-zinc-300 light:text-zinc-700 font-medium leading-relaxed mb-8">
               {FOUNDER_TAGLINE}
             </p>
 
@@ -141,14 +183,14 @@ export const About = () => (
                 href="https://jarredmcarter.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-zinc-800 text-white font-bold text-sm border-2 border-zinc-700 hover:border-cyan-400 transition-colors"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-zinc-800 light:bg-zinc-100 text-white light:text-zinc-900 font-bold text-sm border-2 border-zinc-700 light:border-zinc-300 hover:border-cyan-400 transition-colors"
               >
                 Personal Site
                 <ArrowUpRight className="w-4 h-4" />
               </a>
               <a
                 href="mailto:retrac.labs@gmail.com"
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-zinc-800 text-white font-bold text-sm border-2 border-zinc-700 hover:border-yellow-400 transition-colors"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-zinc-800 light:bg-zinc-100 text-white light:text-zinc-900 font-bold text-sm border-2 border-zinc-700 light:border-zinc-300 hover:border-yellow-400 transition-colors"
               >
                 <Mail className="w-4 h-4" />
                 Get in Touch
@@ -158,23 +200,118 @@ export const About = () => (
         </div>
       </motion.section>
 
+      {/* ── mission ── */}
+      <motion.section
+        initial={{ opacity: 0, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.55, delay: 0.06 }}
+        className="border-4 border-zinc-800 light:border-zinc-200 bg-zinc-900 light:bg-white rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-10 relative overflow-hidden mb-6"
+      >
+        <div className="absolute -left-20 -bottom-24 w-72 h-72 rounded-full blur-[90px] opacity-20 bg-cyan-500" />
+
+        <div className="relative z-10">
+          <div className="text-xs font-mono font-black text-cyan-400 light:text-cyan-700 uppercase tracking-widest mb-6">
+            {MISSION_SHORT}
+          </div>
+          <p className="text-2xl sm:text-3xl lg:text-4xl font-black text-white light:text-zinc-900 leading-[1.15] tracking-tight">
+            {MISSION[0]}{' '}
+            {MISSION[1]}
+          </p>
+          <p className="text-lg sm:text-xl text-zinc-400 light:text-zinc-600 font-medium leading-relaxed mt-5 max-w-2xl">
+            {MISSION[2]}
+          </p>
+        </div>
+      </motion.section>
+
+      {/* ── the Macintosh: the mission's evidence ── */}
+      {MAC_PHOTO ? (
+        <motion.figure
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55, delay: 0.1 }}
+          className="border-4 border-zinc-800 light:border-zinc-200 bg-zinc-900 light:bg-white rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden mb-6"
+        >
+          <img
+            src={MAC_PHOTO}
+            alt={MAC_PHOTO_ALT}
+            className="w-full h-auto block"
+            loading="lazy"
+          />
+          <figcaption className="px-6 sm:px-8 py-5 text-sm sm:text-base text-zinc-400 light:text-zinc-600 font-medium leading-relaxed border-t-4 border-zinc-800 light:border-zinc-200">
+            {MAC_PHOTO_CAPTION}
+          </figcaption>
+        </motion.figure>
+      ) : null}
+
       {/* ── the long version ── */}
       <motion.section
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.55, delay: 0.1 }}
-        className="border-4 border-zinc-800 bg-[#0f0f12] rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-10 mb-6"
+        className="border-4 border-zinc-800 light:border-zinc-200 bg-[#0f0f12] light:bg-zinc-50 rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-10 mb-6"
       >
-        <h2 className="text-2xl font-black text-white mb-6">The Longer Version</h2>
-        <div className="space-y-5 text-zinc-300 font-medium leading-relaxed text-lg">
-          {FOUNDER_BIO.map((paragraph, index) => (
-            /* hyphens-auto matters here: justified text without it opens rivers
-               of white space, and the column is narrow on a phone. It works
-               because index.html sets <html lang="en">. */
+        <h2 className="text-2xl font-black text-white light:text-zinc-900 mb-6">The Longer Version</h2>
+        <div className="space-y-5 text-zinc-300 light:text-zinc-700 font-medium leading-relaxed text-lg">
+          {/* hyphens-auto matters here: justified text without it opens rivers
+              of white space, and the column is narrow on a phone. It works
+              because index.html sets <html lang="en">. */}
+          {/* The opening paragraph gets the 2011 photo, on the left. The closing
+              one gets the dog, on the right. Alternating keeps the column from
+              looking like a template. */}
+          <div
+            className={
+              MAC_2011_PHOTO
+                ? 'grid grid-cols-1 sm:grid-cols-[0.62fr_1.38fr] gap-6 sm:gap-8 items-start'
+                : ''
+            }
+          >
+            {MAC_2011_PHOTO ? (
+              <figure className="m-0">
+                <img
+                  src={MAC_2011_PHOTO}
+                  alt={MAC_2011_ALT}
+                  loading="lazy"
+                  width={640}
+                  height={480}
+                  className="w-full h-auto rounded-[1.25rem] border-4 border-zinc-800 light:border-zinc-200"
+                />
+                <figcaption className="mt-3 text-xs font-mono text-zinc-500 light:text-zinc-600 leading-relaxed">
+                  {MAC_2011_CAPTION}
+                </figcaption>
+              </figure>
+            ) : null}
+            <p className="text-justify hyphens-auto">{FOUNDER_BIO[0]}</p>
+          </div>
+
+          {FOUNDER_BIO.slice(1, -1).map((paragraph, index) => (
             <p key={index} className="text-justify hyphens-auto">
               {paragraph}
             </p>
           ))}
+
+          {/* The closing paragraph earns a picture, so it gets the row to
+              itself and the photo sits alongside. */}
+          <div
+            className={
+              LIFE_PHOTO
+                ? 'grid grid-cols-1 sm:grid-cols-[1.35fr_0.65fr] gap-6 sm:gap-8 items-start'
+                : ''
+            }
+          >
+            <p className="text-justify hyphens-auto">
+              {FOUNDER_BIO[FOUNDER_BIO.length - 1]}
+            </p>
+            {LIFE_PHOTO ? (
+              <img
+                src={LIFE_PHOTO}
+                alt={LIFE_PHOTO_ALT}
+                loading="lazy"
+                width={800}
+                height={1067}
+                className="w-full h-auto rounded-[1.25rem] border-4 border-zinc-800 light:border-zinc-200"
+              />
+            ) : null}
+          </div>
         </div>
       </motion.section>
 
@@ -189,10 +326,10 @@ export const About = () => (
           {CREDENTIALS.map((item) => (
             <div
               key={item.label}
-              className="border-2 border-zinc-800 bg-zinc-900 rounded-2xl px-5 py-4"
+              className="border-2 border-zinc-800 light:border-zinc-200 bg-zinc-900 light:bg-white rounded-2xl px-5 py-4"
             >
-              <div className="font-black text-white">{item.label}</div>
-              <div className="text-sm text-zinc-500 font-mono font-bold mt-1">{item.detail}</div>
+              <div className="font-black text-white light:text-zinc-900">{item.label}</div>
+              <div className="text-sm text-zinc-500 light:text-zinc-600 font-mono font-bold mt-1">{item.detail}</div>
             </div>
           ))}
         </motion.section>
@@ -203,10 +340,10 @@ export const About = () => (
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.55, delay: 0.16 }}
-        className="border-4 border-zinc-800 bg-zinc-900 rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-10 mb-6"
+        className="border-4 border-zinc-800 light:border-zinc-200 bg-zinc-900 light:bg-white rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-10 mb-6"
       >
-        <h2 className="text-2xl font-black text-white mb-4">Why "Retrac"</h2>
-        <p className="text-zinc-300 font-medium leading-relaxed text-lg">
+        <h2 className="text-2xl font-black text-white light:text-zinc-900 mb-4">Why "Retrac"</h2>
+        <p className="text-zinc-300 light:text-zinc-700 font-medium leading-relaxed text-lg">
           Retrac is my last name, Carter, backwards. In college, my best friend and I would refer to each other like
             this — with reversed first and last names — when we would go out on the weekends, and after being reminded
             of this earlier this year, the name stuck.
@@ -219,18 +356,18 @@ export const About = () => (
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, delay: 0.22 }}
-          className="border-4 border-zinc-800 bg-zinc-900 rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-10 mb-6"
+          className="border-4 border-zinc-800 light:border-zinc-200 bg-zinc-900 light:bg-white rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-10 mb-6"
         >
-          <h2 className="text-2xl font-black text-white mb-8">How the Apps Get Built</h2>
+          <h2 className="text-2xl font-black text-white light:text-zinc-900 mb-8">How the Apps Get Built</h2>
           <div className="space-y-8">
             {PRINCIPLES.map((principle, index) => (
               <div key={principle.title} className="flex gap-5">
-                <span className="font-mono font-black text-fuchsia-400 shrink-0 pt-1">
+                <span className="font-mono font-black text-fuchsia-400 light:text-fuchsia-700 shrink-0 pt-1">
                   {String(index + 1).padStart(2, '0')}
                 </span>
                 <div>
-                  <h3 className="text-lg font-black text-white mb-2">{principle.title}</h3>
-                  <p className="text-zinc-400 font-medium leading-relaxed">{principle.body}</p>
+                  <h3 className="text-lg font-black text-white light:text-zinc-900 mb-2">{principle.title}</h3>
+                  <p className="text-zinc-400 light:text-zinc-600 font-medium leading-relaxed">{principle.body}</p>
                 </div>
               </div>
             ))}
@@ -247,23 +384,23 @@ export const About = () => (
       >
         <a
           href="#lab-grid"
-          className="flex items-center justify-between gap-4 border-2 border-zinc-800 bg-zinc-900 rounded-2xl p-6 hover:border-white transition-colors"
+          className="flex items-center justify-between gap-4 border-2 border-zinc-800 light:border-zinc-200 bg-zinc-900 light:bg-white rounded-2xl p-6 hover:border-white light:hover:border-zinc-900 transition-colors"
         >
           <div>
-            <div className="font-black text-white text-lg">See What's in the Lab</div>
-            <div className="text-sm text-zinc-500 font-mono font-bold">Shipping and in Progress</div>
+            <div className="font-black text-white light:text-zinc-900 text-lg">See What's in the Lab</div>
+            <div className="text-sm text-zinc-500 light:text-zinc-600 font-mono font-bold">Shipping and in Progress</div>
           </div>
-          <ArrowUpRight className="w-5 h-5 text-zinc-500 shrink-0" />
+          <ArrowUpRight className="w-5 h-5 text-zinc-500 light:text-zinc-600 shrink-0" />
         </a>
         <a
           href="#/early-access"
-          className="flex items-center justify-between gap-4 border-2 border-zinc-800 bg-zinc-900 rounded-2xl p-6 hover:border-cyan-400 transition-colors"
+          className="flex items-center justify-between gap-4 border-2 border-zinc-800 light:border-zinc-200 bg-zinc-900 light:bg-white rounded-2xl p-6 hover:border-cyan-400 transition-colors"
         >
           <div>
-            <div className="font-black text-white text-lg">Test a Build</div>
-            <div className="text-sm text-zinc-500 font-mono font-bold">Join the Beta Program</div>
+            <div className="font-black text-white light:text-zinc-900 text-lg">Test a Build</div>
+            <div className="text-sm text-zinc-500 light:text-zinc-600 font-mono font-bold">Join the Beta Program</div>
           </div>
-          <ArrowUpRight className="w-5 h-5 text-zinc-500 shrink-0" />
+          <ArrowUpRight className="w-5 h-5 text-zinc-500 light:text-zinc-600 shrink-0" />
         </a>
       </motion.section>
     </div>

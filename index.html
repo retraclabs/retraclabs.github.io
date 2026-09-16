@@ -5,6 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RETRAC LABS</title>
     <link rel="icon" type="image/svg+xml" href="/brand/favicon.svg" />
+    <script>
+      // Runs before React. Keep the storage key in sync with src/app/theme.ts.
+      (function () {
+        try {
+          if (localStorage.getItem('retraclabs-theme') === 'light') {
+            document.documentElement.classList.add('light');
+            document.documentElement.style.colorScheme = 'light';
+          } else {
+            document.documentElement.style.colorScheme = 'dark';
+          }
+        } catch (e) {}
+      })();
+    </script>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-T7CQVBS28N"></script>
     <script>
