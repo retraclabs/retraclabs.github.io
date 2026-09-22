@@ -26,7 +26,7 @@ export const ApunteTerms = () => {
                     </h1>
 
                     <p className="text-zinc-500 light:text-zinc-600 font-mono font-bold mb-10">
-                        Last updated: September 10, 2026
+                        Last updated: September 22, 2026
                     </p>
 
                     <div className="space-y-10 text-zinc-300 light:text-zinc-700 font-medium leading-relaxed">
@@ -62,7 +62,7 @@ export const ApunteTerms = () => {
                             </h2>
                             <p>
                                 Apunte is free to download. Transcription, and export to plain text,
-                                timestamped text, and JSON, are free — and remain free.
+                                timestamped text, and JSON, are free.
                             </p>
                             <p className="mt-4">
                                 Premium features — speaker names on transcript lines, on-device
@@ -102,8 +102,7 @@ export const ApunteTerms = () => {
                                 continue to export, and summaries you have already generated remain
                                 in place; only creating <em>new</em> ones stops until you renew.
                                 Searching within a single transcript remains free. Free exports —
-                                plain text, timestamped text, and JSON — remain available forever. We
-                                consider this a commitment, not a courtesy.
+                                plain text, timestamped text, and JSON — remain available.
                             </p>
                         </section>
 

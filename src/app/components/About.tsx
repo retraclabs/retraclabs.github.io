@@ -54,8 +54,9 @@ const FOUNDER_BIO: string[] = [
 
 /* Sits beside the FIRST bio paragraph, the one about getting a Macintosh at
    eleven. Note what it is and is not: the machine is not in the frame, so this
-   cannot carry the "bought once, still running" argument. What it can carry is
-   the moment, because it is that Mac's own output. The caption does that work.
+   cannot carry the durability argument, that a machine this old still works.
+   What it can carry is the moment, because it is that Mac's own output. The
+   caption does that work.
 
    Left deliberately at its native 640x480. It renders around 250px wide here,
    so it is downscaling; blown up to full width a webcam frame just looks mushy,
@@ -89,8 +90,8 @@ const MAC_PHOTO_ALT =
 /** Edit the year. This caption is doing argumentative work, so keep it factual
  *  and let the machine speak. */
 const MAC_PHOTO_CAPTION =
-  'My first Macintosh, bought in 19XX. It still runs. No subscription kept it alive, ' +
-  'no server had to stay up, and nobody revoked it.';
+  'My first Macintosh, bought in 19XX. It still runs. No server had to stay up, ' +
+  'and nobody revoked it.';
 
 /* Optional. Scannable proof behind the trust claims the apps make, which prose
    alone does not deliver: nobody reads four paragraphs to find out whether you
@@ -114,8 +115,8 @@ const PRINCIPLES: { title: string; body: string }[] = [
     body: 'Several of these apps ship without a network entitlement, which means they cannot phone home even if we wanted them to. You can check that yourself on the signed binary rather than taking our word for it.',
   },
   {
-    title: 'Bought once, not rented',
-    body: 'One-time purchases. No subscriptions, no accounts, and nothing that stops working because a server went away.',
+    title: 'Built to keep working',
+    body: 'No accounts. Nothing that stops working because a server went away.',
   },
 ];
 
