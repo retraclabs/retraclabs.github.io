@@ -80,11 +80,11 @@ export const projects: Project[] = [
       'Drop in a voice memo, an interview, a lecture, a video — if macOS can play it, Apunte can read it.\n\n' +
       'It ships without the outgoing-network entitlement, so the app\'s own code cannot open a network ' +
       'connection. You don\'t have to take that on faith. Inspect the signed app yourself with codesign. ' +
-      'Transcription is free, permanently; Premium adds speaker names and formatted export.',
+      'Transcription is free; Premium adds speaker names and formatted export.',
     highlights: [
       'No network access, verifiable: the app ships without the network entitlement, so it cannot upload your audio. Check it yourself in Terminal.',
       'Accurate on real recordings: on a 64-minute, two-person session it captured the same content as MacWhisper, keeping hesitations and false starts rather than smoothing them away.',
-      'A free tier that\'s actually complete: transcription, editing, playback, and plain-text, timestamped, and JSON export are free forever. JSON carries everything, so your work is never locked in.',
+      'A free tier that\'s actually complete: transcription, editing, playback, and plain-text, timestamped, and JSON export are free. JSON carries everything, so your work is never locked in.',
     ],
     nextSteps: [
       'Automatic speaker labels, so conversations are attributed without assigning every line by hand',
@@ -179,9 +179,7 @@ export const projects: Project[] = [
         '· Copy tracking: Snippystack remembers how many times you\'ve used each item\n' +
         '· Pin to top: keep your most-used clips always within reach\n' +
         '· Global shortcut: open SnippyStack from anywhere with ⌥⌘V\n' +
-        '· Privacy-first: your history never leaves your Mac. No cloud. No servers. No accounts.\n' +
-        '\n' +
-        'One-time purchase. No subscription. No nonsense.',
+        '· Privacy-first: your history never leaves your Mac. No cloud. No servers. No accounts.',
     highlights: [
       'Smart type detection: clips are automatically labeled as URLs, emails, code, or plain text',
       'Full history with sort, search, and filter — plus Permanent Snippets for text you reuse',
@@ -218,13 +216,12 @@ export const projects: Project[] = [
     icon: Smartphone,
     span: 'two-thirds',
     teaser: 'Private cycle tracking that never leaves your iPhone.',
-    summary: 'Privacy-first cycle tracking for iPhone. Your body, your data — no subscriptions, no cloud, no noise.',
+    summary: 'Privacy-first cycle tracking for iPhone. Your body, your data — no cloud, no noise.',
     description:
       'Amparo is a cycle-tracking app for iPhone built around privacy, clarity, and emotional ease. ' +
       'Instead of turning your body into a dashboard of warnings and streaks, Amparo helps you log symptoms, ' +
       'track moods, and notice patterns — with a calmer, more human interface that never judges or alarms.\n\n' +
-      'Everything stays on your device. No account required. No cloud sync. No subscription. ' +
-      'One-time purchase at $4.99.\n\n' +
+      'Everything stays on your device. No account required. No cloud sync.\n\n' +
       'Amparo describes what you log. It does not diagnose, and it is not a method of contraception.',
     highlights: [
         'Local-only storage: your cycle data never leaves your iPhone — no accounts, no servers',
