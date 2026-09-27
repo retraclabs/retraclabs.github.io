@@ -5,7 +5,7 @@ import { ArrowLeft } from 'lucide-react';
 /* Keep this date current. Any substantive edit to the text below should move it,
    because "Last updated" is the first thing anyone checks when they want to know
    whether a policy still describes what actually happens. */
-const LAST_UPDATED = 'September 13, 2026';
+const LAST_UPDATED = 'September 27, 2026';
 
 const Section = ({ title, children }: { title: string; children: React.ReactNode }) => (
     <section>
@@ -326,7 +326,7 @@ export const PrivacyPolicy = () => {
                             <p>
                                 The only third parties that handle any information at all are the service
                                 providers named in this policy: Formspree for the beta form, Apple for
-                                TestFlight and the App Store, and Google Analytics for website traffic. If
+                                TestFlight and the App Store, and Cloudflare for website analytics. If
                                 a specific app comes to use a third-party service, we will describe it
                                 clearly here or in that app's own privacy information before it ships.
                             </p>
@@ -339,17 +339,37 @@ export const PrivacyPolicy = () => {
                             </p>
                         </Section>
 
-                        <Section title="Website Analytics">
+                        <Section title="Cookies and Website Analytics">
                             <p>
-                                This website (retraclabs.co) uses Google Analytics to understand aggregate
-                                traffic: page views, general location, and referral sources, so we can
-                                improve the site. This applies to the website only and is entirely separate
-                                from our apps, which contain no analytics. You can opt out with{' '}
-                                <Link href="https://tools.google.com/dlpage/gaoptout">
-                                    Google's browser add-on
-                                </Link>{' '}
-                                or by blocking analytics scripts. This does not apply to any Retrac Labs
-                                app you download.
+                                This website (retraclabs.co) uses Cloudflare Web Analytics to count visits:
+                                which pages are viewed, the site a visit came from, the country, the browser
+                                and type of device, and how quickly pages load. What we see are totals, not
+                                individual visitors.
+                            </p>
+                            <p>
+                                It sets no cookies and stores nothing on your device, which is why this site
+                                has no cookie banner. Like any web request, it reaches Cloudflare from your IP
+                                address. Cloudflare says it does not use your IP address or browser details
+                                to identify you or to follow you across other sites. Its handling is governed
+                                by{' '}
+                                <Link href="https://www.cloudflare.com/privacypolicy/">
+                                    Cloudflare's privacy policy
+                                </Link>
+                                .
+                            </p>
+                            <p>
+                                This site used Google Analytics until September 2026. If you visited before
+                                then, it may have left cookies named <code>_ga</code> in your browser. Nothing
+                                reads them now, and the site deletes them the next time you visit.
+                            </p>
+                            <p>
+                                One thing is saved on your device: whether you chose the light or dark theme.
+                                It sits in your browser's local storage, exists only to remember that choice,
+                                and is never sent anywhere.
+                            </p>
+                            <p>
+                                All of this applies to the website only. Retrac Labs apps contain no
+                                analytics.
                             </p>
                         </Section>
 
@@ -363,8 +383,8 @@ export const PrivacyPolicy = () => {
                             <p>
                                 Ordinary email correspondence is kept as long as it is useful to have a
                                 record of the conversation. Crash reports are kept while the defect is
-                                open. Google Analytics retains website data on its own schedule, which is
-                                currently set to the shortest option available to us.
+                                open. Website analytics are kept by Cloudflare under its own retention
+                                terms.
                             </p>
                             <p>
                                 Data inside our apps is not kept by us at all, because it never reaches us.

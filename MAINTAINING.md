@@ -987,6 +987,64 @@ FileLock  Lock  ShieldCheck  KeyRound  Fingerprint  Binary  Droplet
 certainly wrong or missing from the import list at the top of `projects.ts`.
 That is the single most common way to white-screen this site.
 
+## Analytics
+
+```text
+index.html    the only place analytics is loaded
+```
+
+The site uses **Cloudflare Web Analytics**. It sets no cookies and stores nothing
+on the visitor's device, which is why there is no cookie banner. That was checked
+in Cloudflare's own `beacon.min.js`, which contains no reference to cookies,
+`localStorage`, `sessionStorage`, or IndexedDB.
+
+The dashboard is at **dash.cloudflare.com → Analytics & Logs → Web Analytics**.
+
+### It only runs on retraclabs.co
+
+The beacon is injected by a small script in `index.html`, and only when the
+hostname is exactly `retraclabs.co` or `www.retraclabs.co`. So `npm run dev`,
+`npm run preview`, and anyone who forks the repo never send traffic to the real
+dashboard. If the domain ever changes, update that check or analytics silently
+stops.
+
+The token in that script is public by design. It is in every page's source and
+is not a secret.
+
+### What it can and cannot see
+
+It records totals: pages viewed, referring sites, countries, browsers and
+devices, and page-load speed.
+
+**Hash routes are only partly covered**, because the site routes with `#/…`:
+
+- Clicking between pages inside the site is recorded with the full address,
+  hash included, in browsers that support the Navigation API.
+- Landing directly on an address like `retraclabs.co/#/projects/amparo` is
+  recorded as `/`, because the beacon builds the first page's address from the
+  path alone.
+- Older browsers without the Navigation API do not see hash changes at all.
+
+So trust the overall traffic numbers more than the per-page breakdown.
+
+### Why there is no cookie banner, and when that changes
+
+Consent law is triggered by storing or reading things on the visitor's device.
+Cloudflare does neither, and the theme preference is stored only because the
+visitor asked for it, which is exempt.
+
+**If you ever add anything that sets cookies** (Google Analytics, a chat widget,
+an embedded video player, ads), the site needs a real consent banner again, and
+the tool must not load until the visitor says yes. A banner shown over a tracker
+that is already running is not consent.
+
+### Leftover Google cookies
+
+The site ran Google Analytics until September 2026, which left `_ga` cookies in
+returning visitors' browsers. The script in `index.html` deletes them on each
+visit. That loop can be removed after the end of 2028, when every one of them
+would have expired anyway.
+
 ## Light Mode
 
 The site is **dark by default for everyone**, and light is something a reader

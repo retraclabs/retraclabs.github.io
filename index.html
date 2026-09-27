@@ -18,13 +18,39 @@
         } catch (e) {}
       })();
     </script>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T7CQVBS28N"></script>
+    <!-- Analytics: Cloudflare Web Analytics. It sets no cookies and stores
+         nothing on the visitor's device, so the site needs no consent banner.
+         It loads only on the production hostname, so local development,
+         previews, and forks never send traffic to the real dashboard. The
+         token is public by design; it is visible in any page's source. -->
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-T7CQVBS28N');
+      (function () {
+        // Google Analytics ran on this site until September 2026 and left _ga
+        // cookies in returning visitors' browsers. Nothing reads them now, so
+        // expire them. This loop can be deleted after the end of 2028, by which
+        // point every one of those cookies would have expired on its own.
+        try {
+          var parts = location.hostname.split('.'), domains = [''];
+          for (var i = 0; i < parts.length - 1; i++) domains.push('.' + parts.slice(i).join('.'));
+          document.cookie.split(';').forEach(function (pair) {
+            var name = pair.split('=')[0].trim();
+            if (name === '_ga' || name.indexOf('_ga_') === 0 || name === '_gid' || name.indexOf('_gat') === 0) {
+              domains.forEach(function (d) {
+                document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/' + (d ? '; domain=' + d : '');
+              });
+            }
+          });
+        } catch (e) {}
+
+        var host = location.hostname;
+        if (host === 'retraclabs.co' || host === 'www.retraclabs.co') {
+          var beacon = document.createElement('script');
+          beacon.type = 'module';
+          beacon.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+          beacon.setAttribute('data-cf-beacon', '{"token": "1ef8766313ad43138a8e5ba1386bb7d2"}');
+          document.head.appendChild(beacon);
+        }
+      })();
     </script>
 </head>
 <body>
