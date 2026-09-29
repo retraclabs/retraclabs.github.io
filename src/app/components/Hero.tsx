@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'motion/react';
-import { HERO_SECTION_VH, HERO_FADE_END, c01, smooth } from '../heroChoreography';
+import { motion, useInView, useScroll, useTransform } from 'motion/react';
+import { HERO_SECTION_VH, HERO_FADE_END, RAT_IN_START, RAT_IN_END, c01, smooth } from '../heroChoreography';
+import { LabRat } from './LabRat';
 
 export const Hero = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -27,6 +28,17 @@ export const Hero = () => {
 
   // The scroll cue leaves almost immediately; it has done its job by then.
   const cueOpacity = useTransform(scrollYProgress, (p) => c01(1 - p * 9));
+
+  // The lab rat rises into view from the bottom of the section while the
+  // wordmark burns off, so the stretch between the two is never an empty
+  // screen, and it leads straight into the mission below. Its beaker holds
+  // the same gradient as LABS: the wordmark, bubbling away.
+  const ratIn = useTransform(h, (v) => smooth(c01((v - RAT_IN_START) / (RAT_IN_END - RAT_IN_START))));
+  const ratScale = useTransform(ratIn, (v) => 0.9 + v * 0.1);
+
+  // Animate only while the rat can actually be seen.
+  const ratRef = useRef<HTMLDivElement>(null);
+  const ratInView = useInView(ratRef, { margin: '80px' });
 
   return (
     <section
@@ -122,6 +134,12 @@ export const Hero = () => {
               />
             </motion.svg>
           </motion.div>
+        </motion.div>
+      </div>
+
+      <div className="absolute inset-x-0 bottom-[5svh] flex justify-center px-4 pointer-events-none">
+        <motion.div ref={ratRef} style={{ opacity: ratIn, scale: ratScale }}>
+          <LabRat className="w-44 sm:w-56 md:w-64 lg:w-72 h-auto overflow-visible" playing={ratInView} />
         </motion.div>
       </div>
     </section>

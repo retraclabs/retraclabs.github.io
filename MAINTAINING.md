@@ -141,9 +141,10 @@ src/app/components/Hero.tsx
 src/app/heroChoreography.ts
 ```
 
-`Hero.tsx` draws the big RETRAC / LABS wordmark and the scroll cue under it.
-`heroChoreography.ts` holds the numbers, because App.tsx needs the same numbers
-to know when to bring the menu bar in.
+`Hero.tsx` draws the big RETRAC / LABS wordmark, the scroll cue under it, and
+the lab rat that rises in as the wordmark goes. `heroChoreography.ts` holds the
+numbers, because App.tsx needs the same numbers to know when to bring the menu
+bar in.
 
 As you scroll, the wordmark rushes toward you, blurs, and burns off: the same
 move jarredmcarter.com makes. Three values drive it:
@@ -159,8 +160,17 @@ To change the numbers, edit `heroChoreography.ts`:
 - `HERO_SECTION_VH`: how tall the hero section is, so how much scrolling the
   whole move takes. Bigger means slower.
 - `HERO_FADE_END`: how far into that scroll the wordmark is fully gone. `0.8`
-  means it finishes at 80%, leaving a short beat of empty screen before the Lab
-  arrives.
+  means it finishes at 80%. The rest of the scroll is the lab rat's.
+- `RAT_IN_START` and `RAT_IN_END`: when the rat fades in, measured against the
+  wordmark's own progress. At `0.55` to `0.95` it starts once the wordmark is
+  half gone and is fully there just before the wordmark finishes.
+
+The rat sits at the bottom of the hero section rather than in the middle of the
+screen, so it scrolls up into view from below while the wordmark burns off, and
+then carries on into "Can't, Not Won't." Without it, that stretch was about 300
+pixels of scrolling over an empty black screen. Its size is set on the
+`<LabRat>` in `Hero.tsx`, and its distance from the bottom of the section by
+`bottom-[5svh]` on the element wrapping it.
 
 The menu bar appears the moment the wordmark is gone. That is deliberate; the
 two are meant to hand off to each other. `heroDissipatedAt()` is the single
@@ -810,6 +820,19 @@ Two things are load-bearing and easy to break by reordering:
 - **The tail attaches at one point and ends in open air.** An earlier version
   curled back to touch the glass twice, which turned the beaker into a coffee
   mug. It sits on the left to stay clear of the spout.
+
+The rat appears in two places: the Thanks page, and the homepage, where it
+rises in under the hero. On the homepage it only animates while it is on
+screen, through its `playing` prop:
+
+```tsx
+<LabRat playing={ratInView} />
+```
+
+Leave `playing` off and it always animates, which is right for the Thanks page,
+where it is the first thing on screen. Anyone whose system is set to reduce
+motion gets a still rat everywhere, with its bubbles frozen partway up the
+beaker so it still reads as bubbling.
 
 ## The About Page
 

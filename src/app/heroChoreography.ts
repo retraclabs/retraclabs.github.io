@@ -10,8 +10,16 @@
 export const HERO_SECTION_VH = 185;
 
 /** Fraction of that runway the wordmark takes to fully dissipate. The tail
- *  that is left over is breathing room before the Lab section arrives. */
+ *  that is left over is where the lab rat finishes rising into view, before
+ *  the Lab section arrives. */
 export const HERO_FADE_END = 0.8;
+
+/** The lab rat fades in across this span of the wordmark's own progress:
+ *  starting once the wordmark is half burned off, and fully there just before
+ *  it is gone. The rat sits at the bottom of the hero, so it is still below
+ *  the fold when the fade begins and scrolls up into view as it completes. */
+export const RAT_IN_START = 0.55;
+export const RAT_IN_END = 0.95;
 
 /** Clamp to 0..1. */
 export const c01 = (v: number) => (v < 0 ? 0 : v > 1 ? 1 : v);
