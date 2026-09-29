@@ -92,7 +92,7 @@ export const Hero = () => {
             transition={{ delay: 0.9, duration: 1 }}
             className="flex flex-col items-center gap-3"
           >
-            <span className="text-[10px] sm:text-xs font-mono font-bold text-zinc-500 light:text-zinc-600 uppercase tracking-widest text-center">
+            <span className="text-[10px] sm:text-xs font-mono font-bold text-zinc-400 light:text-zinc-600 uppercase tracking-widest text-center">
               Specimens Below
             </span>
             {/* A drawn arrow rather than a tapered bar. The old gradient faded

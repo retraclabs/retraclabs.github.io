@@ -107,15 +107,15 @@ const CREDENTIALS: { label: string; detail: string }[] = [
  *  drop the section entirely. */
 const PRINCIPLES: { title: string; body: string }[] = [
   {
-    title: 'On-device by default',
+    title: 'On-Device by Default',
     body: 'If a feature can run on your Mac or iPhone, it does. Not as a setting you have to find, but as the only way it works.',
   },
   {
-    title: 'Verifiable, not promised',
+    title: 'Verifiable, Not Promised',
     body: 'Several of these apps ship without a network entitlement, which means they cannot phone home even if we wanted them to. You can check that yourself on the signed binary rather than taking our word for it.',
   },
   {
-    title: 'Built to keep working',
+    title: 'Built to Keep Working',
     body: 'No accounts. Nothing that stops working because a server went away.',
   },
 ];
@@ -125,7 +125,7 @@ const Placeholder = () => (
     <div className="text-5xl" aria-hidden="true">
       🧪
     </div>
-    <p className="text-sm font-mono font-bold text-zinc-500 light:text-zinc-600 leading-relaxed">
+    <p className="text-sm font-mono font-bold text-zinc-400 light:text-zinc-600 leading-relaxed">
       Photo goes here.
       <br />
       Set FOUNDER_PHOTO in About.tsx.
@@ -276,7 +276,7 @@ export const About = () => (
                   height={480}
                   className="w-full h-auto rounded-[1.25rem] border-4 border-zinc-800 light:border-zinc-200"
                 />
-                <figcaption className="mt-3 text-xs font-mono text-zinc-500 light:text-zinc-600 leading-relaxed">
+                <figcaption className="mt-3 text-xs font-mono text-zinc-400 light:text-zinc-600 leading-relaxed">
                   {MAC_2011_CAPTION}
                 </figcaption>
               </figure>
@@ -330,7 +330,7 @@ export const About = () => (
               className="border-2 border-zinc-800 light:border-zinc-200 bg-zinc-900 light:bg-white rounded-2xl px-5 py-4"
             >
               <div className="font-black text-white light:text-zinc-900">{item.label}</div>
-              <div className="text-sm text-zinc-500 light:text-zinc-600 font-mono font-bold mt-1">{item.detail}</div>
+              <div className="text-sm text-zinc-400 light:text-zinc-600 font-mono font-bold mt-1">{item.detail}</div>
             </div>
           ))}
         </motion.section>
@@ -389,9 +389,9 @@ export const About = () => (
         >
           <div>
             <div className="font-black text-white light:text-zinc-900 text-lg">See What's in the Lab</div>
-            <div className="text-sm text-zinc-500 light:text-zinc-600 font-mono font-bold">Shipping and in Progress</div>
+            <div className="text-sm text-zinc-400 light:text-zinc-600 font-mono font-bold">Shipping and in Progress</div>
           </div>
-          <ArrowUpRight className="w-5 h-5 text-zinc-500 light:text-zinc-600 shrink-0" />
+          <ArrowUpRight className="w-5 h-5 text-zinc-400 light:text-zinc-600 shrink-0" />
         </a>
         <a
           href="#/early-access"
@@ -399,9 +399,9 @@ export const About = () => (
         >
           <div>
             <div className="font-black text-white light:text-zinc-900 text-lg">Test a Build</div>
-            <div className="text-sm text-zinc-500 light:text-zinc-600 font-mono font-bold">Join the Beta Program</div>
+            <div className="text-sm text-zinc-400 light:text-zinc-600 font-mono font-bold">Join the Beta Program</div>
           </div>
-          <ArrowUpRight className="w-5 h-5 text-zinc-500 light:text-zinc-600 shrink-0" />
+          <ArrowUpRight className="w-5 h-5 text-zinc-400 light:text-zinc-600 shrink-0" />
         </a>
       </motion.section>
     </div>

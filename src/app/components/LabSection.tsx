@@ -115,7 +115,7 @@ export const LabSection = () => (
             {MISSION[2]}
           </p>
 
-          <p className="text-sm sm:text-base text-zinc-500 light:text-zinc-600 font-medium leading-relaxed max-w-2xl mx-auto">
+          <p className="text-sm sm:text-base text-zinc-400 light:text-zinc-600 font-medium leading-relaxed max-w-2xl mx-auto">
             {CRAFT_LINE}
           </p>
         </motion.div>

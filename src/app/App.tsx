@@ -11,13 +11,18 @@ import { ApunteTerms } from './components/ApunteTerms';
 import { EarlyAccess } from './components/EarlyAccess';
 import { About } from './components/About';
 import { Thanks } from './components/Thanks';
+import { LabNotePage } from './components/LabNotePage';
 import { ThemeToggle } from './components/ThemeToggle';
 import { getProjectBySlug } from './data/projects';
+import { getLabNote } from './labNotes';
 import { heroDissipatedAt } from './heroChoreography';
 import { motion } from 'motion/react';
 
 const STATIC_PAGE_HASHES = ['#/privacy', '#/apunte/privacy', '#/apunte/terms', '#/early-access', '#/about', '#/thanks'];
 
+/** Every page that is not the home page: fixed pages, plus lab notes, which get
+ *  their routes from their own registry rather than from the list above. */
+const isInteriorPage = (hash: string) => STATIC_PAGE_HASHES.includes(hash) || Boolean(getLabNote(hash));
 
 const getProjectFromHash = () => {
   const match = window.location.hash.match(/^#\/projects\/([a-z0-9-]+)$/);
@@ -28,6 +33,7 @@ export default function App() {
   const [currentHash, setCurrentHash] = useState(window.location.hash);
   const [activeProject, setActiveProject] = useState(getProjectFromHash);
   const [headerVisible, setHeaderVisible] = useState(false);
+  const labNote = getLabNote(currentHash);
 
   useEffect(() => {
     window.history.scrollRestoration = 'manual';
@@ -42,7 +48,7 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    if (activeProject || STATIC_PAGE_HASHES.includes(currentHash)) {
+    if (activeProject || isInteriorPage(currentHash)) {
       const scrollId = window.setTimeout(() => {
         window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
       }, 0);
@@ -54,7 +60,7 @@ export default function App() {
   // The menu bar stays out of the way until RETRAC LABS has finished
   // dissipating, the same hand-off jarredmcarter.com makes. Interior pages have
   // no hero to wait for, so it is there from the start.
-  const onHomePage = !activeProject && !STATIC_PAGE_HASHES.includes(currentHash);
+  const onHomePage = !activeProject && !isInteriorPage(currentHash);
 
   useEffect(() => {
     if (!onHomePage) {
@@ -103,11 +109,11 @@ export default function App() {
           (headerVisible ? '' : 'invisible')
         }
       >
-        <div className="flex items-center gap-4 sm:gap-8 px-4 sm:px-6 py-3 bg-zinc-900/95 light:bg-white/95 backdrop-blur-xl border-2 border-zinc-800 light:border-zinc-200 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.4)] pointer-events-auto max-w-[calc(100vw-1.5rem)]">
+        <div className="flex items-center gap-2.5 sm:gap-8 px-3 sm:px-6 py-3 bg-zinc-900/95 light:bg-white/95 backdrop-blur-xl border-2 border-zinc-800 light:border-zinc-200 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.4)] pointer-events-auto max-w-[calc(100vw-1.5rem)]">
           <a href="#" className="text-lg sm:text-xl font-black text-white light:text-zinc-900 uppercase whitespace-nowrap">
             Retrac<span className="text-zinc-500 light:text-zinc-600">Labs</span>
           </a>
-          <nav className="flex gap-3 sm:gap-6 text-[10px] sm:text-sm font-bold font-mono text-zinc-400 light:text-zinc-600">
+          <nav className="flex gap-2 sm:gap-6 text-[10px] sm:text-sm font-bold font-mono text-zinc-400 light:text-zinc-600">
             <a href="#apps" className="hover:text-cyan-400 light:hover:text-cyan-700 transition-colors">LAB</a>
             <a href="#/about" className="hover:text-fuchsia-400 light:hover:text-fuchsia-700 transition-colors">ABOUT</a>
             <a href="#/early-access" className="hover:text-emerald-400 light:hover:text-emerald-700 transition-colors">BETA</a>
@@ -131,6 +137,8 @@ export default function App() {
         <About />
       ) : currentHash === '#/thanks' ? (
         <Thanks />
+      ) : labNote ? (
+        <LabNotePage note={labNote} />
       ) : activeProject ? (
         <ProjectDetail project={activeProject} />
       ) : (

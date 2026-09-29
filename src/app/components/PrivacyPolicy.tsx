@@ -50,7 +50,7 @@ export const PrivacyPolicy = () => {
                         Privacy Policy
                     </h1>
 
-                    <p className="text-zinc-500 light:text-zinc-600 font-mono font-bold mb-10">
+                    <p className="text-zinc-400 light:text-zinc-600 font-mono font-bold mb-10">
                         Last updated: {LAST_UPDATED}
                     </p>
 
@@ -99,7 +99,7 @@ export const PrivacyPolicy = () => {
                                 is entirely optional, and you can leave at any time.
                             </p>
 
-                            <Sub title="What the signup form collects">
+                            <Sub title="What the Signup Form Collects">
                                 <p>
                                     When you submit the form at{' '}
                                     <a href="#/early-access" className="text-cyan-400 light:text-cyan-700 hover:text-cyan-300 light:hover:text-cyan-800">
@@ -129,7 +129,7 @@ export const PrivacyPolicy = () => {
                                 </p>
                             </Sub>
 
-                            <Sub title="Why we collect it and what we do with it">
+                            <Sub title="Why We Collect It and What We Do With It">
                                 <p>
                                     We use this information for one purpose: to run the beta program. In
                                     practice that means working out whether a given build will run on your
@@ -150,7 +150,7 @@ export const PrivacyPolicy = () => {
                                 </p>
                             </Sub>
 
-                            <Sub title="Who else is involved">
+                            <Sub title="Who Else Is Involved">
                                 <p>
                                     Two third parties necessarily handle beta program information. We have
                                     no arrangement with either of them beyond ordinary use of their service.
@@ -179,7 +179,7 @@ export const PrivacyPolicy = () => {
                                 </p>
                             </Sub>
 
-                            <Sub title="Crash reports and diagnostics">
+                            <Sub title="Crash Reports and Diagnostics">
                                 <p>
                                     Beta builds may include Apple's standard crash reporting. A crash report
                                     describes the state of the app when it failed and can incidentally
@@ -194,7 +194,7 @@ export const PrivacyPolicy = () => {
                                 </p>
                             </Sub>
 
-                            <Sub title="Feedback you send us">
+                            <Sub title="Feedback You Send Us">
                                 <p>
                                     When you report a problem or suggest an improvement, we need to be able
                                     to act on it. By sending feedback you grant Retrac Labs a perpetual,
@@ -210,7 +210,7 @@ export const PrivacyPolicy = () => {
                                 </p>
                             </Sub>
 
-                            <Sub title="Unreleased software is confidential">
+                            <Sub title="Unreleased Software Is Confidential">
                                 <p>
                                     Beta builds are unreleased and often unannounced. We ask that you not
                                     publish screenshots, recordings, or descriptions of a beta build, and
@@ -220,7 +220,7 @@ export const PrivacyPolicy = () => {
                                 </p>
                             </Sub>
 
-                            <Sub title="Beta software is provided as is">
+                            <Sub title="Beta Software Is Provided “As Is”">
                                 <p>
                                     Beta software is unfinished by definition. It may be unstable, it may
                                     behave incorrectly, and it may lose data. It is provided without
@@ -233,7 +233,7 @@ export const PrivacyPolicy = () => {
                                 </p>
                             </Sub>
 
-                            <Sub title="Age requirement">
+                            <Sub title="Age Requirement">
                                 <p>
                                     You must be at least 13 years old to take part, because Apple requires
                                     it of TestFlight users. Some builds may carry a higher age requirement,
@@ -241,7 +241,7 @@ export const PrivacyPolicy = () => {
                                 </p>
                             </Sub>
 
-                            <Sub title="Leaving the program">
+                            <Sub title="Leaving the Program">
                                 <p>
                                     Email{' '}
                                     <a href="mailto:retrac.labs@gmail.com" className="text-cyan-400 light:text-cyan-700 hover:text-cyan-300 light:hover:text-cyan-800">
@@ -453,7 +453,7 @@ export const PrivacyPolicy = () => {
                             </p>
                         </Section>
 
-                        <Section title="Changes To This Policy">
+                        <Section title="Changes to This Policy">
                             <p>
                                 We may update this policy as the apps and the beta program change. The
                                 "Last updated" date at the top always reflects the current version. If a

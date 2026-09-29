@@ -9,14 +9,14 @@
    have answered a question nobody asked yet. */
 
 /** One line. For a LinkedIn headline, an email signature, a badge. */
-export const MISSION_SHORT = "Can't, not won't.";
+export const MISSION_SHORT = "Can't, Not Won't.";
 
 /** Three parts, descending in weight. The first two carry the meaning if you
  *  ever have to truncate; the third is the closer. */
 export const MISSION = [
   'Your work and your life run on your Mac.',
   'Retrac Labs builds the apps that let both stay yours.',
-  'Not because we promise not to look, but because they ship without the ability to.',
+  'Not because we promise not to look, but because they ship without the ability for us to.',
 ];
 
 /** The craft claim, which used to open the homepage on its own. It still earns

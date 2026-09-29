@@ -11,7 +11,7 @@ export const Footer = () => {
           <span className="text-2xl font-black tracking-tighter text-white light:text-zinc-900 uppercase">
             Retrac<span className="text-zinc-500 light:text-zinc-600">Labs</span>
           </span>
-          <span className="text-sm font-mono text-zinc-500 light:text-zinc-600 mt-2 font-bold">© {new Date().getFullYear()} / ALL RIGHTS RESERVED</span>
+          <span className="text-sm font-mono text-zinc-400 light:text-zinc-600 mt-2 font-bold">© {new Date().getFullYear()} / ALL RIGHTS RESERVED</span>
         </div>
 
           <div className="flex flex-col items-center md:items-end gap-4">
@@ -43,21 +43,21 @@ export const Footer = () => {
               <div className="flex items-center gap-4">
                   <a
                       href="#/about"
-                      className="text-sm font-mono font-bold text-zinc-500 light:text-zinc-600 hover:text-white light:hover:text-zinc-900 transition-colors"
+                      className="text-sm font-mono font-bold text-zinc-400 light:text-zinc-600 hover:text-white light:hover:text-zinc-900 transition-colors"
                   >
                       About
                   </a>
                   <span className="text-zinc-700 light:text-zinc-300" aria-hidden="true">/</span>
                   <a
                       href="#/early-access"
-                      className="text-sm font-mono font-bold text-zinc-500 light:text-zinc-600 hover:text-white light:hover:text-zinc-900 transition-colors"
+                      className="text-sm font-mono font-bold text-zinc-400 light:text-zinc-600 hover:text-white light:hover:text-zinc-900 transition-colors"
                   >
                       Become a Lab Rat
                   </a>
                   <span className="text-zinc-700 light:text-zinc-300" aria-hidden="true">/</span>
                   <a
                       href="#/privacy"
-                      className="text-sm font-mono font-bold text-zinc-500 light:text-zinc-600 hover:text-white light:hover:text-zinc-900 transition-colors"
+                      className="text-sm font-mono font-bold text-zinc-400 light:text-zinc-600 hover:text-white light:hover:text-zinc-900 transition-colors"
                   >
                       Privacy Policy
                   </a>

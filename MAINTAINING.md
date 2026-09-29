@@ -98,6 +98,7 @@ This is the main traffic controller. It decides whether to show:
 - an individual project page
 - the beta signup page
 - the privacy policy pages
+- a lab note
 
 Current route patterns:
 
@@ -112,11 +113,15 @@ Current route patterns:
 #/privacy
 #/apunte/privacy
 #/apunte/terms
+#/apunte/why-not-whisper
 #/projects/<slug>
 ```
 
+`#/apunte/why-not-whisper` is a lab note. Lab notes do not appear in App.tsx's
+list of pages; they come from their own registry. See "Lab Notes" below.
+
 `<slug>` must match a project in `projects.ts` **that has a summary**. Projects
-with their copy commented out have no page. See "Hiding A Project Until It
+with their copy commented out have no page. See "Hiding a Project Until It
 Ships" below.
 
 App.tsx also holds the menu bar back until the hero has finished dissipating.
@@ -235,6 +240,7 @@ Required on every project:
 - `name`: project title, or codename if it is not announced yet.
 - `platform`: small platform pill.
 - `status`: status pill. Free text, such as "Available", "Beta Testing", or "In Development".
+  Exactly "Available" turns the page into a product page. See "Shipped App Pages".
 - `accent`: which color row in `src/app/data/accents.ts` the card uses.
 - `accentText`: Tailwind text color class.
 - `icon`: icon from `lucide-react`. See "Icons" below for finding names.
@@ -244,7 +250,7 @@ Required on every project:
   - `'half'`
   - `'third'`
 
-Optional. Leaving these out is meaningful, not lazy. See "Hiding A Project
+Optional. Leaving these out is meaningful, not lazy. See "Hiding a Project
 Until It Ships":
 
 - `teaser`: one plain line saying what the app does. Shown on the card and in
@@ -256,7 +262,7 @@ Until It Ships":
   summary is treated as unannounced**, regardless of whether it has a `teaser`.
 - `description`: main body text on the project page.
 - `highlights`: bullets in "What It Is."
-- `nextSteps`: bullets in "Next Steps."
+- `nextSteps`: bullets in "Next Steps" ("Coming Next" once the app has shipped).
 - `version`: replaces "Next Steps" with a shipped-versus-coming pair. Use it for
   apps that are actually out:
 
@@ -272,7 +278,10 @@ Until It Ships":
   If a project has both `version` and `highlights`, the version pair takes the
   two-column row and "What It Is" moves to a full-width strip underneath.
 
-- `appStoreUrl`: turns the sidebar button into a Download button.
+- `appStoreUrl`: the Download button. On a shipped app it sits in the title
+  card; on anything else it replaces "Ask About This" in the sidebar.
+- `price`, `requires`, `screenshots`: shipped apps only. See "Shipped App
+  Pages".
 
 ## Reordering Projects
 
@@ -291,18 +300,21 @@ shipped apps as the reward at the end of the scroll.
 Current order, top to bottom:
 
 ```text
-Project Salt        (Beta Testing)   ─┐
-Project Decibel     (Beta Testing)    │ newest work, nothing announced
-Project Deacon      (Testing)         │
-Project Cobra       (In Development)  ┘
-Snippystack         (Available)      ─┐ shipped, downloadable
+Project Salt        (In Development) ─┐
+Project Deacon      (Testing)         │ newest work, nothing announced
+Project Cobra       (In Development) ─┘
+Apunte              (Available)      ─┐
+Snippystack         (Available)       │ shipped, downloadable
 Amparo              (Available)      ─┘
 ```
+
+A newly shipped app joins the top of the shipped group, as Apunte did: it sits
+directly above the apps that shipped before it.
 
 To put a new experiment at the very top, paste its block above `project-salt`.
 To retire something to the bottom, move its block below `amparo`.
 
-### Checking your work
+### Checking Your Work
 
 After moving a block, make sure the file still parses:
 
@@ -313,7 +325,7 @@ npm run build
 The usual mistake is a missing or doubled comma between `}` and `{`. The build
 will tell you the line.
 
-### Adjusting the shape of the grid
+### Adjusting the Shape of the Grid
 
 Reordering changes the sequence; `span` changes the widths. The grid is six
 columns on a large screen, so a row is "full" of any combination adding up to
@@ -330,7 +342,7 @@ The four codename cards are all `'half'`, so they sit two-by-two. Snippystack
 (`'third'`) and Amparo (`'two-thirds'`) share the bottom row. If a row looks
 lopsided after a reorder, the spans of that row no longer add to six.
 
-## Hiding A Project Until It Ships
+## Hiding a Project Until It Ships
 
 Nothing gets announced before it is finished, beta included. A project is
 public only once it has a `summary`.
@@ -378,14 +390,14 @@ The rule that drives all of this is one line at the bottom of `projects.ts`:
 export const isAnnounced = (project: Project) => Boolean(project.summary);
 ```
 
-### A note on codenames
+### A Note on Codenames
 
 Codenames are the public name while a project is hidden. When an app is ready to
 be announced, change `name` and `slug` to the real name at the same time you
 uncomment the copy. Changing `slug` changes its URL, so do not change it after
 the app has shipped and people have linked to it.
 
-## Adding A New Project Page
+## Adding a New Project Page
 
 1. Open:
 
@@ -426,7 +438,7 @@ the app has shipped and people have linked to it.
    ```
 
 4. If it is not ready to be announced, comment out everything from `summary`
-   down. See "Hiding A Project Until It Ships."
+   down. See "Hiding a Project Until It Ships."
 
 5. Run:
 
@@ -437,7 +449,7 @@ the app has shipped and people have linked to it.
 There is no step where you add a card to `LabSection.tsx`. There used to be.
 The grid now builds itself from this array.
 
-### Adding a new accent color
+### Adding a New Accent Color
 
 If `accent` needs a color that is not already there, add a row to
 `src/app/data/accents.ts` and add the name to the `ProjectAccent` type in
@@ -471,7 +483,7 @@ Example section:
 
 If you want each project to have different custom sections, add more fields to the project data first, then render them in `ProjectDetail.tsx`.
 
-### The glow on a project title card
+### The Glow on a Project Title Card
 
 ```text
 src/app/components/AccentGlow.tsx
@@ -520,6 +532,203 @@ still has its color, it just does not crawl.
 
 The whole effect is damped to 60% on light backgrounds, where a saturated blur
 at full strength turns the card muddy.
+
+## Shipped App Pages
+
+A project whose `status` is exactly `'Available'` gets a product page instead of
+an experiment page. The rule is one line in `projects.ts`:
+
+```ts
+export const isShipped = (project: Project) => project.status === 'Available';
+```
+
+What changes, automatically:
+
+- The download button moves up into the title card, where it is the first
+  thing anyone sees on a phone, with the price and minimum OS underneath it.
+- "Current Focus" becomes "Overview", "Next Steps" becomes "Coming Next", and
+  "Other Experiments" becomes "More From Retrac Labs".
+- Screenshots appear in a gallery under the title card, if the project has any.
+- Lab notes about the app appear as cards further down. See "Lab Notes".
+
+The Lab grid on the homepage is unchanged. It stays the lab.
+
+### Price and Requirements
+
+```ts
+price: '$1.99',
+requires: 'macOS 13.5 or later',
+```
+
+`price` is the US App Store price, written the way the store shows it. It is
+typed here by hand, so **change it here whenever you change it in App Store
+Connect.** Keep it to what the store says. Don't describe the purchase model
+("one-time", "no subscription") unless you mean to promise it.
+
+`requires` is the minimum OS from App Store Connect › App Information.
+
+Either can be left out, and that line simply does not appear.
+
+### Adding Screenshots
+
+1. Take them at full size. Mac App Store screenshots (2560 × 1600) are ideal.
+2. **Check every one for anything the shipping version doesn't have.** A
+   screenshot from a newer build can show a button or a screen that people who
+   download today won't find.
+3. Convert each to WebP at web size, keeping only the color profile:
+
+```bash
+cwebp -q 82 -m 6 -resize 1600 1000 -metadata icc input.png -o src/app/assets/<slug>/<name>.webp
+```
+
+   `-metadata icc` keeps the color profile, without which colors look washed
+   out, and drops everything else, including any EXIF or location data. Each
+   file comes out around 30 to 90 KB. For a portrait iPhone screenshot, use
+   `-resize 0 1600` (height 1600, width to match) instead.
+
+4. Import each file at the top of `projects.ts` and list them, in order:
+
+```ts
+import apunteTranscript from '../assets/apunte/transcript.webp';
+
+screenshots: [
+  {
+    src: apunteTranscript,
+    alt: 'What the picture shows, for someone who cannot see it.',
+    caption: 'One line under the picture.',
+  },
+],
+```
+
+Add `premium: true` to any screenshot of a paid feature. It puts a "Premium"
+tag on the caption, so the page never implies that something is free when it
+isn't. For anything that isn't 1600 × 1000, also add its real `width` and
+`height`. A portrait screenshot then gets a narrower frame instead of one the
+full width of the gallery.
+
+Check that no metadata survived:
+
+```bash
+exiftool -EXIF:all -XMP:all -GPS:all src/app/assets/<slug>/*.webp
+```
+
+It should print nothing.
+
+## Lab Notes
+
+A lab note is a long-form research piece that backs up something a product page
+claims: a benchmark, a methodology, the reasoning behind a technical choice. The
+product page makes the claim in a sentence. The lab note is where it is proved.
+
+The first one is Apunte's "Choosing a Speech Engine":
+
+```text
+#/apunte/why-not-whisper
+```
+
+It appears on the Apunte page as a card below "Coming Next", and the note itself
+ends with "About Apunte" and the Mac App Store button, so a reader who gets to
+the bottom is one click from the download.
+
+### How They Are Built
+
+Everything lives in one folder:
+
+```text
+src/app/labNotes/index.ts          the list of notes, and the details for each
+src/app/labNotes/kit.tsx           the building blocks notes are written in
+src/app/labNotes/WhyNotWhisper.tsx "Choosing a Speech Engine"
+```
+
+A note is an ordinary React component, written with the blocks in `kit.tsx`.
+Because it is made of the site's own pieces, it looks like the rest of the site
+and follows the light/dark toggle with no extra work. The blocks:
+
+- `Section`: a titled section. The title is an `<h2>`.
+- `Subhead`: a heading inside a section, in the product's accent color.
+- `Strong`, `Code`, `Win` (a result in the product's favor, in green): inline
+  text.
+- `Quote`: a pull quote, for the one sentence in a section worth reading twice.
+- `BarChart`: a chart of labeled bars on a shared scale, with optional notes, a
+  threshold marker, and a caption.
+- `DataTable`: a table, optionally with a heading on each row.
+- `Command`: a Terminal command with a copy button.
+- `Note`: small print, for method, caveats, and sample sizes.
+
+**Every heading is title case**: section titles, subheads, chart titles, and
+table column and row headings.
+
+`WhyNotWhisper.tsx` started as `docs/web/why-not-whisper.html` in the Apunte
+project. The site's version is now the one that is published, so edit it here.
+The HTML file in the Apunte project no longer feeds the site.
+
+### Adding One
+
+1. Write the note as a component in `src/app/labNotes/`, using the blocks in
+   `kit.tsx`. `WhyNotWhisper.tsx` is the example to copy.
+2. Add a row to `LAB_NOTES` in `src/app/labNotes/index.ts`:
+
+```ts
+{
+  href: '#/apunte/why-not-whisper',
+  projectSlug: 'apunte',
+  title: 'Choosing a Speech Engine',
+  standfirst: 'The opening paragraph, shown large under the title.',
+  blurb: 'One line for the card on the product page.',
+  dateline: 'Measured September 13, 2026 · Rechecked September 22, 2026',
+  Body: WhyNotWhisper,
+},
+```
+
+That is all. The address, the card on the product page, the "Back to Apunte"
+link, and the download button at the end all come from that row. `App.tsx` and
+`projects.ts` do not need touching.
+
+`dateline` is optional, but include it for anything with measurements in it.
+Benchmarks go stale, and the reader should see when these were taken before
+they read the numbers.
+
+### Before You Publish One
+
+Check it in both themes and at phone width. Tables and long Terminal commands
+are what overflow first on a phone, so look at those specifically.
+
+## Apunte 1.1 Release Day
+
+The site describes Apunte 1.0, the version on the App Store. Everything for 1.1
+is already written, in `~/Documents/Apunte/docs/site-updates-1.1.md`, and it is
+held back on purpose: it adds live transcription, call recording, and a lifetime
+purchase to the Terms and the privacy policy, and none of that should be a legal
+commitment before the version that does it is in people's hands.
+
+The day 1.1 is live on the App Store, in this order:
+
+1. **Project card.** Apply section 1 of the doc to the `apunte` entry in
+   `projects.ts`. The slug stays `apunte`, so ignore the doc's note about
+   `project-decibel`, and keep the real `appStoreUrl` rather than the doc's
+   placeholder. Keep `requires` and `screenshots`, which the doc does not
+   include, and update `price` to mention the lifetime purchase.
+2. **Privacy policy.** Apply section 2 to `ApuntePrivacy.tsx`.
+3. **Terms of Use.** Apply section 3 to `ApunteTerms.tsx`, including the
+   renumbering after the new section 6.
+4. **Lab note.** Add the paragraph from section 4 of the doc to
+   `src/app/labNotes/WhyNotWhisper.tsx`, as its own `<Note>`, where the comment
+   in "Method and Limits" marks the spot. Ignore the doc's instruction to copy
+   the HTML file; the site no longer uses it.
+5. **Screenshots.** The six on the page were taken from the 1.1 build, so until
+   1.1 ships they show a microphone button in the sidebar that 1.0 doesn't
+   have. From release day they are exact. This is also the time to add
+   `06-live-appstore.png` (live transcription) from
+   `~/Documents/Apunte/docs/screenshots/`. See "Adding Screenshots".
+6. **Dates.** Both legal pages get the actual release date, not the one written
+   in the doc.
+7. `npm run build`, then check `#/projects/apunte`, `#/apunte/privacy`,
+   `#/apunte/terms`, and `#/apunte/why-not-whisper` before committing.
+
+Every "find" string in the doc was checked against the pages on September 28,
+2026, and all of them still match. Three are wrapped across several lines in the
+source, so searching your editor for the whole sentence comes up empty. Search
+for the first few words instead.
 
 ## Privacy Policy
 
@@ -579,7 +788,7 @@ and needs no maintenance.
 You can open `#/thanks` directly to work on it; it does not check that anyone
 actually submitted anything.
 
-### The lab rat
+### The Lab Rat
 
 `LabRat.tsx` is a hand-drawn SVG on a 260 x 260 canvas, not an image file, so it
 picks up the site's colors and can animate. The rat bobs, the liquid rocks, and
@@ -620,7 +829,7 @@ const FOUNDER_BIO      = [...];  // one string per paragraph
 const PRINCIPLES       = [...];  // the "How the apps get built" list
 ```
 
-### Adding your photo
+### Adding Your Photo
 
 1. Put the file in `public/brand/`.
 2. Set `FOUNDER_PHOTO` to its path, starting with a slash:
@@ -636,7 +845,7 @@ A portrait crop around 4:5 fits the layout, at least 1000px on the short edge.
 While `FOUNDER_PHOTO` is `null` the page draws a dashed placeholder instead, so
 it never shows a broken image.
 
-### The bio
+### The Bio
 
 `FOUNDER_BIO` is an array of strings and each one becomes its own paragraph. Add
 or remove entries freely; the layout does not care how many there are. The
@@ -646,7 +855,7 @@ ship before writing it.
 To drop the "How the apps get built" section entirely, empty the `PRINCIPLES`
 array. The section disappears rather than leaving an empty heading.
 
-### A note on the nav
+### A Note on the Nav
 
 The **ABOUT** link in the menu bar now opens this page, not the blurb on the
 homepage. That blurb still exists and still has `id="about"`, so any old
@@ -662,7 +871,7 @@ This is the page "Get Early Access" opens. It explains why testers matter, what
 testing actually involves, and collects enough detail to know whether a build
 will even run on someone's hardware.
 
-### Where submissions go
+### Where Submissions Go
 
 The site is static, and GitHub Pages cannot receive a form post, so submissions
 go through Formspree and land in `retrac.labs@gmail.com`. The endpoint is at the
@@ -676,7 +885,7 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mnpqkgqo';
 not per form.** That number is shared with any other form you add later, so
 check the Formspree dashboard before assuming a quiet week means no interest.
 
-### Ignore Formspree's "Redirect" setting
+### Ignore Formspree's "Redirect" Setting
 
 In the Formspree dashboard, under **Workflow**, there is an *If submission
 success -> Redirect* field locked behind the Personal plan. **You do not need
@@ -696,7 +905,7 @@ if (response.ok) {
 
 The thanks page is ours, it is instant, and it works on the free tier.
 
-### CAPTCHA must be off, or the form cannot submit
+### CAPTCHA Must Be Off, or the Form Cannot Submit
 
 **This one will cost you an afternoon if you forget it.** If Formspree's CAPTCHA
 is switched on for this form, every submission is rejected with:
@@ -724,7 +933,7 @@ site key and secret key, loading Cloudflare's script, rendering the widget on
 the page, and adding Cloudflare to the privacy policy as another party that sees
 visitor data. Worth it at volume. Not worth it at 50 submissions a month.
 
-### When a submission fails
+### When a Submission Fails
 
 The visitor sees a sentence with Formspree's own reason in brackets, and the
 full response is written to the browser console:
@@ -736,7 +945,7 @@ full response is written to the browser console:
 Open the console first. Formspree answers with either `{ error: "..." }` or
 `{ errors: [{ message }] }` depending on the failure, and the page reads both.
 
-### Formspree has its own spam folder
+### Formspree Has Its Own Spam Folder
 
 Separate from Gmail's. In the Formspree dashboard the form has **Inbox** and
 **Spam** tabs, and a submission filed as spam does not count against the monthly
@@ -746,7 +955,7 @@ not a sign anything is broken.
 Check the Spam tab occasionally once the site is live. If a real signup is
 sitting in it, mark it not-spam so the classifier learns.
 
-### Testing the form
+### Testing the Form
 
 The only real test is a live submission, which does use one of your 50:
 
@@ -766,7 +975,7 @@ button for an amber "this form isn't connected yet" panel and points people at
 your email instead. That is deliberate: nobody should ever fill in a form that
 quietly goes nowhere.
 
-### What it asks
+### What It Asks
 
 Email is the only required field. Everything else is optional, because a
 half-filled form you actually receive beats a complete one nobody finishes.
@@ -777,7 +986,7 @@ macOS / iOS / iPadOS versions, apps of interest, time available,
 feedback style, accessibility features used, region, free-text notes
 ```
 
-### Editing the questions
+### Editing the Questions
 
 The dropdowns and checkbox groups are plain arrays at the top of the file:
 
@@ -849,7 +1058,7 @@ Example usage:
 />
 ```
 
-### Where To Add Images For Project Pages
+### Where to Add Images for Project Pages
 
 Use:
 
@@ -886,7 +1095,7 @@ And render conditionally:
 )}
 ```
 
-## Adding Video Or Media
+## Adding Video or Media
 
 Put video files in:
 
@@ -939,7 +1148,7 @@ In `projects.ts` you pass the icon itself, with no angle brackets and no quotes:
 icon: Hash,
 ```
 
-### Finding an icon's name
+### Finding an Icon's Name
 
 Browse them at **https://lucide.dev/icons** and use the search box there. The
 site lists every icon with its name, and searching by idea works better than
@@ -965,13 +1174,13 @@ ls node_modules/lucide-react/dist/esm/icons/ | grep -i lock
 
 That lists what is actually installed, which is the only list that matters.
 
-### What the current projects use
+### What the Current Projects Use
 
 ```text
 Project Salt      Hash         a hash, which is what a salt goes into
-Project Decibel   AudioLines   audio waveform
 Project Deacon    Zap
 Project Cobra     Mic
+Apunte            AudioLines   audio waveform
 Snippystack       Monitor
 Amparo            Smartphone
 ```
@@ -1000,7 +1209,7 @@ in Cloudflare's own `beacon.min.js`, which contains no reference to cookies,
 
 The dashboard is at **dash.cloudflare.com → Analytics & Logs → Web Analytics**.
 
-### It only runs on retraclabs.co
+### It Only Runs on retraclabs.co
 
 The beacon is injected by a small script in `index.html`, and only when the
 hostname is exactly `retraclabs.co` or `www.retraclabs.co`. So `npm run dev`,
@@ -1011,7 +1220,7 @@ stops.
 The token in that script is public by design. It is in every page's source and
 is not a secret.
 
-### What it can and cannot see
+### What It Can and Cannot See
 
 It records totals: pages viewed, referring sites, countries, browsers and
 devices, and page-load speed.
@@ -1027,7 +1236,7 @@ devices, and page-load speed.
 
 So trust the overall traffic numbers more than the per-page breakdown.
 
-### Why there is no cookie banner, and when that changes
+### Why There Is No Cookie Banner, and When That Changes
 
 Consent law is triggered by storing or reading things on the visitor's device.
 Cloudflare does neither, and the theme preference is stored only because the
@@ -1038,7 +1247,7 @@ an embedded video player, ads), the site needs a real consent banner again, and
 the tool must not load until the visitor says yes. A banner shown over a tracker
 that is already running is not consent.
 
-### Leftover Google cookies
+### Leftover Google Cookies
 
 The site ran Google Analytics until September 2026, which left `_ga` cookies in
 returning visitors' browsers. The script in `index.html` deletes them on each
@@ -1058,7 +1267,7 @@ src/styles/tailwind.css             where the `light:` variant is defined
 index.html                          sets the class before React mounts
 ```
 
-### How it works
+### How It Works
 
 Dark is the **unprefixed** palette, and light is an override:
 
@@ -1079,7 +1288,7 @@ there **before React loads**, so somebody who chose light never sees a flash of
 dark first. That script reads the same localStorage key as `theme.ts`; if you
 change the key, change both.
 
-### Adding new markup
+### Adding New Markup
 
 Every color class you write needs a light counterpart. The mapping in use:
 
@@ -1100,7 +1309,7 @@ text-zinc-500    light:text-zinc-600    zinc-500 is 4.39:1 on light, just under 
 unreadable, so `text-cyan-400` pairs with `light:text-cyan-700`, and so on
 through the palette in `src/app/data/accents.ts`.
 
-### Two traps
+### Two Traps
 
 **A button whose background does not change must keep its text color.** The
 submit button is `bg-cyan-400` in both themes, so its black text has to stay
@@ -1112,7 +1321,7 @@ themes, so the hover text has to be dark in both.
 white card is separated only by a hairline. They use `light:bg-zinc-50` with a
 `light:border-zinc-300` so the field still reads as a field.
 
-### Checking your work
+### Checking Your Work
 
 Paste this into the browser console on any page to audit contrast. It converts
 through canvas because Tailwind 4 emits `oklch()`, which cannot be parsed as RGB:
@@ -1206,6 +1415,15 @@ This means:
 - small screens and up: `text-xl`
 - medium screens and up: `text-3xl`
 
+### Gray Text Contrast
+
+For small secondary text, use `text-zinc-400 light:text-zinc-600`. It passes
+WCAG AA contrast on every background the site uses, in both themes.
+
+`text-zinc-500` does not. On the dark cards it comes out around 3.7 to 1, under
+the 4.5 to 1 that small text needs. Keep it for large, bold text only, like
+the "Labs" half of the wordmark.
+
 ## Deployment
 
 The deployment workflow lives here:
@@ -1257,14 +1475,14 @@ Those should stay ignored by `.gitignore`.
 
 ## Common Problems
 
-### A project card is not clickable
+### A Project Card Is Not Clickable
 
 That is probably correct. A project with its `summary` commented out is
 unannounced, and unannounced projects have no page, so their cards are not
-buttons. See "Hiding A Project Until It Ships." If it *should* be clickable,
+buttons. See "Hiding a Project Until It Ships." If it *should* be clickable,
 uncomment its `summary`.
 
-### The project page does not open
+### The Project Page Does Not Open
 
 Check:
 
@@ -1276,7 +1494,7 @@ Check:
    /^#\/projects\/([a-z0-9-]+)$/
    ```
 
-### The site is blank
+### The Site Is Blank
 
 Run:
 
@@ -1291,23 +1509,23 @@ Read the first error. It is usually:
 - mismatched JSX tags
 - a missing or doubled comma in `projects.ts`
 
-### The cards are in the wrong order
+### The Cards Are in the Wrong Order
 
 The array order in `projects.ts` *is* the page order. If a card is not where you
 expect, its block is not where you think it is in that array.
 
-### A row of cards looks lopsided
+### A Row of Cards Looks Lopsided
 
 The `span` values in that row no longer add up to six. See "Reordering
 Projects."
 
-### The menu bar appears too early or too late
+### The Menu Bar Appears Too Early or Too Late
 
 Edit `HERO_FADE_END` in `src/app/heroChoreography.ts`. Do not add a separate
 threshold in `App.tsx`; the point of that file is that both components read the
 same number.
 
-### Text updates do not show
+### Text Updates Do Not Show
 
 Hard refresh the browser. If needed, stop and restart:
 
@@ -1315,7 +1533,7 @@ Hard refresh the browser. If needed, stop and restart:
 npm run dev
 ```
 
-### GitHub Pages does not update
+### GitHub Pages Does Not Update
 
 Check:
 

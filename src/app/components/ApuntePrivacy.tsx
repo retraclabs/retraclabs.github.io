@@ -25,7 +25,7 @@ export const ApuntePrivacy = () => {
                         Privacy Policy
                     </h1>
 
-                    <p className="text-zinc-500 light:text-zinc-600 font-mono font-bold mb-10">
+                    <p className="text-zinc-400 light:text-zinc-600 font-mono font-bold mb-10">
                         Last updated: September 10, 2026
                     </p>
 
@@ -78,7 +78,7 @@ export const ApuntePrivacy = () => {
                                 a network connection from its own code. You can verify this yourself
                                 on the signed app:
                             </p>
-                            <pre className="mt-4 mb-2 overflow-x-auto rounded-xl border border-zinc-800 light:border-zinc-200 bg-black/40 px-4 py-3 text-sm text-cyan-300 light:text-cyan-800 font-mono">
+                            <pre className="mt-4 mb-2 overflow-x-auto rounded-xl border border-zinc-800 light:border-zinc-200 bg-black/40 light:bg-zinc-100 px-4 py-3 text-sm text-cyan-300 light:text-cyan-800 font-mono">
 {`codesign -d --entitlements - Apunte.app`}
                             </pre>
                             <p>
@@ -239,7 +239,7 @@ export const ApuntePrivacy = () => {
                                     retrac.labs@gmail.com
                                 </a>.
                             </p>
-                            <p className="mt-6 text-sm text-zinc-500 light:text-zinc-600">
+                            <p className="mt-6 text-sm text-zinc-400 light:text-zinc-600">
                                 See also:{' '}
                                 <a
                                     href="#/apunte/terms"

@@ -1,4 +1,10 @@
 import { AudioLines, Hash, Mic, Monitor, Smartphone, Zap, type LucideIcon } from 'lucide-react';
+import apunteTranscript from '../assets/apunte/transcript.webp';
+import apunteReviewMode from '../assets/apunte/review-mode.webp';
+import apunteSpeakerNames from '../assets/apunte/speaker-names.webp';
+import apunteSummary from '../assets/apunte/summary.webp';
+import apunteLibrarySearch from '../assets/apunte/library-search.webp';
+import apunteExportFormats from '../assets/apunte/export-formats.webp';
 
 /** How wide a card sits in the six-column Lab grid. See LabSection.tsx. */
 export type ProjectSpan = 'full' | 'two-thirds' | 'half' | 'third';
@@ -36,6 +42,31 @@ export type Project = {
     nextFeatures: string[];
   };
   appStoreUrl?: string;
+  /* The next three are for shipped apps, and all optional. Each one filled in
+     appears on the product page. See MAINTAINING.md → "Shipped App Pages". */
+  /** The US App Store price, as the store shows it: 'Free', '$1.99'. Change it
+   *  here whenever you change it in App Store Connect. */
+  price?: string;
+  /** The minimum OS, from App Store Connect: 'macOS 26 or later'. */
+  requires?: string;
+  /** In the order they should appear. Files go in src/app/assets/<slug>/. */
+  screenshots?: Screenshot[];
+};
+
+export type Screenshot = {
+  src: string;
+  /** What the picture shows, for anyone who cannot see it. */
+  alt: string;
+  /** One line under the picture. */
+  caption: string;
+  /** Marks a feature that needs a paid upgrade, so the page never implies it
+   *  is free. */
+  premium?: boolean;
+  /** Pixel size of the file. Defaults to 1600 × 1000, the size Mac screenshots
+   *  are exported at. Give the real size for anything else: a portrait iPhone
+   *  screenshot gets a narrower frame so it does not tower over the page. */
+  width?: number;
+  height?: number;
 };
 
 export type ProjectAccent = 'pink' | 'cyan' | 'emerald' | 'sky' | 'purple' | 'green';
@@ -62,35 +93,6 @@ export const projects: Project[] = [
     description: '',
     highlights: [],
     nextSteps: [], */
-  },
-  {
-    slug: 'project-decibel',
-    name: 'Project Decibel',
-    platform: 'macOS',
-    status: 'Beta Testing',
-    accent: 'sky',
-    accentText: 'text-sky-400',
-    icon: AudioLines,
-    span: 'half',
-    teaser: 'Turns audio and video into text, entirely on your Mac.',
-    /* summary:
-      'Transcription that never leaves your Mac. Your recordings, your words. No uploads, no account, no network.',
-    description:
-      'Apunte turns audio and video into accurate, timestamped transcripts entirely on your Mac. ' +
-      'Drop in a voice memo, an interview, a lecture, a video — if macOS can play it, Apunte can read it.\n\n' +
-      'It ships without the outgoing-network entitlement, so the app\'s own code cannot open a network ' +
-      'connection. You don\'t have to take that on faith. Inspect the signed app yourself with codesign. ' +
-      'Transcription is free; Premium adds speaker names and formatted export.',
-    highlights: [
-      'No network access, verifiable: the app ships without the network entitlement, so it cannot upload your audio. Check it yourself in Terminal.',
-      'Accurate on real recordings: on a 64-minute, two-person session it captured the same content as MacWhisper, keeping hesitations and false starts rather than smoothing them away.',
-      'A free tier that\'s actually complete: transcription, editing, playback, and plain-text, timestamped, and JSON export are free. JSON carries everything, so your work is never locked in.',
-    ],
-    nextSteps: [
-      'Automatic speaker labels, so conversations are attributed without assigning every line by hand',
-      'Encryption for the transcript database — stored audio is already sealed with a key held in the Mac\'s Secure Enclave',
-      'A clinical edition built on the same on-device core, for practitioners who cannot send session audio to a server',
-    ], */
   },
   {
     slug: 'project-deacon',
@@ -152,6 +154,74 @@ export const projects: Project[] = [
     ], */
   },
   {
+    slug: 'apunte',
+    name: 'Apunte',
+    platform: 'macOS',
+    status: 'Available',
+    accent: 'sky',
+    accentText: 'text-sky-400',
+    icon: AudioLines,
+    span: 'half',
+    teaser: 'Turns audio and video into text, entirely on your Mac.',
+    appStoreUrl: 'https://apps.apple.com/us/app/apunte/id6802142206?mt=12',
+    summary:
+      'Transcription that never leaves your Mac. Your recordings, your words. No uploads, no account, no network.',
+    description:
+      'Apunte turns audio and video into accurate, timestamped transcripts entirely on your Mac. ' +
+      'Drop in a voice memo, an interview, a lecture, a video — if macOS can play it, Apunte can read it.\n\n' +
+      'It ships without the outgoing-network entitlement, so the app\'s own code cannot open a network ' +
+      'connection. You don\'t have to take that on faith. Inspect the signed app yourself with codesign. ' +
+      'Transcription is free; Premium adds speaker names, summaries, library-wide search, and formatted ' +
+      'export, as a monthly or yearly subscription.',
+    highlights: [
+      'No network access, verifiable: the app ships without the network entitlement, so it cannot upload your audio. Check it yourself in Terminal.',
+      'Accurate on real recordings: on a 64-minute, two-person session it captured the same content as MacWhisper, keeping hesitations and false starts rather than smoothing them away.',
+      'A free tier that\'s actually complete: transcription, editing, playback, and plain-text, timestamped, and JSON export are free. JSON carries everything, so your work is never locked in.',
+    ],
+    nextSteps: [
+      'Automatic speaker labels, so conversations are attributed without assigning every line by hand',
+      'Encryption for the transcript database — stored audio is already sealed with a key held in the Mac\'s Secure Enclave',
+      'A clinical edition built on the same on-device core, for practitioners who cannot send session audio to a server',
+    ],
+    price: 'Free, with an optional Premium subscription',
+    requires: 'macOS 26 or later',
+    screenshots: [
+      {
+        src: apunteTranscript,
+        alt: 'Apunte\'s main window: a meeting transcript with a timestamp on every line, and a library of recordings in the sidebar.',
+        caption: 'Every line timestamped, and transcribed entirely on your Mac.',
+      },
+      {
+        src: apunteReviewMode,
+        alt: 'The same transcript in review mode, with three uncertain lines underlined and a count of three in the toolbar.',
+        caption: 'Review mode marks the lines Apunte was unsure of, so you check those instead of rereading everything.',
+      },
+      {
+        src: apunteSpeakerNames,
+        alt: 'An interview transcript with the speaker\'s name above each line.',
+        caption: 'Label who is speaking on any line. Names carry into every export.',
+        premium: true,
+      },
+      {
+        src: apunteSummary,
+        alt: 'A summary of a meeting recording: an overview paragraph, key points, and action items.',
+        caption: 'An overview, key points, and action items for each part of a recording, generated on your Mac.',
+        premium: true,
+      },
+      {
+        src: apunteLibrarySearch,
+        alt: 'Search results for the word memory across the library, each with its timestamp.',
+        caption: 'Find a phrase across every transcript you have, down to the line.',
+        premium: true,
+      },
+      {
+        src: apunteExportFormats,
+        alt: 'The export menu: plain text, timestamped text, and JSON listed as included, then SubRip, WebVTT, CSV, Markdown, HTML, PDF, and Word as more formats.',
+        caption: 'Plain text, timestamped text, and JSON export are free. SRT, WebVTT, CSV, Markdown, HTML, PDF, and Word come with Premium.',
+      },
+    ],
+  },
+  {
     slug: 'snippystack',
     name: 'Snippystack',
     platform: 'macOS',
@@ -205,6 +275,8 @@ export const projects: Project[] = [
       ],
     },
     appStoreUrl: 'https://apps.apple.com/us/app/snippystack/id6765705718?mt=12',
+    price: '$1.99',
+    requires: 'macOS 13.5 or later',
   },
   {
     slug: 'amparo',
@@ -249,12 +321,19 @@ export const projects: Project[] = [
       ],
     },
     appStoreUrl: 'https://apps.apple.com/us/app/amparo/id6765911709',
+    price: '$4.99',
+    requires: 'iOS 17.6 or later',
   },
 ];
 
 /** A project is "announced" once it has a summary. Unannounced ones show a
  *  codename card and have no detail page. */
 export const isAnnounced = (project: Project) => Boolean(project.summary);
+
+/** A project is "shipped" once it is on the App Store. Its page drops the lab
+ *  framing and becomes a product page: download button up top, price, and
+ *  screenshots. See MAINTAINING.md → "Shipped App Pages". */
+export const isShipped = (project: Project) => project.status === 'Available';
 
 export const getProjectBySlug = (slug: string | null) => {
   const project = projects.find((item) => item.slug === slug);

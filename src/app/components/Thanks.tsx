@@ -13,6 +13,11 @@ import { projects, isAnnounced } from '../data/projects';
 export const Thanks = () => {
   // Anything shipping is worth a download while they wait for an invite.
   const shipping = projects.filter((project) => isAnnounced(project) && project.appStoreUrl);
+  // Counted rather than written out, so shipping another app never leaves this
+  // sentence saying "these two" over a list of three.
+  const countWord = ['one', 'two', 'three', 'four', 'five', 'six'][shipping.length - 1];
+  const shippingLead =
+    shipping.length === 1 ? 'This one is' : countWord ? `These ${countWord} are` : 'These are';
 
   return (
     <main className="relative z-10 px-4 sm:px-6 pt-32 sm:pt-36 pb-20 min-h-screen">
@@ -41,7 +46,7 @@ export const Thanks = () => {
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white light:text-zinc-900 uppercase mb-6 leading-[0.95]">
-              You're a Lab Rat now
+              You're a Lab Rat Now
             </h1>
 
             <p className="text-lg sm:text-xl text-zinc-300 light:text-zinc-700 font-medium leading-relaxed max-w-xl">
@@ -59,7 +64,7 @@ export const Thanks = () => {
           transition={{ duration: 0.55, delay: 0.12 }}
           className="border-4 border-zinc-800 light:border-zinc-200 bg-[#0f0f12] light:bg-zinc-50 rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-8 mb-6"
         >
-          <h2 className="text-2xl font-black text-white light:text-zinc-900 mb-6">What happens now</h2>
+          <h2 className="text-2xl font-black text-white light:text-zinc-900 mb-6">What Happens Now</h2>
           <ol className="space-y-5">
             {[
               [
@@ -111,9 +116,9 @@ export const Thanks = () => {
             transition={{ duration: 0.55, delay: 0.2 }}
             className="border-4 border-zinc-800 light:border-zinc-200 bg-zinc-900 light:bg-white rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-8 mb-6"
           >
-            <h2 className="text-2xl font-black text-white light:text-zinc-900 mb-2">While you wait</h2>
+            <h2 className="text-2xl font-black text-white light:text-zinc-900 mb-2">While You Wait</h2>
             <p className="text-zinc-400 light:text-zinc-600 font-medium mb-6">
-              These two are finished and on the App Store today.
+              {shippingLead} finished and on the App Store today.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {shipping.map((project) => {
@@ -124,7 +129,7 @@ export const Thanks = () => {
                     href={project.appStoreUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-between gap-4 border-2 border-zinc-800 light:border-zinc-200 bg-[#0f0f12] light:bg-zinc-50 rounded-2xl p-5 hover:border-cyan-400 transition-colors"
+                    className="flex items-center justify-between gap-4 border-2 border-zinc-800 light:border-zinc-200 bg-[#0f0f12] light:bg-zinc-50 rounded-2xl p-5 hover:border-cyan-400 transition-colors sm:last:odd:col-span-2"
                   >
                     <div className="flex items-center gap-4">
                       <div className="p-3 rounded-xl bg-zinc-800 light:bg-zinc-100 text-white light:text-zinc-900 shrink-0">
@@ -132,12 +137,12 @@ export const Thanks = () => {
                       </div>
                       <div>
                         <div className="font-black text-white light:text-zinc-900">{project.name}</div>
-                        <div className="text-sm text-zinc-500 light:text-zinc-600 font-mono font-bold">
+                        <div className="text-sm text-zinc-400 light:text-zinc-600 font-mono font-bold">
                           {project.platform}
                         </div>
                       </div>
                     </div>
-                    <ArrowUpRight className="w-5 h-5 text-zinc-500 light:text-zinc-600 shrink-0" />
+                    <ArrowUpRight className="w-5 h-5 text-zinc-400 light:text-zinc-600 shrink-0" />
                   </a>
                 );
               })}
@@ -164,7 +169,7 @@ export const Thanks = () => {
             className="flex-1 inline-flex items-center justify-center gap-2 px-7 py-4 rounded-2xl bg-zinc-900 light:bg-white text-white light:text-zinc-900 font-bold border-2 border-zinc-700 light:border-zinc-300 hover:border-cyan-400 transition-colors"
           >
             <Mail className="w-5 h-5" />
-            Say hello
+            Say Hello
           </a>
         </motion.section>
       </div>

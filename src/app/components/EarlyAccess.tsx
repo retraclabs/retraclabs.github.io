@@ -129,7 +129,7 @@ const Field = ({
       {label}
       {required ? <span className="text-cyan-400 light:text-cyan-700"> *</span> : null}
     </label>
-    {hint ? <p className="text-xs font-mono text-zinc-500 light:text-zinc-600 mb-3">{hint}</p> : <div className="mb-3" />}
+    {hint ? <p className="text-xs font-mono text-zinc-400 light:text-zinc-600 mb-3">{hint}</p> : <div className="mb-3" />}
     {children}
   </div>
 );
@@ -179,7 +179,7 @@ const CheckGrid = ({
           <span className="min-w-0">
             <span className="block text-sm font-medium">{value}</span>
             {hint ? (
-              <span className="block text-xs font-mono text-zinc-500 light:text-zinc-600 mt-1 leading-relaxed">
+              <span className="block text-xs font-mono text-zinc-400 light:text-zinc-600 mt-1 leading-relaxed">
                 {hint}
               </span>
             ) : null}
@@ -281,9 +281,9 @@ export const EarlyAccess = () => {
               LAB RATS WANTED
             </div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white light:text-zinc-900 uppercase mb-6 leading-[0.95]">
-              There is no lab
+              There Is No Lab
               <br />
-              without you
+              Without You
             </h1>
             <p className="text-lg sm:text-xl text-zinc-300 light:text-zinc-700 font-medium leading-relaxed mb-4">
               Retrac Labs is a small operation. There is no QA department, no focus group, and no
@@ -305,7 +305,7 @@ export const EarlyAccess = () => {
           transition={{ duration: 0.55, delay: 0.1 }}
           className="border-4 border-zinc-800 light:border-zinc-200 bg-[#0f0f12] light:bg-zinc-50 rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-8 mb-6"
         >
-          <h2 className="text-2xl font-black text-white light:text-zinc-900 mb-6">What testing actually involves</h2>
+          <h2 className="text-2xl font-black text-white light:text-zinc-900 mb-6">What Testing Actually Involves</h2>
           <ol className="space-y-5">
             {[
               [
@@ -349,7 +349,7 @@ export const EarlyAccess = () => {
           transition={{ duration: 0.55, delay: 0.18 }}
           className="border-4 border-zinc-800 light:border-zinc-200 bg-zinc-900 light:bg-white rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-10"
         >
-          <h2 className="text-3xl font-black text-white light:text-zinc-900 uppercase mb-2">Sign up to test</h2>
+          <h2 className="text-3xl font-black text-white light:text-zinc-900 uppercase mb-2">Sign Up to Test</h2>
           <p className="text-zinc-400 light:text-zinc-600 font-medium mb-10">
             Everything except your email is optional. The more you fill in, the better we can match
             you to a build that will actually run.
@@ -519,7 +519,7 @@ export const EarlyAccess = () => {
             </Field>
 
             <div className="border-t-2 border-zinc-800 light:border-zinc-200 pt-8">
-              <p className="text-xs font-mono text-zinc-500 light:text-zinc-600 leading-relaxed mb-6">
+              <p className="text-xs font-mono text-zinc-400 light:text-zinc-600 leading-relaxed mb-6">
                 What happens to this: it lands in retrac.labs@gmail.com and stays there. It is not
                 sold, not shared, and not fed to any analytics service. Ask us to delete it at any
                 time and it's gone.

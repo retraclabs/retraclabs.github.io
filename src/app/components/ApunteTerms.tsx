@@ -25,7 +25,7 @@ export const ApunteTerms = () => {
                         Terms of Use
                     </h1>
 
-                    <p className="text-zinc-500 light:text-zinc-600 font-mono font-bold mb-10">
+                    <p className="text-zinc-400 light:text-zinc-600 font-mono font-bold mb-10">
                         Last updated: September 22, 2026
                     </p>
 
@@ -201,7 +201,7 @@ export const ApunteTerms = () => {
                                     retrac.labs@gmail.com
                                 </a>.
                             </p>
-                            <p className="mt-6 text-sm text-zinc-500 light:text-zinc-600">
+                            <p className="mt-6 text-sm text-zinc-400 light:text-zinc-600">
                                 See also:{' '}
                                 <a
                                     href="#/apunte/privacy"
