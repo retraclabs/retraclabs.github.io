@@ -103,21 +103,21 @@ export const projects: Project[] = [
     accentText: 'text-purple-400',
     icon: Zap,
     span: 'half',
-    teaser: 'Moves clipboard items and files between your Apple devices.',
-    /* summary: 'A fast bridge for clipboard, files, and context across Apple devices.',
+    teaser: 'Sets up your Mac for each part of your day, opening the apps, files, and links you need and hiding the rest.',
+    /* summary: 'Stage your Mac for what comes next, in one click.',
     description:
-      'Ambient Desk is a macOS utility for moving useful fragments between machines without breaking focus. ' +
-      'It keeps a visible, local queue of clipboard items and files ready to hand off across your Apple devices — ' +
-      'fast, private, and trustworthy. Now entering beta and looking for early testers.',
+      'Ambient Desk saves each part of your day as a desk: the apps, files, folders, and links it needs. ' +
+      'Stage one and it opens what you need, hides everything else, arranges your windows, and sets your audio. ' +
+      'Un-stage it and your previous apps come back. Everything stays on your Mac. Now in beta and looking for early testers.',
     highlights: [
-      'Clipboard and file relay built for Apple-platform workflows',
-      'A visible queue so every transfer feels understandable and intentional',
-      'Local-first: nothing moves without your say-so, no accounts required',
+      'Opens what a desk needs, hides the rest, and arranges your windows side by side',
+      'Stages itself at a set time, before a calendar event, or when a Focus turns on',
+      'Local-first: no account, no analytics, and no network access',
     ],
     nextSteps: [
-      'Gather feedback from early beta testers on core handoff flows',
-      'Refine the queue UI and permission model based on real usage',
-      'Expand device pairing and add scheduled or triggered transfers',
+      'Gather feedback from beta testers on staging and window arrangement',
+      'Refine first-run setup around how testers actually get started',
+      'Launch on the Mac App Store as a one-time purchase',
     ], */
   },
   {

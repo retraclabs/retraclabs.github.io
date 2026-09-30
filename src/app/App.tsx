@@ -10,6 +10,7 @@ import { ApuntePrivacy } from './components/ApuntePrivacy';
 import { ApunteTerms } from './components/ApunteTerms';
 import { HashDropPrivacy } from './components/HashDropPrivacy';
 import { HashDropTerms } from './components/HashDropTerms';
+import { AmbientDeskPrivacy } from './components/AmbientDeskPrivacy';
 import { EarlyAccess } from './components/EarlyAccess';
 import { About } from './components/About';
 import { Thanks } from './components/Thanks';
@@ -20,7 +21,7 @@ import { getLabNote } from './labNotes';
 import { heroDissipatedAt } from './heroChoreography';
 import { motion } from 'motion/react';
 
-const STATIC_PAGE_HASHES = ['#/privacy', '#/apunte/privacy', '#/apunte/terms', '#/hash-drop/privacy', '#/hash-drop/terms', '#/early-access', '#/about', '#/thanks'];
+const STATIC_PAGE_HASHES = ['#/privacy', '#/apunte/privacy', '#/apunte/terms', '#/hash-drop/privacy', '#/hash-drop/terms', '#/ambient-desk/privacy', '#/early-access', '#/about', '#/thanks'];
 
 /** Every page that is not the home page: fixed pages, plus lab notes, which get
  *  their routes from their own registry rather than from the list above. */
@@ -137,6 +138,8 @@ export default function App() {
         <HashDropPrivacy />
       ) : currentHash === '#/hash-drop/terms' ? (
         <HashDropTerms />
+      ) : currentHash === '#/ambient-desk/privacy' ? (
+        <AmbientDeskPrivacy />
       ) : currentHash === '#/early-access' ? (
         <EarlyAccess />
       ) : currentHash === '#/about' ? (
