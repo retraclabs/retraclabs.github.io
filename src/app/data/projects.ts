@@ -321,6 +321,7 @@ export const projects: Project[] = [
         'A Quick Log widget for your period and symptoms, right on the Home Screen',
         'Rebuilt predictions with confidence levels and ranges, and ovulation confirmed by temperature',
         'A fresh look: colors that follow your cycle, playful animations, and full support for larger text',
+        'A new app icon, with dark, tinted, and clear versions for your Home Screen',
         'Siri keeps quiet about your cycle while your iPhone is locked',
       ],
     },

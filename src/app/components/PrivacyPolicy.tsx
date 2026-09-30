@@ -5,7 +5,7 @@ import { ArrowLeft } from 'lucide-react';
 /* Keep this date current. Any substantive edit to the text below should move it,
    because "Last updated" is the first thing anyone checks when they want to know
    whether a policy still describes what actually happens. */
-const LAST_UPDATED = 'September 27, 2026';
+const LAST_UPDATED = 'September 30, 2026';
 
 const Section = ({ title, children }: { title: string; children: React.ReactNode }) => (
     <section>
@@ -280,9 +280,35 @@ export const PrivacyPolicy = () => {
                             <p>
                                 Amparo is an iOS cycle-tracking app available on the App Store. All cycle
                                 data, symptoms, moods, and personal health records you enter are stored
-                                exclusively on your iPhone. Amparo does not transmit health information to
-                                Retrac Labs or any third party. No account is required. No cloud sync
-                                occurs. Your data stays yours: private, local, and fully under your
+                                only on your iPhone. Amparo never connects to the internet and does not
+                                transmit health information to Retrac Labs or any third party. No account
+                                is required, and no cloud sync occurs.
+                            </p>
+                            <p>
+                                Starting with version 1.1, Amparo's data is excluded from iCloud Backup and
+                                computer backups by default. You can choose to include it in iCloud Backup
+                                in Settings. If you do, Apple stores that backup under its own privacy
+                                policy, and it is end-to-end encrypted only if you have turned on Advanced
+                                Data Protection. Before version 1.1, iOS included Amparo's data in iCloud
+                                Backup by default, as it does for most apps.
+                            </p>
+                            <p>
+                                Move to a New iPhone creates an encrypted file that you send yourself, by
+                                AirDrop, the Files app, or a cable. It never passes through Retrac Labs, and
+                                it cannot be opened without a one-time code that is shown only on your
+                                sending iPhone and is never stored. Bring Your History reads an export file
+                                you choose, from Apple Health, Clue, or Flo, on your iPhone. Amparo does not
+                                use HealthKit, the file is never uploaded, and pregnancy and lactation
+                                records in an Apple Health export are never imported. The Doctor Visit
+                                Summary is a PDF created on your iPhone, and it goes only where you share it.
+                            </p>
+                            <p>
+                                If you ask Siri about your cycle, Siri handles the request under Apple's
+                                privacy policy, and Amparo answers only while your iPhone is unlocked.
+                                Reminders and symptom heads-ups are notifications scheduled on your iPhone.
+                                Keep My History can delete older entries automatically, Delete Everything
+                                destroys Amparo's database and cancels its reminders, and deleting the app
+                                does the same. Your data stays yours: private, local, and fully under your
                                 control.
                             </p>
                         </Section>
