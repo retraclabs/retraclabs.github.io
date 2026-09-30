@@ -82,7 +82,7 @@ const APPS: { value: string; hint: string }[] = [
   ...projects.map((project) => ({
     value: project.name,
     hint:
-      `${project.platform}${project.status === 'Available' ? ', shipping' : ''}. ` +
+      `${project.platform}, ${project.status === 'Available' ? 'shipping' : project.status.toLowerCase()}. ` +
       (project.teaser ?? 'Not described publicly yet.'),
   })),
   {

@@ -8,6 +8,8 @@ import { ProjectDetail } from './components/ProjectDetail';
 import { PrivacyPolicy } from './components/PrivacyPolicy';
 import { ApuntePrivacy } from './components/ApuntePrivacy';
 import { ApunteTerms } from './components/ApunteTerms';
+import { HashDropPrivacy } from './components/HashDropPrivacy';
+import { HashDropTerms } from './components/HashDropTerms';
 import { EarlyAccess } from './components/EarlyAccess';
 import { About } from './components/About';
 import { Thanks } from './components/Thanks';
@@ -18,7 +20,7 @@ import { getLabNote } from './labNotes';
 import { heroDissipatedAt } from './heroChoreography';
 import { motion } from 'motion/react';
 
-const STATIC_PAGE_HASHES = ['#/privacy', '#/apunte/privacy', '#/apunte/terms', '#/early-access', '#/about', '#/thanks'];
+const STATIC_PAGE_HASHES = ['#/privacy', '#/apunte/privacy', '#/apunte/terms', '#/hash-drop/privacy', '#/hash-drop/terms', '#/early-access', '#/about', '#/thanks'];
 
 /** Every page that is not the home page: fixed pages, plus lab notes, which get
  *  their routes from their own registry rather than from the list above. */
@@ -131,6 +133,10 @@ export default function App() {
         <ApuntePrivacy />
       ) : currentHash === '#/apunte/terms' ? (
         <ApunteTerms />
+      ) : currentHash === '#/hash-drop/privacy' ? (
+        <HashDropPrivacy />
+      ) : currentHash === '#/hash-drop/terms' ? (
+        <HashDropTerms />
       ) : currentHash === '#/early-access' ? (
         <EarlyAccess />
       ) : currentHash === '#/about' ? (
