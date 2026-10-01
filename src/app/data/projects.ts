@@ -80,8 +80,8 @@ export type ProjectAccent = 'pink' | 'cyan' | 'emerald' | 'sky' | 'purple' | 'gr
    ────────────────────────────────────────────────────────────────────────────── */
 export const projects: Project[] = [
   {
-    slug: 'project-salt',
-    name: 'Project Salt',
+    slug: 'hash-drop',
+    name: 'Hash Drop',
     platform: 'macOS',
     status: 'In Development',
     accent: 'green',
@@ -89,10 +89,26 @@ export const projects: Project[] = [
     icon: Hash,
     span: 'half',
     teaser: 'Proves a download is exactly what its publisher released, checking hashes, signatures, and notarization on your Mac.',
-    /* summary: '',
-    description: '',
-    highlights: [],
-    nextSteps: [], */
+    summary:
+      'Know the file you have is the file you meant to get. No uploads, no account, no network.',
+    description:
+      'Hash Drop checks that a download is exactly what its publisher released. Drop in a file, paste the hash ' +
+      'from the publisher\'s site, and get a plain Match or No Match. It reads checksum lists like SHA256SUMS, and it ' +
+      'spots a “PDF” that is really a program. Hash Drop Pro verifies PGP, minisign, and SSH signatures, shows who ' +
+      'signed an app and whether Apple notarized it, and checks new downloads as they land.\n\n' +
+      'It ships without the outgoing-network entitlement, so the app\'s own code cannot open a network connection. ' +
+      'You don\'t have to take that on faith: inspect the signed app yourself with codesign. Verifying files is ' +
+      'free, and Pro is a one-time purchase with no subscription. Looking for beta testers.',
+    highlights: [
+      'A plain answer: paste the publisher\'s hash and get Match or No Match, with MD5, SHA-1, SHA-256, SHA-512, and SHA-3.',
+      'Proof of who made it: signed checksum lists (PGP, minisign, and SSH), code signatures, and notarization, all checked on your Mac.',
+      'No network access, verifiable: the app ships without the network entitlement, so it cannot upload your files. Check it yourself in Terminal.',
+    ],
+    nextSteps: [
+      'Gather feedback from beta testers, especially on any verdict that reads as unclear',
+      'Tune Downloads Guard and Folder Monitor notifications around how testers use them',
+      'Launch on the Mac App Store, free with a one-time Pro upgrade',
+    ],
   },
   {
     slug: 'project-deacon',

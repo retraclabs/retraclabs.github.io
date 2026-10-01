@@ -5,7 +5,7 @@ import { ArrowLeft } from 'lucide-react';
 /* Keep this date current. Any substantive edit to the text below should move it,
    because "Last updated" is the first thing anyone checks when they want to know
    whether a policy still describes what actually happens. */
-const LAST_UPDATED = 'September 30, 2026';
+const LAST_UPDATED = 'October 1, 2026';
 
 const Section = ({ title, children }: { title: string; children: React.ReactNode }) => (
     <section>
@@ -336,6 +336,25 @@ export const PrivacyPolicy = () => {
                                 </a>{' '}
                                 and{' '}
                                 <a href="#/apunte/terms" className="text-cyan-400 light:text-cyan-700 hover:text-cyan-300 light:hover:text-cyan-800">
+                                    Terms of Use
+                                </a>
+                                .
+                            </p>
+                        </Section>
+
+                        <Section title="Hash Drop">
+                            <p>
+                                Hash Drop is a macOS app that checks files entirely on your Mac: their
+                                hashes, checksum lists, code signatures, and signed checksums. It ships
+                                without any outgoing-network entitlement, so it cannot transmit your
+                                files, hashes, or anything else: no analytics, no account, no cloud.
+                                What it keeps, like your history and watched folders, stays in its
+                                sandbox on your Mac. For full details, see the{' '}
+                                <a href="#/hash-drop/privacy" className="text-cyan-400 light:text-cyan-700 hover:text-cyan-300 light:hover:text-cyan-800">
+                                    Hash Drop privacy policy
+                                </a>{' '}
+                                and{' '}
+                                <a href="#/hash-drop/terms" className="text-cyan-400 light:text-cyan-700 hover:text-cyan-300 light:hover:text-cyan-800">
                                     Terms of Use
                                 </a>
                                 .
