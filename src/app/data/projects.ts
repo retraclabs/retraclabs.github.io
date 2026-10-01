@@ -250,13 +250,13 @@ export const projects: Project[] = [
     summary: 'The context-aware clipboard manager that actually thinks. Smart type detection, full history, search, and pins, all' +
         ' from your menu bar.',
     description:
-      'macOS copies. SnippyStack remembers.' +
+      'macOS copies. Snippystack remembers.' +
         '\n' +
-        'Every time you press ⌘C, the system overwrites your last copy, and whatever was there is gone. SnippyStack fixes that. It quietly lives in your menu bar, capturing everything you copy and keeping it ready whenever you need it.\n' +
+        'Every time you press ⌘C, the system overwrites your last copy, and whatever was there is gone. Snippystack fixes that. It quietly lives in your menu bar, capturing everything you copy and keeping it ready whenever you need it.\n' +
         '\n' +
-        'Click the Snippystack icon to browse your full clipboard history. Click any item to instantly paste it. Search across hundreds of saved clips. Pin your most-used snippets so they\'re always at the top.\n' +
+        'Click the Snippystack icon to browse your full clipboard history. Click any item to copy it again, then paste it anywhere. Search across hundreds of saved clips. Pin your most-used snippets so they\'re always at the top.\n' +
         '\n' +
-        'SnippyStack goes further than other clipboard managers:' +
+        'Snippystack goes further than other clipboard managers:' +
         '\n' +
         '· Smart detection: clips are automatically labeled as URLs, emails, code, or plain text\n' +
         '· Full history window: sort by newest, oldest, longest, or most copied, and filter by type\n' +
@@ -264,30 +264,32 @@ export const projects: Project[] = [
         '· Word and character counts: see exactly how long each clip is at a glance\n' +
         '· Copy tracking: Snippystack remembers how many times you\'ve used each item\n' +
         '· Pin to top: keep your most-used clips always within reach\n' +
-        '· Global shortcut: open SnippyStack from anywhere with ⌥⌘V\n' +
+        '· Excluded apps: keep the apps you choose out of your history entirely\n' +
         '· Privacy-first: your history never leaves your Mac. No cloud. No servers. No accounts.',
     highlights: [
       'Smart type detection: clips are automatically labeled as URLs, emails, code, or plain text',
-      'Full history with sort, search, and filter — plus Permanent Snippets for text you reuse',
+      'Full history with sort, search, and filter, plus Permanent Snippets for text you reuse',
       'Privacy-first: your clipboard never leaves your Mac. No cloud, no accounts, no nonsense.',
     ],
     version: {
       current: '1.0',
       currentFeatures: [
-        'Menu-bar clipboard history: every ⌘C captured and kept, click any clip to paste it',
+        'Menu-bar clipboard history: every ⌘C captured and kept, and any clip one click from your clipboard again',
         'Smart type detection labels clips as URLs, emails, code, or plain text automatically',
         'Full history window: sort by newest, oldest, longest, or most copied, and filter by type',
         'Permanent Snippets for text you reuse, kept separate from the rolling history',
         'Search across hundreds of clips, with word and character counts on each',
-        'Pin to top, copy tracking, and a global ⌥⌘V shortcut from anywhere',
+        'Pin to top, copy tracking, and excluded apps that never land in your history',
         'Entirely on-device: no cloud, no servers, no account',
       ],
-      next: '1.1',
+      next: '2.0',
       nextFeatures: [
-        'A keyboard-driven quick-paste window that reaches a recent clip without opening full history',
-        'Scheduled expiry for sensitive clips: set one to delete itself after a chosen time',
-        'Excluded apps, so a password manager never lands in the history in the first place',
-        'Wider smart detection: file paths, phone numbers, and hex colors as their own types',
+        'Three skins (Glass, Tech, and Notepad), each with its own light and dark design, plus Liquid Glass on macOS 26',
+        'A global shortcut that opens your clips from any app, with no special permissions',
+        'Image clips: screenshots are saved with the text inside them, read on your Mac, so search finds them',
+        'Privacy upgrades: password manager copies skipped, Pause Capture, Auto-Forget, and one-time codes that fade after five minutes',
+        'Copy As (case, Base64, JSON, and more), Copy Together, snippet editing, and Shortcuts actions',
+        'A rebuilt History window that filters by kind or by the app each clip came from. Requires macOS 14 or later.',
       ],
     },
     appStoreUrl: 'https://apps.apple.com/us/app/snippystack/id6765705718?mt=12',

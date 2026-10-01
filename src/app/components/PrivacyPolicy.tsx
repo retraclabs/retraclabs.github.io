@@ -313,14 +313,55 @@ export const PrivacyPolicy = () => {
                             </p>
                         </Section>
 
-                        <Section title="SnippyStack">
+                        <Section title="Snippystack">
                             <p>
-                                SnippyStack is a macOS clipboard manager available on the Mac App Store.
-                                All clipboard history, pinned snippets, and usage data are stored
-                                exclusively on your Mac. SnippyStack does not transmit clipboard contents,
-                                history, or any personally identifiable information to Retrac Labs or any
-                                third party. No account is required. No cloud sync occurs.
+                                Snippystack is a macOS clipboard manager available on the Mac App Store.
+                                It ships without the entitlement it would need to reach the network, so it
+                                cannot send your clipboard anywhere: no analytics, no account, no ads, and
+                                no cloud sync. Version 2.0 adds image clips, text recognition, a global
+                                shortcut, and Shortcuts actions, and everything below covers them too.
                             </p>
+
+                            <Sub title="What It Keeps on Your Mac">
+                                <ul className="list-disc pl-6 space-y-1.5 text-zinc-400 light:text-zinc-600">
+                                    <li>The text and images you copy, as your clipboard history, plus your pins and snippets</li>
+                                    <li>Which app each clip came from, so it can show that app's icon and let you filter by it</li>
+                                    <li>Any text inside images you copy, read on your Mac by Apple's Vision framework so you can search for it</li>
+                                    <li>Your settings, such as your skin, your shortcut, and your excluded apps</li>
+                                </ul>
+                                <p>
+                                    All of it stays in Snippystack's sandbox on your Mac, and none of it is
+                                    sent to Retrac Labs or anyone else. Like any app's data, it is included
+                                    in backups you make yourself, such as Time Machine.
+                                </p>
+                            </Sub>
+
+                            <Sub title="What It Leaves Alone">
+                                <ul className="list-disc pl-6 space-y-1.5 text-zinc-400 light:text-zinc-600">
+                                    <li>Copies that password managers mark as hidden are skipped automatically.</li>
+                                    <li>Copies made while an excluded app is in front are skipped. Common password managers are excluded on a fresh install.</li>
+                                    <li>You can pause capture at any time, for a set time or until you resume.</li>
+                                </ul>
+                            </Sub>
+
+                            <Sub title="Your Controls">
+                                <ul className="list-disc pl-6 space-y-1.5 text-zinc-400 light:text-zinc-600">
+                                    <li>Delete any clip or clear your history at any time, or have it cleared whenever the app quits.</li>
+                                    <li>Auto-Forget removes clips after a day, a week, or a month. Pinned clips are kept.</li>
+                                    <li>One-time codes are forgotten after five minutes unless you pin them.</li>
+                                    <li>Tracking tags, such as utm_source and fbclid, can be removed from links before they are saved.</li>
+                                    <li>Exporting your snippets writes a file only where you choose to save it.</li>
+                                </ul>
+                            </Sub>
+
+                            <Sub title="The Shortcut and Shortcuts Actions">
+                                <p>
+                                    The global keyboard shortcut is registered with macOS's standard hotkey
+                                    service. Snippystack does not watch your typing and does not ask for
+                                    Accessibility or Input Monitoring access. Its actions in Apple's
+                                    Shortcuts app run only when you run them, on your Mac.
+                                </p>
+                            </Sub>
                         </Section>
 
                         <Section title="Apunte">
