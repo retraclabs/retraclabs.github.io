@@ -26,7 +26,7 @@ export const HashDropPrivacy = () => {
                     </h1>
 
                     <p className="text-zinc-400 light:text-zinc-600 font-mono font-bold mb-10">
-                        Last updated: September 30, 2026
+                        Last updated: October 3, 2026
                     </p>
 
                     <div className="space-y-10 text-zinc-300 light:text-zinc-700 font-medium leading-relaxed">
@@ -82,7 +82,8 @@ export const HashDropPrivacy = () => {
 {`codesign -d --entitlements - "/Applications/Hash Drop.app"`}
                             </pre>
                             <p>
-                                The output lists only <code>app-sandbox</code>, the user-selected file
+                                Besides the identifiers Apple adds when it signs the app, the output
+                                lists only <code>app-sandbox</code>, the user-selected file
                                 read/write permission, and app-scoped bookmarks, which let Hash Drop
                                 remember folders you chose. There is no network client. The Finder
                                 Quick Action inside the app has even less: the sandbox and read-only
@@ -158,8 +159,9 @@ export const HashDropPrivacy = () => {
                                 off, limit how many entries it keeps, or clear it every time you quit,
                                 and the History screen can clear everything at once. Removing a
                                 watched folder, hash list, or key deletes what Hash Drop saved for it.
-                                Deleting the Hash Drop app removes its container and everything
-                                inside it.
+                                Deleting Hash Drop from your Applications folder may leave its folder
+                                behind, as it does for many Mac apps; to remove everything, delete that
+                                folder too.
                             </p>
                         </section>
 
@@ -230,7 +232,7 @@ export const HashDropPrivacy = () => {
                                 database, and no account holds your information. Your data is already
                                 entirely in your possession, on your Mac, under your control. You
                                 exercise every one of these rights directly, by managing or deleting
-                                it in the app, or by deleting the app.
+                                it in the app, or by deleting the app and its folder.
                             </p>
                         </section>
 

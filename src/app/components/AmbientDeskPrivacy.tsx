@@ -26,7 +26,7 @@ export const AmbientDeskPrivacy = () => {
                     </h1>
 
                     <p className="text-zinc-400 light:text-zinc-600 font-mono font-bold mb-10">
-                        Last updated: September 30, 2026
+                        Last updated: October 3, 2026
                     </p>
 
                     <div className="space-y-10 text-zinc-300 light:text-zinc-700 font-medium leading-relaxed">
@@ -83,8 +83,9 @@ export const AmbientDeskPrivacy = () => {
 {`codesign -d --entitlements - "/Applications/Ambient Desk.app"`}
                             </pre>
                             <p>
-                                The output lists only <code>app-sandbox</code>, read-only access to
-                                files you choose, and calendar access. There is no network client.
+                                Besides the identifiers Apple adds when it signs the app, the output
+                                lists only <code>app-sandbox</code>, read-only access to files you
+                                choose, and calendar access. There is no network client.
                                 The honest boundary: a web link you add to a desk opens in your own
                                 browser, and the App Store runs outside the app. Those are described
                                 under “Third Parties” below.
@@ -193,8 +194,9 @@ export const AmbientDeskPrivacy = () => {
                                 with its history, and you can delete any template you have saved. If
                                 you export a desk, the file goes only where you save it and is yours
                                 to keep or delete. If you turned on Open Ambient Desk at Login,
-                                turning it off removes the login item. Deleting the Ambient Desk app
-                                removes its container and everything inside it.
+                                turning it off removes the login item. Deleting Ambient Desk from your
+                                Applications folder may leave its folder behind, as it does for many
+                                Mac apps; to remove everything, delete that folder too.
                             </p>
                         </section>
 
@@ -255,7 +257,7 @@ export const AmbientDeskPrivacy = () => {
                                 database, and no account holds your information. Your data is already
                                 entirely in your possession, on your Mac, under your control. You
                                 exercise every one of these rights directly, by managing or deleting
-                                it in the app, or by deleting the app.
+                                it in the app, or by deleting the app and its folder.
                             </p>
                         </section>
 

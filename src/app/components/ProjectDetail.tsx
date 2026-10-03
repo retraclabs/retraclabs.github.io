@@ -236,8 +236,8 @@ export const ProjectDetail = ({ project }: ProjectDetailProps) => {
           </section>
         )}
 
-        {/* Snippystack's highlights still deserve a home when the version pair
-            has taken the lower row. */}
+        {/* An app's highlights still deserve a home when the version pair has
+            taken the lower row. */}
         {project.version && project.highlights?.length ? (
           <motion.section
             initial={{ opacity: 0, y: 24 }}

@@ -114,6 +114,10 @@ Current route patterns:
 #/apunte/privacy
 #/apunte/terms
 #/apunte/why-not-whisper
+#/hash-drop/privacy
+#/hash-drop/terms
+#/ambient-desk/privacy
+#/retazo/privacy
 #/projects/<slug>
 ```
 
@@ -314,7 +318,7 @@ Project Salt        (In Development) ─┐
 Project Deacon      (Testing)         │ newest work, nothing announced
 Project Cobra       (In Development) ─┘
 Apunte              (Available)      ─┐
-Snippystack         (Available)       │ shipped, downloadable
+Retazo              (Available)       │ shipped, downloadable
 Amparo              (Available)      ─┘
 ```
 
@@ -348,7 +352,7 @@ six:
 'third'       = 2   pairs with 'two-thirds'
 ```
 
-The four codename cards are all `'half'`, so they sit two-by-two. Snippystack
+The four codename cards are all `'half'`, so they sit two-by-two. Retazo
 (`'third'`) and Amparo (`'two-thirds'`) share the bottom row. If a row looks
 lopsided after a reorder, the spans of that row no longer add to six.
 
@@ -406,6 +410,18 @@ Codenames are the public name while a project is hidden. When an app is ready to
 be announced, change `name` and `slug` to the real name at the same time you
 uncomment the copy. Changing `slug` changes its URL, so do not change it after
 the app has shipped and people have linked to it.
+
+**Renaming a shipped app** is the exception, and it is safe if you keep the old
+slug in `formerSlugs`:
+
+```ts
+slug: 'retazo',
+formerSlugs: ['snippystack'],
+```
+
+Old links like `#/projects/snippystack` still open the page, and the address
+bar switches to `#/projects/retazo`. Retazo, called Snippystack until 2.0, is
+set up this way. Never remove an entry from `formerSlugs`.
 
 ## Adding a New Project Page
 
@@ -566,8 +582,8 @@ The Lab grid on the homepage is unchanged. It stays the lab.
 ### Price and Requirements
 
 ```ts
-price: '$1.99',
-requires: 'macOS 13.5 or later',
+price: '$2.99',
+requires: 'macOS 14 or later',
 ```
 
 `price` is the US App Store price, written the way the store shows it. It is
@@ -1204,7 +1220,7 @@ Project Salt      Hash         a hash, which is what a salt goes into
 Project Deacon    Zap
 Project Cobra     Mic
 Apunte            AudioLines   audio waveform
-Snippystack       Monitor
+Retazo            Scissors     the app's own menu bar icon
 Amparo            Smartphone
 ```
 

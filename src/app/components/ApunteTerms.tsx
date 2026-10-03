@@ -26,7 +26,7 @@ export const ApunteTerms = () => {
                     </h1>
 
                     <p className="text-zinc-400 light:text-zinc-600 font-mono font-bold mb-10">
-                        Last updated: September 22, 2026
+                        Last updated: October 3, 2026
                     </p>
 
                     <div className="space-y-10 text-zinc-300 light:text-zinc-700 font-medium leading-relaxed">
@@ -67,9 +67,11 @@ export const ApunteTerms = () => {
                             <p className="mt-4">
                                 Premium features — speaker names on transcript lines, on-device
                                 summaries of each part of a recording, search across your whole
-                                transcript library, and export to SubRip (SRT), WebVTT, CSV,
-                                Markdown, HTML, PDF, and Word — are unlocked through an in-app
-                                purchase, offered as a monthly or yearly subscription.
+                                transcript library, live transcription from the microphone or a
+                                call, and export to SubRip (SRT), WebVTT, CSV, Markdown, HTML, PDF,
+                                and Word — are unlocked through an in-app purchase, offered as a
+                                monthly subscription, a yearly subscription, or a one-time lifetime
+                                purchase. The lifetime purchase does not renew and does not expire.
                             </p>
                             <ul className="list-disc pl-5 space-y-3 mt-4 marker:text-sky-400">
                                 <li>
@@ -101,6 +103,9 @@ export const ApunteTerms = () => {
                                 Any speaker names you have already assigned remain visible and
                                 continue to export, and summaries you have already generated remain
                                 in place; only creating <em>new</em> ones stops until you renew.
+                                Live transcripts you already captured stay in your library, with
+                                their editing, playback, and free export formats; starting a new live
+                                session needs an active subscription or the lifetime purchase.
                                 Searching within a single transcript remains free. Free exports —
                                 plain text, timestamped text, and JSON — remain available.
                             </p>
@@ -108,7 +113,7 @@ export const ApunteTerms = () => {
 
                         <section>
                             <h2 className="text-2xl font-black text-white light:text-zinc-900 mb-3">
-                                3. Accuracy — Please Read
+                                3. Accuracy
                             </h2>
                             <p>
                                 Apunte produces transcripts using automatic speech recognition, which
@@ -124,6 +129,12 @@ export const ApunteTerms = () => {
                                 inaccurate or incomplete, including stating things that were not said.
                                 Always check a summary against the transcript and the recording before
                                 relying on it.
+                            </p>
+                            <p className="mt-4">
+                                Live transcription shows provisional text while people speak and
+                                finalizes it moments later; the finalized text is what is saved. Live
+                                results are subject to the same errors as any transcript, and a poor
+                                microphone or a weak call connection makes them worse.
                             </p>
                         </section>
 
@@ -156,7 +167,22 @@ export const ApunteTerms = () => {
 
                         <section>
                             <h2 className="text-2xl font-black text-white light:text-zinc-900 mb-3">
-                                6. Limitation of Liability
+                                6. Recording Calls and Meetings
+                            </h2>
+                            <p>
+                                Call mode records your microphone and what other apps play on your
+                                Mac, only during a session you start. Recording a conversation may
+                                require the consent of the other participants under the laws that
+                                apply to you or to them, and the rules of the service the call runs
+                                on. You are solely responsible for obtaining any consent the law
+                                requires and for complying with those rules. Retrac Labs does not
+                                record, receive, or store any call.
+                            </p>
+                        </section>
+
+                        <section>
+                            <h2 className="text-2xl font-black text-white light:text-zinc-900 mb-3">
+                                7. Limitation of Liability
                             </h2>
                             <p>
                                 To the maximum extent permitted by law, Retrac Labs shall not be
@@ -169,7 +195,7 @@ export const ApunteTerms = () => {
 
                         <section>
                             <h2 className="text-2xl font-black text-white light:text-zinc-900 mb-3">
-                                7. Governing Law
+                                8. Governing Law
                             </h2>
                             <p>
                                 These Terms are governed by the laws of the State of New York, United
@@ -179,7 +205,7 @@ export const ApunteTerms = () => {
 
                         <section>
                             <h2 className="text-2xl font-black text-white light:text-zinc-900 mb-3">
-                                8. Changes to These Terms
+                                9. Changes to These Terms
                             </h2>
                             <p>
                                 We may update these Terms. Material changes will be reflected here
@@ -190,7 +216,7 @@ export const ApunteTerms = () => {
 
                         <section>
                             <h2 className="text-2xl font-black text-white light:text-zinc-900 mb-3">
-                                9. Contact
+                                10. Contact
                             </h2>
                             <p>
                                 Questions about these Terms? Contact us at{' '}

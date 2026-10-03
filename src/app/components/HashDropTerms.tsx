@@ -116,7 +116,7 @@ export const HashDropTerms = () => {
 
                         <section>
                             <h2 className="text-2xl font-black text-white light:text-zinc-900 mb-3">
-                                3. What the Results Mean — Please Read
+                                3. What the Results Mean
                             </h2>
                             <p>
                                 Hash Drop reports what it computes and what the systems it relies on

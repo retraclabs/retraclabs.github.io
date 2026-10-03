@@ -5,7 +5,7 @@ import { ArrowLeft } from 'lucide-react';
 /* Keep this date current. Any substantive edit to the text below should move it,
    because "Last updated" is the first thing anyone checks when they want to know
    whether a policy still describes what actually happens. */
-const LAST_UPDATED = 'October 1, 2026';
+const LAST_UPDATED = 'October 3, 2026';
 
 const Section = ({ title, children }: { title: string; children: React.ReactNode }) => (
     <section>
@@ -313,55 +313,19 @@ export const PrivacyPolicy = () => {
                             </p>
                         </Section>
 
-                        <Section title="Snippystack">
+                        <Section title="Retazo">
                             <p>
-                                Snippystack is a macOS clipboard manager available on the Mac App Store.
-                                It ships without the entitlement it would need to reach the network, so it
-                                cannot send your clipboard anywhere: no analytics, no account, no ads, and
-                                no cloud sync. Version 2.0 adds image clips, text recognition, a global
-                                shortcut, and Shortcuts actions, and everything below covers them too.
+                                Retazo, called Snippystack until version 2.0, is a macOS clipboard
+                                manager. It ships without the entitlement it would need to reach the
+                                network, so it cannot send your clipboard anywhere: no analytics, no
+                                account, no ads, and no cloud sync. What it keeps, like your clipboard
+                                history and snippets, stays in its sandbox on your Mac. For full
+                                details, see the{' '}
+                                <a href="#/retazo/privacy" className="text-cyan-400 light:text-cyan-700 hover:text-cyan-300 light:hover:text-cyan-800">
+                                    Retazo privacy policy
+                                </a>
+                                .
                             </p>
-
-                            <Sub title="What It Keeps on Your Mac">
-                                <ul className="list-disc pl-6 space-y-1.5 text-zinc-400 light:text-zinc-600">
-                                    <li>The text and images you copy, as your clipboard history, plus your pins and snippets</li>
-                                    <li>Which app each clip came from, so it can show that app's icon and let you filter by it</li>
-                                    <li>Any text inside images you copy, read on your Mac by Apple's Vision framework so you can search for it</li>
-                                    <li>Your settings, such as your skin, your shortcut, and your excluded apps</li>
-                                </ul>
-                                <p>
-                                    All of it stays in Snippystack's sandbox on your Mac, and none of it is
-                                    sent to Retrac Labs or anyone else. Like any app's data, it is included
-                                    in backups you make yourself, such as Time Machine.
-                                </p>
-                            </Sub>
-
-                            <Sub title="What It Leaves Alone">
-                                <ul className="list-disc pl-6 space-y-1.5 text-zinc-400 light:text-zinc-600">
-                                    <li>Copies that password managers mark as hidden are skipped automatically.</li>
-                                    <li>Copies made while an excluded app is in front are skipped. Common password managers are excluded on a fresh install.</li>
-                                    <li>You can pause capture at any time, for a set time or until you resume.</li>
-                                </ul>
-                            </Sub>
-
-                            <Sub title="Your Controls">
-                                <ul className="list-disc pl-6 space-y-1.5 text-zinc-400 light:text-zinc-600">
-                                    <li>Delete any clip or clear your history at any time, or have it cleared whenever the app quits.</li>
-                                    <li>Auto-Forget removes clips after a day, a week, or a month. Pinned clips are kept.</li>
-                                    <li>One-time codes are forgotten after five minutes unless you pin them.</li>
-                                    <li>Tracking tags, such as utm_source and fbclid, can be removed from links before they are saved.</li>
-                                    <li>Exporting your snippets writes a file only where you choose to save it.</li>
-                                </ul>
-                            </Sub>
-
-                            <Sub title="The Shortcut and Shortcuts Actions">
-                                <p>
-                                    The global keyboard shortcut is registered with macOS's standard hotkey
-                                    service. Snippystack does not watch your typing and does not ask for
-                                    Accessibility or Input Monitoring access. Its actions in Apple's
-                                    Shortcuts app run only when you run them, on your Mac.
-                                </p>
-                            </Sub>
                         </Section>
 
                         <Section title="Apunte">
@@ -474,7 +438,9 @@ export const PrivacyPolicy = () => {
                             </p>
                             <p>
                                 Data inside our apps is not kept by us at all, because it never reaches us.
-                                Deleting the app deletes it.
+                                Deleting an iPhone app deletes its data. On a Mac, an app's data folder
+                                can stay behind after the app is deleted; to remove it, delete the app's
+                                folder in <code>~/Library/Containers</code> too.
                             </p>
                         </Section>
 

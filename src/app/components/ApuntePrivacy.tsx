@@ -26,7 +26,7 @@ export const ApuntePrivacy = () => {
                     </h1>
 
                     <p className="text-zinc-400 light:text-zinc-600 font-mono font-bold mb-10">
-                        Last updated: September 10, 2026
+                        Last updated: October 3, 2026
                     </p>
 
                     <div className="space-y-10 text-zinc-300 light:text-zinc-700 font-medium leading-relaxed">
@@ -67,7 +67,11 @@ export const ApuntePrivacy = () => {
                                 Apunte has no analytics, no crash reporting, no telemetry, no update
                                 check, no account, and no login. It builds no profile, identifier, or
                                 advertising ID. Your audio, video, and transcripts are never
-                                transmitted anywhere.
+                                transmitted anywhere. Live transcription listens to your
+                                microphone only while a session you started is running and, in call
+                                mode, also to what other apps are playing, after you allow that in
+                                macOS's own prompt. What it hears is transcribed on your Mac and kept
+                                there like any imported recording.
                             </p>
                             <p className="mt-4">
                                 This is structural, not just a promise. Apunte ships{' '}
@@ -122,12 +126,33 @@ export const ApuntePrivacy = () => {
 
                         <section>
                             <h2 className="text-2xl font-black text-white light:text-zinc-900 mb-3">
+                                Microphone and System Audio
+                            </h2>
+                            <p>
+                                Live transcription uses two macOS permissions, each requested the
+                                first time it is needed and revocable at any time in System Settings
+                                › Privacy &amp; Security. Microphone access is used only while a live
+                                session is running. System audio recording is used only in call
+                                mode, only while a session is running, and only so the other side of
+                                a call or meeting can be transcribed alongside your microphone.
+                                Nothing is captured outside a session you started, and Apunte never
+                                sends any of it anywhere. Recording other people may require their
+                                consent where you or they are; see the Terms of Use.
+                            </p>
+                        </section>
+
+                        <section>
+                            <h2 className="text-2xl font-black text-white light:text-zinc-900 mb-3">
                                 Retention and Deletion
                             </h2>
                             <p>
                                 You control how long audio is kept: keep it, erase it immediately
                                 after transcription, or erase it automatically after a number of days
-                                you choose. Erasure overwrites the audio before removing it — a
+                                you choose. A live session always keeps its recording, whatever that
+                                setting says, because a microphone recording exists nowhere else and
+                                the transcript can only be checked against it; the days-based setting
+                                still applies to it, and you can erase it by hand at any time.
+                                Erasure overwrites the audio before removing it — a
                                 practical deletion, not a forensic secure-wipe, and we don't claim
                                 otherwise. Deleting the Apunte app removes its container and
                                 everything inside it.
@@ -146,7 +171,9 @@ export const ApuntePrivacy = () => {
                             <ul className="list-disc pl-5 space-y-3 mt-4 marker:text-sky-400">
                                 <li>
                                     <strong className="text-white light:text-zinc-900 font-bold">Purchases.</strong>{' '}
-                                    Premium features are unlocked through Apple's In-App Purchase.
+                                    Premium features are unlocked through Apple's In-App Purchase,
+                                    as a monthly or yearly subscription or a one-time lifetime
+                                    purchase.
                                     Apple processes the transaction; Apunte never sees your payment
                                     details and stores no transaction data of its own beyond asking
                                     StoreKit whether your entitlement is currently active.

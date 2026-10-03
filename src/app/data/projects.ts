@@ -1,16 +1,30 @@
-import { AudioLines, Hash, Mic, Monitor, Smartphone, Zap, type LucideIcon } from 'lucide-react';
+import { AudioLines, Hash, Mic, Scissors, Smartphone, Zap, type LucideIcon } from 'lucide-react';
 import apunteTranscript from '../assets/apunte/transcript.webp';
 import apunteReviewMode from '../assets/apunte/review-mode.webp';
 import apunteSpeakerNames from '../assets/apunte/speaker-names.webp';
 import apunteSummary from '../assets/apunte/summary.webp';
 import apunteLibrarySearch from '../assets/apunte/library-search.webp';
 import apunteExportFormats from '../assets/apunte/export-formats.webp';
+import apunteLive from '../assets/apunte/live.webp';
+import apunteMultiSelect from '../assets/apunte/multi-select.webp';
+import apuntePrivacy from '../assets/apunte/privacy.webp';
+import retazoMenuBar from '../assets/retazo/menu-bar.webp';
+import retazoSkins from '../assets/retazo/skins.webp';
+import retazoImageClips from '../assets/retazo/image-clips.webp';
+import retazoShortcut from '../assets/retazo/shortcut.webp';
+import retazoPrivacy from '../assets/retazo/privacy.webp';
+import retazoHistory from '../assets/retazo/history.webp';
+import retazoSnippets from '../assets/retazo/snippets.webp';
 
 /** How wide a card sits in the six-column Lab grid. See LabSection.tsx. */
 export type ProjectSpan = 'full' | 'two-thirds' | 'half' | 'third';
 
 export type Project = {
   slug: string;
+  /** Slugs a shipped app used before it was renamed. Old links still open its
+   *  page, and the address bar switches to the current slug. See MAINTAINING.md
+   *  → "A Note on Codenames". */
+  formerSlugs?: string[];
   name: string;
   platform: string;
   status: string;
@@ -178,34 +192,58 @@ export const projects: Project[] = [
     accentText: 'text-sky-400',
     icon: AudioLines,
     span: 'half',
-    teaser: 'Turns audio and video into text, entirely on your Mac.',
+    teaser: 'Turns audio, video, and live conversations into text, entirely on your Mac.',
     appStoreUrl: 'https://apps.apple.com/us/app/apunte/id6802142206?mt=12',
     summary:
-      'Transcription that never leaves your Mac. Your recordings, your words. No uploads, no account, no network.',
+      'Transcription that never leaves your Mac. Your recordings, your calls, your words. No uploads, no account, no network.',
     description:
       'Apunte turns audio and video into accurate, timestamped transcripts entirely on your Mac. ' +
-      'Drop in a voice memo, an interview, a lecture, a video — if macOS can play it, Apunte can read it.\n\n' +
+      'Drop in a voice memo, an interview, a lecture, a video — if macOS can play it, Apunte can read it. ' +
+      'Or transcribe live: the room you are in, or a call or meeting on headphones, with both sides in one transcript.\n\n' +
       'It ships without the outgoing-network entitlement, so the app\'s own code cannot open a network ' +
       'connection. You don\'t have to take that on faith. Inspect the signed app yourself with codesign. ' +
-      'Transcription is free; Premium adds speaker names, summaries, library-wide search, and formatted ' +
-      'export, as a monthly or yearly subscription.',
+      'Transcription is free; Premium adds speaker names, summaries, library-wide search, live transcription, ' +
+      'and formatted export, as a subscription or a one-time lifetime purchase.',
     highlights: [
       'No network access, verifiable: the app ships without the network entitlement, so it cannot upload your audio. Check it yourself in Terminal.',
       'Accurate on real recordings: on a 64-minute, two-person session it captured the same content as MacWhisper, keeping hesitations and false starts rather than smoothing them away.',
+      'Live, for the room or the call: words appear as people speak, and a call on headphones puts both sides in one transcript. The recording stays on your Mac so you can check any line against it.',
       'A free tier that\'s actually complete: transcription, editing, playback, and plain-text, timestamped, and JSON export are free. JSON carries everything, so your work is never locked in.',
     ],
-    nextSteps: [
-      'Automatic speaker labels, so conversations are attributed without assigning every line by hand',
-      'Encryption for the transcript database — stored audio is already sealed with a key held in the Mac\'s Secure Enclave',
-      'A clinical edition built on the same on-device core, for practitioners who cannot send session audio to a server',
-    ],
-    price: 'Free, with an optional Premium subscription',
+    version: {
+      current: '1.1',
+      currentFeatures: [
+        'Live transcription from the microphone, or from a call or meeting on headphones with both sides in one transcript',
+        'Speaker names, on-device summaries with timestamps, and search across every transcript',
+        'Review mode, which marks the lines the recogniser was unsure of',
+        'Export to plain text, timestamped text, JSON, SubRip, WebVTT, CSV, Markdown, HTML, PDF, and Word',
+        'Select several transcripts at once to delete them, or to erase their audio, together',
+      ],
+      next: '1.1.1',
+      nextFeatures: [
+        'Redeem an offer code from inside the app',
+        'A reminder under the call option about consent where the law requires it',
+      ],
+    },
+    price: 'Free, with Premium as a subscription or a one-time purchase',
     requires: 'macOS 26 or later',
     screenshots: [
       {
         src: apunteTranscript,
         alt: 'Apunte\'s main window: a meeting transcript with a timestamp on every line, and a library of recordings in the sidebar.',
         caption: 'Every line timestamped, and transcribed entirely on your Mac.',
+      },
+      {
+        src: apunteLive,
+        alt: 'A live session in call mode: the header reads Listening, seven lines have arrived, and the bar shows two level meters, one for the microphone and one for other apps.',
+        caption: 'Live, from the microphone or from a call on headphones, with both sides in one transcript.',
+        premium: true,
+      },
+      {
+        src: apunteSummary,
+        alt: 'A summary of a meeting recording: an overview paragraph, key points, and action items.',
+        caption: 'An overview, key points, and action items for each part of a recording, generated on your Mac.',
+        premium: true,
       },
       {
         src: apunteReviewMode,
@@ -219,12 +257,6 @@ export const projects: Project[] = [
         premium: true,
       },
       {
-        src: apunteSummary,
-        alt: 'A summary of a meeting recording: an overview paragraph, key points, and action items.',
-        caption: 'An overview, key points, and action items for each part of a recording, generated on your Mac.',
-        premium: true,
-      },
-      {
         src: apunteLibrarySearch,
         alt: 'Search results for the word memory across the library, each with its timestamp.',
         caption: 'Find a phrase across every transcript you have, down to the line.',
@@ -235,66 +267,105 @@ export const projects: Project[] = [
         alt: 'The export menu: plain text, timestamped text, and JSON listed as included, then SubRip, WebVTT, CSV, Markdown, HTML, PDF, and Word as more formats.',
         caption: 'Plain text, timestamped text, and JSON export are free. SRT, WebVTT, CSV, Markdown, HTML, PDF, and Word come with Premium.',
       },
+      {
+        src: apunteMultiSelect,
+        alt: 'Two transcripts selected in the sidebar, and a pane offering to delete both.',
+        caption: 'Select several transcripts to delete them, or to erase their audio, together.',
+      },
+      {
+        src: apuntePrivacy,
+        alt: 'The Privacy pane: Apunte makes no network calls, with the codesign command that verifies it and a note that stored audio is encrypted with a key in the Secure Enclave.',
+        caption: 'No network entitlement, and the command that proves it.',
+        width: 1120,
+        height: 1416,
+      },
     ],
   },
   {
-    slug: 'snippystack',
-    name: 'Snippystack',
+    slug: 'retazo',
+    formerSlugs: ['snippystack'],
+    name: 'Retazo',
     platform: 'macOS',
     status: 'Available',
     accent: 'cyan',
     accentText: 'text-cyan-400',
-    icon: Monitor,
+    icon: Scissors,
     span: 'third',
     teaser: 'Clipboard history that lives in your menu bar.',
-    summary: 'The context-aware clipboard manager that actually thinks. Smart type detection, full history, search, and pins, all' +
-        ' from your menu bar.',
+    summary:
+      'Your clipboard, with a memory. Searchable screenshots, a global shortcut, three skins, and privacy built in. Everything stays on your Mac.',
     description:
-      'macOS copies. Snippystack remembers.' +
-        '\n' +
-        'Every time you press ⌘C, the system overwrites your last copy, and whatever was there is gone. Snippystack fixes that. It quietly lives in your menu bar, capturing everything you copy and keeping it ready whenever you need it.\n' +
-        '\n' +
-        'Click the Snippystack icon to browse your full clipboard history. Click any item to copy it again, then paste it anywhere. Search across hundreds of saved clips. Pin your most-used snippets so they\'re always at the top.\n' +
-        '\n' +
-        'Snippystack goes further than other clipboard managers:' +
-        '\n' +
-        '· Smart detection: clips are automatically labeled as URLs, emails, code, or plain text\n' +
-        '· Full history window: sort by newest, oldest, longest, or most copied, and filter by type\n' +
-        '· Permanent Snippets: save text you reuse often, separate from your clipboard history\n' +
-        '· Word and character counts: see exactly how long each clip is at a glance\n' +
-        '· Copy tracking: Snippystack remembers how many times you\'ve used each item\n' +
-        '· Pin to top: keep your most-used clips always within reach\n' +
-        '· Excluded apps: keep the apps you choose out of your history entirely\n' +
-        '· Privacy-first: your history never leaves your Mac. No cloud. No servers. No accounts.',
+      'Retazo keeps everything you copy and puts it one click or one shortcut away. Press ⌃⌘V in any app, pick a ' +
+      'clip, and ⌘V pastes it right where you were. Screenshots are saved with the text inside them, read on your ' +
+      'Mac, so a search finds them. Snippets hold the text you retype, and they work in the Shortcuts app too.\n\n' +
+      'Password manager copies are skipped, one-time codes fade after five minutes, and tracking tags are stripped ' +
+      'from links. It ships without the outgoing-network entitlement, so the app\'s own code cannot open a network ' +
+      'connection. You don\'t have to take that on faith: inspect the signed app yourself with codesign. One ' +
+      'purchase, no subscription.\n\n' +
+      'Retazo, Spanish for a scrap or snippet, was called Snippystack until version 2.0. Same app, new name, and ' +
+      'everything you saved came along.',
     highlights: [
-      'Smart type detection: clips are automatically labeled as URLs, emails, code, or plain text',
-      'Full history with sort, search, and filter, plus Permanent Snippets for text you reuse',
-      'Privacy-first: your clipboard never leaves your Mac. No cloud, no accounts, no nonsense.',
+      'One shortcut, any app: press ⌃⌘V, pick a clip, and paste it where you were. No Accessibility or Input Monitoring permission needed.',
+      'Screenshots you can search: text in copied images is read on your Mac by Apple\'s Vision framework, and never uploaded.',
+      'No network access, verifiable: the app ships without the network entitlement, so it cannot send your clipboard anywhere. Check it yourself in Terminal.',
     ],
     version: {
-      current: '1.0',
+      current: '2.0',
       currentFeatures: [
-        'Menu-bar clipboard history: every ⌘C captured and kept, and any clip one click from your clipboard again',
-        'Smart type detection labels clips as URLs, emails, code, or plain text automatically',
-        'Full history window: sort by newest, oldest, longest, or most copied, and filter by type',
-        'Permanent Snippets for text you reuse, kept separate from the rolling history',
-        'Search across hundreds of clips, with word and character counts on each',
-        'Pin to top, copy tracking, and excluded apps that never land in your history',
-        'Entirely on-device: no cloud, no servers, no account',
-      ],
-      next: '2.0',
-      nextFeatures: [
+        'Clipboard history in your menu bar: text, links, code, and images, each one click from your clipboard again',
+        'A global shortcut, ⌃⌘V, that opens your clips from any app with no special permissions',
+        'Image clips with searchable text, read on your Mac by Apple\'s Vision framework',
+        'Snippets for text you retype, with editing, Export and Import, and Shortcuts actions',
+        'Copy As (case, Base64, pretty JSON, and more), and Copy Together for several clips at once',
+        'A History window that filters by kind or by the app each clip came from',
         'Three skins (Glass, Tech, and Notepad), each with its own light and dark design, plus Liquid Glass on macOS 26',
-        'A global shortcut that opens your clips from any app, with no special permissions',
-        'Image clips: screenshots are saved with the text inside them, read on your Mac, so search finds them',
-        'Privacy upgrades: password manager copies skipped, Pause Capture, Auto-Forget, and one-time codes that fade after five minutes',
-        'Copy As (case, Base64, JSON, and more), Copy Together, snippet editing, and Shortcuts actions',
-        'A rebuilt History window that filters by kind or by the app each clip came from. Requires macOS 14 or later.',
+        'Password manager copies skipped, Pause Capture, Auto-Forget, one-time codes that fade, and tracking tags removed from links',
+      ],
+      next: '2.1',
+      nextFeatures: [
+        'Optional iCloud sync for your snippets, off unless you turn it on. Your clipboard history never syncs.',
       ],
     },
-    appStoreUrl: 'https://apps.apple.com/us/app/snippystack/id6765705718?mt=12',
-    price: '$1.99',
-    requires: 'macOS 13.5 or later',
+    appStoreUrl: 'https://apps.apple.com/us/app/retazo-clipboard-history/id6765705718?mt=12',
+    price: '$2.99',
+    requires: 'macOS 14 or later',
+    screenshots: [
+      {
+        src: retazoMenuBar,
+        alt: 'Retazo\'s panel open below the scissors icon in the menu bar, listing recent clips: a pinned email address, a one-time code, meeting notes, links, a screenshot, and a line of code, each with the app it came from.',
+        caption: 'Everything you copy, kept in the menu bar. Click a clip, and ⌘V pastes it where you were.',
+      },
+      {
+        src: retazoSkins,
+        alt: 'The same list of clips in three skins side by side: frosted Liquid Glass, Tech in green on black, and Notepad on ruled paper with a highlighter.',
+        caption: 'Glass, Tech, and Notepad, each with its own light and dark design. Switch any time in Settings.',
+      },
+      {
+        src: retazoImageClips,
+        alt: 'The History window with a screenshot of a Q3 Roadmap slide selected. The detail pane shows the image and, beneath it, the text read from it.',
+        caption: 'Text in copied images is read on your Mac, so a search finds that one screenshot.',
+      },
+      {
+        src: retazoShortcut,
+        alt: 'Retazo\'s welcome screen in the Tech skin, showing the keys Control, Command, and V under the line Always One Shortcut Away.',
+        caption: 'Press ⌃⌘V in any app to open your clips. No Accessibility or Input Monitoring permission needed.',
+      },
+      {
+        src: retazoPrivacy,
+        alt: 'Retazo\'s Privacy settings in the Notepad skin: Skip Passwords and Hidden Copies, Forget One-Time Codes, and Remove Trackers From Links are checked, above buttons to pause capture and an Auto-Forget menu.',
+        caption: 'Password manager copies are skipped, one-time codes fade after five minutes, and you can pause capture any time.',
+      },
+      {
+        src: retazoHistory,
+        alt: 'The History window in the Tech skin with three clips selected, and buttons to Copy Together, Pin All, or Delete them.',
+        caption: 'Filter by kind or by the app a clip came from, then copy several together, or right-click for Copy As.',
+      },
+      {
+        src: retazoSnippets,
+        alt: 'The Snippets tab listing saved text: an email signature, a studio address, a thank-you reply, a bug report template, an out-of-office message, and a weekly check-in.',
+        caption: 'Save the text you retype, edit it any time, and copy it from the Shortcuts app, too.',
+      },
+    ],
   },
   {
     slug: 'amparo',
@@ -359,6 +430,8 @@ export const isAnnounced = (project: Project) => Boolean(project.summary);
 export const isShipped = (project: Project) => project.status === 'Available';
 
 export const getProjectBySlug = (slug: string | null) => {
-  const project = projects.find((item) => item.slug === slug);
+  const project = projects.find(
+    (item) => item.slug === slug || (slug !== null && item.formerSlugs?.includes(slug)),
+  );
   return project && isAnnounced(project) ? project : undefined;
 };
