@@ -1,0 +1,6 @@
+# compiled Swift helpers, rebuilt on first run
+glyphs
+render
+# third-party font files; see README.md
+fonts/
+__pycache__/

@@ -1167,6 +1167,30 @@ Render:
 
 For large videos, consider hosting them elsewhere later. GitHub repos are not ideal for lots of heavy media.
 
+## The J Marks and Wordmarks
+
+`public/brand/j/` holds the personal J marks: `J/>` (the `code` mark) and `J_`
+(the `cursor` mark), each in Geist Mono (the main mark) and Silkscreen (the
+pixel version), as rounded tiles and as transparent marks in several colors.
+The colors come from jarredmcarter.com, so the marks match that site.
+
+`public/brand/wordmarks/` holds the same treatment for `@j__cart`,
+`jarred m. carter`, and `jarred carter`: transparent, all at one type size, for
+laying over photos and video.
+
+They are generated, not drawn. Don't edit the SVGs by hand; the next build
+overwrites them. To change a color, the spacing, or anything else, edit
+`tools/brand-marks/build.py` and run:
+
+```bash
+python3 tools/brand-marks/build.py
+```
+
+`tools/brand-marks/README.md` explains what each file is and where the fonts
+go. The older files at the top of `public/brand/` (`j-mark.svg`,
+`j-code-mark.svg`, their `-gradient` versions, and the `-2048` PNG and JPG
+exports) are rebuilt in the same design, so existing links keep working.
+
 ## Icons
 
 Icons come from [lucide-react](https://lucide.dev/icons). Import what you need:
