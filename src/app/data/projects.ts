@@ -211,18 +211,19 @@ export const projects: Project[] = [
       'A free tier that\'s actually complete: transcription, editing, playback, and plain-text, timestamped, and JSON export are free. JSON carries everything, so your work is never locked in.',
     ],
     version: {
-      current: '1.1',
+      current: '1.1.1',
       currentFeatures: [
         'Live transcription from the microphone, or from a call or meeting on headphones with both sides in one transcript',
-        'Speaker names, on-device summaries with timestamps, and search across every transcript',
+        'Speaker names, on-device summaries in the transcript\'s language, and search across every transcript',
         'Review mode, which marks the lines the recogniser was unsure of',
         'Export to plain text, timestamped text, JSON, SubRip, WebVTT, CSV, Markdown, HTML, PDF, and Word',
         'Select several transcripts at once to delete them, or to erase their audio, together',
-      ],
-      next: '1.1.1',
-      nextFeatures: [
         'Redeem an offer code from inside the app',
-        'A reminder under the call option about consent where the law requires it',
+      ],
+      next: '1.2',
+      nextFeatures: [
+        'The app in Spanish, with other languages to follow',
+        'Speaker labels for calls, telling your side from theirs automatically',
       ],
     },
     price: 'Free, with Premium as a subscription or a one-time purchase',
