@@ -464,7 +464,9 @@ export const projects: Project[] = [
       ],
       next: '2.1',
       nextFeatures: [
-        'Optional iCloud sync for your snippets, off unless you turn it on. Your clipboard history never syncs.',
+        'The Clothesline: screenshots and clips hang on a line across the top of your screen, above every window, ready to drag into any app',
+        'Drag clips straight from the panel and the History window into chats, documents, and uploads',
+        'Hang any clip or snippet yourself, or let new screenshots hang on their own, including ones saved to a folder you choose',
       ],
     },
     appStoreUrl: 'https://apps.apple.com/us/app/retazo-clipboard-history/id6765705718?mt=12',
