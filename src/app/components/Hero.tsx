@@ -2,8 +2,10 @@ import React, { useRef } from 'react';
 import { motion, useInView, useScroll, useTransform } from 'motion/react';
 import { HERO_SECTION_VH, HERO_FADE_END, RAT_IN_START, RAT_IN_END, c01, smooth } from '../heroChoreography';
 import { LabRat } from './LabRat';
+import { useStrings } from '../i18n/context';
 
 export const Hero = () => {
+  const t = useStrings();
   const containerRef = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -105,7 +107,7 @@ export const Hero = () => {
             className="flex flex-col items-center gap-3"
           >
             <span className="text-[10px] sm:text-xs font-mono font-bold text-zinc-400 light:text-zinc-600 uppercase tracking-widest text-center">
-              Specimens Below
+              {t.hero.cue}
             </span>
             {/* A drawn arrow rather than a tapered bar. The old gradient faded
                 out exactly where the head should have been, so there was no head. */}

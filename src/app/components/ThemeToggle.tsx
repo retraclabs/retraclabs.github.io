@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
 import { Moon, Sun } from 'lucide-react';
 import { applyTheme, readStoredTheme, type Theme } from '../theme';
+import { useStrings } from '../i18n/context';
 
 /* Sits in the menu bar. The icon shows what you will GET, not what you are in,
    which is the convention people expect: a sun means "switch to light". */
 export const ThemeToggle = () => {
   const [theme, setTheme] = useState<Theme>('dark');
+  const t = useStrings();
 
   // index.html has already put the class on <html> before React mounted, so
   // this only syncs component state with what is already on screen. Reading it
@@ -21,14 +23,14 @@ export const ThemeToggle = () => {
     applyTheme(next);
   };
 
-  const goingTo = theme === 'dark' ? 'light' : 'dark';
+  const label = theme === 'dark' ? t.theme.toLight : t.theme.toDark;
 
   return (
     <button
       type="button"
       onClick={toggle}
-      aria-label={`Switch to ${goingTo} mode`}
-      title={`Switch to ${goingTo} mode`}
+      aria-label={label}
+      title={label}
       className="flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-full text-zinc-400 light:text-zinc-500 hover:text-white light:hover:text-zinc-900 transition-colors shrink-0"
     >
       <motion.span

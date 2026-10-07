@@ -4,6 +4,8 @@ import { ArrowLeft, ArrowUpRight, CheckCircle2, FlaskConical, Sparkles } from 'l
 import { Project, projects, isAnnounced, isShipped } from '../data/projects';
 import { ACCENTS } from '../data/accents';
 import { getLabNotesFor } from '../labNotes';
+import { useLanguage, useStrings } from '../i18n/context';
+import { appLanguage, localizeProject } from '../i18n/projects';
 import { AccentGlow } from './AccentGlow';
 import { ScreenshotGallery } from './ScreenshotGallery';
 
@@ -11,7 +13,14 @@ type ProjectDetailProps = {
   project: Project;
 };
 
-export const ProjectDetail = ({ project }: ProjectDetailProps) => {
+export const ProjectDetail = ({ project: english }: ProjectDetailProps) => {
+  const { language } = useLanguage();
+  const t = useStrings();
+  // The page's own text in the page's language, with English wherever a
+  // translation is missing; `inEnglish` marks those parts for screen readers.
+  const { project, fallback } = localizeProject(english, language);
+  const inEnglish = (field: Parameters<typeof fallback.has>[0]) => (fallback.has(field) ? 'en' : undefined);
+  const appInLanguage = appLanguage(project, language);
   const Icon = project.icon;
   const accent = ACCENTS[project.accent];
   // A shipped app's page is a product page: the download button moves up into
@@ -19,7 +28,7 @@ export const ProjectDetail = ({ project }: ProjectDetailProps) => {
   // Experiments") gives way to plain product language.
   const shipped = isShipped(project);
   const labNotes = getLabNotesFor(project.slug);
-  const downloadLabel = project.platform === 'iOS' ? 'Download on the App Store' : 'Download on the Mac App Store';
+  const downloadLabel = t.project.download(project.platform);
   // Unannounced projects have no page to link to, so they stay off this list.
   const relatedProjects = projects.filter(
     (item) => item.slug !== project.slug && isAnnounced(item),
@@ -35,7 +44,7 @@ export const ProjectDetail = ({ project }: ProjectDetailProps) => {
           className="inline-flex items-center gap-2 text-sm font-mono font-bold text-zinc-400 light:text-zinc-600 hover:text-white light:hover:text-zinc-900 transition-colors mb-10"
         >
           <ArrowLeft className="w-4 h-4" />
-          Back to Lab
+          {t.project.backToLab}
         </motion.a>
 
         <section className="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-6 lg:gap-10 items-stretch">
@@ -55,14 +64,14 @@ export const ProjectDetail = ({ project }: ProjectDetailProps) => {
                   {project.platform}
                 </span>
                 <span className="px-4 py-2 rounded-full bg-zinc-800 light:bg-zinc-100 text-zinc-300 light:text-zinc-700 font-mono font-bold text-sm">
-                  {project.status}
+                  {t.status[project.status] ?? project.status}
                 </span>
               </div>
 
               <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white light:text-zinc-900 uppercase mb-6">
                 {project.name}
               </h1>
-              <p className="text-xl sm:text-2xl text-zinc-300 light:text-zinc-700 font-medium leading-relaxed max-w-3xl">
+              <p lang={inEnglish('summary')} className="text-xl sm:text-2xl text-zinc-300 light:text-zinc-700 font-medium leading-relaxed max-w-3xl">
                 {project.summary}
               </p>
 
@@ -82,20 +91,28 @@ export const ProjectDetail = ({ project }: ProjectDetailProps) => {
                       {project.price ? (
                         <>
                           <dt className="text-xs font-mono font-black text-zinc-400 light:text-zinc-600 uppercase tracking-widest">
-                            Price
+                            {t.project.price}
                           </dt>
-                          <dd className="font-bold text-zinc-200 light:text-zinc-800">{project.price}</dd>
+                          <dd lang={inEnglish('price')} className="font-bold text-zinc-200 light:text-zinc-800">{project.price}</dd>
                         </>
                       ) : null}
                       {project.requires ? (
                         <>
                           <dt className="text-xs font-mono font-black text-zinc-400 light:text-zinc-600 uppercase tracking-widest">
-                            Requires
+                            {t.project.requires}
                           </dt>
-                          <dd className="font-bold text-zinc-200 light:text-zinc-800">{project.requires}</dd>
+                          <dd lang={inEnglish('requires')} className="font-bold text-zinc-200 light:text-zinc-800">{project.requires}</dd>
                         </>
                       ) : null}
                     </dl>
+                  ) : null}
+                  {/* So nobody buys expecting a language the app doesn't have yet. */}
+                  {appInLanguage.state === 'no' ? (
+                    <p className="text-sm font-medium text-zinc-400 light:text-zinc-600">{t.project.appOnlyInEnglish}</p>
+                  ) : appInLanguage.state === 'coming' && appInLanguage.version ? (
+                    <p className="text-sm font-medium text-zinc-400 light:text-zinc-600">
+                      {t.project.appLanguageComing(appInLanguage.version)}
+                    </p>
                   ) : null}
                 </div>
               ) : null}
@@ -109,9 +126,9 @@ export const ProjectDetail = ({ project }: ProjectDetailProps) => {
             className="border-4 border-zinc-800 light:border-zinc-200 bg-[#0f0f12] light:bg-zinc-50 rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-8"
           >
             <div className="text-xs font-mono font-black text-zinc-400 light:text-zinc-600 uppercase tracking-widest mb-4">
-              {shipped ? 'Overview' : 'Current Focus'}
+              {shipped ? t.project.overview : t.project.currentFocus}
             </div>
-            <p className={'text-zinc-300 light:text-zinc-700 font-medium leading-relaxed whitespace-pre-line' + (shipped ? '' : ' mb-8')}>
+            <p lang={inEnglish('description')} className={'text-zinc-300 light:text-zinc-700 font-medium leading-relaxed whitespace-pre-line' + (shipped ? '' : ' mb-8')}>
               {project.description}
             </p>
             {shipped ? null : project.appStoreUrl ? (
@@ -129,7 +146,7 @@ export const ProjectDetail = ({ project }: ProjectDetailProps) => {
                 href="mailto:retrac.labs@gmail.com"
                 className="inline-flex items-center justify-center gap-2 w-full px-5 py-4 rounded-2xl bg-white light:bg-zinc-900 text-black light:text-white font-black border-2 border-white light:border-zinc-900 hover:bg-yellow-400 light:hover:text-zinc-900 hover:border-yellow-400 transition-colors"
               >
-                Ask About This
+                {t.project.askAboutThis}
                 <ArrowUpRight className="w-5 h-5" />
               </a>
             )}
@@ -137,13 +154,19 @@ export const ProjectDetail = ({ project }: ProjectDetailProps) => {
         </section>
 
         {project.screenshots?.length ? (
-          <ScreenshotGallery name={project.name} screenshots={project.screenshots} accent={accent} />
+          <ScreenshotGallery
+            name={project.name}
+            screenshots={project.screenshots}
+            accent={accent}
+            currentVersion={project.version?.current}
+            languageSince={project.languageSince}
+          />
         ) : null}
 
         {project.version ? (
           /* A shipped app gets a straight comparison: what is on your Mac now
              against what the next build adds, instead of a vague roadmap. */
-          <section className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+          <section lang={inEnglish('version')} className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
@@ -151,12 +174,12 @@ export const ProjectDetail = ({ project }: ProjectDetailProps) => {
               className="border-4 border-zinc-800 light:border-zinc-200 bg-zinc-900 light:bg-white rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-8"
             >
               <div className="flex items-baseline justify-between gap-3 mb-2">
-                <h2 className="text-2xl font-black text-white light:text-zinc-900">Latest Version</h2>
+                <h2 lang={language} className="text-2xl font-black text-white light:text-zinc-900">{t.project.latestVersion}</h2>
                 <span className={'px-3 py-1 rounded-full bg-zinc-800 light:bg-zinc-100 font-mono font-black text-sm ' + accent.text}>
                   {project.version.current}
                 </span>
               </div>
-              <p className="text-sm text-zinc-400 light:text-zinc-600 font-mono mb-6">Shipping today.</p>
+              <p lang={language} className="text-sm text-zinc-400 light:text-zinc-600 font-mono mb-6">{t.project.shippingToday}</p>
               <div className="space-y-4">
                 {project.version.currentFeatures.map((feature) => (
                   <div key={feature} className="flex gap-3 text-zinc-300 light:text-zinc-700 font-medium">
@@ -174,12 +197,12 @@ export const ProjectDetail = ({ project }: ProjectDetailProps) => {
               className="border-4 border-dashed border-zinc-800 light:border-zinc-200 bg-[#0f0f12] light:bg-zinc-50 rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-8"
             >
               <div className="flex items-baseline justify-between gap-3 mb-2">
-                <h2 className="text-2xl font-black text-white light:text-zinc-900">Next Version</h2>
+                <h2 lang={language} className="text-2xl font-black text-white light:text-zinc-900">{t.project.nextVersion}</h2>
                 <span className="px-3 py-1 rounded-full bg-zinc-800 light:bg-zinc-100 text-zinc-400 light:text-zinc-600 font-mono font-black text-sm">
                   {project.version.next}
                 </span>
               </div>
-              <p className="text-sm text-zinc-400 light:text-zinc-600 font-mono mb-6">In the lab. Not shipped yet.</p>
+              <p lang={language} className="text-sm text-zinc-400 light:text-zinc-600 font-mono mb-6">{t.project.notShippedYet}</p>
               <div className="space-y-4">
                 {project.version.nextFeatures.map((feature) => (
                   <div key={feature} className="flex gap-3 text-zinc-400 light:text-zinc-600 font-medium">
@@ -199,8 +222,8 @@ export const ProjectDetail = ({ project }: ProjectDetailProps) => {
                 transition={{ duration: 0.55, delay: 0.18 }}
                 className="border-4 border-zinc-800 light:border-zinc-200 bg-zinc-900 light:bg-white rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-8"
               >
-                <h2 className="text-2xl font-black text-white light:text-zinc-900 mb-6">What It Is</h2>
-                <div className="space-y-4">
+                <h2 className="text-2xl font-black text-white light:text-zinc-900 mb-6">{t.project.whatItIs}</h2>
+                <div lang={inEnglish('highlights')} className="space-y-4">
                   {project.highlights.map((highlight) => (
                     <div key={highlight} className="flex gap-3 text-zinc-300 light:text-zinc-700 font-medium">
                       <CheckCircle2 className={'w-5 h-5 mt-0.5 shrink-0 ' + accent.text} />
@@ -219,9 +242,9 @@ export const ProjectDetail = ({ project }: ProjectDetailProps) => {
                 className="border-4 border-zinc-800 light:border-zinc-200 bg-zinc-900 light:bg-white rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-8"
               >
                 <h2 className="text-2xl font-black text-white light:text-zinc-900 mb-6">
-                  {shipped ? 'Coming Next' : 'Next Steps'}
+                  {shipped ? t.project.comingNext : t.project.nextSteps}
                 </h2>
-                <div className="space-y-4">
+                <div lang={inEnglish('nextSteps')} className="space-y-4">
                   {project.nextSteps.map((step, index) => (
                     <div key={step} className="flex gap-3 text-zinc-300 light:text-zinc-700 font-medium">
                       <span className={'font-mono font-black ' + accent.text}>
@@ -245,8 +268,8 @@ export const ProjectDetail = ({ project }: ProjectDetailProps) => {
             transition={{ duration: 0.55, delay: 0.3 }}
             className="border-4 border-zinc-800 light:border-zinc-200 bg-zinc-900 light:bg-white rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-8 mt-6"
           >
-            <h2 className="text-2xl font-black text-white light:text-zinc-900 mb-6">What It Is</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <h2 className="text-2xl font-black text-white light:text-zinc-900 mb-6">{t.project.whatItIs}</h2>
+            <div lang={inEnglish('highlights')} className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {project.highlights.map((highlight) => (
                 <div key={highlight} className="flex gap-3 text-zinc-300 light:text-zinc-700 font-medium">
                   <CheckCircle2 className={'w-5 h-5 mt-0.5 shrink-0 ' + accent.text} />
@@ -276,13 +299,19 @@ export const ProjectDetail = ({ project }: ProjectDetailProps) => {
                 </div>
                 <div className="flex-1">
                   <div className="text-xs font-mono font-black text-zinc-400 light:text-zinc-600 uppercase tracking-widest mb-2">
-                    Lab Notes
+                    {t.project.labNotes}
+                    {/* Notes aren't translated yet: say so before the click. */}
+                    {t.project.inEnglish ? ` · ${t.project.inEnglish}` : null}
                   </div>
-                  <h2 className="text-2xl font-black text-white light:text-zinc-900 mb-2">{note.title}</h2>
-                  <p className="text-zinc-400 light:text-zinc-600 font-medium leading-relaxed">{note.blurb}</p>
+                  <h2 lang="en" className="text-2xl font-black text-white light:text-zinc-900 mb-2">{note.title}</h2>
+                  {language !== 'en' && note.translations?.[language] ? (
+                    <p className="text-zinc-400 light:text-zinc-600 font-medium leading-relaxed">{note.translations[language]!.blurb}</p>
+                  ) : (
+                    <p lang="en" className="text-zinc-400 light:text-zinc-600 font-medium leading-relaxed">{note.blurb}</p>
+                  )}
                 </div>
                 <span className={'inline-flex items-center gap-2 font-mono font-black text-sm shrink-0 ' + accent.text}>
-                  Read the Note
+                  {t.project.readNote}
                   <ArrowUpRight className="w-5 h-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </span>
               </a>
@@ -293,7 +322,7 @@ export const ProjectDetail = ({ project }: ProjectDetailProps) => {
         {relatedProjects.length ? (
           <section className="mt-14">
             <div className="text-xs font-mono font-black text-zinc-400 light:text-zinc-600 uppercase tracking-widest mb-4">
-              {shipped ? 'More From Retrac Labs' : 'Other Experiments'}
+              {shipped ? t.project.moreFrom : t.project.otherExperiments}
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {relatedProjects.map((relatedProject) => {

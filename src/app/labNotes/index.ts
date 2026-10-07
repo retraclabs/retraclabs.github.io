@@ -1,4 +1,5 @@
 import type { ComponentType } from 'react';
+import type { Language } from '../data/languages';
 import { WhyNotWhisper } from './WhyNotWhisper';
 
 /* Lab notes: research that backs up what a product page claims. Benchmarks,
@@ -29,6 +30,9 @@ export type LabNote = {
   /** When the work was done. Measurements go stale, so say when they were taken. */
   dateline?: string;
   Body: ComponentType;
+  /** The card's blurb in other languages. The note itself is English only
+   *  for now; the card says so beside its label. */
+  translations?: Partial<Record<Exclude<Language, 'en'>, { blurb: string }>>;
 };
 
 export const LAB_NOTES: LabNote[] = [
@@ -44,6 +48,13 @@ export const LAB_NOTES: LabNote[] = [
       'that decided it, including the ones that went against it.',
     dateline: 'Measured September 13, 2026 · Rechecked September 22, 2026',
     Body: WhyNotWhisper,
+    translations: {
+      es: {
+        blurb:
+          'Por qué Apunte usa el reconocimiento de voz que viene con macOS en lugar de Whisper, con las mediciones ' +
+          'que lo decidieron, incluidas las que salieron en su contra.',
+      },
+    },
   },
 ];
 

@@ -5,7 +5,7 @@ import { ArrowLeft } from 'lucide-react';
 /* Keep this date current. Any substantive edit to the text below should move it,
    because "Last updated" is the first thing anyone checks when they want to know
    whether a policy still describes what actually happens. */
-const LAST_UPDATED = 'October 3, 2026';
+const LAST_UPDATED = 'October 5, 2026';
 
 const Section = ({ title, children }: { title: string; children: React.ReactNode }) => (
     <section>
@@ -304,8 +304,22 @@ export const PrivacyPolicy = () => {
                             </p>
                             <p>
                                 If you ask Siri about your cycle, Siri handles the request under Apple's
-                                privacy policy, and Amparo answers only while your iPhone is unlocked.
-                                Reminders and symptom heads-ups are notifications scheduled on your iPhone.
+                                privacy policy, and Amparo answers only while your iPhone is unlocked. The
+                                Quick Log widget and Amparo's control in Control Center also log only while
+                                your iPhone is unlocked, and with Discreet Mode on, the control says nothing
+                                about your cycle. Reminders and symptom heads-ups are notifications scheduled
+                                on your iPhone.
+                            </p>
+                            <p>
+                                Send Feedback, in Amparo's Settings, opens a draft in your own Mail app,
+                                addressed to Retrac Labs, with only the Amparo and iOS version numbers filled
+                                in. Nothing is sent unless you send it, and Amparo never adds your cycle data
+                                to it. An email you send is ordinary correspondence, kept as described in
+                                "How Long We Keep Things." Amparo may also show Apple's standard prompt to
+                                rate the app, at most once per version. Any rating or review you leave goes to
+                                Apple under Apple's terms, and Amparo never learns what you chose.
+                            </p>
+                            <p>
                                 Keep My History can delete older entries automatically, Delete Everything
                                 destroys Amparo's database and cancels its reminders, and deleting the app
                                 does the same. Your data stays yours: private, local, and fully under your

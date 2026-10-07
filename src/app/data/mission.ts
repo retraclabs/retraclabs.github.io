@@ -6,7 +6,12 @@
    The order of MISSION is load-bearing. The reader's stake comes first and the
    proof second, because "ships without the network entitlement" is a devastating
    fact only to somebody who has already decided to care. Lead with it and you
-   have answered a question nobody asked yet. */
+   have answered a question nobody asked yet.
+
+   The homepage shows it in the visitor's language (MISSION_IN, below); the
+   About page is English only for now and uses the English exports. */
+
+import type { Language } from './languages';
 
 /** One line. For a LinkedIn headline, an email signature, a badge. */
 export const MISSION_SHORT = "Can't, Not Won't.";
@@ -24,3 +29,20 @@ export const MISSION = [
  *  contact than what they refuse to do. */
 export const CRAFT_LINE =
   'Playful, powerful, and precise experiences for the Apple ecosystem. Currently experimenting in the laboratory.';
+
+/** The same three tiers in each language the homepage offers. Spanish keeps
+ *  the order and the weight: the stake, then the proof, then the closer. */
+export const MISSION_IN: Record<Language, { short: string; lines: string[]; craft: string }> = {
+  en: { short: MISSION_SHORT, lines: MISSION, craft: CRAFT_LINE },
+  es: {
+    short: 'No podemos, no es que no queramos.',
+    lines: [
+      'Tu trabajo y tu vida viven en tu Mac.',
+      'Retrac Labs crea apps para que ambos sigan siendo tuyos.',
+      'No porque prometamos no mirar, sino porque las apps salen sin ninguna forma de que podamos hacerlo.',
+    ],
+    craft:
+      'Experiencias divertidas, potentes y precisas para el ecosistema de Apple. Por ahora, experimentando en el laboratorio.',
+  },
+};
+

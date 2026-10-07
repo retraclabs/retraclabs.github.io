@@ -3,7 +3,9 @@ import { motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 import { projects, isAnnounced, type Project } from '../data/projects';
 import { ACCENTS, SPANS } from '../data/accents';
-import { MISSION, MISSION_SHORT, CRAFT_LINE } from '../data/mission';
+import { MISSION_IN } from '../data/mission';
+import { useLanguage, useStrings } from '../i18n/context';
+import { localizeProject } from '../i18n/projects';
 
 const openProject = (slug: string) => {
   window.location.hash = `#/projects/${slug}`;
@@ -12,7 +14,10 @@ const openProject = (slug: string) => {
 /* One card, built from the project's own data. Every card in the grid comes
    through here, which is why reordering the `projects` array is all it takes to
    reorder the page; there is no per-project markup left to keep in sync. */
-const ProjectCard = ({ project, index }: { project: Project; index: number }) => {
+const ProjectCard = ({ project: english, index }: { project: Project; index: number }) => {
+  const { language } = useLanguage();
+  const t = useStrings();
+  const { project, fallback } = localizeProject(english, language);
   const accent = ACCENTS[project.accent];
   const Icon = project.icon;
   const announced = isAnnounced(project);
@@ -40,7 +45,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
                 'px-4 py-2 rounded-full font-mono font-bold text-sm border ' + accent.pill
               }
             >
-              {project.status}
+              {t.status[project.status] ?? project.status}
             </span>
           </div>
         </div>
@@ -50,7 +55,10 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
           {/* Announced projects show the full summary. Unannounced ones fall back
               to the one-line teaser, which says what the thing does without
               naming it or announcing it. */}
-          <p className="text-zinc-400 light:text-zinc-600 font-medium max-w-lg">
+          <p
+            lang={fallback.has(announced ? 'summary' : 'teaser') ? 'en' : undefined}
+            className="text-zinc-400 light:text-zinc-600 font-medium max-w-lg"
+          >
             {announced ? project.summary : project.teaser}
           </p>
         </div>
@@ -89,7 +97,12 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
   );
 };
 
-export const LabSection = () => (
+export const LabSection = () => {
+  const { language } = useLanguage();
+  const t = useStrings();
+  const mission = MISSION_IN[language];
+
+  return (
   <section id="apps" className="py-16 sm:py-24 px-4 sm:px-6 relative z-10">
     <div className="max-w-6xl mx-auto">
       <div id="about" className="flex flex-col items-center mb-24 sm:mb-40 pt-10 sm:pt-12 scroll-mt-32">
@@ -104,19 +117,19 @@ export const LabSection = () => (
           className="max-w-4xl mx-auto text-center mb-10 sm:mb-12"
         >
           <div className="text-xs sm:text-sm font-mono font-black text-cyan-400 light:text-cyan-700 uppercase tracking-widest mb-6">
-            {MISSION_SHORT}
+            {mission.short}
           </div>
 
           <p className="text-2xl sm:text-3xl md:text-4xl font-black text-white light:text-zinc-900 leading-[1.15] tracking-tight mb-6">
-            {MISSION[0]} {MISSION[1]}
+            {mission.lines[0]} {mission.lines[1]}
           </p>
 
           <p className="text-lg sm:text-xl md:text-2xl text-zinc-400 light:text-zinc-600 font-medium leading-relaxed mb-8">
-            {MISSION[2]}
+            {mission.lines[2]}
           </p>
 
           <p className="text-sm sm:text-base text-zinc-400 light:text-zinc-600 font-medium leading-relaxed max-w-2xl mx-auto">
-            {CRAFT_LINE}
+            {mission.craft}
           </p>
         </motion.div>
 
@@ -134,7 +147,7 @@ export const LabSection = () => (
             whileTap={{ y: 0, x: 0, boxShadow: '0px 0px 0px 0px rgba(244,114,182,1)' }}
             className="group flex items-center justify-center gap-3 px-7 sm:px-8 py-4 rounded-2xl bg-white light:bg-zinc-900 text-black light:text-white font-black tracking-wide border-2 border-white light:border-zinc-900 transition-all"
           >
-            Visit the Lab
+            {t.home.visitLab}
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </motion.a>
 
@@ -145,7 +158,7 @@ export const LabSection = () => (
             whileTap={{ y: 0, x: 0, boxShadow: '0px 0px 0px 0px rgba(34,211,238,1)' }}
             className="flex items-center justify-center px-7 sm:px-8 py-4 rounded-2xl bg-zinc-900 light:bg-white text-white light:text-zinc-900 font-bold tracking-wide border-2 border-zinc-700 light:border-zinc-300 hover:border-cyan-400 transition-all"
           >
-            Get Early Access
+            {t.home.earlyAccess}
           </motion.a>
         </motion.div>
       </div>
@@ -157,10 +170,10 @@ export const LabSection = () => (
         className="flex flex-col items-center mb-12 sm:mb-16 space-y-4"
       >
         <div className="px-4 py-1.5 rounded-full border-2 border-zinc-800 light:border-zinc-200 bg-zinc-900 light:bg-white text-xs font-black font-mono text-zinc-400 light:text-zinc-600 uppercase tracking-widest">
-          Current Projects
+          {t.home.currentProjects}
         </div>
-        <h2 className="text-4xl md:text-6xl font-black text-white light:text-zinc-900 uppercase">
-          In the <span className="text-yellow-400 light:text-yellow-700">Lab</span>
+        <h2 className="text-4xl md:text-6xl font-black text-white light:text-zinc-900 uppercase text-center">
+          {t.home.inThe} <span className="text-yellow-400 light:text-yellow-700">{t.home.lab}</span>
         </h2>
       </motion.div>
 
@@ -169,7 +182,7 @@ export const LabSection = () => (
           cards underneath the bar. */}
       <div
         id="lab-grid"
-        className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-5 sm:gap-6 auto-rows-[300px] sm:auto-rows-[280px] scroll-mt-32"
+        className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-5 sm:gap-6 auto-rows-[minmax(300px,auto)] sm:auto-rows-[minmax(280px,auto)] scroll-mt-32"
       >
         {projects.map((project, index) => (
           <ProjectCard key={project.slug} project={project} index={index} />
@@ -177,4 +190,5 @@ export const LabSection = () => (
       </div>
     </div>
   </section>
-);
+  );
+};

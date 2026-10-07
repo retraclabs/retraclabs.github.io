@@ -1,13 +1,25 @@
 import { AudioLines, Hash, Mic, Scissors, Smartphone, Zap, type LucideIcon } from 'lucide-react';
+import type { Language } from './languages';
 import apunteTranscript from '../assets/apunte/transcript.webp';
+import apunteLive from '../assets/apunte/live.webp';
+import apunteSummary from '../assets/apunte/summary.webp';
 import apunteReviewMode from '../assets/apunte/review-mode.webp';
 import apunteSpeakerNames from '../assets/apunte/speaker-names.webp';
-import apunteSummary from '../assets/apunte/summary.webp';
+import apunteClip from '../assets/apunte/clip.webp';
 import apunteLibrarySearch from '../assets/apunte/library-search.webp';
 import apunteExportFormats from '../assets/apunte/export-formats.webp';
-import apunteLive from '../assets/apunte/live.webp';
-import apunteMultiSelect from '../assets/apunte/multi-select.webp';
+import apunteSkins from '../assets/apunte/skins.webp';
 import apuntePrivacy from '../assets/apunte/privacy.webp';
+import apunteTranscriptEs from '../assets/apunte/es/transcript.webp';
+import apunteLiveEs from '../assets/apunte/es/live.webp';
+import apunteSummaryEs from '../assets/apunte/es/summary.webp';
+import apunteReviewModeEs from '../assets/apunte/es/review-mode.webp';
+import apunteSpeakerNamesEs from '../assets/apunte/es/speaker-names.webp';
+import apunteClipEs from '../assets/apunte/es/clip.webp';
+import apunteLibrarySearchEs from '../assets/apunte/es/library-search.webp';
+import apunteExportFormatsEs from '../assets/apunte/es/export-formats.webp';
+import apunteSkinsEs from '../assets/apunte/es/skins.webp';
+import apuntePrivacyEs from '../assets/apunte/es/privacy.webp';
 import retazoMenuBar from '../assets/retazo/menu-bar.webp';
 import retazoSkins from '../assets/retazo/skins.webp';
 import retazoImageClips from '../assets/retazo/image-clips.webp';
@@ -15,6 +27,24 @@ import retazoShortcut from '../assets/retazo/shortcut.webp';
 import retazoPrivacy from '../assets/retazo/privacy.webp';
 import retazoHistory from '../assets/retazo/history.webp';
 import retazoSnippets from '../assets/retazo/snippets.webp';
+import amparoHome from '../assets/amparo/home.webp';
+import amparoPrivacy from '../assets/amparo/privacy.webp';
+import amparoInsights from '../assets/amparo/insights.webp';
+import amparoPatterns from '../assets/amparo/patterns.webp';
+import amparoCalendar from '../assets/amparo/calendar.webp';
+import amparoLog from '../assets/amparo/log.webp';
+import amparoMove from '../assets/amparo/move-to-a-new-iphone.webp';
+import amparoHistory from '../assets/amparo/bring-your-history.webp';
+import amparoIcons from '../assets/amparo/app-icons.webp';
+import amparoHomeEs from '../assets/amparo/es/home.webp';
+import amparoPrivacyEs from '../assets/amparo/es/privacy.webp';
+import amparoInsightsEs from '../assets/amparo/es/insights.webp';
+import amparoPatternsEs from '../assets/amparo/es/patterns.webp';
+import amparoCalendarEs from '../assets/amparo/es/calendar.webp';
+import amparoLogEs from '../assets/amparo/es/log.webp';
+import amparoHistoryEs from '../assets/amparo/es/bring-your-history.webp';
+import amparoIconsEs from '../assets/amparo/es/app-icons.webp';
+import amparoMoveEs from '../assets/amparo/es/move-to-a-new-iphone.webp';
 
 /** How wide a card sits in the six-column Lab grid. See LabSection.tsx. */
 export type ProjectSpan = 'full' | 'two-thirds' | 'half' | 'third';
@@ -65,6 +95,13 @@ export type Project = {
   requires?: string;
   /** In the order they should appear. Files go in src/app/assets/<slug>/. */
   screenshots?: Screenshot[];
+  /** The version in which the app itself arrives in a language other than
+   *  English, e.g. { es: '1.2' }. While `version.current` is older, that
+   *  language's product page says the app is in English for now and that the
+   *  language arrives in this version, and its screenshots say the same. Once
+   *  `current` reaches it, both notes go away by themselves. A project with
+   *  no entry for a language is English-only, and its page says so. */
+  languageSince?: Partial<Record<Exclude<Language, 'en'>, string>>;
 };
 
 export type Screenshot = {
@@ -76,9 +113,31 @@ export type Screenshot = {
   /** Marks a feature that needs a paid upgrade, so the page never implies it
    *  is free. */
   premium?: boolean;
+  /** The version the pictured feature arrives in, for a screenshot taken from
+   *  a build that isn't out yet. While the project's `version.current` is
+   *  older, the picture is tagged "Coming in 1.3"; once `current` reaches it,
+   *  the tag goes away by itself. */
+  since?: string;
   /** Pixel size of the file. Defaults to 1600 × 1000, the size Mac screenshots
    *  are exported at. Give the real size for anything else: a portrait iPhone
    *  screenshot gets a narrower frame so it does not tower over the page. */
+  width?: number;
+  height?: number;
+  /** The same screenshot from the app running in another language, with alt
+   *  text and a caption in that language. The gallery shows a language switch
+   *  once any screenshot has one. See MAINTAINING.md → "Screenshots in Other
+   *  Languages". */
+  translations?: Partial<Record<Exclude<Language, 'en'>, ScreenshotTranslation>>;
+};
+
+export type ScreenshotTranslation = {
+  /** The picture from the app running in this language. Leave it out for an
+   *  app that isn't in this language yet: the English picture then shows with
+   *  this alt text and caption, which describe it in this language. */
+  src?: string;
+  alt: string;
+  caption: string;
+  /** Only when this file's size differs from the English one's. */
   width?: number;
   height?: number;
 };
@@ -228,57 +287,138 @@ export const projects: Project[] = [
     },
     price: 'Free, with Premium as a subscription or a one-time purchase',
     requires: 'macOS 26 or later',
+    languageSince: { es: '1.2' },
     screenshots: [
       {
         src: apunteTranscript,
-        alt: 'Apunte\'s main window: a meeting transcript with a timestamp on every line, and a library of recordings in the sidebar.',
+        alt: 'Apunte\'s main window: a meeting transcript with a timestamp on every line, the library of recordings in the sidebar, and the player along the bottom.',
         caption: 'Every line timestamped, and transcribed entirely on your Mac.',
+        translations: {
+          es: {
+            src: apunteTranscriptEs,
+            alt: 'La ventana principal de Apunte: la transcripción de una reunión con una marca de tiempo en cada línea, la biblioteca de grabaciones en la barra lateral y el reproductor abajo.',
+            caption: 'Cada línea con su marca de tiempo, transcrita por completo en tu Mac.',
+          },
+        },
       },
       {
         src: apunteLive,
         alt: 'A live session in call mode: the header reads Listening, seven lines have arrived, and the bar shows two level meters, one for the microphone and one for other apps.',
         caption: 'Live, from the microphone or from a call on headphones, with both sides in one transcript.',
         premium: true,
+        translations: {
+          es: {
+            src: apunteLiveEs,
+            alt: 'Una sesión en vivo en modo de llamada: el encabezado dice Escuchando, han llegado siete líneas y la barra muestra dos medidores de nivel, uno para el micrófono y otro para las demás apps.',
+            caption: 'En vivo, desde el micrófono o desde una llamada con audífonos, con ambos lados en una sola transcripción.',
+          },
+        },
       },
       {
         src: apunteSummary,
-        alt: 'A summary of a meeting recording: an overview paragraph, key points, and action items.',
+        alt: 'A summary of a meeting recording: an overview paragraph, key points, and action items, under the minutes they cover.',
         caption: 'An overview, key points, and action items for each part of a recording, generated on your Mac.',
         premium: true,
+        translations: {
+          es: {
+            src: apunteSummaryEs,
+            alt: 'El resumen de la grabación de una reunión: un párrafo general, puntos clave y tareas pendientes, bajo los minutos que abarcan.',
+            caption: 'Un resumen general, puntos clave y tareas pendientes por cada parte de una grabación, generados en tu Mac.',
+          },
+        },
       },
       {
         src: apunteReviewMode,
-        alt: 'The same transcript in review mode, with three uncertain lines underlined and a count of three in the toolbar.',
+        alt: 'The same transcript in review mode, with three uncertain lines underlined and "3 to check" in the toolbar.',
         caption: 'Review mode marks the lines Apunte was unsure of, so you check those instead of rereading everything.',
+        translations: {
+          es: {
+            src: apunteReviewModeEs,
+            alt: 'La misma transcripción en modo de revisión, con tres líneas dudosas subrayadas y "3 por revisar" en la barra de herramientas.',
+            caption: 'El modo de revisión marca las líneas de las que Apunte no estaba seguro, para que revises solo esas en lugar de releerlo todo.',
+          },
+        },
       },
       {
         src: apunteSpeakerNames,
-        alt: 'An interview transcript with the speaker\'s name above each line.',
+        alt: 'An interview transcript with each speaker\'s name above their lines, and each speaker in their own color.',
         caption: 'Label who is speaking on any line. Names carry into every export.',
         premium: true,
+        translations: {
+          es: {
+            src: apunteSpeakerNamesEs,
+            alt: 'La transcripción de una entrevista con el nombre de cada hablante sobre sus líneas, y cada hablante en su propio color.',
+            caption: 'Indica quién habla en cualquier línea. Los nombres van en todas las exportaciones.',
+          },
+        },
+      },
+      {
+        src: apunteClip,
+        alt: 'Three lines of a meeting transcript selected, and a bar offering to export their audio as a clip.',
+        caption: 'Select any lines and export just their audio as a clip. The whole recording exports free.',
+        premium: true,
+        since: '1.3',
+        width: 1600,
+        height: 788,
+        translations: {
+          es: {
+            src: apunteClipEs,
+            alt: 'Tres líneas de la transcripción de una reunión seleccionadas, y una barra que ofrece exportar su audio como clip.',
+            caption: 'Selecciona las líneas que quieras y exporta solo su audio como clip. La grabación completa se exporta gratis.',
+          },
+        },
       },
       {
         src: apunteLibrarySearch,
         alt: 'Search results for the word memory across the library, each with its timestamp.',
         caption: 'Find a phrase across every transcript you have, down to the line.',
         premium: true,
+        translations: {
+          es: {
+            src: apunteLibrarySearchEs,
+            alt: 'Resultados de búsqueda de la palabra memoria en toda la biblioteca, cada uno con su marca de tiempo.',
+            caption: 'Encuentra una frase en todas tus transcripciones, hasta la línea exacta.',
+          },
+        },
       },
       {
         src: apunteExportFormats,
-        alt: 'The export menu: plain text, timestamped text, and JSON listed as included, then SubRip, WebVTT, CSV, Markdown, HTML, PDF, and Word as more formats.',
+        alt: 'The export menu: plain text, timestamped text, and JSON listed as included, the recording under Audio, then SubRip, WebVTT, CSV, Markdown, HTML, PDF, and Word as more formats.',
         caption: 'Plain text, timestamped text, and JSON export are free. SRT, WebVTT, CSV, Markdown, HTML, PDF, and Word come with Premium.',
+        translations: {
+          es: {
+            src: apunteExportFormatsEs,
+            alt: 'El menú Exportar: texto sin formato, texto con marcas de tiempo y JSON como incluidos, la grabación en Audio, y luego SubRip, WebVTT, CSV, Markdown, HTML, PDF y Word como más formatos.',
+            caption: 'Exportar a texto sin formato, texto con marcas de tiempo y JSON es gratis. SRT, WebVTT, CSV, Markdown, HTML, PDF y Word vienen con Premium.',
+          },
+        },
       },
       {
-        src: apunteMultiSelect,
-        alt: 'Two transcripts selected in the sidebar, and a pane offering to delete both.',
-        caption: 'Select several transcripts to delete them, or to erase their audio, together.',
+        src: apunteSkins,
+        alt: 'The interview in Steno: pale green paper, a red rule between the timestamps and the text, and speaker names in deep colors.',
+        caption: 'Five looks, among them Steno, a stenographer\'s pad that is Apunte\'s own.',
+        since: '1.3',
+        translations: {
+          es: {
+            src: apunteSkinsEs,
+            alt: 'La entrevista en Taquigrafía: papel verde claro, una línea roja entre las marcas de tiempo y el texto, y los nombres de los hablantes en colores intensos.',
+            caption: 'Cinco estilos, entre ellos Taquigrafía, una libreta de taquígrafo propia de Apunte.',
+          },
+        },
       },
       {
         src: apuntePrivacy,
-        alt: 'The Privacy pane: Apunte makes no network calls, with the codesign command that verifies it and a note that stored audio is encrypted with a key in the Secure Enclave.',
+        alt: 'The Privacy pane: Apunte makes no network calls, with the codesign command that verifies it, a note that stored audio is encrypted with a key in the Secure Enclave, and the switch that locks Apunte with Touch ID or your password.',
         caption: 'No network entitlement, and the command that proves it.',
         width: 1120,
         height: 1416,
+        translations: {
+          es: {
+            src: apuntePrivacyEs,
+            alt: 'El panel Privacidad: Apunte no hace llamadas de red, con el comando codesign que lo comprueba, una nota de que el audio guardado se cifra con una clave en el Secure Enclave, y el interruptor que bloquea Apunte con Touch ID o tu contraseña.',
+            caption: 'Sin permiso de red, y el comando que lo demuestra.',
+          },
+        },
       },
     ],
   },
@@ -335,36 +475,78 @@ export const projects: Project[] = [
         src: retazoMenuBar,
         alt: 'Retazo\'s panel open below the scissors icon in the menu bar, listing recent clips: a pinned email address, a one-time code, meeting notes, links, a screenshot, and a line of code, each with the app it came from.',
         caption: 'Everything you copy, kept in the menu bar. Click a clip, and ⌘V pastes it where you were.',
+        translations: {
+          es: {
+            alt: 'El panel de Retazo abierto bajo el ícono de tijeras en la barra de menús, con los recortes recientes: un correo electrónico fijado, un código de un solo uso, notas de una reunión, enlaces, una captura de pantalla y una línea de código, cada uno con la app de la que vino.',
+            caption: 'Todo lo que copias, guardado en la barra de menús. Haz clic en un recorte y ⌘V lo pega donde estabas.',
+          },
+        },
       },
       {
         src: retazoSkins,
         alt: 'The same list of clips in three skins side by side: frosted Liquid Glass, Tech in green on black, and Notepad on ruled paper with a highlighter.',
         caption: 'Glass, Tech, and Notepad, each with its own light and dark design. Switch any time in Settings.',
+        translations: {
+          es: {
+            alt: 'La misma lista de recortes en tres estilos, uno al lado del otro: Liquid Glass esmerilado, Tech en verde sobre negro y Notepad sobre papel rayado con un resaltador.',
+            caption: 'Glass, Tech y Notepad, cada uno con su diseño claro y oscuro. Cámbialos cuando quieras en la configuración.',
+          },
+        },
       },
       {
         src: retazoImageClips,
         alt: 'The History window with a screenshot of a Q3 Roadmap slide selected. The detail pane shows the image and, beneath it, the text read from it.',
         caption: 'Text in copied images is read on your Mac, so a search finds that one screenshot.',
+        translations: {
+          es: {
+            alt: 'La ventana de historial con la captura de una diapositiva de Q3 Roadmap seleccionada. El panel de detalle muestra la imagen y, debajo, el texto leído de ella.',
+            caption: 'El texto de las imágenes copiadas se lee en tu Mac, así que una búsqueda encuentra esa captura.',
+          },
+        },
       },
       {
         src: retazoShortcut,
         alt: 'Retazo\'s welcome screen in the Tech skin, showing the keys Control, Command, and V under the line Always One Shortcut Away.',
         caption: 'Press ⌃⌘V in any app to open your clips. No Accessibility or Input Monitoring permission needed.',
+        translations: {
+          es: {
+            alt: 'La pantalla de bienvenida de Retazo en el estilo Tech, con las teclas Control, Comando y V bajo la frase Always One Shortcut Away.',
+            caption: 'Presiona ⌃⌘V en cualquier app para abrir tus recortes. No necesita permisos de Accesibilidad ni de Monitoreo de entrada.',
+          },
+        },
       },
       {
         src: retazoPrivacy,
         alt: 'Retazo\'s Privacy settings in the Notepad skin: Skip Passwords and Hidden Copies, Forget One-Time Codes, and Remove Trackers From Links are checked, above buttons to pause capture and an Auto-Forget menu.',
         caption: 'Password manager copies are skipped, one-time codes fade after five minutes, and you can pause capture any time.',
+        translations: {
+          es: {
+            alt: 'La configuración de privacidad de Retazo en el estilo Notepad: Skip Passwords and Hidden Copies, Forget One-Time Codes y Remove Trackers From Links están marcadas, sobre los botones para pausar la captura y un menú de Auto-Forget.',
+            caption: 'Las copias de gestores de contraseñas no se guardan, los códigos de un solo uso desaparecen a los cinco minutos y puedes pausar la captura cuando quieras.',
+          },
+        },
       },
       {
         src: retazoHistory,
         alt: 'The History window in the Tech skin with three clips selected, and buttons to Copy Together, Pin All, or Delete them.',
         caption: 'Filter by kind or by the app a clip came from, then copy several together, or right-click for Copy As.',
+        translations: {
+          es: {
+            alt: 'La ventana de historial en el estilo Tech con tres recortes seleccionados y botones para Copy Together, Pin All o Delete.',
+            caption: 'Filtra por tipo o por la app de la que vino un recorte, copia varios juntos o haz clic derecho para Copy As.',
+          },
+        },
       },
       {
         src: retazoSnippets,
         alt: 'The Snippets tab listing saved text: an email signature, a studio address, a thank-you reply, a bug report template, an out-of-office message, and a weekly check-in.',
         caption: 'Save the text you retype, edit it any time, and copy it from the Shortcuts app, too.',
+        translations: {
+          es: {
+            alt: 'La pestaña Snippets con texto guardado: una firma de correo, la dirección de un estudio, una respuesta de agradecimiento, una plantilla de reporte de errores, un mensaje de fuera de la oficina y un seguimiento semanal.',
+            caption: 'Guarda el texto que escribes una y otra vez, edítalo cuando quieras y cópialo también desde la app Atajos.',
+          },
+        },
       },
     ],
   },
@@ -391,16 +573,8 @@ export const projects: Project[] = [
         'Pattern insights that describe your own rhythms: never a diagnosis, never a contraceptive',
     ],
     version: {
-      current: '1.0',
+      current: '1.1',
       currentFeatures: [
-        'Period, symptom, and mood logging in a calm, shame-free interface',
-        'Cycle and fertile-window predictions, calculated entirely on your iPhone',
-        'Calendar, charts, and insights that build up as you log',
-        'Home Screen and Lock Screen widgets, Live Activities, and Siri support',
-        'Face ID app lock, local reminders, and CSV export',
-      ],
-      next: '1.1',
-      nextFeatures: [
         'Kept out of iCloud Backup by default, so your data stays on your iPhone unless you choose otherwise',
         'Move to a New iPhone: an encrypted, one-time-code transfer by AirDrop, with no cloud in between',
         'Bring your history from Apple Health, Clue, or Flo, read on your iPhone and never uploaded',
@@ -410,14 +584,154 @@ export const projects: Project[] = [
         'Keep My History: automatically delete entries older than a period you choose',
         'A Quick Log widget for your period and symptoms, right on the Home Screen',
         'Rebuilt predictions with confidence levels and ranges, and ovulation confirmed by temperature',
-        'A fresh look: colors that follow your cycle, playful animations, and full support for larger text',
+        'A fresh look: colors that follow your cycle, playful animations, and support for larger text',
         'A new app icon, with dark, tinted, and clear versions for your Home Screen',
         'Siri keeps quiet about your cycle while your iPhone is locked',
+      ],
+      next: '1.2',
+      nextFeatures: [
+        'Amparo in Spanish: every screen, the widgets, and Siri',
+        'Your patterns up close: each cycle, what tends to come with a symptom, and your mood on those days',
+        'Next-period timing from your confirmed temperature rise, worked out on your iPhone',
+        'Four looks: Midnight, Daylight, Notepad, and Plain, with widgets and the Live Activity to match',
+        'A control for Control Center, the Lock Screen, and the Action button',
+        'Widgets made for StandBy',
+        'Better VoiceOver, Voice Control, and larger-text support, with charts you can hear',
+        'Send Feedback from Settings, through your own Mail app',
       ],
     },
     appStoreUrl: 'https://apps.apple.com/us/app/amparo/id6765911709',
     price: '$4.99',
     requires: 'iOS 17.6 or later',
+    languageSince: { es: '1.2' },
+    screenshots: [
+      {
+        src: amparoHome,
+        alt: 'Amparo\'s Home screen: a ring showing cycle day 12 of 29 in the follicular phase, cards for the next period in 18 days and the fertile window, two symptoms coming up, and a Period Started button.',
+        caption: 'Where you are, when your period\'s due, and what\'s coming up, all from your own logs.',
+        translations: {
+          es: {
+            src: amparoHomeEs,
+            alt: 'La pantalla Inicio de Amparo: un anillo que muestra el día 12 de 29 en la fase folicular, tarjetas con el próximo periodo en 18 días y la ventana fértil, dos síntomas que se acercan y un botón Empezó mi periodo.',
+            caption: 'Dónde estás, cuándo llega tu periodo y lo que viene, todo a partir de tus propios registros.',
+          },
+        },
+        width: 737,
+        height: 1600,
+      },
+      {
+        src: amparoPrivacy,
+        alt: 'Settings opens with Only on This iPhone, saying the data never leaves the phone, then reminders, App Lock, Discreet Mode, and Include in iCloud Backup, which is off.',
+        caption: 'No account, no cloud, and no tracking. Your data even stays out of iCloud Backup unless you choose.',
+        translations: {
+          es: {
+            src: amparoPrivacyEs,
+            alt: 'Configuración abre con Solo en este iPhone, que dice que los datos nunca salen del teléfono, y sigue con los cuatro estilos de Apariencia y los recordatorios.',
+            caption: 'Sin cuenta, sin nube y sin rastreo. Tus datos ni siquiera van al respaldo de iCloud, a menos que tú lo elijas.',
+          },
+        },
+        width: 737,
+        height: 1600,
+      },
+      {
+        src: amparoPatterns,
+        alt: 'Your Patterns lists six symptoms and when each usually arrives, such as bloating 2 to 4 days before a period in 5 of the last 6 cycles, above a temperature chart marking the rise after ovulation.',
+        caption: 'When your symptoms usually arrive, learned from your own logs, plus the temperature rise after ovulation.',
+        translations: {
+          es: {
+            src: amparoPatternsEs,
+            alt: 'Tus patrones enumera seis síntomas y cuándo suele llegar cada uno, como la hinchazón de 2 a 4 días antes del periodo en 5 de los últimos 6 ciclos, sobre una gráfica de temperatura que marca el aumento después de la ovulación.',
+            caption: 'Cuándo suelen llegar tus síntomas, aprendido de tus propios registros, y el aumento de temperatura después de la ovulación.',
+          },
+        },
+        width: 737,
+        height: 1600,
+      },
+      {
+        src: amparoInsights,
+        alt: 'Insights: an average cycle of 29 days, an average period of 5 days, and 153 days logged, then the Doctor Visit Summary and charts of basal body temperature and cycle length.',
+        caption: 'Cycle lengths and temperatures over time, plus a summary PDF to share with your doctor.',
+        translations: {
+          es: {
+            src: amparoInsightsEs,
+            alt: 'Análisis: un ciclo promedio de 29 días, un periodo promedio de 5 días y 153 días registrados, luego el Resumen para la consulta médica y gráficas de temperatura basal y duración del ciclo.',
+            caption: 'La duración de tus ciclos y tus temperaturas a lo largo del tiempo, y un PDF de resumen para compartir con tu médico.',
+          },
+        },
+        width: 737,
+        height: 1600,
+      },
+      {
+        src: amparoCalendar,
+        alt: 'The October calendar with fertile days, predicted period days, and logged days marked, and the symptoms and moods logged on October 4 below it.',
+        caption: 'Periods, predictions, and the days you\'ve logged, with every detail a tap away.',
+        translations: {
+          es: {
+            src: amparoCalendarEs,
+            alt: 'El calendario de octubre con los días fértiles, los días de periodo previstos y los días registrados marcados, y debajo los síntomas y el ánimo registrados el 5 de octubre.',
+            caption: 'Periodos, predicciones y los días que registraste, con cada detalle a un toque.',
+          },
+        },
+        width: 737,
+        height: 1600,
+      },
+      {
+        src: amparoLog,
+        alt: 'Logging October 4: flow, symptoms grouped into pain, digestion, skin, energy, and mental, two moods selected, energy set to High, and body temperature.',
+        caption: 'Flow, symptoms, moods, energy, and temperature, all on one screen.',
+        translations: {
+          es: {
+            src: amparoLogEs,
+            alt: 'El registro del 5 de octubre: flujo, síntomas agrupados en dolor, digestión, piel, energía y mente, dos estados de ánimo seleccionados, energía en Alta y temperatura corporal.',
+            caption: 'Flujo, síntomas, ánimo, energía y temperatura, todo en una sola pantalla.',
+          },
+        },
+        width: 737,
+        height: 1600,
+      },
+      {
+        src: amparoMove,
+        alt: 'Move to a New iPhone, in three steps: seal the data with a one-time code, send it by AirDrop, and unlock it on the new iPhone.',
+        caption: 'Switch phones without the cloud. Your data goes straight to your new iPhone, locked with a one-time code.',
+        translations: {
+          es: {
+            src: amparoMoveEs,
+            alt: 'Pasar a un nuevo iPhone, en tres pasos: sellar los datos con un código de un solo uso, enviarlos por AirDrop y desbloquearlos en el nuevo iPhone.',
+            caption: 'Cambia de teléfono sin la nube. Tus datos van directo a tu iPhone nuevo, protegidos con un código de un solo uso.',
+          },
+        },
+        width: 737,
+        height: 1600,
+      },
+      {
+        src: amparoHistory,
+        alt: 'Bring Your History, with steps for exporting from Apple Health, Clue, and Flo, and a Choose a File button.',
+        caption: 'Bring your past periods from Apple Health, Clue, or Flo. The file is read on your iPhone and never uploaded.',
+        translations: {
+          es: {
+            src: amparoHistoryEs,
+            alt: 'Trae tu historial, con los pasos para exportar desde la app Salud, Clue y Flo, y un botón Elegir un archivo.',
+            caption: 'Trae tus periodos anteriores desde la app Salud de Apple, Clue o Flo. El archivo se lee en tu iPhone y nunca se sube.',
+          },
+        },
+        width: 737,
+        height: 1600,
+      },
+      {
+        src: amparoIcons,
+        alt: 'The App Icon picker with four icons: the Amparo drop, a crescent moon called Dusk, a leaf, and a ring called Glow.',
+        caption: 'Pick a Home Screen icon that doesn\'t look like a cycle tracker.',
+        translations: {
+          es: {
+            src: amparoIconsEs,
+            alt: 'El selector Icono de la app con cuatro iconos: la gota de Amparo, una luna creciente llamada Atardecer, una hoja y un anillo llamado Resplandor.',
+            caption: 'Elige un icono para la pantalla de inicio que no parezca de una app del ciclo.',
+          },
+        },
+        width: 737,
+        height: 1600,
+      },
+    ],
   },
 ];
 

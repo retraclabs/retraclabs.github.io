@@ -1,8 +1,13 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
 import { ArrowLeft, ArrowRight, X } from 'lucide-react';
 import type { Screenshot } from '../data/projects';
 import type { AccentStyle } from '../data/accents';
+import { LANGUAGES, type Language } from '../data/languages';
+import { useLanguage, useStrings } from '../i18n/context';
+import { STRINGS } from '../i18n/strings';
+import { isLater } from '../i18n/projects';
+import { LanguageSwitch } from './LanguageSwitch';
 
 /* A shipped app's screenshots: a strip you can swipe, scroll, or step through
    with the arrows, and a full-size view on click.
@@ -14,18 +19,55 @@ import type { AccentStyle } from '../data/accents';
 
    The full-size view is a native <dialog>. The browser handles Escape, keeps
    focus inside it while open, and hides the rest of the page from screen
-   readers, none of which then has to be written or maintained here. */
+   readers, none of which then has to be written or maintained here.
+
+   Screenshots start in the page's language. When any of them also comes as a
+   picture of the app in another language, an ENG / ESP switch sits beside the
+   arrows and swaps each picture with its alt text and caption, falling back to
+   English for any screenshot without a translation. The switch only changes
+   this gallery; the site's language is set in the menu bar.
+
+   A translation can be words only (no `src`): then the English picture shows
+   with words in the page's language. That is how an app that isn't in Spanish
+   yet still gets Spanish captions on a Spanish page, without a switch that
+   would only swap the words. */
 
 /** Mac screenshots are exported at this size; see Screenshot in projects.ts. */
 const DEFAULT_WIDTH = 1600;
 const DEFAULT_HEIGHT = 1000;
 
-const isPortrait = (shot: Screenshot) => (shot.height ?? DEFAULT_HEIGHT) > (shot.width ?? DEFAULT_WIDTH);
+/** One screenshot as shown: its picture, words, and size in the chosen
+ *  language, and the language its words are actually in. */
+type Shown = Omit<Screenshot, 'translations'> & { lang: Language; translatedPicture: boolean };
+
+const inLanguage = (shot: Screenshot, language: Language): Shown => {
+  const { translations, ...english } = shot;
+  const translation = language === 'en' ? undefined : translations?.[language];
+  if (!translation) return { ...english, lang: 'en', translatedPicture: false };
+  return {
+    ...english,
+    alt: translation.alt,
+    caption: translation.caption,
+    src: translation.src ?? english.src,
+    width: translation.src ? translation.width ?? english.width : english.width,
+    height: translation.src ? translation.height ?? english.height : english.height,
+    lang: language,
+    translatedPicture: Boolean(translation.src),
+  };
+};
+
+const isPortrait = (shot: Shown) => (shot.height ?? DEFAULT_HEIGHT) > (shot.width ?? DEFAULT_WIDTH);
 
 type Props = {
   name: string;
   screenshots: Screenshot[];
   accent: AccentStyle;
+  /** The project's `version.current`, for tagging screenshots of features that
+   *  aren't out yet (`since`). */
+  currentVersion?: string;
+  /** The project's `languageSince`, for saying that pictures of the app in a
+   *  language show a version that isn't out yet. */
+  languageSince?: Partial<Record<Exclude<Language, 'en'>, string>>;
 };
 
 /** The full-size view always sits on a black backdrop, whatever the site's
@@ -46,6 +88,40 @@ const PremiumTag = ({ accent, onDark = false }: { accent: AccentStyle; onDark?: 
   >
     Premium
   </span>
+);
+
+/** Neutral rather than accented, so it never reads as a second Premium tag. */
+const ComingTag = ({ label, onDark = false }: { label: string; onDark?: boolean }) => (
+  <span
+    className={
+      'inline-flex items-center px-2 py-0.5 mr-2 rounded-full border text-[10px] font-mono font-black uppercase tracking-widest align-[2px] ' +
+      (onDark
+        ? 'border-zinc-500 text-zinc-200'
+        : 'border-zinc-600 light:border-zinc-300 text-zinc-300 light:text-zinc-700')
+    }
+  >
+    {label}
+  </span>
+);
+
+const Tags = ({
+  shot,
+  accent,
+  currentVersion,
+  onDark = false,
+}: {
+  shot: Shown;
+  accent: AccentStyle;
+  currentVersion?: string;
+  onDark?: boolean;
+}) => (
+  <>
+    {/* In the language of the caption it sits in. */}
+    {shot.since && currentVersion && isLater(shot.since, currentVersion) ? (
+      <ComingTag label={STRINGS[shot.lang].gallery.comingIn(shot.since)} onDark={onDark} />
+    ) : null}
+    {shot.premium ? <PremiumTag accent={accent} onDark={onDark} /> : null}
+  </>
 );
 
 const RoundButton = ({
@@ -77,8 +153,32 @@ const RoundButton = ({
   </button>
 );
 
-export const ScreenshotGallery = ({ name, screenshots, accent }: Props) => {
+export const ScreenshotGallery = ({ name, screenshots, accent, currentVersion, languageSince }: Props) => {
   const reduceMotion = useReducedMotion();
+  const { language: pageLanguage } = useLanguage();
+  const t = useStrings();
+
+  /** English, then every language any screenshot has a picture in. */
+  const pictureLanguages = useMemo<Language[]>(() => {
+    const pictured = new Set<Language>();
+    for (const shot of screenshots) {
+      for (const [code, translation] of Object.entries(shot.translations ?? {})) {
+        if (translation?.src) pictured.add(code as Language);
+      }
+    }
+    return ['en', ...(Object.keys(LANGUAGES) as Language[]).filter((code) => pictured.has(code))];
+  }, [screenshots]);
+
+  // Starts in the page's language, and follows it when the menu bar changes it.
+  const [language, setLanguage] = useState<Language>(pageLanguage);
+  useEffect(() => setLanguage(pageLanguage), [pageLanguage]);
+  const shots = useMemo(() => screenshots.map((shot) => inLanguage(shot, language)), [screenshots, language]);
+
+  // Pictures of the app in a language it doesn't have yet say so.
+  const since = language === 'en' ? undefined : languageSince?.[language as Exclude<Language, 'en'>];
+  const translationPending =
+    since && currentVersion && isLater(since, currentVersion) && shots.some((shot) => shot.translatedPicture) ? since : null;
+
   const trackRef = useRef<HTMLUListElement>(null);
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [edges, setEdges] = useState({ atStart: true, atEnd: false });
@@ -126,9 +226,9 @@ export const ScreenshotGallery = ({ name, screenshots, accent }: Props) => {
   const close = () => dialogRef.current?.close();
 
   const move = (direction: 1 | -1) =>
-    setEnlarged((index) => (index === null ? index : (index + direction + screenshots.length) % screenshots.length));
+    setEnlarged((index) => (index === null ? index : (index + direction + shots.length) % shots.length));
 
-  const shown = enlarged === null ? null : screenshots[enlarged];
+  const shown = enlarged === null ? null : shots[enlarged];
 
   return (
     <motion.section
@@ -138,42 +238,58 @@ export const ScreenshotGallery = ({ name, screenshots, accent }: Props) => {
       aria-labelledby="screenshots-heading"
       className="mt-6 border-4 border-zinc-800 light:border-zinc-200 bg-zinc-900 light:bg-white rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden"
     >
-      <div className="flex items-center justify-between gap-4 px-6 sm:px-8 pt-6 sm:pt-8 mb-5">
+      <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-3 px-6 sm:px-8 pt-6 sm:pt-8 mb-5">
         <h2 id="screenshots-heading" className="text-2xl font-black text-white light:text-zinc-900">
-          Screenshots
+          {t.gallery.heading}
         </h2>
-        <div className="flex gap-2">
-          <RoundButton label="Previous Screenshot" onClick={() => step(-1)} disabled={edges.atStart}>
+        <div className="flex items-center gap-2">
+          {pictureLanguages.length > 1 ? (
+            <LanguageSwitch
+              languages={pictureLanguages}
+              current={pictureLanguages.includes(language) ? language : 'en'}
+              onChange={setLanguage}
+              label={t.gallery.languageGroup}
+            />
+          ) : null}
+          <RoundButton label={t.gallery.previous} onClick={() => step(-1)} disabled={edges.atStart}>
             <ArrowLeft className="w-5 h-5" />
           </RoundButton>
-          <RoundButton label="Next Screenshot" onClick={() => step(1)} disabled={edges.atEnd}>
+          <RoundButton label={t.gallery.next} onClick={() => step(1)} disabled={edges.atEnd}>
             <ArrowRight className="w-5 h-5" />
           </RoundButton>
         </div>
+        {translationPending ? (
+          <p lang={language} className="basis-full text-sm font-medium text-zinc-400 light:text-zinc-600">
+            {STRINGS[language].gallery.translationComing(STRINGS[language].languageNames[language], translationPending)}
+          </p>
+        ) : null}
       </div>
 
       <ul
         ref={trackRef}
         tabIndex={0}
-        aria-label={`${name} screenshots`}
-        className="flex gap-4 sm:gap-6 overflow-x-auto snap-x snap-mandatory scroll-px-6 sm:scroll-px-8 px-6 sm:px-8 pb-6 sm:pb-8 outline-none focus-visible:ring-4 focus-visible:ring-inset focus-visible:ring-cyan-400/50 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        aria-label={t.gallery.strip(name)}
+        // `relative` keeps each button's screen-reader-only label inside the strip. Without it the
+        // labels, positioned against the page, stretched it thousands of pixels wide behind its
+        // clipped overflow, and a scrollIntoView could slide the whole page sideways.
+        className="relative flex gap-4 sm:gap-6 overflow-x-auto snap-x snap-mandatory scroll-px-6 sm:scroll-px-8 px-6 sm:px-8 pb-6 sm:pb-8 outline-none focus-visible:ring-4 focus-visible:ring-inset focus-visible:ring-cyan-400/50 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
-        {screenshots.map((shot, index) => (
+        {shots.map((shot, index) => (
           <li
-            key={shot.src}
+            key={index}
             className={
               'snap-start shrink-0 ' +
               (isPortrait(shot) ? 'w-[62%] sm:w-[34%] lg:w-[24%]' : 'w-[85%] sm:w-[72%] lg:w-[62%]')
             }
           >
-            <figure>
+            <figure lang={shot.lang}>
               <button
                 type="button"
                 onClick={() => open(index)}
                 aria-haspopup="dialog"
                 className="block w-full rounded-xl overflow-hidden border-2 border-zinc-800 light:border-zinc-200 bg-black hover:border-white light:hover:border-zinc-900 focus-visible:outline-none focus-visible:border-cyan-400 transition-colors"
               >
-                <span className="sr-only">Enlarge: </span>
+                <span className="sr-only">{STRINGS[shot.lang].gallery.enlarge}</span>
                 <img
                   src={shot.src}
                   alt={shot.alt}
@@ -186,7 +302,7 @@ export const ScreenshotGallery = ({ name, screenshots, accent }: Props) => {
                 />
               </button>
               <figcaption className="mt-3 text-sm sm:text-base text-zinc-400 light:text-zinc-600 font-medium leading-relaxed">
-                {shot.premium ? <PremiumTag accent={accent} /> : null}
+                <Tags shot={shot} accent={accent} currentVersion={currentVersion} />
                 {shot.caption}
               </figcaption>
             </figure>
@@ -211,11 +327,11 @@ export const ScreenshotGallery = ({ name, screenshots, accent }: Props) => {
         }}
         // A click on the dimmed backdrop lands on the dialog itself.
         onClick={(event) => event.target === event.currentTarget && close()}
-        aria-label={`${name} screenshot`}
+        aria-label={t.gallery.viewer(name)}
         className="m-auto w-[min(100vw_-_1.5rem,84rem)] max-w-none max-h-none bg-transparent p-0 overflow-visible backdrop:bg-black/85 backdrop:backdrop-blur-sm"
       >
         {shown && enlarged !== null ? (
-          <figure>
+          <figure lang={shown.lang}>
             <img
               src={shown.src}
               alt={shown.alt}
@@ -225,20 +341,20 @@ export const ScreenshotGallery = ({ name, screenshots, accent }: Props) => {
             />
             <figcaption className="mt-4 flex flex-col sm:flex-row sm:items-center gap-4 text-sm sm:text-base text-zinc-300 font-medium">
               <span className="flex-1">
-                {shown.premium ? <PremiumTag accent={accent} onDark /> : null}
+                <Tags shot={shown} accent={accent} currentVersion={currentVersion} onDark />
                 {shown.caption}
               </span>
               <span className="flex items-center gap-2 shrink-0">
                 <span className="font-mono font-bold text-zinc-400 mr-2 tabular-nums">
-                  {enlarged + 1} / {screenshots.length}
+                  {enlarged + 1} / {shots.length}
                 </span>
-                <RoundButton label="Previous Screenshot" onClick={() => move(-1)} onDark>
+                <RoundButton label={t.gallery.previous} onClick={() => move(-1)} onDark>
                   <ArrowLeft className="w-5 h-5" />
                 </RoundButton>
-                <RoundButton label="Next Screenshot" onClick={() => move(1)} onDark>
+                <RoundButton label={t.gallery.next} onClick={() => move(1)} onDark>
                   <ArrowRight className="w-5 h-5" />
                 </RoundButton>
-                <RoundButton label="Close" onClick={close} onDark>
+                <RoundButton label={t.gallery.close} onClick={close} onDark>
                   <X className="w-5 h-5" />
                 </RoundButton>
               </span>

@@ -640,6 +640,172 @@ exiftool -EXIF:all -XMP:all -GPS:all src/app/assets/<slug>/*.webp
 
 It should print nothing.
 
+### Screenshots of a Version That Isn't Out Yet
+
+Step 2 above still applies, with one way around it. When a screenshot shows a
+feature from a version that is finished but not yet on the App Store, add
+`since` with that version:
+
+```ts
+{
+  src: apunteClip,
+  alt: '…',
+  caption: '…',
+  since: '1.3',
+},
+```
+
+While the project's `version.current` is older than `since`, the caption
+starts with a "Coming in 1.3" tag ("Próximamente en 1.3" in Spanish). Once you
+change `current` to `'1.3'` on release day, every such tag disappears by
+itself, and the `since` lines can stay or go. Use it for screenshots whose
+subject is the new feature. For a picture where the new part is incidental,
+keep the caption to what is shipping instead.
+
+### Screenshots in Other Languages
+
+A screenshot can carry the same picture from the app running in another
+language, with alt text and a caption in that language:
+
+```ts
+import apunteTranscriptEs from '../assets/apunte/es/transcript.webp';
+
+{
+  src: apunteTranscript,
+  alt: 'Apunte\'s main window: …',
+  caption: 'Every line timestamped, and transcribed entirely on your Mac.',
+  translations: {
+    es: {
+      src: apunteTranscriptEs,
+      alt: 'La ventana principal de Apunte: …',
+      caption: 'Cada línea con su marca de tiempo, transcrita por completo en tu Mac.',
+    },
+  },
+},
+```
+
+Keep each language's files in a folder of its own,
+`src/app/assets/<slug>/es/`, under the same names as the English ones. Give a
+translation its own `width` and `height` only if its file is a different size
+from the English one.
+
+The gallery starts in the page's language (see "Languages"). As soon as any
+screenshot on a page has a translated picture, it also shows an ENG / ESP
+switch beside its arrows, which swaps every picture, its alt text, and its
+caption for that gallery only, keeping English for any screenshot without a
+translation.
+
+**An app that isn't in a language yet** can still have its captions in it:
+leave `src` out of the translation, and the English picture shows with the
+translated alt text and caption. Retazo works this way, so its Spanish page
+has Spanish captions under English screenshots and no picture switch.
+
+**Pictures of a version that isn't out yet** are covered by the project's
+`languageSince`, for example `languageSince: { es: '1.2' }`. While
+`version.current` is older, the gallery says the pictures show the app in
+Spanish arriving in that version, and the Spanish product page says the app
+is in English for now. Once you set `current` to that version, both notes
+disappear by themselves.
+
+For Apunte, `Scripts/store-assets.sh` in the Apunte repository writes both sets
+at web size, English to `docs/screenshots/Web/` and Spanish to
+`docs/screenshots/Web/es/`, ready to copy into `src/app/assets/apunte/`.
+
+## Languages
+
+The site comes in English and Spanish. The ENG / ESP switch sits in the menu
+bar; on a phone, where the bar is already full, it is a single button that
+switches to the other language, and CONTACT leaves the bar (the footer's
+email button stands in).
+
+### How a Page Gets Its Language
+
+The language is in the address, so a link to a Spanish page opens in Spanish
+for whoever it is sent to:
+
+```text
+#/projects/apunte      English, the same addresses the site always had
+#/es/projects/apunte   Spanish
+```
+
+An address with no language shows the visitor's own choice: whatever they
+picked before, else the first of their browser's languages the site has, else
+English. The address bar is then updated to say which language that is.
+`#/en/...` also works, and settles back to the plain English address.
+In-page anchors like `#apps` never get a prefix.
+
+`App.tsx` owns the language and the address; `src/app/i18n/route.ts` does the
+parsing. Routing always works on the path with the language taken off, so the
+rest of App.tsx compares against `#/about`, never `#/es/about`.
+
+### Where the Words Live
+
+| What | File |
+|---|---|
+| Menu bar, homepage, product page labels, gallery, footer | `src/app/i18n/strings.ts` |
+| Mission statement | `src/app/data/mission.ts` (`MISSION_IN`) |
+| Product copy: teasers, summaries, descriptions, lists, price | `src/app/data/projects.es.ts` |
+| Screenshot alt text and captions | each screenshot's `translations` in `projects.ts` |
+| A lab note's card blurb | its `translations` in `src/app/labNotes/index.ts` |
+
+Components read the language with `useLanguage()` and the interface text with
+`useStrings()`, both from `src/app/i18n/context.tsx`.
+
+### Keeping the Spanish Current
+
+Anything without a Spanish version shows in English, marked as English for
+screen readers, so nothing ever breaks. Stale Spanish is the real risk, and
+two rules prevent it:
+
+- **Release text is keyed by version.** In `projects.es.ts`, the version
+  lists (and anything else that changes with a release) go under `releases`,
+  keyed by the version they describe. They are used only while that version is
+  the project's `version.current`. Bump the English to a new version and the
+  Spanish page shows English there until you add a block for it, never last
+  release's list. Apunte's 1.2 block is already written, for the day
+  `docs/site-updates-1.2.md` is applied.
+- **Every other English edit gets its Spanish edit.** Change a summary,
+  description, or highlight in `projects.ts`, and change it in
+  `projects.es.ts` in the same commit, or delete the Spanish field so the
+  English shows.
+
+Never give an unannounced project a Spanish `summary`: a summary is what
+announces a project, in any language.
+
+### Pages That Stay in English
+
+The About page, the beta form, the Thanks page, lab notes, and every privacy
+policy and terms page are English only. In Spanish they keep the Spanish menu
+bar and footer, show a line saying the page is only available in English, and
+are marked as English. That wrapper is `EnglishOnly`, in `App.tsx`.
+
+**Keep the legal pages in English** until they are translated professionally.
+A Spanish privacy policy or Terms of Use is a legal document in its own
+right, so a loose translation could promise something the English doesn't.
+When one is translated, add a line saying the English version governs.
+
+### Spanish Style
+
+Spanish isn't English with the words swapped, and three of this site's
+English rules reverse:
+
+- **Headings are sentence case.** "Próxima versión", not "Próxima Versión".
+- **No comma before "y"** in a list: "rojo, verde y azul".
+- **Mexican Spanish**, matching the apps' own translations: video, audífonos,
+  periodo, and tú.
+
+Feature names that are English in an English-only app stay in English (Copy
+As, Pause Capture), since that is what the reader will see on screen.
+
+### Adding a Language
+
+1. Add it to `LANGUAGES` and the `Language` type in
+   `src/app/data/languages.ts`.
+2. Add its interface text to `src/app/i18n/strings.ts` and its mission to
+   `src/app/data/mission.ts`.
+3. Add a `projects.<code>.ts` like `projects.es.ts`, and register it in
+   `src/app/i18n/projects.ts`.
+
 ## Lab Notes
 
 A lab note is a long-form research piece that backs up something a product page
