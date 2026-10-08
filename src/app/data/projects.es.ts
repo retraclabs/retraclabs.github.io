@@ -104,7 +104,6 @@ export const PROJECTS_ES: Record<string, ProjectTranslation> = {
           ],
         },
       },
-      // Ready for the day docs/site-updates-1.2.md (in the Apunte project) is applied.
       '1.2': {
         description:
           'Apunte convierte audio y video en transcripciones precisas y con marcas de tiempo, por completo en tu Mac. ' +
@@ -126,10 +125,10 @@ export const PROJECTS_ES: Record<string, ProjectTranslation> = {
             'Canjea un código de oferta desde la app',
           ],
           nextFeatures: [
-            'Etiquetas de hablante, con varias líneas asignadas a una persona a la vez',
-            'Bloqueo con código y Touch ID',
-            'Exporta una grabación, o recorta un clip para compartir',
-            'Estilos, entre ellos uno propio de Apunte',
+            'Exporta una grabación gratis, o un clip de cualquier línea',
+            'Hablantes con su propio color, y llamadas que se etiquetan solas: Yo y Otros',
+            'Bloqueo con Touch ID o la contraseña de tu Mac',
+            'Cinco estilos, entre ellos Taquigrafía, propio de Apunte',
           ],
         },
       },

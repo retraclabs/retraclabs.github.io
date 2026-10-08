@@ -262,7 +262,7 @@ export const projects: Project[] = [
       'It ships without the outgoing-network entitlement, so the app\'s own code cannot open a network ' +
       'connection. You don\'t have to take that on faith. Inspect the signed app yourself with codesign. ' +
       'Transcription is free; Premium adds speaker names, summaries, library-wide search, live transcription, ' +
-      'and formatted export, as a subscription or a one-time lifetime purchase.',
+      'and formatted export, as a subscription or a one-time lifetime purchase. The app is in English and Spanish.',
     highlights: [
       'No network access, verifiable: the app ships without the network entitlement, so it cannot upload your audio. Check it yourself in Terminal.',
       'Accurate on real recordings: on a 64-minute, two-person session it captured the same content as MacWhisper, keeping hesitations and false starts rather than smoothing them away.',
@@ -270,19 +270,22 @@ export const projects: Project[] = [
       'A free tier that\'s actually complete: transcription, editing, playback, and plain-text, timestamped, and JSON export are free. JSON carries everything, so your work is never locked in.',
     ],
     version: {
-      current: '1.1.1',
+      current: '1.2',
       currentFeatures: [
+        'The whole app in Spanish, following your Mac\'s language',
         'Live transcription from the microphone, or from a call or meeting on headphones with both sides in one transcript',
         'Speaker names, on-device summaries in the transcript\'s language, and search across every transcript',
-        'Review mode, which marks the lines the recogniser was unsure of',
+        'Review mode, which marks the lines the recogniser was unsure of and counts them',
         'Export to plain text, timestamped text, JSON, SubRip, WebVTT, CSV, Markdown, HTML, PDF, and Word',
         'Select several transcripts at once to delete them, or to erase their audio, together',
         'Redeem an offer code from inside the app',
       ],
-      next: '1.2',
+      next: '1.3',
       nextFeatures: [
-        'The app in Spanish, with other languages to follow',
-        'Speaker labels for calls, telling your side from theirs automatically',
+        'Export a recording, free, or a clip of any lines',
+        'Speakers in their own colors, and calls that label themselves: Me and Others',
+        'A lock with Touch ID or your Mac\'s password',
+        'Five looks, among them Steno, Apunte\'s own',
       ],
     },
     price: 'Free, with Premium as a subscription or a one-time purchase',
