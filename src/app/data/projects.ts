@@ -261,31 +261,30 @@ export const projects: Project[] = [
       'Or transcribe live: the room you are in, or a call or meeting on headphones, with both sides in one transcript.\n\n' +
       'It ships without the outgoing-network entitlement, so the app\'s own code cannot open a network ' +
       'connection. You don\'t have to take that on faith. Inspect the signed app yourself with codesign. ' +
-      'Transcription is free; Premium adds speaker names, summaries, library-wide search, live transcription, ' +
-      'and formatted export, as a subscription or a one-time lifetime purchase. The app is in English and Spanish.',
+      'Transcription, and exporting the recording itself, are free; Premium adds speaker names, summaries, ' +
+      'library-wide search, live transcription, formatted export, and audio clips, as a subscription or a ' +
+      'one-time lifetime purchase. The app is in English and Spanish, and locks with Touch ID.',
     highlights: [
       'No network access, verifiable: the app ships without the network entitlement, so it cannot upload your audio. Check it yourself in Terminal.',
       'Accurate on real recordings: on a 64-minute, two-person session it captured the same content as MacWhisper, keeping hesitations and false starts rather than smoothing them away.',
       'Live, for the room or the call: words appear as people speak, and a call on headphones puts both sides in one transcript. The recording stays on your Mac so you can check any line against it.',
-      'A free tier that\'s actually complete: transcription, editing, playback, and plain-text, timestamped, and JSON export are free. JSON carries everything, so your work is never locked in.',
+      'A free tier that\'s actually complete: transcription, editing, playback, the lock, every look, and export to plain text, timestamped text, JSON, or the recording itself are free. JSON carries everything, so your work is never locked in.',
     ],
     version: {
-      current: '1.2',
+      current: '1.3',
       currentFeatures: [
-        'The whole app in Spanish, following your Mac\'s language',
-        'Live transcription from the microphone, or from a call or meeting on headphones with both sides in one transcript',
-        'Speaker names, on-device summaries in the transcript\'s language, and search across every transcript',
+        'Live transcription from the microphone, or from a call or meeting on headphones with both sides in one transcript, each line labeled Me or Others',
+        'Export the recording itself, free, or a clip of any lines',
+        'Speaker names in their own colors, on-device summaries in the transcript\'s language, and search across every transcript',
         'Review mode, which marks the lines the recogniser was unsure of and counts them',
         'Export to plain text, timestamped text, JSON, SubRip, WebVTT, CSV, Markdown, HTML, PDF, and Word',
-        'Select several transcripts at once to delete them, or to erase their audio, together',
-        'Redeem an offer code from inside the app',
+        'A lock with Touch ID or your Mac\'s password, and five looks, among them Steno, Apunte\'s own',
+        'The whole app in English and Spanish, following your Mac\'s language',
       ],
-      next: '1.3',
+      next: '1.4',
       nextFeatures: [
-        'Export a recording, free, or a clip of any lines',
-        'Speakers in their own colors, and calls that label themselves: Me and Others',
-        'A lock with Touch ID or your Mac\'s password',
-        'Five looks, among them Steno, Apunte\'s own',
+        'Controls in the menu bar for calls and meetings, without opening the window',
+        'Each look\'s type carried through the whole window',
       ],
     },
     price: 'Free, with Premium as a subscription or a one-time purchase',
@@ -345,13 +344,13 @@ export const projects: Project[] = [
       {
         src: apunteSpeakerNames,
         alt: 'An interview transcript with each speaker\'s name above their lines, and each speaker in their own color.',
-        caption: 'Label who is speaking on any line. Names carry into every export.',
+        caption: 'Label who is speaking on any line, each in their own color. Names carry into every export, and calls label themselves: Me and Others.',
         premium: true,
         translations: {
           es: {
             src: apunteSpeakerNamesEs,
             alt: 'La transcripción de una entrevista con el nombre de cada hablante sobre sus líneas, y cada hablante en su propio color.',
-            caption: 'Indica quién habla en cualquier línea. Los nombres van en todas las exportaciones.',
+            caption: 'Indica quién habla en cualquier línea, cada uno con su color. Los nombres van en todas las exportaciones, y las llamadas se etiquetan solas: Yo y Otros.',
           },
         },
       },
@@ -387,12 +386,12 @@ export const projects: Project[] = [
       {
         src: apunteExportFormats,
         alt: 'The export menu: plain text, timestamped text, and JSON listed as included, the recording under Audio, then SubRip, WebVTT, CSV, Markdown, HTML, PDF, and Word as more formats.',
-        caption: 'Plain text, timestamped text, and JSON export are free. SRT, WebVTT, CSV, Markdown, HTML, PDF, and Word come with Premium.',
+        caption: 'Plain text, timestamped text, JSON, and the recording itself export free. SRT, WebVTT, CSV, Markdown, HTML, PDF, and Word come with Premium.',
         translations: {
           es: {
             src: apunteExportFormatsEs,
             alt: 'El menú Exportar: texto sin formato, texto con marcas de tiempo y JSON como incluidos, la grabación en Audio, y luego SubRip, WebVTT, CSV, Markdown, HTML, PDF y Word como más formatos.',
-            caption: 'Exportar a texto sin formato, texto con marcas de tiempo y JSON es gratis. SRT, WebVTT, CSV, Markdown, HTML, PDF y Word vienen con Premium.',
+            caption: 'Exportar a texto sin formato, texto con marcas de tiempo, JSON o la grabación misma es gratis. SRT, WebVTT, CSV, Markdown, HTML, PDF y Word vienen con Premium.',
           },
         },
       },

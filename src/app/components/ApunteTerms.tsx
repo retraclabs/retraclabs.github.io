@@ -26,7 +26,7 @@ export const ApunteTerms = () => {
                     </h1>
 
                     <p className="text-zinc-400 light:text-zinc-600 font-mono font-bold mb-10">
-                        Last updated: October 3, 2026
+                        Last updated: October 9, 2026
                     </p>
 
                     <div className="space-y-10 text-zinc-300 light:text-zinc-700 font-medium leading-relaxed">
@@ -61,15 +61,16 @@ export const ApunteTerms = () => {
                                 2. Purchases and Subscriptions
                             </h2>
                             <p>
-                                Apunte is free to download. Transcription, and export to plain text,
-                                timestamped text, and JSON, are free.
+                                Apunte is free to download. Transcription, export to plain text,
+                                timestamped text, and JSON, and export of a whole recording are free.
                             </p>
                             <p className="mt-4">
                                 Premium features — speaker names on transcript lines, on-device
                                 summaries of each part of a recording, search across your whole
                                 transcript library, live transcription from the microphone or a
                                 call, and export to SubRip (SRT), WebVTT, CSV, Markdown, HTML, PDF,
-                                and Word — are unlocked through an in-app purchase, offered as a
+                                and Word, plus audio clips of any lines — are unlocked through an
+                                in-app purchase, offered as a
                                 monthly subscription, a yearly subscription, or a one-time lifetime
                                 purchase. The lifetime purchase does not renew and does not expire.
                             </p>
@@ -106,8 +107,9 @@ export const ApunteTerms = () => {
                                 Live transcripts you already captured stay in your library, with
                                 their editing, playback, and free export formats; starting a new live
                                 session needs an active subscription or the lifetime purchase.
-                                Searching within a single transcript remains free. Free exports —
-                                plain text, timestamped text, and JSON — remain available.
+                                Searching within a single transcript remains free. Files and clips
+                                you already exported are yours. Free exports — plain text,
+                                timestamped text, JSON, and the whole recording — remain available.
                             </p>
                         </section>
 
@@ -175,8 +177,9 @@ export const ApunteTerms = () => {
                                 require the consent of the other participants under the laws that
                                 apply to you or to them, and the rules of the service the call runs
                                 on. You are solely responsible for obtaining any consent the law
-                                requires and for complying with those rules. Retrac Labs does not
-                                record, receive, or store any call.
+                                requires and for complying with those rules. The same goes for
+                                sharing a recording, or a clip of one, that you export from Apunte.
+                                Retrac Labs does not record, receive, or store any call.
                             </p>
                         </section>
 

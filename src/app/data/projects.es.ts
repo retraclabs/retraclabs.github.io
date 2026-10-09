@@ -132,6 +132,41 @@ export const PROJECTS_ES: Record<string, ProjectTranslation> = {
           ],
         },
       },
+      // Apunte 1.3, approved 2026-10-09. Coming next is 1.4's settled Mac features; Identify
+      // Speakers joins the list after the lawyer's review of its privacy wording.
+      '1.3': {
+        description:
+          'Apunte convierte audio y video en transcripciones precisas y con marcas de tiempo, por completo en tu Mac. ' +
+          'Suelta una nota de voz, una entrevista, una clase o un video: si macOS puede reproducirlo, Apunte puede ' +
+          'transcribirlo. O transcribe en vivo: la sala en la que estás, o una llamada o reunión con audífonos, con ' +
+          'ambos lados en una sola transcripción.\n\n' +
+          'No tiene el permiso de red saliente, así que el propio código de la app no puede abrir una conexión de red. ' +
+          'No tienes que creerlo a ciegas: compruébalo en la app firmada con codesign. La transcripción y la ' +
+          'exportación de la grabación misma son gratuitas; Premium agrega nombres de hablantes, resúmenes, búsqueda ' +
+          'en toda la biblioteca, transcripción en vivo, exportación con formato y clips de audio, como suscripción o ' +
+          'como compra única de por vida. La app está en español y en inglés, y se bloquea con Touch ID.',
+        highlights: [
+          'Sin acceso a la red, y puedes comprobarlo: la app no tiene el permiso de red, así que no puede subir tu audio. Verifícalo en Terminal.',
+          'Precisa con grabaciones reales: en una sesión de 64 minutos entre dos personas capturó el mismo contenido que MacWhisper, y conservó las vacilaciones y los arranques en falso en lugar de suavizarlos.',
+          'En vivo, para la sala o la llamada: las palabras aparecen mientras la gente habla, y una llamada con audífonos pone ambos lados en una sola transcripción. La grabación se queda en tu Mac para que puedas cotejar cualquier línea con ella.',
+          'Una versión gratuita de verdad completa: la transcripción, la edición, la reproducción, el bloqueo, todos los estilos y la exportación a texto sin formato, texto con marcas de tiempo, JSON o la grabación misma son gratis. El JSON lo lleva todo, así que tu trabajo nunca queda atrapado.',
+        ],
+        version: {
+          currentFeatures: [
+            'Transcripción en vivo desde el micrófono, o desde una llamada o reunión con audífonos, con ambos lados en una sola transcripción y cada línea etiquetada como Yo u Otros',
+            'Exporta la grabación misma gratis, o un clip de cualquier línea',
+            'Nombres de hablantes con su propio color, resúmenes generados en el dispositivo en el idioma de la transcripción y búsqueda en todas las transcripciones',
+            'Modo de revisión, que marca las líneas de las que el reconocedor no estaba seguro y las cuenta',
+            'Exportación a texto sin formato, texto con marcas de tiempo, JSON, SubRip, WebVTT, CSV, Markdown, HTML, PDF y Word',
+            'Bloqueo con Touch ID o la contraseña de tu Mac, y cinco estilos, entre ellos Taquigrafía, propio de Apunte',
+            'Toda la app en español y en inglés, siguiendo el idioma de tu Mac',
+          ],
+          nextFeatures: [
+            'Controles en la barra de menús para llamadas y reuniones, sin abrir la ventana',
+            'La tipografía de cada estilo en toda la ventana',
+          ],
+        },
+      },
     },
   },
 

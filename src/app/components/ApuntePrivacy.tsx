@@ -26,7 +26,7 @@ export const ApuntePrivacy = () => {
                     </h1>
 
                     <p className="text-zinc-400 light:text-zinc-600 font-mono font-bold mb-10">
-                        Last updated: October 3, 2026
+                        Last updated: October 9, 2026
                     </p>
 
                     <div className="space-y-10 text-zinc-300 light:text-zinc-700 font-medium leading-relaxed">
@@ -121,6 +121,23 @@ export const ApuntePrivacy = () => {
                                     is unlocked, they are readable like any other document. We state
                                     this plainly rather than imply the whole store is encrypted.
                                 </li>
+                                <li>
+                                    <strong className="text-white light:text-zinc-900 font-bold">Exported
+                                    audio goes only where you put it.</strong> Exporting a whole
+                                    recording decrypts it straight into the file you save. A clip, or
+                                    the sound from a video, needs a working copy: Apunte decrypts the
+                                    recording into a temporary folder inside its container for the
+                                    seconds the export takes, then overwrites and removes that folder,
+                                    whether the export worked or not. The file you saved is an
+                                    ordinary, unencrypted audio file. It is outside Apunte's care from
+                                    then on: the retention setting does not apply to it, and deleting
+                                    it is up to you.
+                                </li>
+                                <li>
+                                    <strong className="text-white light:text-zinc-900 font-bold">Settings
+                                    stay on your Mac too,</strong> in the same container, including
+                                    the look you chose and whether the lock is on.
+                                </li>
                             </ul>
                         </section>
 
@@ -138,6 +155,32 @@ export const ApuntePrivacy = () => {
                                 Nothing is captured outside a session you started, and Apunte never
                                 sends any of it anywhere. Recording other people may require their
                                 consent where you or they are; see the Terms of Use.
+                            </p>
+                            <p className="mt-4">
+                                In call mode, Apunte labels each line “Me” or “Others” by comparing
+                                how loud your microphone and the other apps' audio were while it
+                                was spoken. That comparison of loudness is all it uses: no voice
+                                recognition, no voiceprint, and no biometric information of any
+                                kind. The levels are used once, when the session ends, and are not
+                                kept. The labels are ordinary speaker names that you can rename or
+                                remove.
+                            </p>
+                        </section>
+
+                        <section>
+                            <h2 className="text-2xl font-black text-white light:text-zinc-900 mb-3">
+                                The App Lock
+                            </h2>
+                            <p>
+                                You can lock Apunte with Touch ID or your Mac's login password in
+                                Settings › Privacy. macOS does the checking, through Apple's
+                                LocalAuthentication framework, and tells Apunte only whether you
+                                passed. Apunte never sees, stores, or transmits your fingerprint or
+                                your password; fingerprint data never leaves your Mac's Secure
+                                Enclave. The lock covers Apunte's windows so someone using your
+                                unlocked Mac can't read your transcripts. It is a gate, not
+                                encryption: the transcript database is still stored as described
+                                above, and FileVault is what protects it on disk.
                             </p>
                         </section>
 
@@ -165,7 +208,7 @@ export const ApuntePrivacy = () => {
                             </h2>
                             <p>
                                 Apunte uses no third-party SDKs, ad networks, data brokers, or
-                                analytics providers. The only third party involved is Apple, in three
+                                analytics providers. The only third party involved is Apple, in four
                                 operating-system roles:
                             </p>
                             <ul className="list-disc pl-5 space-y-3 mt-4 marker:text-sky-400">
@@ -177,6 +220,11 @@ export const ApuntePrivacy = () => {
                                     Apple processes the transaction; Apunte never sees your payment
                                     details and stores no transaction data of its own beyond asking
                                     StoreKit whether your entitlement is currently active.
+                                </li>
+                                <li>
+                                    <strong className="text-white light:text-zinc-900 font-bold">Unlocking.</strong>{' '}
+                                    When the app lock is on, macOS checks your fingerprint or
+                                    password and answers only yes or no; see “The App Lock” above.
                                 </li>
                                 <li>
                                     <strong className="text-white light:text-zinc-900 font-bold">Speech model
