@@ -21,6 +21,7 @@ import apunteExportFormatsEs from '../assets/apunte/es/export-formats.webp';
 import apunteSkinsEs from '../assets/apunte/es/skins.webp';
 import apuntePrivacyEs from '../assets/apunte/es/privacy.webp';
 import retazoMenuBar from '../assets/retazo/menu-bar.webp';
+import retazoClothesline from '../assets/retazo/clothesline.webp';
 import retazoSkins from '../assets/retazo/skins.webp';
 import retazoImageClips from '../assets/retazo/image-clips.webp';
 import retazoShortcut from '../assets/retazo/shortcut.webp';
@@ -436,8 +437,11 @@ export const projects: Project[] = [
     span: 'third',
     teaser: 'Clipboard history that lives in your menu bar.',
     summary:
-      'Your clipboard, with a memory. Searchable screenshots, a global shortcut, three skins, and privacy built in. Everything stays on your Mac.',
+      'Your clipboard, with a memory. Hang screenshots on a clothesline above every window, drag them anywhere, and keep everything on your Mac.',
     description:
+      'The Clothesline, new in 2.1, is a line across the top of your screen, above every window. Screenshots ' +
+      'hang on it the moment you take them, ready to drag into any chat, document, or upload, and anything you ' +
+      'drag toward the top of the screen hangs there too.\n\n' +
       'Retazo keeps everything you copy and puts it one click or one shortcut away. Press ⌃⌘V in any app, pick a ' +
       'clip, and ⌘V pastes it right where you were. Screenshots are saved with the text inside them, read on your ' +
       'Mac, so a search finds them. Snippets hold the text you retype, and they work in the Shortcuts app too.\n\n' +
@@ -448,27 +452,29 @@ export const projects: Project[] = [
       'Retazo, Spanish for a scrap or snippet, was called Snippystack until version 2.0. Same app, new name, and ' +
       'everything you saved came along.',
     highlights: [
+      'A clothesline for your screenshots: they hang on a line across the top of your screen, above every window, ready to drag into any app.',
       'One shortcut, any app: press ⌃⌘V, pick a clip, and paste it where you were. No Accessibility or Input Monitoring permission needed.',
       'Screenshots you can search: text in copied images is read on your Mac by Apple\'s Vision framework, and never uploaded.',
       'No network access, verifiable: the app ships without the network entitlement, so it cannot send your clipboard anywhere. Check it yourself in Terminal.',
     ],
     version: {
-      current: '2.0',
+      current: '2.1',
       currentFeatures: [
+        'The Clothesline: screenshots and clips hang on a line across the top of your screen, above every window, ready to drag into any app',
+        'Drag anything toward the top of the screen to hang it, or right-click any clip or snippet and choose Hang on Clothesline',
+        'Drag clips straight from the panel and the History window into chats, documents, and uploads',
+        'A watched screenshots folder, so every screenshot you save hangs on its own',
         'Clipboard history in your menu bar: text, links, code, and images, each one click from your clipboard again',
         'A global shortcut, ⌃⌘V, that opens your clips from any app with no special permissions',
         'Image clips with searchable text, read on your Mac by Apple\'s Vision framework',
         'Snippets for text you retype, with editing, Export and Import, and Shortcuts actions',
         'Copy As (case, Base64, pretty JSON, and more), and Copy Together for several clips at once',
-        'A History window that filters by kind or by the app each clip came from',
         'Three skins (Glass, Tech, and Notepad), each with its own light and dark design, plus Liquid Glass on macOS 26',
         'Password manager copies skipped, Pause Capture, Auto-Forget, one-time codes that fade, and tracking tags removed from links',
       ],
-      next: '2.1',
+      next: '2.2',
       nextFeatures: [
-        'The Clothesline: screenshots and clips hang on a line across the top of your screen, above every window, ready to drag into any app',
-        'Drag clips straight from the panel and the History window into chats, documents, and uploads',
-        'Hang any clip or snippet yourself, or let new screenshots hang on their own, including ones saved to a folder you choose',
+        'Optional iCloud sync for your snippets, off unless you turn it on. Your clipboard history never syncs.',
       ],
     },
     appStoreUrl: 'https://apps.apple.com/us/app/retazo-clipboard-history/id6765705718?mt=12',
@@ -485,6 +491,11 @@ export const projects: Project[] = [
             caption: 'Todo lo que copias, guardado en la barra de menús. Haz clic en un recorte y ⌘V lo pega donde estabas.',
           },
         },
+      },
+      {
+        src: retazoClothesline,
+        alt: 'The Clothesline under the menu bar: a cord with wooden clothespins holding a Drag Here to Hang spot, a note, and four screenshots on paper cards.',
+        caption: 'Screenshots and clips hang above every window. Drag them into any app, or drag anything toward the top to hang it.',
       },
       {
         src: retazoSkins,

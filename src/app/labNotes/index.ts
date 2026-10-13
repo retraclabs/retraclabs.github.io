@@ -46,7 +46,7 @@ export const LAB_NOTES: LabNote[] = [
     blurb:
       'Why Apunte uses the speech engine built into macOS instead of Whisper, with the measurements ' +
       'that decided it, including the ones that went against it.',
-    dateline: 'Measured September 13, 2026 · Rechecked September 22, 2026',
+    dateline: 'Measured September 13, 2026 · Rechecked September 22, 2026 · Corrected October 12, 2026',
     Body: WhyNotWhisper,
     translations: {
       es: {

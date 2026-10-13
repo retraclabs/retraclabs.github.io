@@ -43,7 +43,7 @@ export const RetazoPrivacy = () => {
                     </h1>
 
                     <p className="text-zinc-400 light:text-zinc-600 font-mono font-bold mb-10">
-                        Last updated: October 3, 2026
+                        Last updated: October 12, 2026
                     </p>
 
                     <div className="space-y-10 text-zinc-300 light:text-zinc-700 font-medium leading-relaxed">
@@ -94,9 +94,11 @@ export const RetazoPrivacy = () => {
                             </pre>
                             <p>
                                 Besides the identifiers Apple adds when it signs the app, the output
-                                lists only <code>app-sandbox</code> and access to files you choose,
-                                which Retazo uses only when you export or import snippets. There is no
-                                network client. The honest boundary: a link you open from a clip opens
+                                lists only <code>app-sandbox</code>, access to files you choose (used
+                                when you export or import snippets, and to read the screenshots folder
+                                you pick), and, from version 2.1, a bookmark entitlement that lets
+                                Retazo remember that folder between launches. There is no network
+                                client. The honest boundary: a link you open from a clip opens
                                 in your own browser, and the App Store and the Shortcuts app run
                                 outside Retazo. Those are described under “Third Parties” below.
                             </p>
@@ -129,15 +131,31 @@ export const RetazoPrivacy = () => {
                                     screenshot by its words. The text is saved with the image.
                                 </li>
                                 <li>
+                                    <Strong>Your screenshots folder, only if you choose one.</Strong>{' '}
+                                    Starting with version 2.1, Settings › Clothesline can watch the
+                                    folder macOS saves screenshots to. Retazo lists the folder’s file
+                                    names and reads new image files, so they can hang on the
+                                    Clothesline. It never changes, moves, or deletes anything there.
+                                    macOS asks you to pick the folder, and Retazo remembers it with a
+                                    bookmark until you choose Stop Watching.
+                                </li>
+                                <li>
+                                    <Strong>Where the pointer is.</Strong> To bring the Clothesline down
+                                    when the pointer or a drag reaches the top of the screen, Retazo
+                                    checks the pointer’s position and whether a mouse button is down.
+                                    It never watches your typing.
+                                </li>
+                                <li>
                                     <Strong>Your clipboard permission.</Strong> On recent versions of
                                     macOS, System Settings › Privacy &amp; Security › Paste from Other
                                     Apps decides whether Retazo may read the clipboard. Retazo checks
                                     that setting so it can tell you when it is set to Deny.
                                 </li>
                                 <li>
-                                    <Strong>Your global shortcut.</Strong> Retazo registers one
-                                    keyboard shortcut (⌃⌘V unless you change it) with macOS’s standard
-                                    hotkey service. It does not watch your typing, and it does not ask
+                                    <Strong>Your keyboard shortcuts.</Strong> Retazo registers two shortcuts
+                                    (Control-Command-V for the panel and Control-Command-L for the
+                                    Clothesline, unless you change them) with macOS’s standard hotkey
+                                    service. It does not watch your typing, and it does not ask
                                     for Accessibility or Input Monitoring access.
                                 </li>
                             </ul>
@@ -198,6 +216,10 @@ export const RetazoPrivacy = () => {
                                     <Strong>Your snippets.</Strong>
                                 </li>
                                 <li>
+                                    <Strong>Which clips and snippets hang on the Clothesline</Strong>{' '}
+                                    (version 2.1 and later).
+                                </li>
+                                <li>
                                     Your settings, such as your skin, your shortcut, and your excluded
                                     apps.
                                 </li>
@@ -210,6 +232,13 @@ export const RetazoPrivacy = () => {
                                 such as Time Machine. So that Siri and Shortcuts can offer your
                                 snippets by name, macOS keeps their titles in its on-device index;
                                 they are not sent anywhere.
+                            </p>
+                            <p className="mt-4">
+                                When you drag a picture out of Retazo, or drop one onto the
+                                Clothesline, Retazo makes a copy with a readable name in its own
+                                temporary folder, inside the same container, so the other app can
+                                take it. Those copies are removed within minutes, and at the next
+                                launch.
                             </p>
                         </section>
 
@@ -224,11 +253,15 @@ export const RetazoPrivacy = () => {
                                 the oldest unpinned ones go. Auto-Forget can remove clips after a day,
                                 a week, or a month, and Clear History When Retazo Quits empties your
                                 history every time you quit; both keep pinned clips. One-time codes are
-                                forgotten after five minutes unless you pin them.
+                                forgotten after five minutes unless you pin them. Taking something off
+                                the Clothesline keeps it in your history, clearing your history also
+                                empties the Clothesline, and a one-time code hung there is kept while
+                                it hangs and forgotten five minutes after it comes down.
                             </p>
                             <p className="mt-4">
                                 If you export your snippets, the file goes only where you save it and
-                                is yours to keep or delete. If you turned on Open Retazo at Login,
+                                is yours to keep or delete. Stop Watching, in Settings › Clothesline,
+                                forgets the screenshots folder. If you turned on Open Retazo at Login,
                                 turning it off removes the login item. Deleting Retazo from your
                                 Applications folder may leave its folder behind, as it does for many
                                 Mac apps; to remove everything, delete that folder too.
@@ -264,6 +297,11 @@ export const RetazoPrivacy = () => {
                                 them involves Retrac Labs:
                             </p>
                             <ul className="list-disc pl-5 space-y-3 mt-4 marker:text-cyan-400">
+                                <li>
+                                    <Strong>Apps you drag into.</Strong> A clip you drag from Retazo into
+                                    another app is handed to that app, and what it does with it is up
+                                    to that app.
+                                </li>
                                 <li>
                                     <Strong>Links you open.</Strong> Open Link on a clip opens it in your
                                     default browser. The browser makes that connection, not Retazo, and
