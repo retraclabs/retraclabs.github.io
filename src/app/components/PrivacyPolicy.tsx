@@ -5,7 +5,7 @@ import { ArrowLeft } from 'lucide-react';
 /* Keep this date current. Any substantive edit to the text below should move it,
    because "Last updated" is the first thing anyone checks when they want to know
    whether a policy still describes what actually happens. */
-const LAST_UPDATED = 'October 5, 2026';
+const LAST_UPDATED = 'October 14, 2026';
 
 const Section = ({ title, children }: { title: string; children: React.ReactNode }) => (
     <section>
@@ -301,14 +301,16 @@ export const PrivacyPolicy = () => {
                                 use HealthKit, the file is never uploaded, and pregnancy and lactation
                                 records in an Apple Health export are never imported. The Doctor Visit
                                 Summary is a PDF created on your iPhone, and it goes only where you share it.
+                                The CSV export, which includes your temperatures starting with version 1.3,
+                                is also made on your iPhone and goes only where you share it.
                             </p>
                             <p>
                                 If you ask Siri about your cycle, Siri handles the request under Apple's
                                 privacy policy, and Amparo answers only while your iPhone is unlocked. The
                                 Quick Log widget and Amparo's control in Control Center also log only while
                                 your iPhone is unlocked, and with Discreet Mode on, the control says nothing
-                                about your cycle. Reminders and symptom heads-ups are notifications scheduled
-                                on your iPhone.
+                                about your cycle. Reminders, symptom heads-ups, and Pattern Notes are
+                                notifications scheduled on your iPhone.
                             </p>
                             <p>
                                 Send Feedback, in Amparo's Settings, opens a draft in your own Mail app,

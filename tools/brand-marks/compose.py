@@ -15,6 +15,7 @@ HERE = Path(__file__).parent
 FONTS = {
     'geist': (HERE / 'fonts' / 'GeistMono.ttf', 800),       # variable font, ExtraBold
     'silk': (HERE / 'fonts' / 'Silkscreen-Bold.ttf', 0),    # static font
+    'sans': (HERE / 'fonts' / 'Geist.ttf', 900),            # variable font, Black: the RL favicon
 }
 
 

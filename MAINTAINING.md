@@ -961,6 +961,32 @@ src/app/components/Footer.tsx
 
 Privacy policy text should be plain and conservative. Avoid promising things that are not technically guaranteed yet. For health-related apps such as Amparo, avoid language that sounds like medical advice.
 
+## Security Contact
+
+```text
+public/.well-known/security.txt
+```
+
+It is served at `retraclabs.co/.well-known/security.txt`, the standard place
+(RFC 9116) where anyone who finds a security problem in an app or on the site
+looks for who to tell. It points them at the Retrac Labs email address.
+
+**Move its `Expires` line ahead once a year**, keeping it under a year from
+that day. An expired file doesn't count, so security researchers and scanners
+treat the site as having no contact at all. The dev server and the deploy build
+both warn from 45 days out; the check is the small plugin at the top of
+`vite.config.ts`.
+
+Two things keep it published, so leave them alone:
+
+- Vite copies everything in `public/`, including folders whose names start with
+  a dot.
+- `actions/upload-pages-artifact@v3` in `.github/workflows/deploy.yml` keeps
+  those folders too. Before upgrading it, check that the new version does.
+
+If the contact address ever changes, change it here and in the footer in the
+same commit.
+
 ## The Thanks Page
 
 ```text
@@ -1356,6 +1382,20 @@ python3 tools/brand-marks/build.py
 go. The older files at the top of `public/brand/` (`j-mark.svg`,
 `j-code-mark.svg`, their `-gradient` versions, and the `-2048` PNG and JPG
 exports) are rebuilt in the same design, so existing links keep working.
+
+## The Favicon
+
+The tab icon is the RL monogram: `public/brand/favicon.svg`, plus
+`public/favicon.ico` for older browsers and `public/apple-touch-icon.png` for
+the site saved to an iPhone home screen. `index.html` links all three. They're
+generated too, from Geist Black outlines:
+
+```bash
+python3 tools/brand-marks/favicon.py
+```
+
+Browsers hold on to favicons hard, so after a change, check in a private
+window.
 
 ## Icons
 

@@ -29,18 +29,24 @@ import retazoPrivacy from '../assets/retazo/privacy.webp';
 import retazoHistory from '../assets/retazo/history.webp';
 import retazoSnippets from '../assets/retazo/snippets.webp';
 import amparoHome from '../assets/amparo/home.webp';
+import amparoDuo from '../assets/amparo/iphone-duo.webp';
 import amparoPrivacy from '../assets/amparo/privacy.webp';
 import amparoInsights from '../assets/amparo/insights.webp';
 import amparoPatterns from '../assets/amparo/patterns.webp';
+import amparoPatternDetail from '../assets/amparo/pattern-detail.webp';
+import amparoSkins from '../assets/amparo/skins.webp';
 import amparoCalendar from '../assets/amparo/calendar.webp';
 import amparoLog from '../assets/amparo/log.webp';
 import amparoMove from '../assets/amparo/move-to-a-new-iphone.webp';
 import amparoHistory from '../assets/amparo/bring-your-history.webp';
 import amparoIcons from '../assets/amparo/app-icons.webp';
 import amparoHomeEs from '../assets/amparo/es/home.webp';
+import amparoDuoEs from '../assets/amparo/es/iphone-duo.webp';
 import amparoPrivacyEs from '../assets/amparo/es/privacy.webp';
 import amparoInsightsEs from '../assets/amparo/es/insights.webp';
 import amparoPatternsEs from '../assets/amparo/es/patterns.webp';
+import amparoPatternDetailEs from '../assets/amparo/es/pattern-detail.webp';
+import amparoSkinsEs from '../assets/amparo/es/skins.webp';
 import amparoCalendarEs from '../assets/amparo/es/calendar.webp';
 import amparoLogEs from '../assets/amparo/es/log.webp';
 import amparoHistoryEs from '../assets/amparo/es/bring-your-history.webp';
@@ -588,31 +594,30 @@ export const projects: Project[] = [
         'Pattern insights that describe your own rhythms: never a diagnosis, never a contraceptive',
     ],
     version: {
-      current: '1.1',
+      current: '1.3',
       currentFeatures: [
+        'The whole app in English and Spanish, following your iPhone\'s language, widgets and Siri included',
         'Kept out of iCloud Backup by default, so your data stays on your iPhone unless you choose otherwise',
         'Move to a New iPhone: an encrypted, one-time-code transfer by AirDrop, with no cloud in between',
         'Bring your history from Apple Health, Clue, or Flo, read on your iPhone and never uploaded',
+        'Your patterns: when your symptoms usually arrive, each one cycle by cycle, and an optional heads-up the morning before',
+        'Pattern Notes: an optional note when your cycles start running shorter or longer, vary more, or go 60 days without a period',
+        'Predictions with confidence levels and ranges, ovulation confirmed by temperature, and next-period timing from that rise',
+        'Temperatures in Celsius or Fahrenheit, following your iPhone\'s region until you choose',
         'A Doctor Visit Summary: a PDF of your cycles, patterns, and temperatures to share with a clinician',
-        'Your patterns: when your symptoms usually arrive, with an optional heads-up the morning before',
         'Discreet Mode for notifications and the Lock Screen, plus app icons that don\'t look like a cycle tracker',
         'Keep My History: automatically delete entries older than a period you choose',
-        'A Quick Log widget for your period and symptoms, right on the Home Screen',
-        'Rebuilt predictions with confidence levels and ranges, and ovulation confirmed by temperature',
-        'A fresh look: colors that follow your cycle, playful animations, and support for larger text',
-        'A new app icon, with dark, tinted, and clear versions for your Home Screen',
+        'Four looks: Midnight, Daylight, Notepad, and Plain, with widgets and the Live Activity to match',
+        'Widgets for the Home Screen, the Lock Screen, and StandBy, plus a control for Control Center and the Action button',
+        'Made for iPhone Duo: unfold it, and Home, Calendar, and Insights spread into two columns',
+        'VoiceOver, Voice Control, larger text, and Increase Contrast, with charts you can hear',
         'Siri keeps quiet about your cycle while your iPhone is locked',
       ],
-      next: '1.2',
+      next: '1.4',
       nextFeatures: [
-        'Amparo in Spanish: every screen, the widgets, and Siri',
-        'Your patterns up close: each cycle, what tends to come with a symptom, and your mood on those days',
-        'Next-period timing from your confirmed temperature rise, worked out on your iPhone',
-        'Four looks: Midnight, Daylight, Notepad, and Plain, with widgets and the Live Activity to match',
-        'A control for Control Center, the Lock Screen, and the Action button',
-        'Widgets made for StandBy',
-        'Better VoiceOver, Voice Control, and larger-text support, with charts you can hear',
-        'Send Feedback from Settings, through your own Mail app',
+        'Perimenopause Notes: if you choose, a look at whether your cycle lengths show the patterns clinicians use to describe the menopausal transition, with the dates they rest on',
+        'With Pattern Notes on too, a note when one of those patterns first appears',
+        'A page in the Doctor Visit Summary with what Perimenopause Notes found and the criteria behind it',
       ],
     },
     appStoreUrl: 'https://apps.apple.com/us/app/amparo/id6765911709',
@@ -635,8 +640,22 @@ export const projects: Project[] = [
         height: 1600,
       },
       {
+        src: amparoDuo,
+        alt: 'Amparo\'s Home screen unfolded on iPhone Duo: the cycle ring and phase on the left, and the next period, the fertile window, two symptoms coming up, and the Period Started button in a second column, with the tabs in a rail on the right.',
+        caption: 'Made for iPhone Duo: unfold it, and Home, Calendar, and Insights spread into two columns.',
+        translations: {
+          es: {
+            src: amparoDuoEs,
+            alt: 'La pantalla Inicio de Amparo abierta en el iPhone Duo: el anillo del ciclo y la fase a la izquierda, y en una segunda columna el próximo periodo, la ventana fértil, dos síntomas que se acercan y el botón Empezó mi periodo, con las pestañas en un riel a la derecha.',
+            caption: 'Hecha para el iPhone Duo: al abrirlo, Inicio, Calendario y Análisis se reparten en dos columnas.',
+          },
+        },
+        width: 1600,
+        height: 1126,
+      },
+      {
         src: amparoPrivacy,
-        alt: 'Settings opens with Only on This iPhone, saying the data never leaves the phone, then reminders, App Lock, Discreet Mode, and Include in iCloud Backup, which is off.',
+        alt: 'Settings opens with Only on This iPhone, saying the data never leaves the phone, then the four looks under Appearance and the reminders.',
         caption: 'No account, no cloud, and no tracking. Your data even stays out of iCloud Backup unless you choose.',
         translations: {
           es: {
@@ -663,6 +682,20 @@ export const projects: Project[] = [
         height: 1600,
       },
       {
+        src: amparoPatternDetail,
+        alt: 'Bloating up close: usually 2 to 4 days before a period in 5 of the last 6 cycles, a cycle-by-cycle chart of the days it was logged, headache and food cravings often logged with it, and the moods on those days.',
+        caption: 'Tap a symptom to see when it showed up each cycle, and what tends to come with it.',
+        translations: {
+          es: {
+            src: amparoPatternDetailEs,
+            alt: 'La hinchazón de cerca: suele ser de 2 a 4 días antes del periodo, en 5 de los últimos 6 ciclos, con una gráfica ciclo a ciclo de los días en que se registró, el dolor de cabeza y los antojos que suelen registrarse con ella, y el ánimo de esos días.',
+            caption: 'Toca un síntoma para ver cuándo apareció en cada ciclo y qué suele venir con él.',
+          },
+        },
+        width: 737,
+        height: 1600,
+      },
+      {
         src: amparoInsights,
         alt: 'Insights: an average cycle of 29 days, an average period of 5 days, and 153 days logged, then the Doctor Visit Summary and charts of basal body temperature and cycle length.',
         caption: 'Cycle lengths and temperatures over time, plus a summary PDF to share with your doctor.',
@@ -677,8 +710,22 @@ export const projects: Project[] = [
         height: 1600,
       },
       {
+        src: amparoSkins,
+        alt: 'The Home screen in the Notepad look: lined, cream-colored paper, a handwritten Amparo title, and the cycle ring in warm ink colors.',
+        caption: 'Midnight, Daylight, Notepad, or Plain, and your widgets follow along.',
+        translations: {
+          es: {
+            src: amparoSkinsEs,
+            alt: 'La pantalla Inicio con el estilo Libreta: papel rayado color crema, el título Amparo escrito a mano y el anillo del ciclo en tonos de tinta cálidos.',
+            caption: 'Medianoche, Luz de día, Libreta o Sencillo, y tus widgets también cambian.',
+          },
+        },
+        width: 737,
+        height: 1600,
+      },
+      {
         src: amparoCalendar,
-        alt: 'The October calendar with fertile days, predicted period days, and logged days marked, and the symptoms and moods logged on October 4 below it.',
+        alt: 'The October calendar with fertile days, predicted period days, and logged days marked, and the symptoms and moods logged on October 5 below it.',
         caption: 'Periods, predictions, and the days you\'ve logged, with every detail a tap away.',
         translations: {
           es: {
@@ -692,7 +739,7 @@ export const projects: Project[] = [
       },
       {
         src: amparoLog,
-        alt: 'Logging October 4: flow, symptoms grouped into pain, digestion, skin, energy, and mental, two moods selected, energy set to High, and body temperature.',
+        alt: 'Logging October 5: flow, symptoms grouped into pain, digestion, skin, energy, and mental, two moods selected, energy set to High, and body temperature.',
         caption: 'Flow, symptoms, moods, energy, and temperature, all on one screen.',
         translations: {
           es: {

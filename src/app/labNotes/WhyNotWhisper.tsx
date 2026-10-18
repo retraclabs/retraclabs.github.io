@@ -110,12 +110,15 @@ export const WhyNotWhisper = () => (
         columns={['Engine', 'How It Fails', 'Can You Catch It?']}
         rowHeaders
         rows={[
-          ['Apunte', 'Mishears a word, visibly garbles it', 'Easily; it looks wrong'],
+          ['Apunte', 'Mishears a word, usually visibly, sometimes as a natural-sounding one', 'Usually; often it looks wrong'],
           ['Whisper', 'May generate a fluent sentence', 'Harder; it reads correctly'],
         ]}
       />
       <p>
-        A garbled phrase announces itself; a fabricated one does not. For subtitling a podcast, a smooth
+        A garbled phrase announces itself; a fabricated one does not. Not every mishearing is garbled,
+        though: on our second recording, “to a hundred milligrams” came out as “200 milligrams” in every
+        engine we tried, Apple’s included, and it reads perfectly well. Only listening catches that, which
+        is why numbers deserve a second listen whatever the transcript looks like. For subtitling a podcast, a smooth
         reading is worth more and the occasional invented phrase is harmless. For a record you may need to
         rely on later — an interview, a meeting, a session — we would rather be visibly wrong than
         invisibly wrong. That is the judgement behind Apunte, and reasonable people building different
@@ -179,20 +182,29 @@ export const WhyNotWhisper = () => (
         tell you which line in a passage is the unreliable one.
       </p>
       <p>
-        This is the difference that decided it for us. Both engines make mistakes. Apple’s tell you where
-        they are.
+        This is the difference that decided it for us. Both engines make mistakes. Apple’s are wrong
+        words where the sounds were, and on this recording its confidence pointed straight at them.
+        Whisper’s worst was a sentence nobody said, delivered as confidently as the truth.
+      </p>
+      <p>
+        Confidence doesn’t always point the way, though. On a second recording, an 11.5-minute reading
+        of a fictional clinical script, Apple’s three wrong segments scored 0.72, 0.93, and 0.93, and no
+        segment at all scored under 0.5. What held on both recordings is the part that matters most:
+        Apple’s recogniser invented nothing, and Whisper did, again.
       </p>
     </Section>
 
     <Section title="What We Built on Top of That">
       <p>
-        Since the confidence signal is reliable, Apunte shows it. Turn on review mode and every line the
-        recogniser was unsure about is marked, with a control to step through them in order to check
-        the six lines that are probably wrong rather than re-reading nine thousand words.
+        Because the confidence signal is useful, Apunte shows it. Turn on review mode and every line the
+        recogniser was unsure about is marked, with a control to step through them in order. It is a
+        hint, not a guarantee: a wrong word can arrive with high confidence, so anything that matters,
+        a name, a number, a dose, is worth checking against the audio, which one click plays.
       </p>
       <p>
-        The threshold is 0.5, chosen from the measurements above rather than picked by feel. On our test
-        recording it flags exactly the wrong segments and none of the right ones.
+        The threshold is 0.5, chosen from the measurements above rather than picked by feel. On our first
+        test recording it flagged exactly the wrong segments and none of the right ones; on the second
+        it flagged none of the three errors.
       </p>
     </Section>
 
@@ -278,8 +290,7 @@ export const WhyNotWhisper = () => (
         transcript, which is <em>not</em> a human-verified ground truth, meaning these figures measure
         divergence from MacWhisper rather than absolute accuracy. The 64-minute comparison covers 8,128
         words; the difficult-passage comparison covers 115 words and is a small sample, and the confidence
-        findings in particular come from a single recording, and we would not present them as a general
-        law. Whisper’s confidence is reported as an average log probability over a chunk, which is not
+        findings come from two recordings that disagree, so we present neither as a general law. Whisper’s confidence is reported as an average log probability over a chunk, which is not
         directly comparable to Apple’s per-segment score; we compare each engine against its own range
         rather than against each other’s.
       </Note>

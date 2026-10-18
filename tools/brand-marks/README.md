@@ -58,15 +58,35 @@ The build also rewrites the four older files in `public/brand/` (`j-mark`,
 `j-code-mark`, and their `-gradient` versions, with `-2048` PNG and JPG) in the
 new design, so anything already linking to them picks it up.
 
+## The Favicon
+
+```bash
+python3 tools/brand-marks/favicon.py
+```
+
+Builds the site's RL monogram (a white R and a gradient L on the dark tile) as
+`public/brand/favicon.svg`, `public/favicon.ico` (16, 32, and 48px), and
+`public/apple-touch-icon.png` (180px, square, since iOS rounds it). The
+letters are Geist Black outlines, sized larger than the old favicon's so they
+read at 16px. The 16px size drops the ring, which is a smudge at that size.
+Each PNG is drawn at its own size rather than shrunk from a big one.
+
+The old favicon set the letters as live `<text>` in the system font, so every
+device drew it in its own font, and some renderers dropped the weight and drew
+it thin. Outlines look the same everywhere. Apple's San Francisco, the font
+the site's wordmark falls back to on Apple devices, isn't licensed for logos,
+which is why this uses Geist.
+
 ## Fonts
 
-Not committed. Put these two files in `tools/brand-marks/fonts/`:
+Not committed. Put these three files in `tools/brand-marks/fonts/`:
 
 - `GeistMono.ttf`: Geist Mono, the variable font, from Google Fonts
 - `Silkscreen-Bold.ttf`: Silkscreen Bold, from Google Fonts
+- `Geist.ttf`: Geist, the variable font, from Google Fonts (the favicon)
 
-Both are released under the SIL Open Font License, which allows using them in
-a logo.
+All three are released under the SIL Open Font License, which allows using
+them in a logo.
 
 ## Changing Things
 

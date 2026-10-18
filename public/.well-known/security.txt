@@ -1,0 +1,8 @@
+# How to report a security problem in a Retrac Labs app or on retraclabs.co
+# (RFC 9116). Email us what you found and how to reproduce it, with the app,
+# its version, and your device. Please give us a chance to ship a fix before
+# you publish, and don't test in ways that touch anyone else's data.
+Contact: mailto:retrac.labs@gmail.com
+Expires: 2027-10-01T04:00:00.000Z
+Preferred-Languages: en
+Canonical: https://retraclabs.co/.well-known/security.txt
