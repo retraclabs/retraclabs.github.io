@@ -5,7 +5,7 @@ import { ArrowLeft } from 'lucide-react';
 /* Keep this date current. Any substantive edit to the text below should move it,
    because "Last updated" is the first thing anyone checks when they want to know
    whether a policy still describes what actually happens. */
-const LAST_UPDATED = 'October 14, 2026';
+const LAST_UPDATED = 'October 22, 2026';
 
 const Section = ({ title, children }: { title: string; children: React.ReactNode }) => (
     <section>
@@ -310,7 +310,9 @@ export const PrivacyPolicy = () => {
                                 Quick Log widget and Amparo's control in Control Center also log only while
                                 your iPhone is unlocked, and with Discreet Mode on, the control says nothing
                                 about your cycle. Reminders, symptom heads-ups, and Pattern Notes are
-                                notifications scheduled on your iPhone.
+                                notifications scheduled on your iPhone. Perimenopause Notes, off unless you
+                                turn it on, looks for cycle-length patterns in your logs on your iPhone, and
+                                nothing about it leaves your iPhone unless you share the Doctor Visit Summary.
                             </p>
                             <p>
                                 Send Feedback, in Amparo's Settings, opens a draft in your own Mail app,

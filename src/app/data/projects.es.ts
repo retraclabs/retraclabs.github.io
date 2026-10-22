@@ -167,6 +167,45 @@ export const PROJECTS_ES: Record<string, ProjectTranslation> = {
           ],
         },
       },
+      // Apunte 1.4, released 2026-10-21. Coming next is 1.5's decided Mac features.
+      '1.4': {
+        description:
+          'Apunte convierte audio y video en transcripciones precisas y con marcas de tiempo, por completo en tu Mac. ' +
+          'Suelta una nota de voz, una entrevista, una clase o un video: si macOS puede reproducirlo, Apunte puede ' +
+          'transcribirlo. O transcribe en vivo: la sala en la que estás, o una llamada o reunión con audífonos, con ' +
+          'ambos lados en una sola transcripción.\n\n' +
+          'No tiene el permiso de red saliente, así que el propio código de la app no puede abrir una conexión de red. ' +
+          'No tienes que creerlo a ciegas: compruébalo en la app firmada con codesign. La transcripción y la ' +
+          'exportación de la grabación misma son gratuitas; Premium agrega nombres de hablantes, resúmenes, búsqueda ' +
+          'en toda la biblioteca, transcripción en vivo, exportación con formato y clips de audio, como suscripción o ' +
+          'como compra única de por vida. La app está en español y en inglés, y se bloquea con Touch ID.',
+        highlights: [
+          'Sin acceso a la red, y puedes comprobarlo: la app no tiene el permiso de red, así que no puede subir tu audio. Verifícalo en Terminal.',
+          'Precisa con grabaciones reales: en una sesión de 64 minutos entre dos personas capturó el mismo contenido que MacWhisper, y conservó las vacilaciones y los arranques en falso en lugar de suavizarlos.',
+          'En vivo, para la sala o la llamada: las palabras aparecen mientras la gente habla, y una llamada con audífonos pone ambos lados en una sola transcripción. La grabación se queda en tu Mac para que puedas cotejar cualquier línea con ella.',
+          'Una versión gratuita de verdad completa: la transcripción, la edición, la reproducción, el bloqueo, todos los estilos y la exportación a texto sin formato, texto con marcas de tiempo, JSON o la grabación misma son gratis. El JSON lo lleva todo, así que tu trabajo nunca queda atrapado.',
+        ],
+        version: {
+          currentFeatures: [
+            'Transcripción en vivo desde el micrófono, o desde una llamada o reunión con audífonos, con ambos lados en una sola transcripción y cada línea etiquetada como Yo u Otros',
+            'Identificar hablantes: Apunte distingue las voces de una grabación en tu Mac y las numera, y tú nombras a cada persona una vez',
+            'Envía transcripciones a otra Mac con AirDrop o un cable: un solo archivo cifrado que solo tus dispositivos pueden abrir, sin nube y sin cuenta',
+            'Controles en la barra de menús para llamadas y reuniones, sin abrir la ventana',
+            'Exporta la grabación misma gratis, o un clip de cualquier línea',
+            'Nombres de hablantes con su propio color, resúmenes generados en el dispositivo que leen tus ediciones y los nombres de los hablantes, y búsqueda en todas las transcripciones',
+            'Modo de revisión, que marca las líneas de las que el reconocedor no estaba seguro y las cuenta',
+            'Exportación a texto sin formato, texto con marcas de tiempo, JSON, SubRip, WebVTT, CSV, Markdown, HTML, PDF y Word',
+            'Bloqueo con Touch ID o la contraseña de tu Mac, y cinco estilos, cada uno con su tipografía en toda la ventana, en español y en inglés',
+          ],
+          nextFeatures: [
+            'Tus propias notas junto a la transcripción, cada una en el momento en que la escribiste, que un resumen sigue como guía',
+            'Buscar y reemplazar, y correcciones guardadas para las palabras que Apunte suele escribir mal',
+            'Un modo de revisión que también marca números y dosis',
+            'Tiempo de habla, y las líneas de un solo hablante',
+            'Una oferta para transcribir cuando empieza una llamada',
+          ],
+        },
+      },
     },
   },
 
@@ -309,6 +348,33 @@ export const PROJECTS_ES: Record<string, ProjectTranslation> = {
             'Notas de perimenopausia: si así lo eliges, una revisión de si la duración de tus ciclos muestra los patrones que los profesionales de la salud usan para describir la transición a la menopausia, con las fechas en que se basan',
             'Si también tienes activadas las Notas de patrones, una nota cuando uno de esos patrones aparezca por primera vez',
             'Una página en el Resumen para la consulta médica con lo que encontraron las Notas de perimenopausia y los criterios en que se basan',
+          ],
+        },
+      },
+      '1.4': {
+        version: {
+          currentFeatures: [
+            'Toda la app en inglés y en español, según el idioma de tu iPhone, con los widgets y Siri incluidos',
+            'Fuera del respaldo de iCloud de forma predeterminada, para que tus datos se queden en tu iPhone a menos que elijas otra cosa',
+            'Pasar a un nuevo iPhone: una transferencia cifrada por AirDrop con un código de un solo uso, sin nube de por medio',
+            'Trae tu historial desde la app Salud de Apple, Clue o Flo, leído en tu iPhone y nunca subido',
+            'Tus patrones: cuándo suelen llegar tus síntomas, cada uno ciclo a ciclo, y un aviso opcional la mañana anterior',
+            'Notas de patrones: una nota opcional cuando tus ciclos empiezan a acortarse, a alargarse, a variar más o pasan 60 días sin periodo',
+            'Notas de perimenopausia: si así lo eliges, una revisión de si la duración de tus ciclos muestra los patrones que los profesionales de la salud usan para describir la transición a la menopausia, con las fechas en que se basan, en Análisis y en el Resumen para la consulta médica',
+            'Predicciones con niveles de confianza y rangos, la ovulación confirmada por la temperatura y el cálculo de tu próximo periodo a partir de ese aumento',
+            'La temperatura en grados Celsius o Fahrenheit, según la región de tu iPhone hasta que elijas una unidad',
+            'Un resumen para la consulta médica: un PDF con tus ciclos, patrones y temperaturas para compartir con un profesional de la salud',
+            'Modo discreto para las notificaciones y la pantalla bloqueada, además de iconos que no parecen de una app del ciclo',
+            'Conservar mi historial: elimina automáticamente los registros más antiguos que el plazo que elijas',
+            'Cuatro estilos: Medianoche, Luz de día, Libreta y Sencillo, con widgets y la Actividad en vivo a juego',
+            'Widgets para la pantalla de inicio, la pantalla bloqueada y el modo En espera, además de un control para el Centro de control y el botón de acción',
+            'Hecha para el iPhone Duo: al abrirlo, Inicio, Calendario y Análisis se reparten en dos columnas',
+            'VoiceOver, Control por voz, texto grande y Aumentar contraste, con gráficas que puedes escuchar',
+            'Siri no habla de tu ciclo mientras tu iPhone está bloqueado',
+          ],
+          nextFeatures: [
+            'Diseñada para el iPhone Duo: al abrirlo, cada pestaña se reparte en dos columnas, con todo el registro del día en una sola pantalla',
+            'El Calendario muestra todo lo que registraste en un día junto al mes',
           ],
         },
       },

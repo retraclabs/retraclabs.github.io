@@ -34,6 +34,7 @@ import amparoPrivacy from '../assets/amparo/privacy.webp';
 import amparoInsights from '../assets/amparo/insights.webp';
 import amparoPatterns from '../assets/amparo/patterns.webp';
 import amparoPatternDetail from '../assets/amparo/pattern-detail.webp';
+import amparoPerimenopause from '../assets/amparo/perimenopause-notes.webp';
 import amparoSkins from '../assets/amparo/skins.webp';
 import amparoCalendar from '../assets/amparo/calendar.webp';
 import amparoLog from '../assets/amparo/log.webp';
@@ -46,6 +47,7 @@ import amparoPrivacyEs from '../assets/amparo/es/privacy.webp';
 import amparoInsightsEs from '../assets/amparo/es/insights.webp';
 import amparoPatternsEs from '../assets/amparo/es/patterns.webp';
 import amparoPatternDetailEs from '../assets/amparo/es/pattern-detail.webp';
+import amparoPerimenopauseEs from '../assets/amparo/es/perimenopause-notes.webp';
 import amparoSkinsEs from '../assets/amparo/es/skins.webp';
 import amparoCalendarEs from '../assets/amparo/es/calendar.webp';
 import amparoLogEs from '../assets/amparo/es/log.webp';
@@ -278,20 +280,25 @@ export const projects: Project[] = [
       'A free tier that\'s actually complete: transcription, editing, playback, the lock, every look, and export to plain text, timestamped text, JSON, or the recording itself are free. JSON carries everything, so your work is never locked in.',
     ],
     version: {
-      current: '1.3',
+      current: '1.4',
       currentFeatures: [
         'Live transcription from the microphone, or from a call or meeting on headphones with both sides in one transcript, each line labeled Me or Others',
+        'Identify Speakers: Apunte tells the voices in a recording apart on your Mac and numbers them, and you name each person once',
+        'Send transcripts to another Mac with AirDrop or a cable: one encrypted file that only your own devices can open, with no cloud and no account',
+        'Controls in the menu bar for calls and meetings, without opening the window',
         'Export the recording itself, free, or a clip of any lines',
-        'Speaker names in their own colors, on-device summaries in the transcript\'s language, and search across every transcript',
+        'Speaker names in their own colors, on-device summaries that read your edits and speakers\' names, and search across every transcript',
         'Review mode, which marks the lines the recogniser was unsure of and counts them',
         'Export to plain text, timestamped text, JSON, SubRip, WebVTT, CSV, Markdown, HTML, PDF, and Word',
-        'A lock with Touch ID or your Mac\'s password, and five looks, among them Steno, Apunte\'s own',
-        'The whole app in English and Spanish, following your Mac\'s language',
+        'A lock with Touch ID or your Mac\'s password, and five looks, each with its own type across the whole window, in English and Spanish',
       ],
-      next: '1.4',
+      next: '1.5',
       nextFeatures: [
-        'Controls in the menu bar for calls and meetings, without opening the window',
-        'Each look\'s type carried through the whole window',
+        'Your own notes beside the transcript, each at the moment you typed it, which a summary follows as its outline',
+        'Find and Replace, and saved fixes for words Apunte keeps getting wrong',
+        'Review mode that also flags numbers and doses',
+        'Talk Time, and one speaker\'s lines alone',
+        'An offer to transcribe when a call starts',
       ],
     },
     price: 'Free, with Premium as a subscription or a one-time purchase',
@@ -594,7 +601,7 @@ export const projects: Project[] = [
         'Pattern insights that describe your own rhythms: never a diagnosis, never a contraceptive',
     ],
     version: {
-      current: '1.3',
+      current: '1.4',
       currentFeatures: [
         'The whole app in English and Spanish, following your iPhone\'s language, widgets and Siri included',
         'Kept out of iCloud Backup by default, so your data stays on your iPhone unless you choose otherwise',
@@ -602,6 +609,7 @@ export const projects: Project[] = [
         'Bring your history from Apple Health, Clue, or Flo, read on your iPhone and never uploaded',
         'Your patterns: when your symptoms usually arrive, each one cycle by cycle, and an optional heads-up the morning before',
         'Pattern Notes: an optional note when your cycles start running shorter or longer, vary more, or go 60 days without a period',
+        'Perimenopause Notes: if you choose, a look at whether your cycle lengths show the patterns clinicians use to describe the menopausal transition, with the dates they rest on, in Insights and the Doctor Visit Summary',
         'Predictions with confidence levels and ranges, ovulation confirmed by temperature, and next-period timing from that rise',
         'Temperatures in Celsius or Fahrenheit, following your iPhone\'s region until you choose',
         'A Doctor Visit Summary: a PDF of your cycles, patterns, and temperatures to share with a clinician',
@@ -613,11 +621,10 @@ export const projects: Project[] = [
         'VoiceOver, Voice Control, larger text, and Increase Contrast, with charts you can hear',
         'Siri keeps quiet about your cycle while your iPhone is locked',
       ],
-      next: '1.4',
+      next: '1.5',
       nextFeatures: [
-        'Perimenopause Notes: if you choose, a look at whether your cycle lengths show the patterns clinicians use to describe the menopausal transition, with the dates they rest on',
-        'With Pattern Notes on too, a note when one of those patterns first appears',
-        'A page in the Doctor Visit Summary with what Perimenopause Notes found and the criteria behind it',
+        'Designed for iPhone Duo: unfold it, and every tab spreads into two columns, with the whole day\'s log on one screen',
+        'The Calendar shows everything you logged for a day beside the month',
       ],
     },
     appStoreUrl: 'https://apps.apple.com/us/app/amparo/id6765911709',
@@ -676,6 +683,20 @@ export const projects: Project[] = [
             src: amparoPatternsEs,
             alt: 'Tus patrones enumera seis síntomas y cuándo suele llegar cada uno, como la hinchazón de 2 a 4 días antes del periodo en 5 de los últimos 6 ciclos, sobre una gráfica de temperatura que marca el aumento después de la ovulación.',
             caption: 'Cuándo suelen llegar tus síntomas, aprendido de tus propios registros, y el aumento de temperatura después de la ovulación.',
+          },
+        },
+        width: 737,
+        height: 1600,
+      },
+      {
+        src: amparoPerimenopause,
+        alt: 'Perimenopause Notes in Insights: your cycle length has varied in a lasting way, three dated changes of a week or more, the other causes that look the same, and a note that Amparo can\'t diagnose anything.',
+        caption: 'If you choose, Amparo looks in your logs for the cycle patterns clinicians use to describe the menopausal transition.',
+        translations: {
+          es: {
+            src: amparoPerimenopauseEs,
+            alt: 'Notas de perimenopausia en Análisis: la duración de tu ciclo ha variado de forma duradera, tres cambios con fecha de una semana o más, las otras causas que se ven igual y una nota de que Amparo no puede diagnosticar nada.',
+            caption: 'Si tú lo eliges, Amparo busca en tus registros los patrones del ciclo que describen la transición a la menopausia.',
           },
         },
         width: 737,
