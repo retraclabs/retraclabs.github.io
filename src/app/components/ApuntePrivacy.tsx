@@ -185,6 +185,16 @@ export const ApuntePrivacy = () => {
                                     only their sound is kept.
                                 </li>
                                 <li>
+                                    <strong className="text-white light:text-zinc-900 font-bold">“Transcribe
+                                    in Apunte” in the share sheet,</strong> in Voice Memos or any app
+                                    that shares audio or video, copies what you share into a folder
+                                    that only Apunte and its extensions can reach on your device.
+                                    The copy is unencrypted, protected until you first unlock the
+                                    device after it starts, and kept out of backups. Apunte imports
+                                    it the next time you open it and then erases it, and erases one
+                                    left there an hour or more if an import never happened.
+                                </li>
+                                <li>
                                     <strong className="text-white light:text-zinc-900 font-bold">While a
                                     file is transcribed,</strong> on any device, Apunte works from an
                                     unencrypted copy inside its container and erases that copy when
