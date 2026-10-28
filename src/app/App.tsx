@@ -8,10 +8,13 @@ import { ProjectDetail } from './components/ProjectDetail';
 import { PrivacyPolicy } from './components/PrivacyPolicy';
 import { ApuntePrivacy } from './components/ApuntePrivacy';
 import { ApunteTerms } from './components/ApunteTerms';
+import { FielPrivacy } from './components/FielPrivacy';
+import { FielTerms } from './components/FielTerms';
 import { HashDropPrivacy } from './components/HashDropPrivacy';
 import { HashDropTerms } from './components/HashDropTerms';
 import { AmbientDeskPrivacy } from './components/AmbientDeskPrivacy';
 import { RetazoPrivacy } from './components/RetazoPrivacy';
+import { GetOnTheRugRedirect, GET_ON_THE_RUG_PRIVACY, APPLE_STANDARD_EULA } from './components/GetOnTheRugRedirect';
 import { EarlyAccess } from './components/EarlyAccess';
 import { About } from './components/About';
 import { Thanks } from './components/Thanks';
@@ -29,6 +32,8 @@ import { hashFor, parseHash } from './i18n/route';
 import { motion } from 'motion/react';
 
 const STATIC_PAGE_HASHES = ['#/privacy', '#/apunte/privacy', '#/apunte/terms', '#/hash-drop/privacy', '#/hash-drop/terms', '#/ambient-desk/privacy', '#/retazo/privacy', '#/early-access', '#/about', '#/thanks'];
+/* Get On The Rug's old legal routes, which forward to getontherug.co; fold them into the list above next time it is edited. */
+STATIC_PAGE_HASHES.push('#/get-on-the-rug/privacy', '#/get-on-the-rug/terms');
 
 /** Every page that is not the home page: fixed pages, plus lab notes, which get
  *  their routes from their own registry rather than from the list above. */
@@ -197,6 +202,10 @@ export default function App() {
         <EnglishOnly><ApuntePrivacy /></EnglishOnly>
       ) : path === '#/apunte/terms' ? (
         <EnglishOnly><ApunteTerms /></EnglishOnly>
+      ) : path === '#/fiel/privacy' ? (
+        <EnglishOnly><FielPrivacy /></EnglishOnly>
+      ) : path === '#/fiel/terms' ? (
+        <EnglishOnly><FielTerms /></EnglishOnly>
       ) : path === '#/hash-drop/privacy' ? (
         <EnglishOnly><HashDropPrivacy /></EnglishOnly>
       ) : path === '#/hash-drop/terms' ? (
@@ -205,6 +214,10 @@ export default function App() {
         <EnglishOnly><AmbientDeskPrivacy /></EnglishOnly>
       ) : path === '#/retazo/privacy' ? (
         <EnglishOnly><RetazoPrivacy /></EnglishOnly>
+      ) : path === '#/get-on-the-rug/privacy' ? (
+        <GetOnTheRugRedirect to={GET_ON_THE_RUG_PRIVACY} label="privacy policy" />
+      ) : path === '#/get-on-the-rug/terms' ? (
+        <GetOnTheRugRedirect to={APPLE_STANDARD_EULA} label="terms of use" />
       ) : path === '#/early-access' ? (
         <EnglishOnly><EarlyAccess /></EnglishOnly>
       ) : path === '#/about' ? (

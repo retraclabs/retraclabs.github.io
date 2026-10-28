@@ -100,6 +100,18 @@ export const ACCENTS: Record<ProjectAccent, AccentStyle> = {
     rule: 'border-green-400 light:border-green-600',
     wash: 'bg-green-400/5 light:bg-green-50',
   },
+  orange: {
+    border: 'hover:border-orange-400',
+    text: 'text-orange-400 light:text-orange-700',
+    iconBg: 'bg-zinc-800 light:bg-zinc-100 text-orange-400 light:text-orange-700',
+    pill: 'bg-orange-400/10 text-orange-400 light:text-orange-700 border-orange-400/20',
+    shadow: 'rgba(251,146,60,1)',
+    glow: 'bg-[radial-gradient(circle_at_80%_80%,rgba(251,146,60,0.14),transparent_55%)]',
+    detailGlow: 'bg-orange-500',
+    fill: 'bg-orange-400 light:bg-orange-600',
+    rule: 'border-orange-400 light:border-orange-600',
+    wash: 'bg-orange-400/5 light:bg-orange-50',
+  },
 };
 
 /** Card width in the six-column Lab grid. */

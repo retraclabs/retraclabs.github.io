@@ -1,4 +1,4 @@
-import { AudioLines, Hash, Mic, Scissors, Smartphone, Zap, type LucideIcon } from 'lucide-react';
+import { AudioLines, Hash, MessagesSquare, Mic, Scissors, Smartphone, Zap, type LucideIcon } from 'lucide-react';
 import type { Language } from './languages';
 import apunteTranscript from '../assets/apunte/transcript.webp';
 import apunteLive from '../assets/apunte/live.webp';
@@ -151,7 +151,7 @@ export type ScreenshotTranslation = {
   height?: number;
 };
 
-export type ProjectAccent = 'pink' | 'cyan' | 'emerald' | 'sky' | 'purple' | 'green';
+export type ProjectAccent = 'pink' | 'cyan' | 'emerald' | 'sky' | 'purple' | 'green' | 'orange';
 
 /* ──────────────────────────────────────────────────────────────────────────────
    ORDER MATTERS. This array is the order the cards appear in, top to bottom.
@@ -161,6 +161,43 @@ export type ProjectAccent = 'pink' | 'cyan' | 'emerald' | 'sky' | 'purple' | 'gr
    See MAINTAINING.md → "Reordering Projects".
    ────────────────────────────────────────────────────────────────────────────── */
 export const projects: Project[] = [
+  {
+    slug: 'get-on-the-rug',
+    name: 'Get On The Rug',
+    platform: 'iOS',
+    status: 'Beta Testing',
+    accent: 'orange',
+    accentText: 'text-orange-400',
+    icon: MessagesSquare,
+    span: 'full',
+    teaser: 'A guided way for two people to have a hard conversation, one turn at a time.',
+    summary:
+      'A guided way to have the hard conversation. Two people, one rug, one turn at a time.',
+    description:
+      'Get On The Rug gives a hard conversation between two people a shape. Pick a topic or name your own, ' +
+      'read five short rules out loud together, and begin. One of you speaks for two, three, or five minutes while ' +
+      'the other listens. Then the listener has a minute to say back what they heard, and the speaker tells them ' +
+      'what they got right and what is missing. Each round goes a level deeper, from what happened to what\'s ' +
+      'underneath to what you need, and the conversation closes with what you\'re grateful for about each other ' +
+      'and one next step each. Either of you can pause during a turn.\n\n' +
+      'Use one phone lying flat on the rug between you, with the top half of the screen turned to face whoever ' +
+      'sits at the top, or two phones joined by a four-character code. Two phones talk to each other directly ' +
+      'over Wi-Fi, with no server in between, and the link between them is encrypted. The app makes ' +
+      'no internet connections of its own and has no account and no analytics; purchases are handled by Apple. ' +
+      'The first three conversations on each phone are free, and Premium is a one-time purchase, with no ' +
+      'subscription, that unlocks the rest. Looking for beta testers. Its own site is getontherug.co.\n\n' +
+      'Get On The Rug isn\'t therapy, counseling, or crisis support. If you ever feel unsafe, stop and get help. ' +
+      'Get On The Rug™ is a trademark of Thomas Brad Murphy.',
+    highlights: [
+      'One speaks, one listens: timed turns of two, three, or five minutes, then a minute for the listener to say back what they heard.',
+      'One phone or two: lay one phone flat between you, or join two phones with a four-character code. They link directly over Wi-Fi, encrypted, with no server in between.',
+      'No servers, no account: the app makes no internet connections of its own, has no analytics, and never records what anyone says aloud. Purchases are handled by Apple.',
+    ],
+    nextSteps: [
+      'Gather feedback from TestFlight testers, on one phone and on two',
+      'Launch on the App Store, free with a one-time Premium unlock',
+    ],
+  },
   {
     slug: 'hash-drop',
     name: 'Hash Drop',
@@ -280,25 +317,22 @@ export const projects: Project[] = [
       'A free tier that\'s actually complete: transcription, editing, playback, the lock, every look, and export to plain text, timestamped text, JSON, or the recording itself are free. JSON carries everything, so your work is never locked in.',
     ],
     version: {
-      current: '1.4',
+      current: '1.5',
       currentFeatures: [
+        'Your own notes in a pane beside the transcript: type while you listen, and each note lands at the moment you started typing, live or on playback',
+        'An offer to transcribe when a call starts, in FaceTime, Zoom, or your browser: one click, and call mode if you\'re on headphones',
+        'Find and Replace, and saved fixes for words Apunte keeps getting wrong',
+        'Review mode that also marks every number, and notes whose number differs from what was said',
+        'Talk Time, and one speaker\'s lines alone',
+        'A live session that survives a crash: the recording and your notes come back the next time Apunte opens',
         'Live transcription from the microphone, or from a call or meeting on headphones with both sides in one transcript, each line labeled Me or Others',
         'Identify Speakers: Apunte tells the voices in a recording apart on your Mac and numbers them, and you name each person once',
-        'Send transcripts to another Mac with AirDrop or a cable: one encrypted file that only your own devices can open, with no cloud and no account',
-        'Controls in the menu bar for calls and meetings, without opening the window',
-        'Export the recording itself, free, or a clip of any lines',
-        'Speaker names in their own colors, on-device summaries that read your edits and speakers\' names, and search across every transcript',
-        'Review mode, which marks the lines the recogniser was unsure of and counts them',
-        'Export to plain text, timestamped text, JSON, SubRip, WebVTT, CSV, Markdown, HTML, PDF, and Word',
-        'A lock with Touch ID or your Mac\'s password, and five looks, each with its own type across the whole window, in English and Spanish',
+        'Send transcripts to your iPhone, iPad, or another Mac with AirDrop or a cable: one encrypted file that only your own devices can open, with no cloud and no account',
+        'Export to plain text, timestamped text, JSON, SubRip, WebVTT, CSV, Markdown, HTML, PDF, and Word, or the recording itself, free',
       ],
-      next: '1.5',
+      next: '1.6',
       nextFeatures: [
-        'Your own notes beside the transcript, each at the moment you typed it, which a summary follows as its outline',
-        'Find and Replace, and saved fixes for words Apunte keeps getting wrong',
-        'Review mode that also flags numbers and doses',
-        'Talk Time, and one speaker\'s lines alone',
-        'An offer to transcribe when a call starts',
+        'Automatic sync between your devices, through your own iCloud Drive, in sealed files only your devices can open',
       ],
     },
     price: 'Free, with Premium as a subscription or a one-time purchase',

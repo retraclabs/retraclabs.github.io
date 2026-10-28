@@ -26,7 +26,7 @@ export const ApunteTerms = () => {
                     </h1>
 
                     <p className="text-zinc-400 light:text-zinc-600 font-mono font-bold mb-10">
-                        Last updated: October 9, 2026
+                        Last updated: October 28, 2026
                     </p>
 
                     <div className="space-y-10 text-zinc-300 light:text-zinc-700 font-medium leading-relaxed">
@@ -35,8 +35,9 @@ export const ApunteTerms = () => {
                                 Agreement
                             </h2>
                             <p>
-                                These Terms of Use (“Terms”) govern your use of Apunte, a macOS
-                                application developed by Retrac Labs (Jarred Carter). By downloading
+                                These Terms of Use (“Terms”) govern your use of Apunte, an
+                                application for Mac, iPhone, and iPad developed by Retrac Labs
+                                (Jarred Carter). By downloading
                                 or using Apunte, you agree to these Terms. If you do not agree, do not
                                 use the app.
                             </p>
@@ -52,7 +53,9 @@ export const ApunteTerms = () => {
                                 control, in accordance with the App Store Terms of Service. You may
                                 not reverse engineer, decompile, resell, redistribute, sublicense, or
                                 rent the app, except where such a restriction is prohibited by
-                                applicable law.
+                                applicable law. Open-source components included in Apunte, listed in
+                                its About window, are licensed under their own terms, and nothing in
+                                these Terms limits your rights under those licences.
                             </p>
                         </section>
 
@@ -65,8 +68,10 @@ export const ApunteTerms = () => {
                                 timestamped text, and JSON, and export of a whole recording are free.
                             </p>
                             <p className="mt-4">
-                                Premium features — speaker names on transcript lines, on-device
-                                summaries of each part of a recording, search across your whole
+                                Premium features — speaker names on transcript lines, which
+                                Apunte can also assign by telling the speakers in a recording apart
+                                on your Mac, on-device summaries of each part of a recording, search
+                                across your whole
                                 transcript library, live transcription from the microphone or a
                                 call, and export to SubRip (SRT), WebVTT, CSV, Markdown, HTML, PDF,
                                 and Word, plus audio clips of any lines — are unlocked through an
@@ -102,8 +107,10 @@ export const ApunteTerms = () => {
                             <p className="mt-4">
                                 <strong className="text-white light:text-zinc-900 font-bold">If Premium lapses.</strong>{' '}
                                 Any speaker names you have already assigned remain visible and
-                                continue to export, and summaries you have already generated remain
-                                in place; only creating <em>new</em> ones stops until you renew.
+                                continue to export; only assigning <em>new</em> ones stops until you
+                                renew. Summaries you already made stay with their transcript on
+                                the device that made them, and you can still open them; making a
+                                new one needs an active subscription or the lifetime purchase.
                                 Live transcripts you already captured stay in your library, with
                                 their editing, playback, and free export formats; starting a new live
                                 session needs an active subscription or the lifetime purchase.
@@ -127,7 +134,7 @@ export const ApunteTerms = () => {
                                 accuracy, completeness, or fitness for a particular purpose.
                             </p>
                             <p className="mt-4">
-                                Summaries are generated on your Mac by Apple Intelligence and can be
+                                Summaries are generated on your device by Apple Intelligence and can be
                                 inaccurate or incomplete, including stating things that were not said.
                                 Always check a summary against the transcript and the recording before
                                 relying on it.
@@ -163,7 +170,7 @@ export const ApunteTerms = () => {
                                 You retain all rights to your recordings, source files, and
                                 transcripts. They are yours entirely. Retrac Labs claims no ownership
                                 or licence over your content and never receives it — it stays on your
-                                Mac.
+                                devices, or goes only where you send it.
                             </p>
                         </section>
 
@@ -172,8 +179,9 @@ export const ApunteTerms = () => {
                                 6. Recording Calls and Meetings
                             </h2>
                             <p>
-                                Call mode records your microphone and what other apps play on your
-                                Mac, only during a session you start. Recording a conversation may
+                                On a Mac, call mode records your microphone and what other apps play
+                                there, only during a session you start; on iPhone and iPad, Apunte
+                                records the microphone alone. Recording a conversation may
                                 require the consent of the other participants under the laws that
                                 apply to you or to them, and the rules of the service the call runs
                                 on. You are solely responsible for obtaining any consent the law

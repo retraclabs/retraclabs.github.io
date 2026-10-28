@@ -43,7 +43,7 @@ export const RetazoPrivacy = () => {
                     </h1>
 
                     <p className="text-zinc-400 light:text-zinc-600 font-mono font-bold mb-10">
-                        Last updated: October 12, 2026
+                        Last updated: October 23, 2026
                     </p>
 
                     <div className="space-y-10 text-zinc-300 light:text-zinc-700 font-medium leading-relaxed">
@@ -141,9 +141,10 @@ export const RetazoPrivacy = () => {
                                 </li>
                                 <li>
                                     <Strong>Where the pointer is.</Strong> To bring the Clothesline down
-                                    when the pointer or a drag reaches the top of the screen, Retazo
-                                    checks the pointer’s position and whether a mouse button is down.
-                                    It never watches your typing.
+                                    when a drag reaches the menu bar, to put it away once the pointer
+                                    moves on, and, if you turn it on, when the pointer rests at the top
+                                    edge of the screen, Retazo checks the pointer’s position and whether
+                                    a mouse button is down. It never watches your typing.
                                 </li>
                                 <li>
                                     <Strong>Your clipboard permission.</Strong> On recent versions of

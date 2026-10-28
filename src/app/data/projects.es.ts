@@ -33,6 +33,11 @@ export type ProjectTranslation = ProjectText & {
 };
 
 export const PROJECTS_ES: Record<string, ProjectTranslation> = {
+  'get-on-the-rug': {
+    teaser: 'Una forma guiada de que dos personas tengan una conversación difícil, un turno a la vez.',
+    summary: 'Una forma guiada de tener esa conversación difícil. Dos personas, un tapete, un turno a la vez.',
+  },
+
   'hash-drop': {
     teaser:
       'Comprueba que una descarga sea exactamente lo que publicó su autor, verificando hashes, firmas y notarización en tu Mac.',
@@ -203,6 +208,42 @@ export const PROJECTS_ES: Record<string, ProjectTranslation> = {
             'Un modo de revisión que también marca números y dosis',
             'Tiempo de habla, y las líneas de un solo hablante',
             'Una oferta para transcribir cuando empieza una llamada',
+          ],
+        },
+      },
+      // Apunte 1.5 (shipped as 1.5.1), released 2026-10-28. Coming next is folder sync (1.6).
+      '1.5': {
+        description:
+          'Apunte convierte audio y video en transcripciones precisas y con marcas de tiempo, por completo en tu Mac. ' +
+          'Suelta una nota de voz, una entrevista, una clase o un video: si macOS puede reproducirlo, Apunte puede ' +
+          'transcribirlo. O transcribe en vivo: la sala en la que estás, o una llamada o reunión con audífonos, con ' +
+          'ambos lados en una sola transcripción.\n\n' +
+          'No tiene el permiso de red saliente, así que el propio código de la app no puede abrir una conexión de red. ' +
+          'No tienes que creerlo a ciegas: compruébalo en la app firmada con codesign. La transcripción y la ' +
+          'exportación de la grabación misma son gratuitas; Premium agrega nombres de hablantes, resúmenes, búsqueda ' +
+          'en toda la biblioteca, transcripción en vivo, exportación con formato y clips de audio, como suscripción o ' +
+          'como compra única de por vida. La app está en español y en inglés, y se bloquea con Touch ID.',
+        highlights: [
+          'Sin acceso a la red, y puedes comprobarlo: la app no tiene el permiso de red, así que no puede subir tu audio. Verifícalo en Terminal.',
+          'Precisa con grabaciones reales: en una sesión de 64 minutos entre dos personas capturó el mismo contenido que MacWhisper, y conservó las vacilaciones y los arranques en falso en lugar de suavizarlos.',
+          'En vivo, para la sala o la llamada: las palabras aparecen mientras la gente habla, y una llamada con audífonos pone ambos lados en una sola transcripción. La grabación se queda en tu Mac para que puedas cotejar cualquier línea con ella.',
+          'Una versión gratuita de verdad completa: la transcripción, la edición, la reproducción, el bloqueo, todos los estilos y la exportación a texto sin formato, texto con marcas de tiempo, JSON o la grabación misma son gratis. El JSON lo lleva todo, así que tu trabajo nunca queda atrapado.',
+        ],
+        version: {
+          currentFeatures: [
+            'Tus propias notas en un panel junto a la transcripción: escribe mientras escuchas y cada nota queda en el momento en que empezaste a escribir, en vivo o al reproducir',
+            'Una oferta para transcribir cuando empieza una llamada en FaceTime, Zoom o tu navegador: un clic, y modo de llamada si usas audífonos',
+            'Buscar y reemplazar, y correcciones guardadas para las palabras que Apunte suele escribir mal',
+            'Un modo de revisión que también marca cada número, y las notas cuyo número no coincide con lo que se dijo',
+            'Tiempo de habla, y las líneas de un solo hablante',
+            'Una sesión en vivo que sobrevive a un cierre inesperado: la grabación y tus notas vuelven la próxima vez que abres Apunte',
+            'Transcripción en vivo desde el micrófono, o desde una llamada o reunión con audífonos, con ambos lados en una sola transcripción y cada línea etiquetada como Yo u Otros',
+            'Identificar hablantes: Apunte distingue las voces de una grabación en tu Mac y las numera, y tú nombras a cada persona una vez',
+            'Envía transcripciones a tu iPhone, iPad u otra Mac con AirDrop o un cable: un solo archivo cifrado que solo tus dispositivos pueden abrir, sin nube y sin cuenta',
+            'Exportación a texto sin formato, texto con marcas de tiempo, JSON, SubRip, WebVTT, CSV, Markdown, HTML, PDF y Word, o la grabación misma, gratis',
+          ],
+          nextFeatures: [
+            'Sincronización automática entre tus dispositivos, a través de tu propio iCloud Drive, en archivos sellados que solo tus dispositivos pueden abrir',
           ],
         },
       },

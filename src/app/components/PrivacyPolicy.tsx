@@ -384,6 +384,24 @@ export const PrivacyPolicy = () => {
                             </p>
                         </Section>
 
+                        <Section title="Get On The Rug">
+                            <p>
+                                Get On The Rug is an iPhone app, now in TestFlight testing, that guides
+                                two people through a hard conversation, on one phone or on two phones
+                                linked directly to each other. It makes no internet connections of its
+                                own and has no servers, no account, and no analytics. Two phones talk to
+                                each other directly over Wi-Fi, encrypted, with nothing sent to Retrac
+                                Labs or any server. What it keeps stays on your phones, nothing anyone
+                                says aloud is recorded, and purchases are handled by Apple. For full
+                                details, see Get On The Rug's own{' '}
+                                <a href="https://getontherug.co/privacy" className="text-cyan-400 light:text-cyan-700 hover:text-cyan-300 light:hover:text-cyan-800">
+                                    privacy policy
+                                </a>
+                                {' '}at getontherug.co. While Retrac Labs develops the app, this policy covers
+                                its beta testers, as described in The Beta Testing Program above.
+                            </p>
+                        </Section>
+
                         <Section title="Data Sharing">
                             <p>
                                 Retrac Labs does not sell personal information, and has never done so. We

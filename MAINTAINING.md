@@ -118,6 +118,8 @@ Current route patterns:
 #/hash-drop/terms
 #/ambient-desk/privacy
 #/retazo/privacy
+#/get-on-the-rug/privacy   (forwards to getontherug.co/privacy)
+#/get-on-the-rug/terms     (forwards to Apple's Standard License Agreement)
 #/projects/<slug>
 ```
 
@@ -314,8 +316,9 @@ shipped apps as the reward at the end of the scroll.
 Current order, top to bottom:
 
 ```text
-Project Salt        (In Development) ─┐
-Project Deacon      (Testing)         │ newest work, nothing announced
+Get On The Rug™     (Beta Testing)      announced, in TestFlight, a full-width row
+Hash Drop           (In Development) ─┐
+Project Deacon      (Testing)         │ newest work; only Hash Drop announced
 Project Cobra       (In Development) ─┘
 Apunte              (Available)      ─┐
 Retazo              (Available)       │ shipped, downloadable
@@ -325,7 +328,7 @@ Amparo              (Available)      ─┘
 A newly shipped app joins the top of the shipped group, as Apunte did: it sits
 directly above the apps that shipped before it.
 
-To put a new experiment at the very top, paste its block above `project-salt`.
+To put a new experiment at the very top, paste its block above `get-on-the-rug`.
 To retire something to the bottom, move its block below `amparo`.
 
 ### Checking Your Work
@@ -352,9 +355,10 @@ six:
 'third'       = 2   pairs with 'two-thirds'
 ```
 
-The four codename cards are all `'half'`, so they sit two-by-two. Retazo
-(`'third'`) and Amparo (`'two-thirds'`) share the bottom row. If a row looks
-lopsided after a reorder, the spans of that row no longer add to six.
+Get On The Rug is `'full'`, a row of its own. Hash Drop, Deacon, Cobra, and
+Apunte are all `'half'`, so they sit two-by-two. Retazo (`'third'`) and Amparo
+(`'two-thirds'`) share the bottom row. If a row looks lopsided after a reorder,
+the spans of that row no longer add to six.
 
 ## Hiding a Project Until It Ships
 
@@ -1446,11 +1450,12 @@ That lists what is actually installed, which is the only list that matters.
 ### What the Current Projects Use
 
 ```text
-Project Salt      Hash         a hash, which is what a salt goes into
+Get On The Rug    MessagesSquare  two speech bubbles, taking turns
+Hash Drop         Hash            a hash, as in the name
 Project Deacon    Zap
 Project Cobra     Mic
-Apunte            AudioLines   audio waveform
-Retazo            Scissors     the app's own menu bar icon
+Apunte            AudioLines      audio waveform
+Retazo            Scissors        the app's own menu bar icon
 Amparo            Smartphone
 ```
 
