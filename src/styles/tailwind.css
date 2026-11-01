@@ -7,3 +7,17 @@
    are the dark palette, and `light:` overrides them. The class sits on <html>,
    so :where covers both the root itself and everything under it. */
 @custom-variant light (&:where(.light, .light *));
+
+/* The page's ground, matching the wrapper in App.tsx. Safari on iPhone tints
+   its toolbar and status bar from this color, and shows it when you pull past
+   the top or bottom of the page, so without it both were the template's white
+   (theme.css gives <body> a white background). Unlayered, so it wins over
+   theme.css's @layer base. */
+html,
+body {
+  background-color: #09090b;
+}
+html.light,
+html.light body {
+  background-color: #f4f4f5;
+}
