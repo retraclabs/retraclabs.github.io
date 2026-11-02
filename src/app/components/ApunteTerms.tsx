@@ -17,7 +17,7 @@ export const ApunteTerms = () => {
                 </motion.a>
 
                 <section className="border-4 border-zinc-800 light:border-zinc-200 bg-zinc-900 light:bg-white rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-10">
-                    <div className="text-xs font-mono font-black text-sky-400 light:text-sky-700 uppercase tracking-widest mb-4">
+                    <div className="text-xs font-mono font-black text-[#feb860] light:text-amber-700 uppercase tracking-widest mb-4">
                         Apunte
                     </div>
 
@@ -79,7 +79,7 @@ export const ApunteTerms = () => {
                                 monthly subscription, a yearly subscription, or a one-time lifetime
                                 purchase. The lifetime purchase does not renew and does not expire.
                             </p>
-                            <ul className="list-disc pl-5 space-y-3 mt-4 marker:text-sky-400">
+                            <ul className="list-disc pl-5 space-y-3 mt-4 marker:text-[#feb860] light:marker:text-amber-600">
                                 <li>
                                     <strong className="text-white light:text-zinc-900 font-bold">Auto-renewal.</strong>{' '}
                                     Subscriptions renew automatically unless cancelled at least 24
@@ -242,7 +242,7 @@ export const ApunteTerms = () => {
                                 See also:{' '}
                                 <a
                                     href="#/apunte/privacy"
-                                    className="text-sky-400 light:text-sky-700 hover:text-sky-300 light:hover:text-sky-800 font-bold"
+                                    className="text-[#feb860] light:text-amber-700 hover:text-amber-200 light:hover:text-amber-800 font-bold"
                                 >
                                     Apunte Privacy Policy
                                 </a>.

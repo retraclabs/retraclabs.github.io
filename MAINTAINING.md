@@ -296,6 +296,9 @@ Until It Ships":
 
 - `appStoreUrl`: the Download button. On a shipped app it sits in the title
   card; on anything else it replaces "Ask About This" in the sidebar.
+- `contactUrl`: where "Ask About This" goes, opened in a new tab, for a project
+  with a contact form of its own. Get On The Rug's points at the form on
+  getontherug.co/privacy. Without it, the button writes to Retrac Labs' email.
 - `price`, `requires`, `screenshots`: shipped apps only. See "Shipped App
   Pages".
 
@@ -599,6 +602,29 @@ Connect.** Keep it to what the store says. Don't describe the purchase model
 
 Either can be left out, and that line simply does not appear.
 
+### An App on Two Platforms
+
+Apunte is one App Store record with a Mac app and an iPhone and iPad app. Its
+entry names the second platform with `alsoOn`:
+
+```ts
+platform: 'macOS',
+appStoreUrl: 'https://apps.apple.com/us/app/apunte/id6802142206',
+alsoOn: { platform: 'iOS' },
+requires: 'macOS, iOS, or iPadOS 26 or later',
+```
+
+The card and every list then read "macOS · iOS", and the download button says
+"Download on the App Store" instead of "Download on the Mac App Store". One
+button is enough: the App Store opens the version for whatever device follows
+the link, the Mac app on a Mac and the iPhone or iPad app on those. Write both
+platforms' minimums into `requires`, in both languages.
+
+Old links ended in `?mt=12` to aim at the Mac App Store. Apple now redirects
+that to the plain address, so it does nothing; leave it off new links. A
+Mac-only app (no `alsoOn`) keeps "Mac App Store" on its button, so an iPhone
+visitor knows before tapping that there's nothing for their phone.
+
 ### Adding Screenshots
 
 1. Take them at full size. Mac App Store screenshots (2560 × 1600) are ideal.
@@ -714,6 +740,57 @@ disappear by themselves.
 For Apunte, `Scripts/store-assets.sh` in the Apunte repository writes both sets
 at web size, English to `docs/screenshots/Web/` and Spanish to
 `docs/screenshots/Web/es/`, ready to copy into `src/app/assets/apunte/`.
+
+### Screenshots From More Than One Device
+
+An app with pictures from more than one device gets a switch beside the
+gallery's heading, one button per device, and the strip shows one device's
+pictures at a time. Apunte has Mac, iPhone, and iPad; Amparo has iPhone and
+iPhone Duo. The gallery opens on the visitor's own kind of device when it can
+tell (an iPhone or an iPad), and on the first device listed otherwise.
+
+Mark each picture from another device with `device`:
+
+```ts
+{
+  device: 'iphone',
+  src: apunteIphoneLive,
+  alt: '…',
+  caption: '…',
+  width: 737,
+  height: 1600,
+},
+```
+
+The devices are `'mac'`, `'iphone'`, `'ipad'`, and `'duo'` (an iPhone Duo,
+unfolded). A picture without `device` is from the project's own platform: a
+Mac for a macOS app, an iPhone for an iOS one. The buttons come in the order
+each device first appears in the list. Keep each device's files in a folder of
+its own, `src/app/assets/<slug>/<device>/`, with Spanish in
+`src/app/assets/<slug>/es/<device>/`.
+
+Sizes, all at a height or width of 1600:
+
+```text
+iPhone       737 × 1600    cwebp … -resize 0 1600
+iPad        1200 × 1600    cwebp … -resize 0 1600
+iPhone Duo  1600 × 1126    cwebp … -resize 1600 0   (unfolded, landscape)
+```
+
+Each comes from the app's own unframed captures, never the App Store's framed
+ones:
+
+- **Apunte on iPhone and iPad:** `docs/ios/store/Raw/en/iphone/`, `…/ipad/`,
+  and the same under `Raw/es/`, in the Apunte repository. The iPad set leaves
+  out the Lock Screen and phone call pictures, as the App Store's does.
+- **Amparo on iPhone:** `docs/screenshots/Raw/` and
+  `docs/screenshots/Spanish/Raw/` in the Amparo repository.
+- **Amparo on iPhone Duo:** `Raw/Duo inner/` in the same two folders. Use only
+  the screens the shipping version lays out in two columns; the rest are the
+  iPhone layout, stretched.
+
+An app on a second platform also takes `alsoOn` (see "Shipped App Pages"), so
+whoever sees its iPhone pictures can download it.
 
 ## Languages
 
@@ -1403,7 +1480,37 @@ window.
 
 ## Icons
 
-Icons come from [lucide-react](https://lucide.dev/icons). Import what you need:
+### App Icons
+
+Every announced app shows its own icon on its card, its product page, and
+every list of projects, made from the icon in the app's own project:
+
+```bash
+python3 tools/app-icons.py
+```
+
+It writes `src/app/assets/<slug>/icon.webp`, 256 pixels with transparent
+corners, for each app listed in `APPS` at the top of the script, and the app's
+entry in `projects.ts` points at it with `appIcon`. Run it again whenever an
+app's icon changes, and commit the new files.
+
+- **An icon drawn in Icon Composer** (an `.icon` folder, as Hash Drop, Retazo,
+  and Amparo have) is rendered by `ictool`, the renderer inside Xcode's Icon
+  Composer, so the glass and shading match the app on the device. The script
+  needs Xcode installed.
+- **A plain PNG** is used as it is. A full-bleed square, which is how iOS icons
+  are drawn because iOS rounds them itself, is cut to Apple's icon shape.
+
+To add an app, add a line to `APPS` with its slug and the path to its icon,
+run the script, then import the file in `projects.ts` and add `appIcon`.
+**Never add a codename project.** Its real icon would name it, so it keeps a
+Lucide icon until it ships.
+
+### Lucide Icons
+
+Codename projects, and anything without an `appIcon`, show a Lucide icon on a
+tile instead. They come from [lucide-react](https://lucide.dev/icons). Import
+what you need:
 
 ```ts
 import { Smartphone, Monitor, Hash, Mail } from 'lucide-react';
@@ -1449,14 +1556,17 @@ That lists what is actually installed, which is the only list that matters.
 
 ### What the Current Projects Use
 
+Every project keeps an `icon`, even one with an `appIcon`, so there is always
+something to fall back on.
+
 ```text
-Get On The Rug    MessagesSquare  two speech bubbles, taking turns
-Hash Drop         Hash            a hash, as in the name
-Project Deacon    Zap
-Project Cobra     Mic
-Apunte            AudioLines      audio waveform
-Retazo            Scissors        the app's own menu bar icon
-Amparo            Smartphone
+Get On The Rug    app icon, PNG     (fallback MessagesSquare)
+Hash Drop         app icon, .icon   (fallback Hash)
+Project Deacon    Zap               codename: no app icon
+Project Cobra     Mic               codename: no app icon
+Apunte            app icon, PNG     (fallback AudioLines); the Mac icon
+Retazo            app icon, .icon   (fallback Scissors)
+Amparo            app icon, .icon   (fallback Smartphone)
 ```
 
 Other candidates that suit this lab, all confirmed present:

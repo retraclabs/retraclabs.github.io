@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
 import { ArrowLeft, ArrowRight, X } from 'lucide-react';
-import type { Screenshot } from '../data/projects';
+import type { Device, Screenshot } from '../data/projects';
 import type { AccentStyle } from '../data/accents';
 import { LANGUAGES, type Language } from '../data/languages';
 import { useLanguage, useStrings } from '../i18n/context';
@@ -30,7 +30,13 @@ import { LanguageSwitch } from './LanguageSwitch';
    A translation can be words only (no `src`): then the English picture shows
    with words in the page's language. That is how an app that isn't in Spanish
    yet still gets Spanish captions on a Spanish page, without a switch that
-   would only swap the words. */
+   would only swap the words.
+
+   An app with pictures from more than one device (Apunte on Mac, iPhone, and
+   iPad; Amparo on iPhone and the unfolded iPhone Duo) gets a switch with a
+   button per device beside the heading, and the strip shows one device's
+   pictures at a time. It opens on the visitor's own kind of device
+   when the app has pictures from it, and on the first device listed if not. */
 
 /** Mac screenshots are exported at this size; see Screenshot in projects.ts. */
 const DEFAULT_WIDTH = 1600;
@@ -56,11 +62,66 @@ const inLanguage = (shot: Screenshot, language: Language): Shown => {
   };
 };
 
-const isPortrait = (shot: Shown) => (shot.height ?? DEFAULT_HEIGHT) > (shot.width ?? DEFAULT_WIDTH);
+/** How wide a picture sits in the strip, by its shape, so a phone, a tablet,
+ *  and a Mac window come out at about the same height. */
+const widthClass = (shot: Shown) => {
+  const ratio = (shot.width ?? DEFAULT_WIDTH) / (shot.height ?? DEFAULT_HEIGHT);
+  if (ratio >= 1) return 'w-[85%] sm:w-[72%] lg:w-[62%]';
+  if (ratio > 0.6) return 'w-[80%] sm:w-[46%] lg:w-[34%]';   // an iPad, or a tall Mac window
+  return 'w-[62%] sm:w-[34%] lg:w-[24%]';                     // a phone
+};
+
+/** The same in every language the site has. */
+const DEVICE_NAMES: Record<Device, string> = { mac: 'Mac', iphone: 'iPhone', ipad: 'iPad', duo: 'iPhone Duo' };
+
+/** The kind of device the visitor is on. Safari on an iPad calls itself a
+ *  Mac, but no Mac has a touch screen. An iPhone Duo can't be told from any
+ *  other iPhone, so it opens on the iPhone pictures. */
+const visitorDevice = (): Device => {
+  const agent = navigator.userAgent;
+  if (/iPhone|iPod/.test(agent)) return 'iphone';
+  if (/iPad/.test(agent) || (/Macintosh/.test(agent) && navigator.maxTouchPoints > 1)) return 'ipad';
+  return 'mac';
+};
+
+/** Styled like the ENG / ESP switch beside it, but in plain case, since
+ *  "IPHONE" isn't a name anyone writes. */
+const DeviceSwitch = ({
+  devices,
+  current,
+  onChange,
+  label,
+}: {
+  devices: Device[];
+  current: Device;
+  onChange: (device: Device) => void;
+  label: string;
+}) => (
+  <div role="group" aria-label={label} className="inline-flex shrink-0 rounded-full border-2 border-zinc-700 light:border-zinc-300 p-0.5">
+    {devices.map((device) => (
+      <button
+        key={device}
+        type="button"
+        aria-pressed={current === device}
+        onClick={() => onChange(device)}
+        className={
+          'h-8 px-3 rounded-full font-bold text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 ' +
+          (current === device
+            ? 'bg-white text-black light:bg-zinc-900 light:text-white'
+            : 'text-zinc-400 light:text-zinc-600 hover:text-white light:hover:text-zinc-900')
+        }
+      >
+        {DEVICE_NAMES[device]}
+      </button>
+    ))}
+  </div>
+);
 
 type Props = {
   name: string;
   screenshots: Screenshot[];
+  /** The project's `platform`: the device of any screenshot without its own. */
+  platform: string;
   accent: AccentStyle;
   /** The project's `version.current`, for tagging screenshots of features that
    *  aren't out yet (`since`). */
@@ -153,26 +214,37 @@ const RoundButton = ({
   </button>
 );
 
-export const ScreenshotGallery = ({ name, screenshots, accent, currentVersion, languageSince }: Props) => {
+export const ScreenshotGallery = ({ name, screenshots, platform, accent, currentVersion, languageSince }: Props) => {
   const reduceMotion = useReducedMotion();
   const { language: pageLanguage } = useLanguage();
   const t = useStrings();
 
-  /** English, then every language any screenshot has a picture in. */
+  /** Every device with pictures, in the order they're listed. */
+  const ownDevice: Device = platform === 'iOS' ? 'iphone' : 'mac';
+  const deviceOf = useCallback((shot: Screenshot) => shot.device ?? ownDevice, [ownDevice]);
+  const devices = useMemo(() => [...new Set(screenshots.map(deviceOf))], [screenshots, deviceOf]);
+  const [device, setDevice] = useState<Device>(() => {
+    const visitor = visitorDevice();
+    return devices.includes(visitor) ? visitor : devices[0];
+  });
+  const onDevice = useMemo(() => screenshots.filter((shot) => deviceOf(shot) === device), [screenshots, deviceOf, device]);
+
+  /** English, then every language any of this device's screenshots has a
+   *  picture in. */
   const pictureLanguages = useMemo<Language[]>(() => {
     const pictured = new Set<Language>();
-    for (const shot of screenshots) {
+    for (const shot of onDevice) {
       for (const [code, translation] of Object.entries(shot.translations ?? {})) {
         if (translation?.src) pictured.add(code as Language);
       }
     }
     return ['en', ...(Object.keys(LANGUAGES) as Language[]).filter((code) => pictured.has(code))];
-  }, [screenshots]);
+  }, [onDevice]);
 
   // Starts in the page's language, and follows it when the menu bar changes it.
   const [language, setLanguage] = useState<Language>(pageLanguage);
   useEffect(() => setLanguage(pageLanguage), [pageLanguage]);
-  const shots = useMemo(() => screenshots.map((shot) => inLanguage(shot, language)), [screenshots, language]);
+  const shots = useMemo(() => onDevice.map((shot) => inLanguage(shot, language)), [onDevice, language]);
 
   // Pictures of the app in a language it doesn't have yet say so.
   const since = language === 'en' ? undefined : languageSince?.[language as Exclude<Language, 'en'>];
@@ -204,6 +276,12 @@ export const ScreenshotGallery = ({ name, screenshots, accent, currentVersion, l
       window.removeEventListener('resize', measure);
     };
   }, [measure]);
+
+  // Another device's pictures start from their first.
+  useEffect(() => {
+    if (trackRef.current) trackRef.current.scrollLeft = 0;
+    measure();
+  }, [device, measure]);
 
   // Never leave the page unscrollable, even if this unmounts mid-view.
   useEffect(() => () => void (document.documentElement.style.overflow = ''), []);
@@ -239,9 +317,14 @@ export const ScreenshotGallery = ({ name, screenshots, accent, currentVersion, l
       className="mt-6 border-4 border-zinc-800 light:border-zinc-200 bg-zinc-900 light:bg-white rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden"
     >
       <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-3 px-6 sm:px-8 pt-6 sm:pt-8 mb-5">
-        <h2 id="screenshots-heading" className="text-2xl font-black text-white light:text-zinc-900">
-          {t.gallery.heading}
-        </h2>
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-3">
+          <h2 id="screenshots-heading" className="text-2xl font-black text-white light:text-zinc-900">
+            {t.gallery.heading}
+          </h2>
+          {devices.length > 1 ? (
+            <DeviceSwitch devices={devices} current={device} onChange={setDevice} label={t.gallery.deviceGroup} />
+          ) : null}
+        </div>
         <div className="flex items-center gap-2">
           {pictureLanguages.length > 1 ? (
             <LanguageSwitch
@@ -277,10 +360,7 @@ export const ScreenshotGallery = ({ name, screenshots, accent, currentVersion, l
         {shots.map((shot, index) => (
           <li
             key={index}
-            className={
-              'snap-start shrink-0 ' +
-              (isPortrait(shot) ? 'w-[62%] sm:w-[34%] lg:w-[24%]' : 'w-[85%] sm:w-[72%] lg:w-[62%]')
-            }
+            className={'snap-start shrink-0 ' + widthClass(shot)}
           >
             <figure lang={shot.lang}>
               <button

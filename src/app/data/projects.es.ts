@@ -91,7 +91,7 @@ export const PROJECTS_ES: Record<string, ProjectTranslation> = {
       'Una versión gratuita de verdad completa: la transcripción, la edición, la reproducción y la exportación a texto sin formato, texto con marcas de tiempo y JSON son gratis. El JSON lo lleva todo, así que tu trabajo nunca queda atrapado.',
     ],
     price: 'Gratis, con Premium como suscripción o compra única',
-    requires: 'macOS 26 o posterior',
+    requires: 'macOS, iOS o iPadOS 26 o posterior',
     releases: {
       '1.1.1': {
         version: {

@@ -2,7 +2,8 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { ArrowLeft, ArrowUpRight, Mail } from 'lucide-react';
 import { LabRat } from './LabRat';
-import { projects, isAnnounced } from '../data/projects';
+import { ProjectIcon } from './ProjectIcon';
+import { projects, isAnnounced, platformsOf } from '../data/projects';
 
 /* Where a Lab Rat lands after the form goes through. EarlyAccess.tsx sends them
    here by setting the hash, which means Formspree's own "redirect on success"
@@ -121,31 +122,26 @@ export const Thanks = () => {
               {shippingLead} finished and on the App Store today.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {shipping.map((project) => {
-                const Icon = project.icon;
-                return (
-                  <a
-                    key={project.slug}
-                    href={project.appStoreUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-between gap-4 border-2 border-zinc-800 light:border-zinc-200 bg-[#0f0f12] light:bg-zinc-50 rounded-2xl p-5 hover:border-cyan-400 transition-colors sm:last:odd:col-span-2"
-                  >
-                    <div className="flex items-center gap-4">
-                      <div className="p-3 rounded-xl bg-zinc-800 light:bg-zinc-100 text-white light:text-zinc-900 shrink-0">
-                        <Icon className="w-5 h-5" />
-                      </div>
-                      <div>
-                        <div className="font-black text-white light:text-zinc-900">{project.name}</div>
-                        <div className="text-sm text-zinc-400 light:text-zinc-600 font-mono font-bold">
-                          {project.platform}
-                        </div>
+              {shipping.map((project) => (
+                <a
+                  key={project.slug}
+                  href={project.appStoreUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-between gap-4 border-2 border-zinc-800 light:border-zinc-200 bg-[#0f0f12] light:bg-zinc-50 rounded-2xl p-5 hover:border-cyan-400 transition-colors sm:last:odd:col-span-2"
+                >
+                  <div className="flex items-center gap-4">
+                    <ProjectIcon project={project} size="sm" tile="bg-zinc-800 light:bg-zinc-100 text-white light:text-zinc-900" />
+                    <div>
+                      <div className="font-black text-white light:text-zinc-900">{project.name}</div>
+                      <div className="text-sm text-zinc-400 light:text-zinc-600 font-mono font-bold">
+                        {platformsOf(project)}
                       </div>
                     </div>
-                    <ArrowUpRight className="w-5 h-5 text-zinc-400 light:text-zinc-600 shrink-0" />
-                  </a>
-                );
-              })}
+                  </div>
+                  <ArrowUpRight className="w-5 h-5 text-zinc-400 light:text-zinc-600 shrink-0" />
+                </a>
+              ))}
             </div>
           </motion.section>
         ) : null}

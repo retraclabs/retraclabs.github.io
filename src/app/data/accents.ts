@@ -112,6 +112,35 @@ export const ACCENTS: Record<ProjectAccent, AccentStyle> = {
     rule: 'border-orange-400 light:border-orange-600',
     wash: 'bg-orange-400/5 light:bg-orange-50',
   },
+  /* Apunte's waveform, #feb860, sampled from its icon. No Tailwind amber is
+     that color (amber-300 is lemon, amber-400 gold), so the dark theme uses it
+     as is; light mode uses amber-700 for text, dark enough to read on white. */
+  amber: {
+    border: 'hover:border-[#feb860]',
+    text: 'text-[#feb860] light:text-amber-700',
+    iconBg: 'bg-zinc-800 light:bg-zinc-100 text-[#feb860] light:text-amber-700',
+    pill: 'bg-[#feb860]/10 text-[#feb860] light:text-amber-700 border-[#feb860]/20',
+    shadow: 'rgba(254,184,96,1)',
+    glow: 'bg-[radial-gradient(circle_at_85%_40%,rgba(254,184,96,0.13),transparent_55%)]',
+    detailGlow: 'bg-[#feb860]',
+    fill: 'bg-[#feb860] light:bg-amber-500',
+    rule: 'border-[#feb860] light:border-amber-500',
+    wash: 'bg-[#feb860]/5 light:bg-amber-50',
+  },
+  /* Retazo's icon runs from violet to magenta; fuchsia is its middle, and
+     stays clear of Project Deacon's purple and Amparo's pink. */
+  fuchsia: {
+    border: 'hover:border-fuchsia-400',
+    text: 'text-fuchsia-400 light:text-fuchsia-700',
+    iconBg: 'bg-zinc-800 light:bg-zinc-100 text-fuchsia-400 light:text-fuchsia-700',
+    pill: 'bg-fuchsia-400/10 text-fuchsia-400 light:text-fuchsia-700 border-fuchsia-400/20',
+    shadow: 'rgba(232,121,249,1)',
+    glow: 'bg-[radial-gradient(circle_at_15%_85%,rgba(232,121,249,0.14),transparent_55%)]',
+    detailGlow: 'bg-fuchsia-500',
+    fill: 'bg-fuchsia-400 light:bg-fuchsia-600',
+    rule: 'border-fuchsia-400 light:border-fuchsia-600',
+    wash: 'bg-fuchsia-400/5 light:bg-fuchsia-50',
+  },
 };
 
 /** Card width in the six-column Lab grid. */

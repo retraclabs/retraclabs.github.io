@@ -34,7 +34,7 @@ export const RetazoPrivacy = () => {
                 </motion.a>
 
                 <section className="border-4 border-zinc-800 light:border-zinc-200 bg-zinc-900 light:bg-white rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-10">
-                    <div className="text-xs font-mono font-black text-cyan-400 light:text-cyan-700 uppercase tracking-widest mb-4">
+                    <div className="text-xs font-mono font-black text-fuchsia-400 light:text-fuchsia-700 uppercase tracking-widest mb-4">
                         Retazo
                     </div>
 
@@ -112,7 +112,7 @@ export const RetazoPrivacy = () => {
                                 Everything below is read on your Mac, used on your Mac, and never
                                 leaves it.
                             </p>
-                            <ul className="list-disc pl-5 space-y-3 mt-4 marker:text-cyan-400">
+                            <ul className="list-disc pl-5 space-y-3 mt-4 marker:text-fuchsia-400">
                                 <li>
                                     <Strong>What you copy.</Strong> Retazo checks the clipboard about
                                     twice a second and saves each new copy: text, links, code, and
@@ -169,7 +169,7 @@ export const RetazoPrivacy = () => {
                             <p>
                                 Each of these can be changed in Retazo’s settings:
                             </p>
-                            <ul className="list-disc pl-5 space-y-3 mt-4 marker:text-cyan-400">
+                            <ul className="list-disc pl-5 space-y-3 mt-4 marker:text-fuchsia-400">
                                 <li>
                                     <Strong>Hidden copies.</Strong> Password managers and similar apps
                                     mark what they copy as hidden or temporary. Retazo skips those copies
@@ -207,7 +207,7 @@ export const RetazoPrivacy = () => {
                                 carried over to Retazo. It never leaves your Mac through any action of
                                 the app, and this version does not sync through iCloud. That includes:
                             </p>
-                            <ul className="list-disc pl-5 space-y-3 mt-4 marker:text-cyan-400">
+                            <ul className="list-disc pl-5 space-y-3 mt-4 marker:text-fuchsia-400">
                                 <li>
                                     <Strong>Your clipboard history:</Strong> the text and images you
                                     copied, the text read from those images, which app each came from,
@@ -297,7 +297,7 @@ export const RetazoPrivacy = () => {
                                 analytics providers. A few things involve someone else, and none of
                                 them involves Retrac Labs:
                             </p>
-                            <ul className="list-disc pl-5 space-y-3 mt-4 marker:text-cyan-400">
+                            <ul className="list-disc pl-5 space-y-3 mt-4 marker:text-fuchsia-400">
                                 <li>
                                     <Strong>Apps you drag into.</Strong> A clip you drag from Retazo into
                                     another app is handed to that app, and what it does with it is up

@@ -17,7 +17,7 @@ export const ApuntePrivacy = () => {
                 </motion.a>
 
                 <section className="border-4 border-zinc-800 light:border-zinc-200 bg-zinc-900 light:bg-white rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-10">
-                    <div className="text-xs font-mono font-black text-sky-400 light:text-sky-700 uppercase tracking-widest mb-4">
+                    <div className="text-xs font-mono font-black text-[#feb860] light:text-amber-700 uppercase tracking-widest mb-4">
                         Apunte
                     </div>
 
@@ -117,7 +117,7 @@ export const ApuntePrivacy = () => {
                                 Nothing leaves your device through any action of the app; exports
                                 and transfers, described below, go only where you send them.
                             </p>
-                            <ul className="list-disc pl-5 space-y-3 mt-4 marker:text-sky-400">
+                            <ul className="list-disc pl-5 space-y-3 mt-4 marker:text-[#feb860] light:marker:text-amber-600">
                                 <li>
                                     <strong className="text-white light:text-zinc-900 font-bold">Stored audio is
                                     encrypted at rest</strong> using AES-256-GCM, with a key wrapped
@@ -361,7 +361,7 @@ export const ApuntePrivacy = () => {
                                 providers. The only third party involved is Apple, in five
                                 operating-system roles:
                             </p>
-                            <ul className="list-disc pl-5 space-y-3 mt-4 marker:text-sky-400">
+                            <ul className="list-disc pl-5 space-y-3 mt-4 marker:text-[#feb860] light:marker:text-amber-600">
                                 <li>
                                     <strong className="text-white light:text-zinc-900 font-bold">Purchases.</strong>{' '}
                                     Premium features are unlocked through Apple's In-App Purchase,
@@ -485,7 +485,7 @@ export const ApuntePrivacy = () => {
                                 See also:{' '}
                                 <a
                                     href="#/apunte/terms"
-                                    className="text-sky-400 light:text-sky-700 hover:text-sky-300 light:hover:text-sky-800 font-bold"
+                                    className="text-[#feb860] light:text-amber-700 hover:text-amber-200 light:hover:text-amber-800 font-bold"
                                 >
                                     Apunte Terms of Use
                                 </a>.

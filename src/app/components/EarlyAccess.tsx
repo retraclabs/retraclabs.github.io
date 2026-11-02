@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { ArrowLeft, FlaskConical, Loader2, Send } from 'lucide-react';
-import { projects } from '../data/projects';
+import { projects, platformsOf } from '../data/projects';
 
 /* ─────────────────────────────────────────────────────────────────────────────
    Where the form posts. Submissions land in retrac.labs@gmail.com by way of
@@ -82,7 +82,7 @@ const APPS: { value: string; hint: string }[] = [
   ...projects.map((project) => ({
     value: project.name,
     hint:
-      `${project.platform}, ${project.status === 'Available' ? 'shipping' : project.status.toLowerCase()}. ` +
+      `${platformsOf(project)}, ${project.status === 'Available' ? 'shipping' : project.status.toLowerCase()}. ` +
       (project.teaser ?? 'Not described publicly yet.'),
   })),
   {

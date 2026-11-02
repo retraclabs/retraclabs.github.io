@@ -3,7 +3,7 @@ import { motion } from 'motion/react';
 import { ArrowLeft, ArrowUpRight, FlaskConical } from 'lucide-react';
 import type { LabNote } from '../labNotes';
 import { LabNoteAccent } from '../labNotes/kit';
-import { getProjectBySlug } from '../data/projects';
+import { getProjectBySlug, isMacOnly } from '../data/projects';
 import { ACCENTS } from '../data/accents';
 import { AccentGlow } from './AccentGlow';
 
@@ -95,7 +95,7 @@ export const LabNotePage = ({ note }: { note: LabNote }) => {
                 rel="noopener noreferrer"
                 className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-4 rounded-2xl bg-cyan-400 text-black font-black border-2 border-cyan-400 hover:bg-yellow-400 hover:border-yellow-400 transition-colors"
               >
-                {project.platform === 'iOS' ? 'Download on the App Store' : 'Download on the Mac App Store'}
+                {isMacOnly(project) ? 'Download on the Mac App Store' : 'Download on the App Store'}
                 <ArrowUpRight className="w-5 h-5" />
               </a>
             ) : null}

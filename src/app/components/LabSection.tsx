@@ -1,11 +1,12 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
-import { projects, isAnnounced, type Project } from '../data/projects';
+import { projects, isAnnounced, platformsOf, type Project } from '../data/projects';
 import { ACCENTS, SPANS } from '../data/accents';
 import { MISSION_IN } from '../data/mission';
 import { useLanguage, useStrings } from '../i18n/context';
 import { localizeProject } from '../i18n/projects';
+import { ProjectIcon } from './ProjectIcon';
 
 const openProject = (slug: string) => {
   window.location.hash = `#/projects/${slug}`;
@@ -19,7 +20,6 @@ const ProjectCard = ({ project: english, index }: { project: Project; index: num
   const t = useStrings();
   const { project, fallback } = localizeProject(english, language);
   const accent = ACCENTS[project.accent];
-  const Icon = project.icon;
   const announced = isAnnounced(project);
 
   const shared =
@@ -33,12 +33,10 @@ const ProjectCard = ({ project: english, index }: { project: Project; index: num
 
       <div className="relative z-10 h-full flex flex-col justify-between gap-6">
         <div className="flex justify-between items-start gap-4">
-          <div className={'p-4 rounded-2xl ' + accent.iconBg}>
-            <Icon className="w-8 h-8" />
-          </div>
+          <ProjectIcon project={project} size="lg" tile={accent.iconBg} />
           <div className="flex flex-wrap justify-end gap-2">
             <span className="px-4 py-2 rounded-full bg-zinc-800 light:bg-zinc-100 text-white light:text-zinc-900 font-mono font-bold text-sm">
-              {project.platform}
+              {platformsOf(project)}
             </span>
             <span
               className={

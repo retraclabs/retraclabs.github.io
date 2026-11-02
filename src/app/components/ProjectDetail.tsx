@@ -1,12 +1,13 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { ArrowLeft, ArrowUpRight, CheckCircle2, FlaskConical, Sparkles } from 'lucide-react';
-import { Project, projects, isAnnounced, isShipped } from '../data/projects';
+import { Project, projects, isAnnounced, isMacOnly, isShipped, platformsOf } from '../data/projects';
 import { ACCENTS } from '../data/accents';
 import { getLabNotesFor } from '../labNotes';
 import { useLanguage, useStrings } from '../i18n/context';
 import { appLanguage, localizeProject } from '../i18n/projects';
 import { AccentGlow } from './AccentGlow';
+import { ProjectIcon } from './ProjectIcon';
 import { ScreenshotGallery } from './ScreenshotGallery';
 
 type ProjectDetailProps = {
@@ -21,14 +22,13 @@ export const ProjectDetail = ({ project: english }: ProjectDetailProps) => {
   const { project, fallback } = localizeProject(english, language);
   const inEnglish = (field: Parameters<typeof fallback.has>[0]) => (fallback.has(field) ? 'en' : undefined);
   const appInLanguage = appLanguage(project, language);
-  const Icon = project.icon;
   const accent = ACCENTS[project.accent];
   // A shipped app's page is a product page: the download button moves up into
   // the title card, and the lab vocabulary ("Current Focus", "Other
   // Experiments") gives way to plain product language.
   const shipped = isShipped(project);
   const labNotes = getLabNotesFor(project.slug);
-  const downloadLabel = t.project.download(project.platform);
+  const downloadLabel = t.project.download(isMacOnly(project));
   // Unannounced projects have no page to link to, so they stay off this list.
   const relatedProjects = projects.filter(
     (item) => item.slug !== project.slug && isAnnounced(item),
@@ -57,11 +57,9 @@ export const ProjectDetail = ({ project: english }: ProjectDetailProps) => {
             <AccentGlow accent={accent} />
             <div className="relative z-10">
               <div className="flex flex-wrap items-center gap-3 mb-8">
-                <div className="p-4 rounded-2xl bg-white light:bg-zinc-900 text-black light:text-white">
-                  <Icon className="w-8 h-8" />
-                </div>
+                <ProjectIcon project={project} size="lg" tile="bg-white light:bg-zinc-900 text-black light:text-white" />
                 <span className={'px-4 py-2 rounded-full bg-zinc-800 light:bg-zinc-100 font-mono font-bold text-sm ' + accent.text}>
-                  {project.platform}
+                  {platformsOf(project)}
                 </span>
                 <span className="px-4 py-2 rounded-full bg-zinc-800 light:bg-zinc-100 text-zinc-300 light:text-zinc-700 font-mono font-bold text-sm">
                   {t.status[project.status] ?? project.status}
@@ -143,7 +141,8 @@ export const ProjectDetail = ({ project: english }: ProjectDetailProps) => {
               </a>
             ) : (
               <a
-                href="mailto:retrac.labs@gmail.com"
+                href={project.contactUrl ?? 'mailto:retrac.labs@gmail.com'}
+                {...(project.contactUrl ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                 className="inline-flex items-center justify-center gap-2 w-full px-5 py-4 rounded-2xl bg-white light:bg-zinc-900 text-black light:text-white font-black border-2 border-white light:border-zinc-900 hover:bg-yellow-400 light:hover:text-zinc-900 hover:border-yellow-400 transition-colors"
               >
                 {t.project.askAboutThis}
@@ -157,6 +156,7 @@ export const ProjectDetail = ({ project: english }: ProjectDetailProps) => {
           <ScreenshotGallery
             name={project.name}
             screenshots={project.screenshots}
+            platform={project.platform}
             accent={accent}
             currentVersion={project.version?.current}
             languageSince={project.languageSince}
@@ -325,28 +325,22 @@ export const ProjectDetail = ({ project: english }: ProjectDetailProps) => {
               {shipped ? t.project.moreFrom : t.project.otherExperiments}
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {relatedProjects.map((relatedProject) => {
-                const RelatedIcon = relatedProject.icon;
-
-                return (
-                  <a
-                    key={relatedProject.slug}
-                    href={'#/projects/' + relatedProject.slug}
-                    className="flex items-center justify-between gap-4 border-2 border-zinc-800 light:border-zinc-200 bg-zinc-900 light:bg-white rounded-2xl p-5 hover:border-white light:hover:border-zinc-900 transition-colors"
-                  >
-                    <div className="flex items-center gap-4">
-                      <div className="p-3 rounded-xl bg-zinc-800 light:bg-zinc-100 text-white light:text-zinc-900">
-                        <RelatedIcon className="w-5 h-5" />
-                      </div>
-                      <div>
-                        <div className="font-black text-white light:text-zinc-900">{relatedProject.name}</div>
-                        <div className="text-sm text-zinc-400 light:text-zinc-600 font-mono font-bold">{relatedProject.platform}</div>
-                      </div>
+              {relatedProjects.map((relatedProject) => (
+                <a
+                  key={relatedProject.slug}
+                  href={'#/projects/' + relatedProject.slug}
+                  className="flex items-center justify-between gap-4 border-2 border-zinc-800 light:border-zinc-200 bg-zinc-900 light:bg-white rounded-2xl p-5 hover:border-white light:hover:border-zinc-900 transition-colors"
+                >
+                  <div className="flex items-center gap-4">
+                    <ProjectIcon project={relatedProject} size="sm" tile="bg-zinc-800 light:bg-zinc-100 text-white light:text-zinc-900" />
+                    <div>
+                      <div className="font-black text-white light:text-zinc-900">{relatedProject.name}</div>
+                      <div className="text-sm text-zinc-400 light:text-zinc-600 font-mono font-bold">{platformsOf(relatedProject)}</div>
                     </div>
-                    <ArrowUpRight className="w-5 h-5 text-zinc-400 light:text-zinc-600" />
-                  </a>
-                );
-              })}
+                  </div>
+                  <ArrowUpRight className="w-5 h-5 text-zinc-400 light:text-zinc-600" />
+                </a>
+              ))}
             </div>
           </section>
         ) : null}

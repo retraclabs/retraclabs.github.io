@@ -29,7 +29,10 @@ import retazoPrivacy from '../assets/retazo/privacy.webp';
 import retazoHistory from '../assets/retazo/history.webp';
 import retazoSnippets from '../assets/retazo/snippets.webp';
 import amparoHome from '../assets/amparo/home.webp';
-import amparoDuo from '../assets/amparo/iphone-duo.webp';
+import amparoDuo from '../assets/amparo/duo/home.webp';
+import amparoDuoCalendar from '../assets/amparo/duo/calendar.webp';
+import amparoDuoInsights from '../assets/amparo/duo/insights.webp';
+import amparoDuoSkins from '../assets/amparo/duo/skins.webp';
 import amparoPrivacy from '../assets/amparo/privacy.webp';
 import amparoInsights from '../assets/amparo/insights.webp';
 import amparoPatterns from '../assets/amparo/patterns.webp';
@@ -42,7 +45,10 @@ import amparoMove from '../assets/amparo/move-to-a-new-iphone.webp';
 import amparoHistory from '../assets/amparo/bring-your-history.webp';
 import amparoIcons from '../assets/amparo/app-icons.webp';
 import amparoHomeEs from '../assets/amparo/es/home.webp';
-import amparoDuoEs from '../assets/amparo/es/iphone-duo.webp';
+import amparoDuoEs from '../assets/amparo/es/duo/home.webp';
+import amparoDuoCalendarEs from '../assets/amparo/es/duo/calendar.webp';
+import amparoDuoInsightsEs from '../assets/amparo/es/duo/insights.webp';
+import amparoDuoSkinsEs from '../assets/amparo/es/duo/skins.webp';
 import amparoPrivacyEs from '../assets/amparo/es/privacy.webp';
 import amparoInsightsEs from '../assets/amparo/es/insights.webp';
 import amparoPatternsEs from '../assets/amparo/es/patterns.webp';
@@ -54,6 +60,49 @@ import amparoLogEs from '../assets/amparo/es/log.webp';
 import amparoHistoryEs from '../assets/amparo/es/bring-your-history.webp';
 import amparoIconsEs from '../assets/amparo/es/app-icons.webp';
 import amparoMoveEs from '../assets/amparo/es/move-to-a-new-iphone.webp';
+import apunteIphoneLive from '../assets/apunte/iphone/live.webp';
+import apunteIphoneTranscript from '../assets/apunte/iphone/transcript.webp';
+import apunteIphoneCassette from '../assets/apunte/iphone/cassette.webp';
+import apunteIphoneImport from '../assets/apunte/iphone/import.webp';
+import apunteIphoneLockScreen from '../assets/apunte/iphone/lock-screen.webp';
+import apunteIphoneCalls from '../assets/apunte/iphone/calls.webp';
+import apunteIphoneTransfer from '../assets/apunte/iphone/transfer.webp';
+import apunteIphoneSearch from '../assets/apunte/iphone/search.webp';
+import apunteIphoneExport from '../assets/apunte/iphone/export.webp';
+import apunteIphonePrivacy from '../assets/apunte/iphone/privacy.webp';
+import apunteIphoneLiveEs from '../assets/apunte/es/iphone/live.webp';
+import apunteIphoneTranscriptEs from '../assets/apunte/es/iphone/transcript.webp';
+import apunteIphoneCassetteEs from '../assets/apunte/es/iphone/cassette.webp';
+import apunteIphoneImportEs from '../assets/apunte/es/iphone/import.webp';
+import apunteIphoneLockScreenEs from '../assets/apunte/es/iphone/lock-screen.webp';
+import apunteIphoneCallsEs from '../assets/apunte/es/iphone/calls.webp';
+import apunteIphoneTransferEs from '../assets/apunte/es/iphone/transfer.webp';
+import apunteIphoneSearchEs from '../assets/apunte/es/iphone/search.webp';
+import apunteIphoneExportEs from '../assets/apunte/es/iphone/export.webp';
+import apunteIphonePrivacyEs from '../assets/apunte/es/iphone/privacy.webp';
+import apunteIpadLive from '../assets/apunte/ipad/live.webp';
+import apunteIpadTranscript from '../assets/apunte/ipad/transcript.webp';
+import apunteIpadCassette from '../assets/apunte/ipad/cassette.webp';
+import apunteIpadImport from '../assets/apunte/ipad/import.webp';
+import apunteIpadTransfer from '../assets/apunte/ipad/transfer.webp';
+import apunteIpadSearch from '../assets/apunte/ipad/search.webp';
+import apunteIpadExport from '../assets/apunte/ipad/export.webp';
+import apunteIpadPrivacy from '../assets/apunte/ipad/privacy.webp';
+import apunteIpadLiveEs from '../assets/apunte/es/ipad/live.webp';
+import apunteIpadTranscriptEs from '../assets/apunte/es/ipad/transcript.webp';
+import apunteIpadCassetteEs from '../assets/apunte/es/ipad/cassette.webp';
+import apunteIpadImportEs from '../assets/apunte/es/ipad/import.webp';
+import apunteIpadTransferEs from '../assets/apunte/es/ipad/transfer.webp';
+import apunteIpadSearchEs from '../assets/apunte/es/ipad/search.webp';
+import apunteIpadExportEs from '../assets/apunte/es/ipad/export.webp';
+import apunteIpadPrivacyEs from '../assets/apunte/es/ipad/privacy.webp';
+/* Each app's own icon, from its project. Rebuild them with
+   `python3 tools/app-icons.py`. See MAINTAINING.md → "Icons". */
+import getOnTheRugIcon from '../assets/get-on-the-rug/icon.webp';
+import hashDropIcon from '../assets/hash-drop/icon.webp';
+import apunteIcon from '../assets/apunte/icon.webp';
+import retazoIcon from '../assets/retazo/icon.webp';
+import amparoIcon from '../assets/amparo/icon.webp';
 
 /** How wide a card sits in the six-column Lab grid. See LabSection.tsx. */
 export type ProjectSpan = 'full' | 'two-thirds' | 'half' | 'third';
@@ -69,7 +118,12 @@ export type Project = {
   status: string;
   accent: ProjectAccent;
   accentText: string;
+  /** Shown on a tile wherever the project has no `appIcon`. */
   icon: LucideIcon;
+  /** The app's own icon, made from its project by tools/app-icons.py. Shown
+   *  in place of `icon` on the card, the product page, and every list. Never
+   *  give one to a codename project: its real icon would name it. */
+  appIcon?: string;
   span: ProjectSpan;
   /** One plain line saying what the thing does. Safe to fill in even while a
    *  project is unannounced: a function is not an announcement, and a codename
@@ -95,6 +149,16 @@ export type Project = {
     nextFeatures: string[];
   };
   appStoreUrl?: string;
+  /** Where "Ask About This" goes, for a project with a contact form of its
+   *  own: Get On The Rug's, on its own site. Opens in a new tab. Without it,
+   *  the button writes to Retrac Labs' email. */
+  contactUrl?: string;
+  /** The same app on a second platform, under the same App Store record:
+   *  Apunte on iPhone and iPad. Its platform joins `platform` on the card, and
+   *  the download button says "App Store" rather than "Mac App Store", since
+   *  the one link opens the version for whatever device follows it. Cover both
+   *  platforms in `requires`. */
+  alsoOn?: { platform: string };
   /* The next three are for shipped apps, and all optional. Each one filled in
      appears on the product page. See MAINTAINING.md → "Shipped App Pages". */
   /** The US App Store price, as the store shows it: 'Free', '$1.99'. Change it
@@ -132,6 +196,12 @@ export type Screenshot = {
    *  screenshot gets a narrower frame so it does not tower over the page. */
   width?: number;
   height?: number;
+  /** The device the picture is from, for an app on more than one. Leave it
+   *  out for the project's own platform (a Mac for macOS, an iPhone for iOS).
+   *  A gallery with pictures from more than one device gets a Mac / iPhone /
+   *  iPad switch. See MAINTAINING.md → "Screenshots From More Than One
+   *  Device". */
+  device?: Device;
   /** The same screenshot from the app running in another language, with alt
    *  text and a caption in that language. The gallery shows a language switch
    *  once any screenshot has one. See MAINTAINING.md → "Screenshots in Other
@@ -151,7 +221,10 @@ export type ScreenshotTranslation = {
   height?: number;
 };
 
-export type ProjectAccent = 'pink' | 'cyan' | 'emerald' | 'sky' | 'purple' | 'green' | 'orange';
+/** `duo` is the iPhone Duo unfolded, whose inner display is landscape. */
+export type Device = 'mac' | 'iphone' | 'ipad' | 'duo';
+
+export type ProjectAccent = 'pink' | 'cyan' | 'emerald' | 'sky' | 'purple' | 'green' | 'orange' | 'amber' | 'fuchsia';
 
 /* ──────────────────────────────────────────────────────────────────────────────
    ORDER MATTERS. This array is the order the cards appear in, top to bottom.
@@ -169,8 +242,11 @@ export const projects: Project[] = [
     accent: 'orange',
     accentText: 'text-orange-400',
     icon: MessagesSquare,
+    appIcon: getOnTheRugIcon,
     span: 'full',
     teaser: 'A guided way for two people to have a hard conversation, one turn at a time.',
+    // Its own site's privacy page has a contact form.
+    contactUrl: 'https://getontherug.co/privacy',
     summary:
       'A guided way to have the hard conversation. Two people, one rug, one turn at a time.',
     description:
@@ -206,6 +282,7 @@ export const projects: Project[] = [
     accent: 'green',
     accentText: 'text-green-400',
     icon: Hash,
+    appIcon: hashDropIcon,
     span: 'half',
     teaser: 'Proves a download is exactly what its publisher released, checking hashes, signatures, and notarization on your Mac.',
     summary:
@@ -293,12 +370,16 @@ export const projects: Project[] = [
     name: 'Apunte',
     platform: 'macOS',
     status: 'Available',
-    accent: 'sky',
-    accentText: 'text-sky-400',
+    accent: 'amber',
+    accentText: 'text-[#feb860]',
     icon: AudioLines,
+    appIcon: apunteIcon,
     span: 'half',
     teaser: 'Turns audio, video, and live conversations into text, entirely on your Mac.',
-    appStoreUrl: 'https://apps.apple.com/us/app/apunte/id6802142206?mt=12',
+    // One record for the Mac, iPhone, and iPad apps. The link once ended in
+    // `?mt=12` (Mac); Apple now redirects that to this plain address.
+    appStoreUrl: 'https://apps.apple.com/us/app/apunte/id6802142206',
+    alsoOn: { platform: 'iOS' },
     summary:
       'Transcription that never leaves your Mac. Your recordings, your calls, your words. No uploads, no account, no network.',
     description:
@@ -336,7 +417,7 @@ export const projects: Project[] = [
       ],
     },
     price: 'Free, with Premium as a subscription or a one-time purchase',
-    requires: 'macOS 26 or later',
+    requires: 'macOS, iOS, or iPadOS 26 or later',
     languageSince: { es: '1.2' },
     screenshots: [
       {
@@ -470,6 +551,283 @@ export const projects: Project[] = [
           },
         },
       },
+      /* iPhone and iPad, from the iOS App Store set (Apunte's
+         docs/ios/store/Raw, captured 2026-10-16), with captions from its
+         Artwork/ios-screenshot-captions.json and -es.json. */
+      {
+        device: 'iphone',
+        src: apunteIphoneLive,
+        alt: 'A live recording on iPhone: the header reads Listening, five timestamped lines have arrived, and the Stop button and running time sit along the bottom.',
+        caption: 'Words appear while people talk, transcribed on your iPhone as you record.',
+        premium: true,
+        width: 737,
+        height: 1600,
+        translations: {
+          es: {
+            src: apunteIphoneLiveEs,
+            alt: 'Una grabación en vivo en el iPhone: el encabezado dice Escuchando, han llegado cinco líneas con marca de tiempo y abajo están el botón Detener y el tiempo transcurrido.',
+            caption: 'Las palabras aparecen mientras la gente habla, transcritas en tu iPhone mientras grabas.',
+          },
+        },
+      },
+      {
+        device: 'iphone',
+        src: apunteIphoneTranscript,
+        alt: 'An interview transcript on iPhone, every line with its timestamp and its speaker\'s name, above the player.',
+        caption: 'Record, or bring in audio and video. Apunte transcribes it on your iPhone, and nothing is uploaded.',
+        width: 737,
+        height: 1600,
+        translations: {
+          es: {
+            src: apunteIphoneTranscriptEs,
+            alt: 'La transcripción de una entrevista en el iPhone, cada línea con su marca de tiempo y el nombre de quien habla, sobre el reproductor.',
+            caption: 'Graba, o trae audio y video. Apunte lo transcribe en tu iPhone y no sube nada.',
+          },
+        },
+      },
+      {
+        device: 'iphone',
+        src: apunteIphoneCassette,
+        alt: 'Recording in the Cassette look: a see-through tape with its two reels, the running time on a digital display, and a note that the transcript appears when you stop.',
+        caption: 'Recording is free. Choose the Cassette look, and the reels turn while you record.',
+        width: 737,
+        height: 1600,
+        translations: {
+          es: {
+            src: apunteIphoneCassetteEs,
+            alt: 'Grabando con el tema Casete: una cinta transparente con sus dos bobinas, el tiempo en una pantalla digital y una nota de que la transcripción aparece cuando detienes la grabación.',
+            caption: 'Grabar es gratis. Elige el tema Casete y las bobinas giran mientras grabas.',
+          },
+        },
+      },
+      {
+        device: 'iphone',
+        src: apunteIphoneImport,
+        alt: 'The library of transcripts, with a menu over the Record button: Transcribe a Call Recording, Choose Videos from Photos, and Choose from Files.',
+        caption: 'Choose files from Files, or videos from Photos. Apunte keeps the sound and transcribes it.',
+        width: 737,
+        height: 1600,
+        translations: {
+          es: {
+            src: apunteIphoneImportEs,
+            alt: 'La biblioteca de transcripciones, con un menú sobre el botón de grabar: Transcribir una grabación de llamada, Elegir videos de Fotos y Elegir de Archivos.',
+            caption: 'Elige archivos de Archivos, o videos de Fotos. Apunte conserva el sonido y lo transcribe.',
+          },
+        },
+      },
+      {
+        device: 'iphone',
+        src: apunteIphoneLockScreen,
+        alt: 'The Lock Screen with Apunte\'s Live Activity: Recording, a level meter, the running time, and a Stop button.',
+        caption: 'The recording stays on your Lock Screen, with its running time and a Stop button.',
+        width: 737,
+        height: 1600,
+        translations: {
+          es: {
+            src: apunteIphoneLockScreenEs,
+            alt: 'La pantalla de bloqueo con la Actividad en vivo de Apunte: Grabando, un medidor de nivel, el tiempo transcurrido y un botón para detener.',
+            caption: 'La grabación sigue en tu pantalla de bloqueo, con su duración y un botón para detenerla.',
+          },
+        },
+      },
+      {
+        device: 'iphone',
+        src: apunteIphoneCalls,
+        alt: 'Transcribing a Call: four steps, from recording a call with iPhone\'s own call recording to sharing its audio to Apunte.',
+        caption: 'Record a call with iPhone\'s own call recording, then share it to Apunte to transcribe.',
+        width: 737,
+        height: 1600,
+        translations: {
+          es: {
+            src: apunteIphoneCallsEs,
+            alt: 'Transcribir una llamada: cuatro pasos, desde grabar una llamada con la grabación de llamadas del iPhone hasta compartir su audio con Apunte.',
+            caption: 'Graba una llamada con la grabación de llamadas del iPhone y compártela con Apunte para transcribirla.',
+          },
+        },
+      },
+      {
+        device: 'iphone',
+        src: apunteIphoneTransfer,
+        alt: 'Send to Your Devices: a one-time code to type on the other device, four transcripts sealed in one file, and a button to send it with AirDrop or Files.',
+        caption: 'Send transcripts between your iPhone, iPad, and Mac by AirDrop or cable. One encrypted file, no account.',
+        width: 737,
+        height: 1600,
+        translations: {
+          es: {
+            src: apunteIphoneTransferEs,
+            alt: 'Enviar a tus dispositivos: un código de un solo uso para escribir en el otro dispositivo, cuatro transcripciones listas en un archivo cifrado y un botón para enviarlo con AirDrop o Archivos.',
+            caption: 'Envía transcripciones entre tu iPhone, iPad y Mac por AirDrop o cable. Un solo archivo cifrado, sin cuenta.',
+          },
+        },
+      },
+      {
+        device: 'iphone',
+        src: apunteIphoneSearch,
+        alt: 'Search results for "last": six lines from three transcripts, each with its timestamp and the word highlighted.',
+        caption: 'Search your whole library down to the line, and jump straight to that moment.',
+        premium: true,
+        width: 737,
+        height: 1600,
+        translations: {
+          es: {
+            src: apunteIphoneSearchEs,
+            alt: 'Resultados de búsqueda de "última": tres líneas de dos transcripciones, cada una con su marca de tiempo y la palabra resaltada.',
+            caption: 'Busca en toda tu biblioteca hasta la línea exacta y salta directo a ese momento.',
+          },
+        },
+      },
+      {
+        device: 'iphone',
+        src: apunteIphoneExport,
+        alt: 'The export menu over a transcript: plain text, timestamped text, and JSON included, then SubRip, WebVTT, CSV, Markdown, and HTML under Premium.',
+        caption: 'Plain text, timestamps, and JSON are free. Subtitles, spreadsheets, and documents come with Premium.',
+        width: 737,
+        height: 1600,
+        translations: {
+          es: {
+            src: apunteIphoneExportEs,
+            alt: 'El menú de exportar sobre una transcripción: texto sin formato, texto con marcas de tiempo y JSON incluidos, y luego SubRip, WebVTT, CSV, Markdown y HTML en Premium.',
+            caption: 'El texto, las marcas de tiempo y JSON son gratis. Subtítulos, hojas de cálculo y documentos vienen con Premium.',
+          },
+        },
+      },
+      {
+        device: 'iphone',
+        src: apunteIphonePrivacy,
+        alt: 'The Privacy page: Apunte makes no network calls, with where to find App Privacy Report, a note that saved audio is encrypted with a key in the Secure Enclave, and switches for the Lock Screen and backups.',
+        caption: 'No account, no analytics, and no network calls. Check it yourself in App Privacy Report.',
+        width: 737,
+        height: 1600,
+        translations: {
+          es: {
+            src: apunteIphonePrivacyEs,
+            alt: 'La página Privacidad: Apunte no hace conexiones de red, con dónde encontrar el Reporte de privacidad de apps, una nota de que el audio guardado se cifra con una clave en el Secure Enclave e interruptores para la pantalla de bloqueo y las copias de seguridad.',
+            caption: 'Sin cuenta, sin analíticas y sin conexiones de red. Compruébalo en el Reporte de privacidad de apps.',
+          },
+        },
+      },
+      {
+        device: 'ipad',
+        src: apunteIpadLive,
+        alt: 'A live recording on iPad: the library in a sidebar, and beside it five timestamped lines under Listening, with the Stop button and running time at the bottom.',
+        caption: 'Words appear while people talk, transcribed on your iPad as you record.',
+        premium: true,
+        width: 1200,
+        height: 1600,
+        translations: {
+          es: {
+            src: apunteIpadLiveEs,
+            alt: 'Una grabación en vivo en el iPad: la biblioteca en una barra lateral y, a su lado, las líneas con marca de tiempo bajo Escuchando, con el botón Detener y el tiempo transcurrido abajo.',
+            caption: 'Las palabras aparecen mientras la gente habla, transcritas en tu iPad mientras grabas.',
+          },
+        },
+      },
+      {
+        device: 'ipad',
+        src: apunteIpadTranscript,
+        alt: 'An interview transcript on iPad, beside the library: every line with its timestamp and its speaker\'s name, above the player.',
+        caption: 'Record, or bring in audio and video. Apunte transcribes it on your iPad, and nothing is uploaded.',
+        width: 1200,
+        height: 1600,
+        translations: {
+          es: {
+            src: apunteIpadTranscriptEs,
+            alt: 'La transcripción de una entrevista en el iPad, junto a la biblioteca: cada línea con su marca de tiempo y el nombre de quien habla, sobre el reproductor.',
+            caption: 'Graba, o trae audio y video. Apunte lo transcribe en tu iPad y no sube nada.',
+          },
+        },
+      },
+      {
+        device: 'ipad',
+        src: apunteIpadCassette,
+        alt: 'Recording on iPad in the Cassette look: the tape and its two reels beside the library, with the running time on a digital display.',
+        caption: 'Recording is free. Choose the Cassette look, and the reels turn while you record.',
+        width: 1200,
+        height: 1600,
+        translations: {
+          es: {
+            src: apunteIpadCassetteEs,
+            alt: 'Grabando en el iPad con el tema Casete: la cinta y sus dos bobinas junto a la biblioteca, con el tiempo en una pantalla digital.',
+            caption: 'Grabar es gratis. Elige el tema Casete y las bobinas giran mientras grabas.',
+          },
+        },
+      },
+      {
+        device: 'ipad',
+        src: apunteIpadImport,
+        alt: 'A transcript on iPad, with a menu over the add button offering to choose videos from Photos or files from Files.',
+        caption: 'Choose files from Files, or videos from Photos. Apunte keeps the sound and transcribes it.',
+        width: 1200,
+        height: 1600,
+        translations: {
+          es: {
+            src: apunteIpadImportEs,
+            alt: 'Una transcripción en el iPad, con un menú sobre el botón para agregar que ofrece elegir videos de Fotos o archivos de Archivos.',
+            caption: 'Elige archivos de Archivos, o videos de Fotos. Apunte conserva el sonido y lo transcribe.',
+          },
+        },
+      },
+      {
+        device: 'ipad',
+        src: apunteIpadTransfer,
+        alt: 'Send to Your Devices on iPad: a one-time code, four transcripts sealed in one file, and a button to send it with AirDrop or Files.',
+        caption: 'Send transcripts between your iPhone, iPad, and Mac by AirDrop or cable. One encrypted file, no account.',
+        width: 1200,
+        height: 1600,
+        translations: {
+          es: {
+            src: apunteIpadTransferEs,
+            alt: 'Enviar a tus dispositivos en el iPad: un código de un solo uso, cuatro transcripciones listas en un archivo cifrado y un botón para enviarlo con AirDrop o Archivos.',
+            caption: 'Envía transcripciones entre tu iPhone, iPad y Mac por AirDrop o cable. Un solo archivo cifrado, sin cuenta.',
+          },
+        },
+      },
+      {
+        device: 'ipad',
+        src: apunteIpadSearch,
+        alt: 'Search results on iPad for one word across the library, each line with its timestamp and the word highlighted.',
+        caption: 'Search your whole library down to the line, and jump straight to that moment.',
+        premium: true,
+        width: 1200,
+        height: 1600,
+        translations: {
+          es: {
+            src: apunteIpadSearchEs,
+            alt: 'Resultados de búsqueda en el iPad de una palabra en toda la biblioteca, cada línea con su marca de tiempo y la palabra resaltada.',
+            caption: 'Busca en toda tu biblioteca hasta la línea exacta y salta directo a ese momento.',
+          },
+        },
+      },
+      {
+        device: 'ipad',
+        src: apunteIpadExport,
+        alt: 'The export menu beside a transcript on iPad: plain text, timestamped text, and JSON included, and the subtitle, spreadsheet, and document formats under Premium.',
+        caption: 'Plain text, timestamps, and JSON are free. Subtitles, spreadsheets, and documents come with Premium.',
+        width: 1200,
+        height: 1600,
+        translations: {
+          es: {
+            src: apunteIpadExportEs,
+            alt: 'El menú de exportar junto a una transcripción en el iPad: texto sin formato, texto con marcas de tiempo y JSON incluidos, y los formatos de subtítulos, hojas de cálculo y documentos en Premium.',
+            caption: 'El texto, las marcas de tiempo y JSON son gratis. Subtítulos, hojas de cálculo y documentos vienen con Premium.',
+          },
+        },
+      },
+      {
+        device: 'ipad',
+        src: apunteIpadPrivacy,
+        alt: 'The Privacy page on iPad: Apunte makes no network calls, with where to find App Privacy Report, a note that saved audio is encrypted with a key in the Secure Enclave, and the Lock Screen switch.',
+        caption: 'No account, no analytics, and no network calls. Check it yourself in App Privacy Report.',
+        width: 1200,
+        height: 1600,
+        translations: {
+          es: {
+            src: apunteIpadPrivacyEs,
+            alt: 'La página Privacidad en el iPad: Apunte no hace conexiones de red, con dónde encontrar el Reporte de privacidad de apps, una nota de que el audio guardado se cifra con una clave en el Secure Enclave y el interruptor de la pantalla de bloqueo.',
+            caption: 'Sin cuenta, sin analíticas y sin conexiones de red. Compruébalo en el Reporte de privacidad de apps.',
+          },
+        },
+      },
     ],
   },
   {
@@ -478,9 +836,10 @@ export const projects: Project[] = [
     name: 'Retazo',
     platform: 'macOS',
     status: 'Available',
-    accent: 'cyan',
-    accentText: 'text-cyan-400',
+    accent: 'fuchsia',
+    accentText: 'text-fuchsia-400',
     icon: Scissors,
+    appIcon: retazoIcon,
     span: 'third',
     teaser: 'Clipboard history that lives in your menu bar.',
     summary:
@@ -620,6 +979,7 @@ export const projects: Project[] = [
     accent: 'pink',
     accentText: 'text-pink-400',
     icon: Smartphone,
+    appIcon: amparoIcon,
     span: 'two-thirds',
     teaser: 'Private cycle tracking that never leaves your iPhone.',
     summary: 'Privacy-first cycle tracking for iPhone. Your body, your data — no cloud, no noise.',
@@ -681,27 +1041,13 @@ export const projects: Project[] = [
         height: 1600,
       },
       {
-        src: amparoDuo,
-        alt: 'Amparo\'s Home screen unfolded on iPhone Duo: the cycle ring and phase on the left, and the next period, the fertile window, two symptoms coming up, and the Period Started button in a second column, with the tabs in a rail on the right.',
-        caption: 'Made for iPhone Duo: unfold it, and Home, Calendar, and Insights spread into two columns.',
-        translations: {
-          es: {
-            src: amparoDuoEs,
-            alt: 'La pantalla Inicio de Amparo abierta en el iPhone Duo: el anillo del ciclo y la fase a la izquierda, y en una segunda columna el próximo periodo, la ventana fértil, dos síntomas que se acercan y el botón Empezó mi periodo, con las pestañas en un riel a la derecha.',
-            caption: 'Hecha para el iPhone Duo: al abrirlo, Inicio, Calendario y Análisis se reparten en dos columnas.',
-          },
-        },
-        width: 1600,
-        height: 1126,
-      },
-      {
         src: amparoPrivacy,
-        alt: 'Settings opens with Only on This iPhone, saying the data never leaves the phone, then the four looks under Appearance and the reminders.',
+        alt: 'Settings opens with Only on This iPhone, saying the data never leaves the phone, then the four looks under Appearance, the temperature unit, and the reminders.',
         caption: 'No account, no cloud, and no tracking. Your data even stays out of iCloud Backup unless you choose.',
         translations: {
           es: {
             src: amparoPrivacyEs,
-            alt: 'Configuración abre con Solo en este iPhone, que dice que los datos nunca salen del teléfono, y sigue con los cuatro estilos de Apariencia y los recordatorios.',
+            alt: 'Configuración abre con Solo en este iPhone, que dice que los datos nunca salen del teléfono, y sigue con los cuatro estilos de Apariencia, la unidad de temperatura y los recordatorios.',
             caption: 'Sin cuenta, sin nube y sin rastreo. Tus datos ni siquiera van al respaldo de iCloud, a menos que tú lo elijas.',
           },
         },
@@ -780,12 +1126,12 @@ export const projects: Project[] = [
       },
       {
         src: amparoCalendar,
-        alt: 'The October calendar with fertile days, predicted period days, and logged days marked, and the symptoms and moods logged on October 5 below it.',
+        alt: 'The October calendar with period days, fertile days, and logged days marked, and the symptoms and moods logged on October 16 below it.',
         caption: 'Periods, predictions, and the days you\'ve logged, with every detail a tap away.',
         translations: {
           es: {
             src: amparoCalendarEs,
-            alt: 'El calendario de octubre con los días fértiles, los días de periodo previstos y los días registrados marcados, y debajo los síntomas y el ánimo registrados el 5 de octubre.',
+            alt: 'El calendario de octubre con los días de periodo, los días fértiles y los días registrados marcados, y debajo los síntomas y el ánimo registrados el 16 de octubre.',
             caption: 'Periodos, predicciones y los días que registraste, con cada detalle a un toque.',
           },
         },
@@ -794,12 +1140,12 @@ export const projects: Project[] = [
       },
       {
         src: amparoLog,
-        alt: 'Logging October 5: flow, symptoms grouped into pain, digestion, skin, energy, and mental, two moods selected, energy set to High, and body temperature.',
+        alt: 'Logging October 16: flow, symptoms grouped into pain, digestion, skin, energy, and mental, two moods selected, energy set to High, and body temperature.',
         caption: 'Flow, symptoms, moods, energy, and temperature, all on one screen.',
         translations: {
           es: {
             src: amparoLogEs,
-            alt: 'El registro del 5 de octubre: flujo, síntomas agrupados en dolor, digestión, piel, energía y mente, dos estados de ánimo seleccionados, energía en Alta y temperatura corporal.',
+            alt: 'El registro del 16 de octubre: flujo, síntomas agrupados en dolor, digestión, piel, energía y mente, dos estados de ánimo seleccionados, energía en Alta y temperatura corporal.',
             caption: 'Flujo, síntomas, ánimo, energía y temperatura, todo en una sola pantalla.',
           },
         },
@@ -848,6 +1194,69 @@ export const projects: Project[] = [
         width: 737,
         height: 1600,
       },
+      /* iPhone Duo, unfolded: the screens 1.4 lays out in two columns, from
+         Amparo's docs/screenshots/Raw/Duo inner (captured 2026-10-17). The
+         other screens there are the iPhone layout, stretched. */
+      {
+        device: 'duo',
+        src: amparoDuo,
+        alt: 'Amparo\'s Home screen unfolded on iPhone Duo: the cycle ring and phase on the left, and the next period, the fertile window, two symptoms coming up, and the Period Started button in a second column, with the tabs in a rail on the right.',
+        caption: 'Made for iPhone Duo: unfold it, and Home, Calendar, and Insights spread into two columns.',
+        translations: {
+          es: {
+            src: amparoDuoEs,
+            alt: 'La pantalla Inicio de Amparo abierta en el iPhone Duo: el anillo del ciclo y la fase a la izquierda, y en una segunda columna el próximo periodo, la ventana fértil, dos síntomas que se acercan y el botón Empezó mi periodo, con las pestañas en un riel a la derecha.',
+            caption: 'Hecha para el iPhone Duo: al abrirlo, Inicio, Calendario y Análisis se reparten en dos columnas.',
+          },
+        },
+        width: 1600,
+        height: 1126,
+      },
+      {
+        device: 'duo',
+        src: amparoDuoCalendar,
+        alt: 'The Calendar unfolded on iPhone Duo: October on the left, and on the right the symptoms and moods logged on October 17, with the tabs in a rail on the right.',
+        caption: 'Unfolded, the month sits beside the day you tap.',
+        translations: {
+          es: {
+            src: amparoDuoCalendarEs,
+            alt: 'El Calendario abierto en el iPhone Duo: octubre a la izquierda y, a la derecha, los síntomas y el ánimo registrados el 17 de octubre, con las pestañas en un riel a la derecha.',
+            caption: 'Al abrirlo, el mes queda junto al día que tocas.',
+          },
+        },
+        width: 1600,
+        height: 1126,
+      },
+      {
+        device: 'duo',
+        src: amparoDuoInsights,
+        alt: 'Insights unfolded on iPhone Duo: the averages across the top, the Doctor Visit Summary, and the basal body temperature and cycle length charts side by side.',
+        caption: 'Insights spreads out, with your charts side by side.',
+        translations: {
+          es: {
+            src: amparoDuoInsightsEs,
+            alt: 'Análisis abierto en el iPhone Duo: los promedios arriba, el Resumen para la consulta médica y las gráficas de temperatura basal y duración del ciclo una junto a la otra.',
+            caption: 'Análisis se extiende, con tus gráficas una junto a la otra.',
+          },
+        },
+        width: 1600,
+        height: 1126,
+      },
+      {
+        device: 'duo',
+        src: amparoDuoSkins,
+        alt: 'Home unfolded on iPhone Duo in the Notepad look: lined, cream-colored paper, the cycle ring on the left, and the cards and the Period Started button on the right.',
+        caption: 'Your look unfolds with it. Here, Notepad.',
+        translations: {
+          es: {
+            src: amparoDuoSkinsEs,
+            alt: 'Inicio abierto en el iPhone Duo con el estilo Libreta: papel rayado color crema, el anillo del ciclo a la izquierda, y las tarjetas y el botón Empezó mi periodo a la derecha.',
+            caption: 'Tu estilo se abre con él. Aquí, Libreta.',
+          },
+        },
+        width: 1600,
+        height: 1126,
+      },
     ],
   },
 ];
@@ -860,6 +1269,15 @@ export const isAnnounced = (project: Project) => Boolean(project.summary);
  *  framing and becomes a product page: download button up top, price, and
  *  screenshots. See MAINTAINING.md → "Shipped App Pages". */
 export const isShipped = (project: Project) => project.status === 'Available';
+
+/** A Mac app with no iPhone or iPad version, whose download button says "Mac
+ *  App Store" so an iPhone visitor knows before tapping. */
+export const isMacOnly = (project: Project) => project.platform === 'macOS' && !project.alsoOn;
+
+/** The project's platforms as one line: "macOS", or "macOS · iOS" for an app
+ *  that is also on a second one. */
+export const platformsOf = (project: Project) =>
+  project.alsoOn ? `${project.platform} · ${project.alsoOn.platform}` : project.platform;
 
 export const getProjectBySlug = (slug: string | null) => {
   const project = projects.find(
