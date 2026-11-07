@@ -5,7 +5,7 @@ import { ArrowLeft } from 'lucide-react';
 /* Keep this date current. Any substantive edit to the text below should move it,
    because "Last updated" is the first thing anyone checks when they want to know
    whether a policy still describes what actually happens. */
-const LAST_UPDATED = 'October 22, 2026';
+const LAST_UPDATED = 'November 6, 2026';
 
 const Section = ({ title, children }: { title: string; children: React.ReactNode }) => (
     <section>
@@ -449,9 +449,11 @@ export const PrivacyPolicy = () => {
                                 reads them now, and the site deletes them the next time you visit.
                             </p>
                             <p>
-                                One thing is saved on your device: whether you chose the light or dark theme.
-                                It sits in your browser's local storage, exists only to remember that choice,
-                                and is never sent anywhere.
+                                Three things can be saved on your device, in your browser's local storage:
+                                whether you chose the light or dark theme, which language you chose, and
+                                that you closed a site notice, such as the one about sync. They exist only
+                                to remember those choices, hold nothing that identifies you, and are never
+                                sent anywhere.
                             </p>
                             <p>
                                 All of this applies to the website only. Retrac Labs apps contain no

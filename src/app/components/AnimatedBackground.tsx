@@ -3,7 +3,10 @@ import { motion } from 'motion/react';
 
 export const AnimatedBackground = () => {
   return (
-    <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10 bg-[#09090b]">
+    // A fixed layer touching the screen's edges, so it matches the page's ground
+    // in both themes: on the folded iPhone Duo, Safari can take its side
+    // toolbar's color from a layer like this one (jarredmcarter.com's .backdrop).
+    <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10 bg-[#09090b] light:bg-[#f4f4f5]">
       {/* Stark, Remix-style dot grid */}
       <div 
         className="absolute inset-0 opacity-20"

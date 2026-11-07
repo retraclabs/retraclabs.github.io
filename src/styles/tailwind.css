@@ -21,3 +21,14 @@ html.light,
 html.light body {
   background-color: #f4f4f5;
 }
+
+/* A path like ~/Library/Containers/com.jarredmcarter.snippystack/ has no break
+   point of its own, so on a phone it ran past the right edge of the privacy
+   pages and the end of it was cut off. Let it break anywhere instead, the way
+   jarredmcarter.com wraps its DOIs. In the base layer, so a utility class can
+   still override it. */
+@layer base {
+  code {
+    overflow-wrap: anywhere;
+  }
+}

@@ -83,6 +83,23 @@ const en = {
     translationComing: (name: string, version: string) =>
       `These show the app in ${name}, which arrives in version ${version}.`,
   },
+  /** The "Changes Regarding Your Data" card (components/SyncNotice.tsx). The
+   *  words are Jarred's, from ~/Documents/RetracLabs/Sync Statement.md; change
+   *  them there first. */
+  syncNotice: {
+    title: 'Changes Regarding Your Data',
+    body:
+      'Nothing changes unless you turn it on. Optional sync is coming to our apps, so your data can ' +
+      'follow you between your iPhone, iPad, and Mac. Your data will be locked on your device before it ' +
+      'reaches iCloud, and only your own devices will have the key. Apple will store it but can\'t read ' +
+      'it, and neither can we, even if a court orders Apple to hand it over. Everything the apps do with ' +
+      'your data still happens on your device.',
+    howItWillWork: 'How It Will Work',
+    gotIt: 'Got It',
+    /** Beside the button while the explainer page is English only. English
+     *  needs none. */
+    explainerInEnglish: '',
+  },
   /** Above a page that hasn't been translated. English needs none. */
   englishOnly: '',
   footer: {
@@ -161,6 +178,20 @@ const es: Strings = {
     comingIn: (version: string) => `Próximamente en la ${version}`,
     translationComing: (name: string, version: string) =>
       `Estas capturas muestran la app en ${name}, que llega con la versión ${version}.`,
+  },
+  /* Draft from Sync Statement.md, not yet reviewed by Jarred (2026-11-06). */
+  syncNotice: {
+    title: 'Cambios sobre tus datos',
+    body:
+      'Nada cambia a menos que lo actives. La sincronización opcional llegará a nuestras apps, para que ' +
+      'tus datos te acompañen entre tu iPhone, iPad y Mac. Tus datos quedarán bajo llave en tu ' +
+      'dispositivo antes de llegar a iCloud, y solo tus propios dispositivos tendrán la llave. Apple los ' +
+      'guardará, pero no podrá leerlos, y nosotros tampoco, aunque un juez le ordene a Apple ' +
+      'entregarlos. Todo lo que las apps hacen con tus datos sigue ocurriendo en tu dispositivo.',
+    howItWillWork: 'Cómo funcionará',
+    gotIt: 'Entendido',
+    // Remove once the explainer page is in Spanish.
+    explainerInEnglish: 'en inglés',
   },
   englishOnly: 'Esta página solo está disponible en inglés.',
   footer: {

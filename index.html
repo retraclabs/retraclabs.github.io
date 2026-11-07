@@ -8,6 +8,9 @@
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" type="image/svg+xml" href="/brand/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <!-- Puts the page back where it belongs after the folded iPhone Duo turns.
+         public/duo.js explains; delete both once Safari stops needing it. -->
+    <script src="/duo.js"></script>
     <script>
       // Runs before React. Keep the storage key in sync with src/app/theme.ts.
       (function () {

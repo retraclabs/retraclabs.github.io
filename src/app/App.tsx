@@ -22,6 +22,8 @@ import { LabNotePage } from './components/LabNotePage';
 import { ThemeToggle } from './components/ThemeToggle';
 import { LanguageSwitch, LanguageToggle } from './components/LanguageSwitch';
 import { EnglishOnly } from './components/EnglishOnly';
+import { SyncExplainer, SYNC_EXPLAINER_PATH } from './components/SyncExplainer';
+import { SyncNotice } from './components/SyncNotice';
 import { getProjectBySlug } from './data/projects';
 import { LANGUAGES, preferredLanguage, rememberLanguage, type Language } from './data/languages';
 import { getLabNote } from './labNotes';
@@ -31,7 +33,7 @@ import { STRINGS } from './i18n/strings';
 import { hashFor, parseHash } from './i18n/route';
 import { motion } from 'motion/react';
 
-const STATIC_PAGE_HASHES = ['#/privacy', '#/apunte/privacy', '#/apunte/terms', '#/hash-drop/privacy', '#/hash-drop/terms', '#/ambient-desk/privacy', '#/retazo/privacy', '#/early-access', '#/about', '#/thanks'];
+const STATIC_PAGE_HASHES = ['#/privacy', '#/apunte/privacy', '#/apunte/terms', '#/hash-drop/privacy', '#/hash-drop/terms', '#/ambient-desk/privacy', '#/retazo/privacy', '#/early-access', '#/about', '#/thanks', SYNC_EXPLAINER_PATH];
 /* Get On The Rug's old legal routes, which forward to getontherug.co; fold them into the list above next time it is edited. */
 STATIC_PAGE_HASHES.push('#/get-on-the-rug/privacy', '#/get-on-the-rug/terms');
 
@@ -194,6 +196,10 @@ export default function App() {
         </div>
       </motion.header>
 
+      {/* "Changes Regarding Your Data". Early in the page, so a screen reader
+          or the Tab key reaches it before the page it sits on. */}
+      <SyncNotice path={path} />
+
       {/* Pages not yet translated are wrapped in EnglishOnly, which says so in
           the visitor's language. See MAINTAINING.md → "Languages". */}
       {path === '#/privacy' ? (
@@ -224,6 +230,8 @@ export default function App() {
         <EnglishOnly><About /></EnglishOnly>
       ) : path === '#/thanks' ? (
         <EnglishOnly><Thanks /></EnglishOnly>
+      ) : path === SYNC_EXPLAINER_PATH ? (
+        <EnglishOnly><SyncExplainer /></EnglishOnly>
       ) : labNote ? (
         <EnglishOnly><LabNotePage note={labNote} /></EnglishOnly>
       ) : activeProject ? (

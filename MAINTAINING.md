@@ -99,6 +99,7 @@ This is the main traffic controller. It decides whether to show:
 - the beta signup page
 - the privacy policy pages
 - a lab note
+- the "Sync, Locked" explainer
 
 Current route patterns:
 
@@ -118,6 +119,7 @@ Current route patterns:
 #/hash-drop/terms
 #/ambient-desk/privacy
 #/retazo/privacy
+#/sync                     ("Sync, Locked", linked from the notice card)
 #/get-on-the-rug/privacy   (forwards to getontherug.co/privacy)
 #/get-on-the-rug/terms     (forwards to Apple's Standard License Agreement)
 #/projects/<slug>
@@ -886,6 +888,40 @@ As, Pause Capture), since that is what the reader will see on screen.
    `src/app/data/mission.ts`.
 3. Add a `projects.<code>.ts` like `projects.es.ts`, and register it in
    `src/app/i18n/projects.ts`.
+
+## The Notice Card
+
+A small card that tells every visitor something once: "Changes Regarding
+Your Data", about the optional sync that's coming. It sits in the
+bottom-right corner, and across the bottom of the screen on a phone. It
+doesn't block the page, and it stays until the visitor presses one of its
+two buttons, or opens the page it links to. Then it's gone for good in that
+browser.
+
+- **The card:** `src/app/components/SyncNotice.tsx`. Its words are in
+  `src/app/i18n/strings.ts` under `syncNotice`, in English and Spanish.
+- **The page it links to:** `src/app/components/SyncExplainer.tsx`, at
+  `#/sync`. English only for now, so the Spanish card's button says "en
+  inglés" (`explainerInEnglish`; empty it once the page is translated).
+- **Where the words come from:** `~/Documents/RetracLabs/Sync Statement.md`,
+  which every sentence has to match, and `Sync Encryption Standard.md` beside
+  it, which says what we may and may not promise. Change the statement
+  first, then copy it here.
+
+**How it remembers.** Closing the card saves one value in the browser's
+local storage: the key `retraclabs.notice`, holding the card's ID
+(`NOTICE_ID`, now `sync-notice-1`). No cookie, nothing that identifies
+anyone, and nothing is sent anywhere. The privacy policy's "Cookies and
+Website Analytics" section lists it, beside the theme and language choices.
+If you ever store anything else in the browser, add it to that paragraph.
+
+**Replacing it.** The day an app ships sync, the card changes to "Apunte Now
+Syncs, Locked" (its words are in Sync Statement.md → "At Launch"). Give it a
+new `NOTICE_ID`, such as `sync-launch-1`, so people who closed the first one
+see the new one once. Keep the same storage key: it holds the last notice
+closed, so old IDs don't pile up. The same day, move the explainer to the
+present tense, name the app, and link it from that app's page and the
+privacy policy.
 
 ## Lab Notes
 
