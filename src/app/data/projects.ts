@@ -892,13 +892,19 @@ export const projects: Project[] = [
         'Password manager copies skipped, Pause Capture, Auto-Forget, one-time codes that fade, and tracking tags removed from links',
       ],
       next: '2.2',
+      // From 2.2's What's New (Retazo's Marketing/App Store Listing.md). Snippet
+      // sync moves to 2.3: when 2.2 ships, it becomes `current` and sync comes
+      // back here as 2.3's.
       nextFeatures: [
-        'Optional iCloud sync for your snippets, off unless you turn it on. Your clipboard history never syncs.',
+        'Retazo in Spanish, Shortcuts actions included: it follows your Mac\'s language, or you can choose Spanish for Retazo alone',
+        'The Clothesline comes down when you press ⌃⌘L or drag something into the menu bar, and at the top edge of the screen only if you turn that on',
+        'Mission Control hides the Clothesline, clicks pass through its empty parts to the windows underneath, and it goes back up soon after the pointer leaves its cards',
       ],
     },
     appStoreUrl: 'https://apps.apple.com/us/app/retazo-clipboard-history/id6765705718?mt=12',
     price: '$2.99',
     requires: 'macOS 14 or later',
+    languageSince: { es: '2.2' },
     screenshots: [
       {
         src: retazoMenuBar,
