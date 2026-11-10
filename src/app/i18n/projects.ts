@@ -43,9 +43,14 @@ export const localizeProject = (project: Project, language: Language) => {
     return translated as Project[K];
   };
 
+  // The translation carries only words; the numbers stay the English ones.
   const version = project.version
     ? text.version
-      ? { ...project.version, ...text.version }
+      ? {
+          ...project.version,
+          ...text.version,
+          alsoOn: project.version.alsoOn && { ...project.version.alsoOn, ...text.version.alsoOn },
+        }
       : (fallback.add('version'), project.version)
     : undefined;
 

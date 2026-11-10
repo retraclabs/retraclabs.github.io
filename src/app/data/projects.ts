@@ -147,6 +147,12 @@ export type Project = {
     currentFeatures: string[];
     next: string;
     nextFeatures: string[];
+    /** The numbers of the `alsoOn` platform, when it counts its own versions:
+     *  Apunte for iPhone and iPad was at 1.1.1 when the Mac was at 1.6. With
+     *  it, every number on the page is labeled with its platform, and its
+     *  `nextFeatures` join the Next Version list, each labeled too. The
+     *  features above are then `platform`'s. */
+    alsoOn?: { current: string; next: string; nextFeatures: string[] };
   };
   appStoreUrl?: string;
   /** Where "Ask About This" goes, for a project with a contact form of its
@@ -375,46 +381,53 @@ export const projects: Project[] = [
     icon: AudioLines,
     appIcon: apunteIcon,
     span: 'half',
-    teaser: 'Turns audio, video, and live conversations into text, entirely on your Mac.',
+    teaser: 'Turns audio, video, and live conversations into text, entirely on your device.',
     // One record for the Mac, iPhone, and iPad apps. The link once ended in
     // `?mt=12` (Mac); Apple now redirects that to this plain address.
     appStoreUrl: 'https://apps.apple.com/us/app/apunte/id6802142206',
     alsoOn: { platform: 'iOS' },
     summary:
-      'Transcription that never leaves your Mac. Your recordings, your calls, your words. No uploads, no account, no network.',
+      'Transcription that never leaves your device. Your recordings, your calls, your words. No uploads, no account, no network.',
     description:
-      'Apunte turns audio and video into accurate, timestamped transcripts entirely on your Mac. ' +
-      'Drop in a voice memo, an interview, a lecture, a video — if macOS can play it, Apunte can read it. ' +
+      'Apunte turns audio and video into accurate, timestamped transcripts entirely on your Mac, iPhone, or iPad. ' +
+      'Drop in a voice memo, an interview, a lecture, a video — if your device can play it, Apunte can read it. ' +
       'Or transcribe live: the room you are in, or a call or meeting on headphones, with both sides in one transcript.\n\n' +
-      'It ships without the outgoing-network entitlement, so the app\'s own code cannot open a network ' +
+      'On the Mac, it ships without the outgoing-network entitlement, so the app\'s own code cannot open a network ' +
       'connection. You don\'t have to take that on faith. Inspect the signed app yourself with codesign. ' +
       'Transcription, and exporting the recording itself, are free; Premium adds speaker names, summaries, ' +
       'library-wide search, live transcription, formatted export, and audio clips, as a subscription or a ' +
-      'one-time lifetime purchase. The app is in English and Spanish, and locks with Touch ID.',
+      'one-time lifetime purchase. The app is in English and Spanish, and locks with Touch ID or Face ID.',
     highlights: [
-      'No network access, verifiable: the app ships without the network entitlement, so it cannot upload your audio. Check it yourself in Terminal.',
+      'No network access, and on the Mac you can verify it: the app ships without the network entitlement, so it cannot upload your audio. Check it yourself in Terminal.',
       'Accurate on real recordings: on a 64-minute, two-person session it captured the same content as MacWhisper, keeping hesitations and false starts rather than smoothing them away.',
-      'Live, for the room or the call: words appear as people speak, and a call on headphones puts both sides in one transcript. The recording stays on your Mac so you can check any line against it.',
+      'Live, for the room or the call: words appear as people speak, and on the Mac a call on headphones puts both sides in one transcript. The recording stays on your device so you can check any line against it.',
       'A free tier that\'s actually complete: transcription, editing, playback, the lock, every look, and export to plain text, timestamped text, JSON, or the recording itself are free. JSON carries everything, so your work is never locked in.',
     ],
     version: {
-      current: '1.5',
+      current: '1.6',
       currentFeatures: [
+        'An overall summary at the end of a long recording\'s summary: a short overview, the main points from start to finish, and the action items in one list, each linked to the moment it came from',
+        'Dates, times, and captions easier to read in every look, and at full strength with Increase Contrast',
         'Your own notes in a pane beside the transcript: type while you listen, and each note lands at the moment you started typing, live or on playback',
         'An offer to transcribe when a call starts, in FaceTime, Zoom, or your browser: one click, and call mode if you\'re on headphones',
         'Find and Replace, and saved fixes for words Apunte keeps getting wrong',
-        'Review mode that also marks every number, and notes whose number differs from what was said',
-        'Talk Time, and one speaker\'s lines alone',
         'A live session that survives a crash: the recording and your notes come back the next time Apunte opens',
         'Live transcription from the microphone, or from a call or meeting on headphones with both sides in one transcript, each line labeled Me or Others',
         'Identify Speakers: Apunte tells the voices in a recording apart on your Mac and numbers them, and you name each person once',
         'Send transcripts to your iPhone, iPad, or another Mac with AirDrop or a cable: one encrypted file that only your own devices can open, with no cloud and no account',
         'Export to plain text, timestamped text, JSON, SubRip, WebVTT, CSV, Markdown, HTML, PDF, and Word, or the recording itself, free',
       ],
-      next: '1.6',
+      next: '1.7',
       nextFeatures: [
         'Automatic sync between your devices, through your own iCloud Drive, in sealed files only your devices can open',
       ],
+      alsoOn: {
+        current: '1.1.1',
+        next: '1.2',
+        nextFeatures: [
+          'Identify Speakers on iPhone and iPad: Apunte tells the voices in a recording apart on your device and numbers them, and you name each person once',
+        ],
+      },
     },
     price: 'Free, with Premium as a subscription or a one-time purchase',
     requires: 'macOS, iOS, or iPadOS 26 or later',

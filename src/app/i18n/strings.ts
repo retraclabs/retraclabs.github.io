@@ -53,6 +53,9 @@ const en = {
     shippingToday: 'Shipping today.',
     nextVersion: 'Next Version',
     notShippedYet: 'In the lab. Not shipped yet.',
+    /** Beside a version number, for an app on two platforms that numbers
+     *  them separately. Keyed by `platform` in projects.ts. */
+    platformNames: { macOS: 'Mac', iOS: 'iPhone and iPad' } as Record<string, string>,
     whatItIs: 'What It Is',
     comingNext: 'Coming Next',
     nextSteps: 'Next Steps',
@@ -154,6 +157,7 @@ const es: Strings = {
     shippingToday: 'Disponible hoy.',
     nextVersion: 'Próxima versión',
     notShippedYet: 'En el laboratorio. Aún no está disponible.',
+    platformNames: { macOS: 'Mac', iOS: 'iPhone y iPad' },
     whatItIs: 'Qué es',
     comingNext: 'Lo que viene',
     nextSteps: 'Próximos pasos',

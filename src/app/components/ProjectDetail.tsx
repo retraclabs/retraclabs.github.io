@@ -29,6 +29,31 @@ export const ProjectDetail = ({ project: english }: ProjectDetailProps) => {
   const shipped = isShipped(project);
   const labNotes = getLabNotesFor(project.slug);
   const downloadLabel = t.project.download(isMacOnly(project));
+  // An app on two platforms that numbers them separately (Apunte: the Mac at
+  // 1.6, iPhone and iPad at 1.1.1) labels each number with its platform, and
+  // each coming feature with the version it arrives in.
+  const platformName = (platform: string) => t.project.platformNames[platform] ?? platform;
+  const second = project.version?.alsoOn && project.alsoOn
+    ? { name: platformName(project.alsoOn.platform), ...project.version.alsoOn }
+    : null;
+  const numbers = (which: 'current' | 'next') =>
+    project.version
+      ? second
+        ? [
+            { label: platformName(project.platform), value: project.version[which] },
+            { label: second.name, value: second[which] },
+          ]
+        : [{ label: null, value: project.version[which] }]
+      : [];
+  const comingFeatures = project.version
+    ? [
+        ...project.version.nextFeatures.map((feature) => ({
+          feature,
+          label: second ? `${platformName(project.platform)} ${project.version!.next}` : null,
+        })),
+        ...(second ? second.nextFeatures.map((feature) => ({ feature, label: `${second.name} ${second.next}` })) : []),
+      ]
+    : [];
   // Unannounced projects have no page to link to, so they stay off this list.
   const relatedProjects = projects.filter(
     (item) => item.slug !== project.slug && isAnnounced(item),
@@ -173,11 +198,16 @@ export const ProjectDetail = ({ project: english }: ProjectDetailProps) => {
               transition={{ duration: 0.55, delay: 0.18 }}
               className="border-4 border-zinc-800 light:border-zinc-200 bg-zinc-900 light:bg-white rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-8"
             >
-              <div className="flex items-baseline justify-between gap-3 mb-2">
+              <div className="flex flex-wrap items-baseline justify-between gap-3 mb-2">
                 <h2 lang={language} className="text-2xl font-black text-white light:text-zinc-900">{t.project.latestVersion}</h2>
-                <span className={'px-3 py-1 rounded-full bg-zinc-800 light:bg-zinc-100 font-mono font-black text-sm ' + accent.text}>
-                  {project.version.current}
-                </span>
+                <div className="flex flex-wrap gap-2">
+                  {numbers('current').map(({ label, value }) => (
+                    <span key={value + label} className={'px-3 py-1 rounded-full bg-zinc-800 light:bg-zinc-100 font-mono font-black text-sm ' + accent.text}>
+                      {label ? <span lang={language} className="text-zinc-400 light:text-zinc-600">{label} </span> : null}
+                      {value}
+                    </span>
+                  ))}
+                </div>
               </div>
               <p lang={language} className="text-sm text-zinc-400 light:text-zinc-600 font-mono mb-6">{t.project.shippingToday}</p>
               <div className="space-y-4">
@@ -196,18 +226,30 @@ export const ProjectDetail = ({ project: english }: ProjectDetailProps) => {
               transition={{ duration: 0.55, delay: 0.24 }}
               className="border-4 border-dashed border-zinc-800 light:border-zinc-200 bg-[#0f0f12] light:bg-zinc-50 rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-8"
             >
-              <div className="flex items-baseline justify-between gap-3 mb-2">
+              <div className="flex flex-wrap items-baseline justify-between gap-3 mb-2">
                 <h2 lang={language} className="text-2xl font-black text-white light:text-zinc-900">{t.project.nextVersion}</h2>
-                <span className="px-3 py-1 rounded-full bg-zinc-800 light:bg-zinc-100 text-zinc-400 light:text-zinc-600 font-mono font-black text-sm">
-                  {project.version.next}
-                </span>
+                <div className="flex flex-wrap gap-2">
+                  {numbers('next').map(({ label, value }) => (
+                    <span key={value + label} className="px-3 py-1 rounded-full bg-zinc-800 light:bg-zinc-100 text-zinc-400 light:text-zinc-600 font-mono font-black text-sm">
+                      {label ? <span lang={language} className="font-bold">{label} </span> : null}
+                      {value}
+                    </span>
+                  ))}
+                </div>
               </div>
               <p lang={language} className="text-sm text-zinc-400 light:text-zinc-600 font-mono mb-6">{t.project.notShippedYet}</p>
               <div className="space-y-4">
-                {project.version.nextFeatures.map((feature) => (
+                {comingFeatures.map(({ feature, label }) => (
                   <div key={feature} className="flex gap-3 text-zinc-400 light:text-zinc-600 font-medium">
                     <Sparkles className="w-5 h-5 mt-0.5 shrink-0 text-zinc-600 light:text-zinc-400" />
-                    <span>{feature}</span>
+                    <span>
+                      {label ? (
+                        <span lang={language} className="block text-xs font-mono font-black uppercase tracking-widest text-zinc-400 light:text-zinc-600 mb-1">
+                          {label}
+                        </span>
+                      ) : null}
+                      {feature}
+                    </span>
                   </div>
                 ))}
               </div>

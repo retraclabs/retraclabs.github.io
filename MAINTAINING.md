@@ -627,6 +627,33 @@ that to the plain address, so it does nothing; leave it off new links. A
 Mac-only app (no `alsoOn`) keeps "Mac App Store" on its button, so an iPhone
 visitor knows before tapping that there's nothing for their phone.
 
+**Version numbers.** Apunte's two apps count their versions separately (Mac
+1.6, iPhone and iPad 1.1.1), so `version` carries the second app's numbers in
+its own `alsoOn`:
+
+```ts
+version: {
+  current: '1.6',              // the Mac's
+  currentFeatures: [ ... ],    // the Mac's
+  next: '1.7',
+  nextFeatures: [ ... ],       // coming to the Mac
+  alsoOn: {
+    current: '1.1.1',          // iPhone and iPad
+    next: '1.2',
+    nextFeatures: [ ... ],     // coming to iPhone and iPad
+  },
+},
+```
+
+The version cards then label every number ("Mac 1.6", "iPhone and iPad
+1.1.1"), and each coming feature with the version it arrives in. The names
+come from `platformNames` in `src/app/i18n/strings.ts`. In
+`projects.es.ts`, a release's `version` takes only the words, the second
+app's under `alsoOn: { nextFeatures }`; the numbers always come from
+`projects.ts`. Releases stay keyed by the Mac's number (`version.current`),
+so when only the iPhone app updates, change `alsoOn` in both files and leave
+the Spanish release key alone.
+
 ### Adding Screenshots
 
 1. Take them at full size. Mac App Store screenshots (2560 × 1600) are ideal.
