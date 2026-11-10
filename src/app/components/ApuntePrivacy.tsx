@@ -26,7 +26,7 @@ export const ApuntePrivacy = () => {
                     </h1>
 
                     <p className="text-zinc-400 light:text-zinc-600 font-mono font-bold mb-10">
-                        Last updated: October 28, 2026
+                        Last updated: November 10, 2026
                     </p>
 
                     <div className="space-y-10 text-zinc-300 light:text-zinc-700 font-medium leading-relaxed">
@@ -279,10 +279,13 @@ export const ApuntePrivacy = () => {
                                 transcript's stored recording when you choose it. To do that,
                                 speaker models built into the app measure the characteristics of
                                 each voice in that recording and compare them with each other, on
-                                your Mac. The measurements exist only in your Mac's memory while
-                                identification runs and are discarded when it finishes. They are
-                                never saved, never compared with any other recording, and never
-                                sent anywhere. Apunte doesn't learn or recognize who anyone is:
+                                your device: your Mac, iPhone, or iPad. The measurements exist only
+                                in the device's memory while identification runs and are discarded
+                                when it finishes. They are never saved, never compared with any
+                                other recording, and never sent anywhere. The decrypted copy of the
+                                recording it works from is erased when it finishes, or, if the
+                                system ends Apunte first, the next time Apunte opens. Apunte doesn't
+                                learn or recognize who anyone is:
                                 speakers are numbered "Speaker 1," "Speaker 2," and so on, and you
                                 name them yourself if you want to. Retrac Labs never receives the
                                 recording, the measurements, or the names.
@@ -354,9 +357,10 @@ export const ApuntePrivacy = () => {
                                 Third Parties — Apple Only
                             </h2>
                             <p>
-                                The Mac app includes open-source software and speaker models,
-                                credited in its About window, that run entirely on your Mac and
-                                never connect to anything. Apunte uses no third-party SDKs that
+                                Apunte includes open-source software and speaker models, credited
+                                in the Mac app's About window and in Settings › Acknowledgments on
+                                iPhone and iPad, that run entirely on your device and never connect
+                                to anything. Apunte uses no third-party SDKs that
                                 collect or send data, and no ad networks, data brokers, or analytics
                                 providers. The only third party involved is Apple, in five
                                 operating-system roles:

@@ -413,7 +413,7 @@ export const projects: Project[] = [
         'Find and Replace, and saved fixes for words Apunte keeps getting wrong',
         'A live session that survives a crash: the recording and your notes come back the next time Apunte opens',
         'Live transcription from the microphone, or from a call or meeting on headphones with both sides in one transcript, each line labeled Me or Others',
-        'Identify Speakers: Apunte tells the voices in a recording apart on your Mac and numbers them, and you name each person once',
+        'Identify Speakers: Apunte tells the voices in a recording apart on your Mac, iPhone, or iPad and numbers them, and you name each person once',
         'Send transcripts to your iPhone, iPad, or another Mac with AirDrop or a cable: one encrypted file that only your own devices can open, with no cloud and no account',
         'Export to plain text, timestamped text, JSON, SubRip, WebVTT, CSV, Markdown, HTML, PDF, and Word, or the recording itself, free',
       ],
@@ -422,10 +422,10 @@ export const projects: Project[] = [
         'Automatic sync between your devices, through your own iCloud Drive, in sealed files only your devices can open',
       ],
       alsoOn: {
-        current: '1.1.1',
-        next: '1.2',
+        current: '1.2',
+        next: '1.3',
         nextFeatures: [
-          'Identify Speakers on iPhone and iPad: Apunte tells the voices in a recording apart on your device and numbers them, and you name each person once',
+          'An overall summary on iPhone and iPad: a long recording\'s summary ends with one for the whole of it, each point linked to the moment it came from',
         ],
       },
     },

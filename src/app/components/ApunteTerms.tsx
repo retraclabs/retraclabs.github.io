@@ -26,7 +26,7 @@ export const ApunteTerms = () => {
                     </h1>
 
                     <p className="text-zinc-400 light:text-zinc-600 font-mono font-bold mb-10">
-                        Last updated: October 28, 2026
+                        Last updated: November 10, 2026
                     </p>
 
                     <div className="space-y-10 text-zinc-300 light:text-zinc-700 font-medium leading-relaxed">
@@ -54,7 +54,8 @@ export const ApunteTerms = () => {
                                 not reverse engineer, decompile, resell, redistribute, sublicense, or
                                 rent the app, except where such a restriction is prohibited by
                                 applicable law. Open-source components included in Apunte, listed in
-                                its About window, are licensed under their own terms, and nothing in
+                                the Mac app's About window and in Settings › Acknowledgments on
+                                iPhone and iPad, are licensed under their own terms, and nothing in
                                 these Terms limits your rights under those licences.
                             </p>
                         </section>
@@ -70,7 +71,7 @@ export const ApunteTerms = () => {
                             <p className="mt-4">
                                 Premium features — speaker names on transcript lines, which
                                 Apunte can also assign by telling the speakers in a recording apart
-                                on your Mac, on-device summaries of each part of a recording, search
+                                on your device, on-device summaries of each part of a recording, search
                                 across your whole
                                 transcript library, live transcription from the microphone or a
                                 call, and export to SubRip (SRT), WebVTT, CSV, Markdown, HTML, PDF,

@@ -275,7 +275,7 @@ export const PROJECTS_ES: Record<string, ProjectTranslation> = {
             'Buscar y reemplazar, y correcciones guardadas para las palabras que Apunte suele escribir mal',
             'Una sesión en vivo que sobrevive a un cierre inesperado: la grabación y tus notas vuelven la próxima vez que abres Apunte',
             'Transcripción en vivo desde el micrófono, o desde una llamada o reunión con audífonos, con ambos lados en una sola transcripción y cada línea etiquetada como Yo u Otros',
-            'Identificar hablantes: Apunte distingue las voces de una grabación en tu Mac y las numera, y tú nombras a cada persona una vez',
+            'Identificar hablantes: Apunte distingue las voces de una grabación en tu Mac, iPhone o iPad y las numera, y tú nombras a cada persona una vez',
             'Envía transcripciones a tu iPhone, iPad u otra Mac con AirDrop o un cable: un solo archivo cifrado que solo tus dispositivos pueden abrir, sin nube y sin cuenta',
             'Exportación a texto sin formato, texto con marcas de tiempo, JSON, SubRip, WebVTT, CSV, Markdown, HTML, PDF y Word, o la grabación misma, gratis',
           ],
@@ -284,7 +284,7 @@ export const PROJECTS_ES: Record<string, ProjectTranslation> = {
           ],
           alsoOn: {
             nextFeatures: [
-              'Identificar hablantes en iPhone y iPad: Apunte distingue las voces de una grabación en tu dispositivo y las numera, y tú nombras a cada persona una vez',
+              'Un resumen de toda la grabación en iPhone y iPad: el resumen de una grabación larga termina con uno de toda ella, con cada punto enlazado al momento del que proviene',
             ],
           },
         },
