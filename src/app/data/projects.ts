@@ -33,6 +33,7 @@ import amparoDuo from '../assets/amparo/duo/home.webp';
 import amparoDuoCalendar from '../assets/amparo/duo/calendar.webp';
 import amparoDuoInsights from '../assets/amparo/duo/insights.webp';
 import amparoDuoSkins from '../assets/amparo/duo/skins.webp';
+import amparoDuoLog from '../assets/amparo/duo/log.webp';
 import amparoPrivacy from '../assets/amparo/privacy.webp';
 import amparoInsights from '../assets/amparo/insights.webp';
 import amparoPatterns from '../assets/amparo/patterns.webp';
@@ -49,6 +50,7 @@ import amparoDuoEs from '../assets/amparo/es/duo/home.webp';
 import amparoDuoCalendarEs from '../assets/amparo/es/duo/calendar.webp';
 import amparoDuoInsightsEs from '../assets/amparo/es/duo/insights.webp';
 import amparoDuoSkinsEs from '../assets/amparo/es/duo/skins.webp';
+import amparoDuoLogEs from '../assets/amparo/es/duo/log.webp';
 import amparoPrivacyEs from '../assets/amparo/es/privacy.webp';
 import amparoInsightsEs from '../assets/amparo/es/insights.webp';
 import amparoPatternsEs from '../assets/amparo/es/patterns.webp';
@@ -1014,7 +1016,7 @@ export const projects: Project[] = [
         'Pattern insights that describe your own rhythms: never a diagnosis, never a contraceptive',
     ],
     version: {
-      current: '1.4',
+      current: '1.5',
       currentFeatures: [
         'The whole app in English and Spanish, following your iPhone\'s language, widgets and Siri included',
         'Kept out of iCloud Backup by default, so your data stays on your iPhone unless you choose otherwise',
@@ -1030,14 +1032,14 @@ export const projects: Project[] = [
         'Keep My History: automatically delete entries older than a period you choose',
         'Four looks: Midnight, Daylight, Notepad, and Plain, with widgets and the Live Activity to match',
         'Widgets for the Home Screen, the Lock Screen, and StandBy, plus a control for Control Center and the Action button',
-        'Made for iPhone Duo: unfold it, and Home, Calendar, and Insights spread into two columns',
+        'Designed for iPhone Duo: unfold it, and every tab spreads into two columns, with the whole day\'s log on one screen',
+        'The Calendar shows everything you logged for a day beside the month',
         'VoiceOver, Voice Control, larger text, and Increase Contrast, with charts you can hear',
         'Siri keeps quiet about your cycle while your iPhone is locked',
       ],
-      next: '1.5',
+      next: '1.6',
       nextFeatures: [
-        'Designed for iPhone Duo: unfold it, and every tab spreads into two columns, with the whole day\'s log on one screen',
-        'The Calendar shows everything you logged for a day beside the month',
+        'What\'s next is still being decided. Whatever it is, your data will stay on your iPhone.',
       ],
     },
     appStoreUrl: 'https://apps.apple.com/us/app/amparo/id6765911709',
@@ -1213,19 +1215,33 @@ export const projects: Project[] = [
         width: 737,
         height: 1600,
       },
-      /* iPhone Duo, unfolded: the screens 1.4 lays out in two columns, from
-         Amparo's docs/screenshots/Raw/Duo inner (captured 2026-10-17). The
-         other screens there are the iPhone layout, stretched. */
+      /* iPhone Duo, unfolded: 1.5 lays out every tab in two columns, from
+         Amparo's docs/screenshots/Raw/Duo inner (captured 2026-10-21). */
       {
         device: 'duo',
         src: amparoDuo,
-        alt: 'Amparo\'s Home screen unfolded on iPhone Duo: the cycle ring and phase on the left, and the next period, the fertile window, two symptoms coming up, and the Period Started button in a second column, with the tabs in a rail on the right.',
-        caption: 'Made for iPhone Duo: unfold it, and Home, Calendar, and Insights spread into two columns.',
+        alt: 'Amparo\'s Home screen unfolded on iPhone Duo: the cycle ring, the follicular phase, and two symptoms coming up on the left; the next period in 18 days, the fertile window, and the Period Started button on the right; and the tabs in a rail along the right edge.',
+        caption: 'Designed for iPhone Duo: unfold it, and every tab spreads into two columns.',
         translations: {
           es: {
             src: amparoDuoEs,
-            alt: 'La pantalla Inicio de Amparo abierta en el iPhone Duo: el anillo del ciclo y la fase a la izquierda, y en una segunda columna el próximo periodo, la ventana fértil, dos síntomas que se acercan y el botón Empezó mi periodo, con las pestañas en un riel a la derecha.',
-            caption: 'Hecha para el iPhone Duo: al abrirlo, Inicio, Calendario y Análisis se reparten en dos columnas.',
+            alt: 'La pantalla Inicio de Amparo abierta en el iPhone Duo: el anillo del ciclo, la fase folicular y dos síntomas que se acercan a la izquierda; el próximo periodo en 18 días, la ventana fértil y el botón Empezó mi periodo a la derecha, y las pestañas en un riel en el borde derecho.',
+            caption: 'Diseñada para el iPhone Duo: al abrirlo, cada pestaña se reparte en dos columnas.',
+          },
+        },
+        width: 1600,
+        height: 1126,
+      },
+      {
+        device: 'duo',
+        src: amparoDuoLog,
+        alt: 'Logging October 21 unfolded on iPhone Duo: flow, symptoms, and moods on the left; energy, temperature, cervical mucus, activity, and notes on the right, with nothing to scroll to.',
+        caption: 'The whole day\'s log on one screen.',
+        translations: {
+          es: {
+            src: amparoDuoLogEs,
+            alt: 'El registro del 21 de octubre abierto en el iPhone Duo: flujo, síntomas y ánimo a la izquierda; energía, temperatura, moco cervical, actividad y notas a la derecha, sin nada que desplazar.',
+            caption: 'Todo el registro del día en una sola pantalla.',
           },
         },
         width: 1600,
@@ -1234,13 +1250,13 @@ export const projects: Project[] = [
       {
         device: 'duo',
         src: amparoDuoCalendar,
-        alt: 'The Calendar unfolded on iPhone Duo: October on the left, and on the right the symptoms and moods logged on October 17, with the tabs in a rail on the right.',
-        caption: 'Unfolded, the month sits beside the day you tap.',
+        alt: 'The Calendar unfolded on iPhone Duo: October on the left, and on the right everything logged on October 21: symptoms, moods, energy, cervical mucus, and notes.',
+        caption: 'Unfolded, everything you logged for a day sits beside the month.',
         translations: {
           es: {
             src: amparoDuoCalendarEs,
-            alt: 'El Calendario abierto en el iPhone Duo: octubre a la izquierda y, a la derecha, los síntomas y el ánimo registrados el 17 de octubre, con las pestañas en un riel a la derecha.',
-            caption: 'Al abrirlo, el mes queda junto al día que tocas.',
+            alt: 'El Calendario abierto en el iPhone Duo: octubre a la izquierda y, a la derecha, todo lo registrado el 21 de octubre: síntomas, ánimo, energía, moco cervical y notas.',
+            caption: 'Al abrirlo, todo lo que registraste en un día queda junto al mes.',
           },
         },
         width: 1600,
@@ -1249,13 +1265,13 @@ export const projects: Project[] = [
       {
         device: 'duo',
         src: amparoDuoInsights,
-        alt: 'Insights unfolded on iPhone Duo: the averages across the top, the Doctor Visit Summary, and the basal body temperature and cycle length charts side by side.',
-        caption: 'Insights spreads out, with your charts side by side.',
+        alt: 'Insights unfolded on iPhone Duo: the averages across the top, the Doctor Visit Summary, and the basal body temperature and cycle length charts side by side, with more in two columns below.',
+        caption: 'Your charts side by side, and your patterns beside your history below.',
         translations: {
           es: {
             src: amparoDuoInsightsEs,
-            alt: 'Análisis abierto en el iPhone Duo: los promedios arriba, el Resumen para la consulta médica y las gráficas de temperatura basal y duración del ciclo una junto a la otra.',
-            caption: 'Análisis se extiende, con tus gráficas una junto a la otra.',
+            alt: 'Análisis abierto en el iPhone Duo: los promedios arriba, el Resumen para la consulta médica y las gráficas de temperatura basal y duración del ciclo una junto a la otra, con más en dos columnas debajo.',
+            caption: 'Tus gráficas una junto a la otra, y debajo tus patrones junto a tu historial.',
           },
         },
         width: 1600,
@@ -1264,12 +1280,12 @@ export const projects: Project[] = [
       {
         device: 'duo',
         src: amparoDuoSkins,
-        alt: 'Home unfolded on iPhone Duo in the Notepad look: lined, cream-colored paper, the cycle ring on the left, and the cards and the Period Started button on the right.',
+        alt: 'Home unfolded on iPhone Duo in the Notepad look: lined, cream-colored paper, the cycle ring and the symptoms coming up on the left, and the cards and the Period Started button on the right.',
         caption: 'Your look unfolds with it. Here, Notepad.',
         translations: {
           es: {
             src: amparoDuoSkinsEs,
-            alt: 'Inicio abierto en el iPhone Duo con el estilo Libreta: papel rayado color crema, el anillo del ciclo a la izquierda, y las tarjetas y el botón Empezó mi periodo a la derecha.',
+            alt: 'Inicio abierto en el iPhone Duo con el estilo Libreta: papel rayado color crema, el anillo del ciclo y los síntomas que se acercan a la izquierda, y las tarjetas y el botón Empezó mi periodo a la derecha.',
             caption: 'Tu estilo se abre con él. Aquí, Libreta.',
           },
         },

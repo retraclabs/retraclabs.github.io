@@ -461,6 +461,33 @@ export const PROJECTS_ES: Record<string, ProjectTranslation> = {
           ],
         },
       },
+      '1.5': {
+        version: {
+          currentFeatures: [
+            'Toda la app en inglés y en español, según el idioma de tu iPhone, con los widgets y Siri incluidos',
+            'Fuera del respaldo de iCloud de forma predeterminada, para que tus datos se queden en tu iPhone a menos que elijas otra cosa',
+            'Pasar a un nuevo iPhone: una transferencia cifrada por AirDrop con un código de un solo uso, sin nube de por medio',
+            'Trae tu historial desde la app Salud de Apple, Clue o Flo, leído en tu iPhone y nunca subido',
+            'Tus patrones: cuándo suelen llegar tus síntomas, cada uno ciclo a ciclo, y un aviso opcional la mañana anterior',
+            'Notas de patrones: una nota opcional cuando tus ciclos empiezan a acortarse, a alargarse, a variar más o pasan 60 días sin periodo',
+            'Notas de perimenopausia: si así lo eliges, una revisión de si la duración de tus ciclos muestra los patrones que los profesionales de la salud usan para describir la transición a la menopausia, con las fechas en que se basan, en Análisis y en el Resumen para la consulta médica',
+            'Predicciones con niveles de confianza y rangos, la ovulación confirmada por la temperatura y el cálculo de tu próximo periodo a partir de ese aumento',
+            'La temperatura en grados Celsius o Fahrenheit, según la región de tu iPhone hasta que elijas una unidad',
+            'Un resumen para la consulta médica: un PDF con tus ciclos, patrones y temperaturas para compartir con un profesional de la salud',
+            'Modo discreto para las notificaciones y la pantalla bloqueada, además de iconos que no parecen de una app del ciclo',
+            'Conservar mi historial: elimina automáticamente los registros más antiguos que el plazo que elijas',
+            'Cuatro estilos: Medianoche, Luz de día, Libreta y Sencillo, con widgets y la Actividad en vivo a juego',
+            'Widgets para la pantalla de inicio, la pantalla bloqueada y el modo En espera, además de un control para el Centro de control y el botón de acción',
+            'Diseñada para el iPhone Duo: al abrirlo, cada pestaña se reparte en dos columnas, con todo el registro del día en una sola pantalla',
+            'El Calendario muestra todo lo que registraste en un día junto al mes',
+            'VoiceOver, Control por voz, texto grande y Aumentar contraste, con gráficas que puedes escuchar',
+            'Siri no habla de tu ciclo mientras tu iPhone está bloqueado',
+          ],
+          nextFeatures: [
+            'Lo siguiente aún está por decidirse. Sea lo que sea, tus datos se quedarán en tu iPhone.',
+          ],
+        },
+      },
     },
   },
 };
