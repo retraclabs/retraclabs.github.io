@@ -1,0 +1,8 @@
+#!/bin/sh
+# Runs before every commit. Git only uses this folder when the repository is
+# told to, which a fresh clone is not; turn it on once per clone with:
+#   git config core.hooksPath .githooks
+set -e
+
+# Refuse to commit a secret or anything .gitignore covers.
+"$(dirname "$0")/check-secrets"
